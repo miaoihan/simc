@@ -5987,7 +5987,7 @@ struct butchery_t : public hunter_melee_attack_t
     if ( p()->talents.frenzy_strikes.ok() )
       p()->cooldowns.wildfire_bomb->adjust( -frenzy_strikes.reduction * std::min( num_targets_hit, frenzy_strikes.cap ) );
 
-    if ( p()->talents.scattered_prey.ok() ) 
+    if ( p()->talents.scattered_prey.ok() && !p()->bugs ) 
       p() -> buffs.scattered_prey -> trigger();
 
     if ( p()->talents.merciless_blow.ok() )
