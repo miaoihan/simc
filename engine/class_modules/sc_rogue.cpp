@@ -4534,8 +4534,7 @@ struct eviscerate_t : public rogue_attack_t
 
     if ( bonus_attack && td( state->target )->debuffs.find_weakness->up() && result_is_hit( state->result ) )
     {
-      // 2024-10-13 -- Shadowed Finishers is currently bugged with Supercharger on PTR
-      bonus_attack->last_cp = cast_state( state )->get_combo_points( p()->bugs );
+      bonus_attack->last_cp = cast_state( state )->get_combo_points();
       bonus_attack->execute_on_target( state->target );
     }
   }
@@ -5941,8 +5940,7 @@ struct black_powder_t: public rogue_attack_t
 
     if ( bonus_attack )
     {
-      // 2024-10-13 -- Shadowed Finishers is currently bugged with Supercharger on PTR
-      bonus_attack->last_cp = cast_state( execute_state )->get_combo_points( p()->bugs );
+      bonus_attack->last_cp = cast_state( execute_state )->get_combo_points();
       bonus_attack->execute_on_target( execute_state->target );
     }
 
@@ -7156,8 +7154,7 @@ struct coup_de_grace_t : public rogue_attack_t
 
       if ( bonus_attack && td( state->target )->debuffs.find_weakness->up() && result_is_hit( state->result ) )
       {
-        // 2024-10-13 -- Shadowed Finishers is currently bugged with Supercharger on PTR
-        bonus_attack->last_cp = cast_state( state )->get_combo_points( p()->bugs );
+        bonus_attack->last_cp = cast_state( state )->get_combo_points();
         bonus_attack->execute_on_target( state->target );
       }
     }
