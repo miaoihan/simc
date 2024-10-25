@@ -1615,7 +1615,7 @@ struct hunter_pet_t: public pet_t
   {
     double m = pet_t::composite_player_critical_damage_multiplier( s );
 
-    if( o() -> buffs.howl_of_the_pack -> check() )
+    if ( o() -> buffs.howl_of_the_pack -> check() )
       m *= 1 + o() -> buffs.howl_of_the_pack -> check_value();
 
     return m;
@@ -2590,19 +2590,19 @@ struct kill_command_bm_t: public kill_command_base_t<hunter_main_pet_base_t>
       o() -> get_target_data( s -> target ) -> debuffs.wild_instincts -> trigger();
     }
 
-    if( o()->buffs.frenzied_tear->check() && p()==o()->pets.main )
+    if ( o()->buffs.frenzied_tear->check() && p()==o()->pets.main )
     {
       double amount = s -> result_mitigated * o() -> talents.frenzied_tear -> effectN( 2 ).percent() / (1 + s->result_crit_bonus);
       p()->active.frenzied_tear->execute_on_target( s -> target, amount );
       o()->buffs.frenzied_tear->decrement();
-      if( o() -> talents.furious_assault.ok() && o() -> rng().roll( o() -> talents.furious_assault -> effectN( 1 ).percent() ) )
+      if ( o() -> talents.furious_assault.ok() && o() -> rng().roll( o() -> talents.furious_assault -> effectN( 1 ).percent() ) )
       {
         o()->buffs.furious_assault->trigger();
         o()->cooldowns.barbed_shot->reset( true );
       }
     }
 
-    if( o()->talents.phantom_pain.ok() )
+    if ( o()->talents.phantom_pain.ok() )
     {
       double replicate_amount = o()->talents.phantom_pain->effectN( 1 ).percent();
       for ( player_t* t : sim->target_non_sleeping_list )
@@ -2610,7 +2610,7 @@ struct kill_command_bm_t: public kill_command_base_t<hunter_main_pet_base_t>
         if ( t->is_enemy() && !t->demise_event && t != s->target )
         {
           hunter_td_t* td = o()->get_target_data( t );
-          if( td->dots.black_arrow->is_ticking() )
+          if ( td->dots.black_arrow->is_ticking() )
           {
             double amount = replicate_amount * s->result_amount;
             o()->actions.phantom_pain->execute_on_target( t, amount );
@@ -2662,12 +2662,12 @@ struct kill_command_sv_t : public hunter_main_pet_attack_t
   {
     hunter_main_pet_attack_t::impact( s );
 
-    if( o()->buffs.frenzied_tear->check() && p()==o()->pets.main )
+    if ( o()->buffs.frenzied_tear->check() && p()==o()->pets.main )
     {
       double amount = s->result_mitigated * o()->talents.frenzied_tear->effectN( 2 ).percent() / (1 + s->result_crit_bonus);
       p()->active.frenzied_tear->execute_on_target( s->target, amount );
       o()->buffs.frenzied_tear->decrement();
-      if( o()->talents.furious_assault.ok() && o()->rng().roll( o()->talents.furious_assault->effectN( 1 ).percent() ) )
+      if ( o()->talents.furious_assault.ok() && o()->rng().roll( o()->talents.furious_assault->effectN( 1 ).percent() ) )
       {
         o()->buffs.furious_assault->trigger();
       }
@@ -2701,7 +2701,7 @@ struct kill_command_sv_t : public hunter_main_pet_attack_t
   {
     hunter_main_pet_attack_t::tick( d );
 
-    if( o()->bugs )
+    if ( o()->bugs )
       o()->buffs.exposed_flank->decrement();
   }
 
@@ -2842,7 +2842,7 @@ struct pet_melee_t : public hunter_pet_melee_t<hunter_pet_t>
 
     trigger_beast_cleave( s );
 
-    if( ( p()==o()->pets.main || p()==o()->pets.animal_companion ) && o()->rng().roll( o()->tier_set.tww_s1_bm_4pc->effectN( 1 ).percent() ) )
+    if ( ( p()==o()->pets.main || p()==o()->pets.animal_companion ) && o()->rng().roll( o()->tier_set.tww_s1_bm_4pc->effectN( 1 ).percent() ) )
     {
       o()->buffs.harmonize->trigger();
     }
@@ -3078,7 +3078,7 @@ struct stomp_t : public hunter_pet_action_t<hunter_pet_t, attack_t>
     if ( !( pet == p() || animal_companion == p() ) )
       return;
 
-    if( p() -> active.laceration && s -> result == RESULT_CRIT )
+    if ( p() -> active.laceration && s -> result == RESULT_CRIT )
     {
       double amount = s -> result_amount * bleed_amount; 
       residual_action::trigger( p() -> active.laceration, s -> target, amount );
@@ -3176,7 +3176,7 @@ void stable_pet_t::init_spells()
 {
   hunter_pet_t::init_spells();
 
-  if( o() -> talents.bloody_frenzy.ok() )
+  if ( o() -> talents.bloody_frenzy.ok() )
     active.stomp = new actions::stomp_t( this );
 }
 
@@ -3198,7 +3198,7 @@ void hunter_main_pet_base_t::init_spells()
   if ( o() -> talents.stomp.ok() || o() -> talents.bloody_frenzy.ok() )
     active.stomp = new actions::stomp_t( this );
 
-  if( o() -> talents.frenzied_tear.ok() )
+  if ( o() -> talents.frenzied_tear.ok() )
     active.frenzied_tear = new actions::frenzied_tear_t( this );
 }
 
@@ -3251,7 +3251,7 @@ void hunter_main_pet_base_t::init_special_effects()
 {
   stable_pet_t::init_special_effects();
 
-  if( o() -> talents.laceration.ok() )
+  if ( o() -> talents.laceration.ok() )
   {
     struct laceration_cb_t : public dbc_proc_callback_t
     {
@@ -3499,7 +3499,7 @@ void hunter_t::trigger_deathblow( player_t* target )
 
   procs.deathblow->occur();
   
-  if( !buffs.withering_fire->check() )
+  if ( !buffs.withering_fire->check() )
   {
     buffs.deathblow->trigger();
   }
@@ -3953,7 +3953,7 @@ struct arcane_shot_base_t: public hunter_ranged_attack_t
   {
     hunter_ranged_attack_t::execute();
 
-    if( p()->tier_set.tww_s1_mm_4pc.ok() && p()->buffs.precise_shots->check() )
+    if ( p()->tier_set.tww_s1_mm_4pc.ok() && p()->buffs.precise_shots->check() )
       p()->buffs.moving_target->trigger();
 
     p() -> buffs.precise_shots -> up(); // Benefit tracking
@@ -4130,7 +4130,7 @@ struct explosive_shot_base_t : public hunter_ranged_attack_t
     if ( p() -> talents.explosive_venom.ok() ) 
     {
       p() -> buffs.explosive_venom -> up(); // Benefit tracking
-      if( p() -> buffs.explosive_venom -> at_max_stacks() )
+      if ( p() -> buffs.explosive_venom -> at_max_stacks() )
       {
         p() -> buffs.explosive_venom -> expire();
         p() -> buffs.explosive_venom -> increment();
@@ -4380,7 +4380,7 @@ struct black_arrow_dot_t : public hunter_ranged_attack_t
       p()->actions.shadow_surge->execute_on_target( d->target );
     }
 
-    if( p()->talents.shadow_hounds.ok() && p()->rppm.shadow_hounds->trigger() )
+    if ( p()->talents.shadow_hounds.ok() && p()->rppm.shadow_hounds->trigger() )
     {
       p()->pets.dark_hound.spawn( shadow_hounds.duration );
       if ( !p()->pets.dark_hound.active_pets().empty() && p()->specialization() == HUNTER_BEAST_MASTERY )
@@ -4730,7 +4730,7 @@ struct multishot_bm_t: public hunter_ranged_attack_t
     if ( p() -> talents.explosive_venom.ok() ) 
     {
       p() -> buffs.explosive_venom -> up(); // Benefit tracking
-      if( p() -> buffs.explosive_venom -> at_max_stacks() ) 
+      if ( p() -> buffs.explosive_venom -> at_max_stacks() ) 
       {
         p() -> buffs.explosive_venom -> expire();
         p() -> buffs.explosive_venom -> increment();
@@ -4743,7 +4743,7 @@ struct multishot_bm_t: public hunter_ranged_attack_t
 
     if ( p() -> talents.scattered_prey.ok() ) 
     {
-      if( p() -> buffs.scattered_prey -> up() ) 
+      if ( p() -> buffs.scattered_prey -> up() ) 
       {
         p() -> buffs.scattered_prey -> decrement();
       }
@@ -4805,7 +4805,7 @@ struct cobra_shot_t: public hunter_ranged_attack_t
     
     if ( p()->talents.serpentine_rhythm.ok() )
     {
-      if( p()->buffs.serpentine_rhythm->at_max_stacks() )
+      if ( p()->buffs.serpentine_rhythm->at_max_stacks() )
       {
         p()->buffs.serpentine_rhythm->expire();
         p()->buffs.serpentine_blessing->trigger();
@@ -4911,14 +4911,14 @@ struct barbed_shot_t: public hunter_ranged_attack_t
       pet -> active.brutal_companion_ba -> execute_on_target( target );
     }
 
-    if( p()->talents.pack_coordination.ok() && p()->pets.main->buffs.pack_coordination->check() )
+    if ( p()->talents.pack_coordination.ok() && p()->pets.main->buffs.pack_coordination->check() )
     {
       p()->pets.main->active.pack_coordination_ba->execute_on_target( target );
-      if( !p()->talents.pack_assault.ok() || !p()->buffs.call_of_the_wild->check() )
+      if ( !p()->talents.pack_assault.ok() || !p()->buffs.call_of_the_wild->check() )
         p()->pets.main->buffs.pack_coordination->decrement();
     }
 
-    if( p()->buffs.furious_assault->check() )
+    if ( p()->buffs.furious_assault->check() )
     {
       p()->buffs.furious_assault->decrement();
     }
@@ -4928,7 +4928,7 @@ struct barbed_shot_t: public hunter_ranged_attack_t
   {
     double m = hunter_ranged_attack_t::composite_ta_multiplier( s );
 
-    if( p()->buffs.furious_assault->check() )
+    if ( p()->buffs.furious_assault->check() )
     {
       m *= 1 + p()->buffs.furious_assault->data().effectN( 4 ).percent();
     }
@@ -4940,7 +4940,7 @@ struct barbed_shot_t: public hunter_ranged_attack_t
   {
     hunter_ranged_attack_t::tick( d );
 
-    if( p() -> talents.master_handler -> ok() )
+    if ( p() -> talents.master_handler -> ok() )
     {
       p() -> cooldowns.kill_command -> adjust( -p() -> talents.master_handler -> effectN( 1 ).time_value() );
     }
@@ -4993,7 +4993,7 @@ struct chimaera_shot_base_t : public hunter_ranged_attack_t
   {
     hunter_ranged_attack_t::execute();
 
-    if( p()->tier_set.tww_s1_mm_4pc.ok() && p()->buffs.precise_shots->check() )
+    if ( p()->tier_set.tww_s1_mm_4pc.ok() && p()->buffs.precise_shots->check() )
     {
       p()->buffs.moving_target->trigger();
     }
@@ -5204,7 +5204,7 @@ struct aimed_shot_base_t : public hunter_ranged_attack_t
     if ( rng().roll( deathblow.chance ) )
       p()->trigger_deathblow( target );
 
-    if( !p()->buffs.wailing_arrow_override->check() )
+    if ( !p()->buffs.wailing_arrow_override->check() )
     { 
       p()->buffs.trick_shots->up(); // Benefit tracking
       p()->consume_trick_shots();
@@ -5266,7 +5266,7 @@ struct aimed_shot_base_t : public hunter_ranged_attack_t
         hydras_bite->execute_on_target( s->target );
     }
 
-    if( p()->talents.phantom_pain.ok() )
+    if ( p()->talents.phantom_pain.ok() )
     {
       double replicate_amount = p()->talents.phantom_pain->effectN( 1 ).percent();
       for ( player_t* t : sim->target_non_sleeping_list )
@@ -5274,7 +5274,7 @@ struct aimed_shot_base_t : public hunter_ranged_attack_t
         if ( t->is_enemy() && !t->demise_event && t != s->target )
         {
           hunter_td_t* td = p()->get_target_data( t );
-          if( td->dots.black_arrow->is_ticking() )
+          if ( td->dots.black_arrow->is_ticking() )
           {
             double amount = replicate_amount * s->result_amount;
             p()->actions.phantom_pain->execute_on_target( t, amount );
@@ -5557,7 +5557,7 @@ struct multishot_mm_base_t: public hunter_ranged_attack_t
   {
     hunter_ranged_attack_t::execute();
 
-    if( p()->tier_set.tww_s1_mm_4pc.ok() && p()->buffs.precise_shots->check() )
+    if ( p()->tier_set.tww_s1_mm_4pc.ok() && p()->buffs.precise_shots->check() )
     {
       p()->buffs.moving_target->trigger();
     }
@@ -5742,7 +5742,7 @@ struct melee_focus_spender_t: hunter_melee_attack_t
   {
     double cost = hunter_melee_attack_t::cost();
 
-    if( p()->buffs.furious_assault->up() )
+    if ( p()->buffs.furious_assault->up() )
       cost *= 1 + p()->buffs.furious_assault->data().effectN( 3 ).percent();
 
     return cost; 
@@ -5784,14 +5784,14 @@ struct melee_focus_spender_t: hunter_melee_attack_t
     if ( rng().roll( wildfire_infusion_chance ) )
       p()->cooldowns.kill_command->reset( true );
 
-    if( p()->talents.pack_coordination.ok() && p()->pets.main->buffs.pack_coordination->check() )
+    if ( p()->talents.pack_coordination.ok() && p()->pets.main->buffs.pack_coordination->check() )
     {
       p()->pets.main->active.pack_coordination_ba->execute_on_target( target );
-      if( !p()->talents.pack_assault.ok() || !p()->buffs.coordinated_assault->check() )
+      if ( !p()->talents.pack_assault.ok() || !p()->buffs.coordinated_assault->check() )
         p()->pets.main->buffs.pack_coordination->decrement();
     }
 
-    if( p()->buffs.furious_assault->check() )
+    if ( p()->buffs.furious_assault->check() )
     {
       p()->buffs.furious_assault->decrement();
     }
@@ -5853,7 +5853,7 @@ struct mongoose_bite_base_t: melee_focus_spender_t
     for ( size_t i = 0; i < stats_.at_fury.size(); i++ )
       stats_.at_fury[ i ] = p -> get_proc( fmt::format( "bite_at_{}_fury", i ) );
 
-    if( !p->talents.mongoose_bite.ok() )
+    if ( !p->talents.mongoose_bite.ok() )
       background = true;
   }
 
@@ -6128,10 +6128,10 @@ struct fury_of_the_eagle_t : public hunter_melee_attack_t
     if ( p()->talents.tip_of_the_spear.ok() )
       p()->buffs.tip_of_the_spear->decrement();
     
-    if( procced_at_max_tip )
+    if ( procced_at_max_tip )
       p()->buffs.tip_of_the_spear->increment();
     
-    if( p()->talents.ruthless_marauder )
+    if ( p()->talents.ruthless_marauder )
       p()->buffs.ruthless_marauder->trigger();
   }
 };
@@ -6198,10 +6198,10 @@ struct coordinated_assault_t: public hunter_melee_attack_t
     if ( p()->talents.bombardier.ok() )
       p()->cooldowns.wildfire_bomb->reset( false, as<int>( p()->talents.bombardier->effectN( 1 ).base_value() ) );
 
-    if( p()->talents.beast_of_opportunity.ok() )
+    if ( p()->talents.beast_of_opportunity.ok() )
       p()->pets.boo_stable_pet.spawn( p()->buffs.beast_of_opportunity->buff_duration(), as<int>( p()->buffs.beast_of_opportunity->data().effectN( 1 ).base_value() ) );
 
-    if( p()->talents.pack_assault.ok() )
+    if ( p()->talents.pack_assault.ok() )
       p()->buffs.vicious_hunt->trigger();
   }
 };
@@ -6568,12 +6568,11 @@ struct kill_command_t: public hunter_spell_t
       {
         chance *= 2; 
       }
-      if( rng().roll( chance ) )
+      if ( rng().roll( chance ) )
         p()->trigger_deathblow( target );
     }
 
-
-    if( p() -> talents.a_murder_of_crows.ok() )
+    if ( p() -> talents.a_murder_of_crows.ok() )
     {
       p() -> buffs.a_murder_of_crows -> trigger();
       if ( p() -> buffs.a_murder_of_crows -> at_max_stacks() )
@@ -6586,12 +6585,12 @@ struct kill_command_t: public hunter_spell_t
     p()->cooldowns.wildfire_bomb->adjust( -wildfire_infusion_reduction );
     p()->buffs.mongoose_fury->extend_duration( p(), bloody_claws_extension );
 
-    if( p()->talents.vicious_hunt.ok() )
+    if ( p()->talents.vicious_hunt.ok() )
     {
-      if( p()->buffs.vicious_hunt->up() )
+      if ( p()->buffs.vicious_hunt->up() )
       {
         p()->actions.vicious_hunt->execute_on_target( target ); 
-        if( !p()->talents.pack_assault.ok() || !p()->buffs.call_of_the_wild->check() )
+        if ( !p()->talents.pack_assault.ok() || !p()->buffs.call_of_the_wild->check() )
           p()->buffs.vicious_hunt->decrement(); 
       }
       else
@@ -6600,10 +6599,10 @@ struct kill_command_t: public hunter_spell_t
       }
     }
 
-    if( p()->talents.covering_fire.ok() )
+    if ( p()->talents.covering_fire.ok() )
     {
       timespan_t duration = timespan_t::from_seconds( p()->talents.covering_fire->effectN( 1 ).base_value() );
-      if( p()->buffs.beast_cleave->check() )
+      if ( p()->buffs.beast_cleave->check() )
         p()->buffs.beast_cleave->extend_duration( p(), duration );
 
       for ( auto pet : pets::active<pets::hunter_pet_t>( p() -> pets.main, p() -> pets.animal_companion ) )
@@ -6799,7 +6798,7 @@ struct bestial_wrath_t: public hunter_spell_t
     if ( p() -> talents.scent_of_blood.ok() )
       p() -> cooldowns.barbed_shot -> reset( true, as<int>( p() -> talents.scent_of_blood -> effectN( 1 ).base_value() ) );
 
-    if( p()->talents.beast_of_opportunity.ok() )
+    if ( p()->talents.beast_of_opportunity.ok() )
       p()->pets.boo_stable_pet.spawn( p()->buffs.beast_of_opportunity->buff_duration(), as<int>( p()->buffs.beast_of_opportunity->data().effectN( 1 ).base_value() ) );
 
     if ( p()->talents.withering_fire.ok() )
@@ -6861,7 +6860,7 @@ struct call_of_the_wild_t: public hunter_spell_t
         pet -> hunter_pet_t::buffs.beast_cleave -> trigger( duration );
     }
 
-    if( p()->talents.pack_assault.ok() )
+    if ( p()->talents.pack_assault.ok() )
       p()->buffs.vicious_hunt->trigger();
   }
 };
@@ -7152,7 +7151,7 @@ struct wildfire_bomb_base_t: public hunter_spell_t
         double am = hunter_spell_t::composite_ta_multiplier( s );
 
         auto td = p() -> find_target_data( s -> target ); 
-        if( td )
+        if ( td )
         {
           am *= 1.0 + td -> debuffs.shredded_armor -> value();
         }
@@ -7216,7 +7215,7 @@ struct wildfire_bomb_base_t: public hunter_spell_t
       double am = hunter_spell_t::composite_da_multiplier( s );
 
       auto td = p() -> find_target_data( s -> target ); 
-      if( td )
+      if ( td )
       {
         am *= 1.0 + td -> debuffs.shredded_armor -> value();
       }
@@ -7985,10 +7984,10 @@ void hunter_t::create_actions()
   if ( talents.a_murder_of_crows.ok() || talents.banshees_mark.ok() )
     actions.a_murder_of_crows = new spells::a_murder_of_crows_t( this );
 
-  if( talents.vicious_hunt.ok() )
+  if ( talents.vicious_hunt.ok() )
     actions.vicious_hunt = new attacks::vicious_hunt_t( this ); 
 
-  if( talents.cull_the_herd.ok() )
+  if ( talents.cull_the_herd.ok() )
     actions.cull_the_herd = new attacks::cull_the_herd_t( this );
 
   if ( talents.sentinel.ok() )
@@ -8188,7 +8187,7 @@ void hunter_t::create_buffs()
           cooldowns.kill_command -> adjust( -( cooldowns.kill_command -> duration * percent_reduction ) );
           cooldowns.barbed_shot -> adjust( -( cooldowns.barbed_shot -> duration * percent_reduction ) );
 
-          if( talents.bloody_frenzy.ok() )
+          if ( talents.bloody_frenzy.ok() )
           {
             //In-game this (re)application of beast_cleave happens multiple times a second, since the regular Beast Cleave buff is longer than the time between ticks, we can get by with just refreshing once per tick
             //In 11.0 it has been changed to use the player's remaining duration of beast_cleave, instead of the remaining duration of call_of_the_wild - this change is to support covering_fire functionality
