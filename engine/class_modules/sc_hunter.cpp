@@ -4288,7 +4288,7 @@ struct kill_shot_base_t : hunter_ranged_attack_t
 
     //TODO 2024-10-14 There is a bug where only Kill Shots buffed by Deathblow bounce to additional targets.
     // Needs more testing to determine if damage is affected. 
-    if ( p()->talents.hunters_prey.ok() )
+    if ( p()->talents.hunters_prey.ok() && ( !p()->bugs || ( !p()->talents.black_arrow.ok() && p()->buffs.deathblow->check() ) ) )
     {
       int active = 0; 
       for ( auto pet : pets::active<pets::hunter_pet_t>( p()->pets.main, p()->pets.animal_companion ) )
