@@ -130,7 +130,7 @@ Range            : 10 yards
 GCD              : 1.5 seconds
 Duration         : 6 seconds
 Cooldown         : 45 seconds
-Category         : 32
+Category         : 32 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -163,7 +163,8 @@ GCD              : 1.5 seconds
 Duration         : 10 seconds
 Cooldown         : 1.5 seconds
 Charges          : 1 (300 seconds cooldown)
-Category         : 1392: Uther's Counsel (378425 effect#2), Improved Blessing of Protection (384909 effect#1)
+Category         : 1392 (Type 1): Uther's Counsel (378425 effect#2), Improved Blessing of Protection (384909 effect#1)
+Category Flags   : Reset Charges on Encounter End (4)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -204,7 +205,7 @@ GCD              : 1.5 seconds
 Duration         : 8 seconds
 Cooldown         : 1.5 seconds
 Charges          : 1 (25 seconds cooldown)
-Category         : 1390
+Category         : 1390 (Type 1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 219
@@ -263,7 +264,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 8 seconds
 Charges          : 1 (8 seconds cooldown)
-Category         : 1512
+Category         : 1512 (Type 1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -423,7 +424,7 @@ GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Duration         : 5 seconds
 Charges          : 1 (11 seconds cooldown)
-Category         : 1663: Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Divine Hammer (198034 effect#2), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
+Category         : 1663 (Type 37): Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Divine Hammer (198034 effect#2), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -455,7 +456,7 @@ Spell Level      : 10
 Range            : 40 yards
 GCD              : 1.5 seconds
 Charges          : 1 (9.5 seconds cooldown)
-Category         : 2179: Avenging Wrath (31884 effect#5), Holy Paladin (137029 effect#27), Avenging Crusader (216331 effect#8), Blessing of Dusk (385126 effect#12), Light's Conviction (414073 effect#1), Paladin Holy 11.0 Class Set 2pc (453658 effect#2), Avenging Wrath (454351 effect#6)
+Category         : 2179 (Type 5): Avenging Wrath (31884 effect#5), Holy Paladin (137029 effect#27), Avenging Crusader (216331 effect#8), Blessing of Dusk (385126 effect#12), Light's Conviction (414073 effect#1), Paladin Holy 11.0 Class Set 2pc (453658 effect#2), Avenging Wrath (454351 effect#6)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -506,7 +507,7 @@ Range            : 30 yards
 GCD              : 1.5 seconds
 Velocity         : 40 yards/sec
 Charges          : 1 (7.5 seconds cooldown)
-Category         : 1895: Paladin (137026 effect#6), Holy Paladin (137029 effect#18), Vanguard's Momentum (337638 effect#1), Vanguard's Momentum (383314 effect#1), Blessing of Dusk (385126 effect#8)
+Category         : 1895 (Type 1): Paladin (137026 effect#6), Holy Paladin (137029 effect#18), Vanguard's Momentum (337638 effect#1), Vanguard's Momentum (383314 effect#1), Blessing of Dusk (385126 effect#8)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -612,7 +613,7 @@ Spell Level      : 6
 GCD              : 1.5 seconds
 Duration         : 12 seconds
 Cooldown         : 9 seconds
-Category         : 932
+Category         : 932 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -742,7 +743,7 @@ School           : Holy
 Spell Type       : None
 Duration         : 20 seconds
 Cooldown         : 120 seconds
-Category         : 1550: Strive for Perfection (296320 effect#6), Strive for Perfection (299367 effect#6), Strive for Perfection (299369 effect#6), Benevolent Faerie (327710 effect#2), Benevolent Faerie Fermata (345453 effect#2), Haunted Mask (356968 effect#2)
+Category         : 1550 (Type 0): Strive for Perfection (296320 effect#6), Strive for Perfection (299367 effect#6), Strive for Perfection (299369 effect#6), Benevolent Faerie (327710 effect#2), Benevolent Faerie Fermata (345453 effect#2), Haunted Mask (356968 effect#2)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -863,7 +864,7 @@ Range            : 5 yards
 GCD              : 1.5 seconds
 Requires weapon  : One-handed Axe, Two-handed Axe, One-handed Mace, Two-handed Mace, Polearm, One-handed Sword, Two-handed Sword, Staff, Fist Weapon, Dagger, Spear
 Charges          : 1 (6 seconds cooldown)
-Category         : 1627: Paladin (137026 effect#4), Retribution Paladin (137027 effect#5), Holy Paladin (137029 effect#20), Divine Hammer (198034 effect#3), Fires of Justice (203316 effect#3), Avenging Crusader (216331 effect#2), Avenging Crusader (216331 effect#11), Swift Justice (383228 effect#2), Improved Crusader Strike (383254 effect#1), Blessing of Dusk (385126 effect#7), Templar Strikes (406646 effect#2), Templar Strikes (406646 effect#3)
+Category         : 1627 (Type 5): Paladin (137026 effect#4), Retribution Paladin (137027 effect#5), Holy Paladin (137029 effect#20), Divine Hammer (198034 effect#3), Fires of Justice (203316 effect#3), Avenging Crusader (216331 effect#2), Avenging Crusader (216331 effect#11), Swift Justice (383228 effect#2), Improved Crusader Strike (383254 effect#1), Blessing of Dusk (385126 effect#7), Templar Strikes (406646 effect#2), Templar Strikes (406646 effect#3)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -1007,7 +1008,7 @@ Range            : 5 yards
 GCD              : 1.5 seconds
 Requires weapon  : One-handed Axe, One-handed Mace, One-handed Sword, Fist Weapon
 Charges          : 2 (5 seconds cooldown)
-Category         : 1570: Paladin (137026 effect#3), Blessing of Dusk (385126 effect#4)
+Category         : 1570 (Type 1): Paladin (137026 effect#3), Blessing of Dusk (385126 effect#4)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -1344,7 +1345,8 @@ Spell Level      : 9
 Range            : 30 yards
 Duration         : 3 seconds
 Charges          : 1 (8 seconds cooldown)
-Category         : 1587
+Category         : 1587 (Type 1)
+Category Flags   : Reset Charges on Encounter End (4), Reset Coooldown on Encounter End (5)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -1835,7 +1837,7 @@ Spell Level      : 27
 Range            : 5 yards
 Duration         : 3 seconds
 Cooldown         : 15 seconds
-Category         : 88
+Category         : 88 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -2226,7 +2228,7 @@ Range            : 5 yards
 GCD              : 1.5 seconds
 Requires weapon  : One-handed Axe, Two-handed Axe, One-handed Mace, Two-handed Mace, Polearm, One-handed Sword, Two-handed Sword, Staff, Fist Weapon, Dagger, Spear
 Cooldown         : 4.5 seconds
-Category         : 1264
+Category         : 1264 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -2352,8 +2354,9 @@ Effects          :
                    Base Value: 7 | Scaled Value: 7 | Misc Value: 11 | Target: Self (1)
 #8 (id=260672)   : Apply Aura (6) | Hasted Global Cooldown (417)
                    Base Value: 100 | Scaled Value: 100 | Target: Self (1)
-                   Affected Spells: Divine Toll (304971), Divine Toll (375576), Divine Resonance (386731), Divine Resonance (387896)
-                   Family Flags: 92
+                   Affected Spells: Divine Toll (304971), Divine Toll (375576), Divine Resonance (386731), Divine Resonance (387896), Hammer of Light (427453)
+                   Family Flags: 29, 92
+Hotfixed         : Affects Spells
 
 Name             : Retribution Paladin (id=137027) [Spell Family (10), Passive, Hidden] 
 Class            : Retribution Paladin
@@ -3014,7 +3017,7 @@ Attributes       : Allow Item Spell In PvP (13), Only On Player (104), Not In Sp
 Effects          :
 #1 (id=227469)   : Apply Aura (6) | Stun (12)
                    Base Value: 0 | Scaled Value: 0 | Target: Enemy (6)
-#2 (id=246845)   : : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 6 seconds
+#2 (id=246845)   : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 6 seconds
                    Base Value: 0 | Scaled Value: 0 | Target: Enemy (6)
 Description      : Stuns the target Player for $d. If the judgment holds for $d, the enemy will be instantly teleported to your jail. Can only be used while in Ashran.
 Tooltip          : Teleporting.
@@ -3334,7 +3337,7 @@ Range            : 12 yards
 GCD              : 1.5 seconds
 Requires weapon  : Two-handed Axe, Two-handed Mace, Polearm, Two-handed Sword, Staff
 Charges          : 1 (12 seconds cooldown)
-Category         : 2128: Retribution Paladin (137027 effect#6), Retribution Paladin (137027 effect#19), Divine Hammer (198034 effect#4), Blessing of Dusk (385126 effect#11), Improved Blade of Justice (403745 effect#1), Light of Justice (404436 effect#1)
+Category         : 2128 (Type 1): Retribution Paladin (137027 effect#6), Retribution Paladin (137027 effect#19), Divine Hammer (198034 effect#4), Blessing of Dusk (385126 effect#11), Improved Blade of Justice (403745 effect#1), Light of Justice (404436 effect#1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -3438,7 +3441,7 @@ School           : Holy
 Spell Type       : None
 Cooldown         : 0.75 seconds
 Charges          : 1 (45 seconds cooldown)
-Category         : 1662: Cavalier (230332 effect#1), Gallant Steed (280189 effect#2), Divine Steed (317911 effect#1), Time Spiral (375253 effect#1), Blessing of the Bronze (381752 effect#1), Divine Spurs (469409 effect#1)
+Category         : 1662 (Type 9): Cavalier (230332 effect#1), Gallant Steed (280189 effect#2), Divine Steed (317911 effect#1), Time Spiral (375253 effect#1), Blessing of the Bronze (381752 effect#1), Divine Spurs (469409 effect#1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 219
@@ -3723,7 +3726,7 @@ Affecting Spells : Retribution Paladin (137027 effect#4), Protection Paladin (13
 Family Flags     : 108
 Attributes       : Is Ability (4), Do Not Sheath (18), No Aura Icon (60), Can Proc From Procs (122), Extra Initial Period (169), Do Not Consume Resources (197), Melee Haste Affects Periodic (278), Do Not Display Power Cost (303)
 Effects          :
-#1 (id=291057)   : : Apply Aura (6) | Periodic Trigger Spell (23): Divine Hammer every 2.2 seconds
+#1 (id=291057)   : Apply Aura (6) | Periodic Trigger Spell (23): Divine Hammer every 2.2 seconds
                    Base Value: 15 | Scaled Value: 15 | Trigger Spell: 198137 | Target: Self (1)
 #2 (id=1144706)  : Apply Aura (6) | Modify Charge Cooldown Recharge Rate% (Category) (148)
                    Base Value: 75 | Scaled Value: 75 | Misc Value: 1663 (Category) | Target: Self (1)
@@ -3953,7 +3956,7 @@ Labels           : 16: Class Spells
 Attributes       : Do Not Sheath (18), Do Not Display Range (126), Spell Haste Affects Periodic (173), Aura Points On Client (268), Visible only to caster (conversations only) (343), Allow Class Ability Procs (416), Nameplate Personal Buffs/Debuffs (423)
 Aura Interrupt   : Leave World (19), Enter World (22), Raid Encounter Start or M+ Start (40)
 Effects          :
-#1 (id=295441)   : : Apply Aura (6) | Periodic Trigger Spell (23): Tyr's Deliverance every 1 seconds
+#1 (id=295441)   : Apply Aura (6) | Periodic Trigger Spell (23): Tyr's Deliverance every 1 seconds
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 200653 | Target: Self (1)
 #2 (id=1038561)  : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
@@ -4111,7 +4114,8 @@ GCD              : 1.5 seconds
 Duration         : 10 seconds
 Cooldown         : 1.5 seconds
 Charges          : 1 (300 seconds cooldown)
-Category         : 1392: Uther's Counsel (378425 effect#2), Improved Blessing of Protection (384909 effect#1)
+Category         : 1392 (Type 1): Uther's Counsel (378425 effect#2), Improved Blessing of Protection (384909 effect#1)
+Category Flags   : Reset Charges on Encounter End (4)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 117
@@ -4146,7 +4150,7 @@ Resource         : 0.32% Base Mana (0) (id=305310)
 GCD              : 1.5 seconds
 Duration         : 5 seconds
 Charges          : 3 (5 seconds cooldown)
-Category         : 1659: Paladin (137026 effect#5), Blessing of Dusk (385126 effect#6)
+Category         : 1659 (Type 1): Paladin (137026 effect#5), Blessing of Dusk (385126 effect#6)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 117
@@ -4637,7 +4641,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 8 seconds
 Charges          : 1 (8 seconds cooldown)
-Category         : 1512
+Category         : 1512 (Type 1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -4660,7 +4664,7 @@ Spell Level      : 1
 Duration         : 10 seconds
 Cooldown         : 1.5 seconds
 Charges          : 2 (30 seconds cooldown)
-Category         : 1643
+Category         : 1643 (Type 1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -5260,7 +5264,7 @@ School           : Holy
 Spell Type       : None
 Duration         : 27 seconds
 Cooldown         : 120 seconds
-Category         : 1550: Strive for Perfection (296320 effect#6), Strive for Perfection (299367 effect#6), Strive for Perfection (299369 effect#6), Benevolent Faerie (327710 effect#2), Benevolent Faerie Fermata (345453 effect#2), Haunted Mask (356968 effect#2)
+Category         : 1550 (Type 0): Strive for Perfection (296320 effect#6), Strive for Perfection (299367 effect#6), Strive for Perfection (299369 effect#6), Benevolent Faerie (327710 effect#2), Benevolent Faerie Fermata (345453 effect#2), Haunted Mask (356968 effect#2)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -5706,7 +5710,7 @@ Spell Type       : Magic
 Spell Level      : 10
 GCD              : 1.5 seconds
 Charges          : 1 (30 seconds cooldown)
-Category         : 2285
+Category         : 2285 (Type 1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -5988,7 +5992,7 @@ Range            : 30 yards
 GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Charges          : 1 (11 seconds cooldown)
-Category         : 1663: Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Divine Hammer (198034 effect#2), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
+Category         : 1663 (Type 37): Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Divine Hammer (198034 effect#2), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -6016,7 +6020,7 @@ Range            : 30 yards
 GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Charges          : 1 (11 seconds cooldown)
-Category         : 1663: Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Divine Hammer (198034 effect#2), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
+Category         : 1663 (Type 37): Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Divine Hammer (198034 effect#2), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -7035,7 +7039,7 @@ GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Duration         : 20 seconds
 Charges          : 1 (30 seconds cooldown)
-Category         : 1938: Duty-Bound Gavel (355099 effect#1)
+Category         : 1938 (Type 1): Duty-Bound Gavel (355099 effect#1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -7086,7 +7090,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 30 seconds
 Cooldown         : 45 seconds
-Category         : 1890
+Category         : 1890 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -7125,7 +7129,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 30 seconds
 Cooldown         : 45 seconds
-Category         : 1890
+Category         : 1890 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -7190,7 +7194,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 30 seconds
 Cooldown         : 45 seconds
-Category         : 1890
+Category         : 1890 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -7224,7 +7228,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 30 seconds
 Cooldown         : 45 seconds
-Category         : 1890
+Category         : 1890 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -8741,7 +8745,7 @@ Duration         : 15 seconds
 Triggered By     : Divine Resonance (355098)
 Attributes       : Allow While Sitting (27), Not In Spellbook Until Learned (269)
 Effects          :
-#1 (id=888579)   : : Apply Aura (6) | Periodic Trigger Spell (23): Divine Resonance every 5 seconds
+#1 (id=888579)   : Apply Aura (6) | Periodic Trigger Spell (23): Divine Resonance every 5 seconds
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 356890 | Target: Self (1)
 #2 (id=893778)   : Dummy (3)
                    Base Value: 15 | Scaled Value: 15
@@ -10134,7 +10138,7 @@ Labels           : 16: Class Spells
 Triggered By     : Divine Resonance (384028)
 Attributes       : Allow While Sitting (27), Not In Spellbook (143)
 Effects          :
-#1 (id=1016308)  : : Apply Aura (6) | Periodic Trigger Spell (23): Divine Resonance every 5 seconds
+#1 (id=1016308)  : Apply Aura (6) | Periodic Trigger Spell (23): Divine Resonance every 5 seconds
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 384030 | Target: Self (1)
 #2 (id=1016309)  : Dummy (3)
                    Base Value: 15 | Scaled Value: 15
@@ -10199,17 +10203,20 @@ Labels           : 16: Class Spells
 Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Hide Passive From Tooltip (451)
 Effects          :
 #1 (id=1016941)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 1 (3)
-                   Base Value: 20 | Scaled Value: 20 | Misc Value: 3 | Target: Self (1)
+                   Base Value: 0 | Scaled Value: 0 | Misc Value: 3 | Target: Self (1)
                    Affected Spells: Sentinel (389539)
                    Family Flags: 76
+Hotfixed         : Base Value (20 -> 0)
 #2 (id=1016942)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 2 (12)
-                   Base Value: 20 | Scaled Value: 20 | Misc Value: 12 | Target: Self (1)
+                   Base Value: 0 | Scaled Value: 0 | Misc Value: 12 | Target: Self (1)
                    Affected Spells: Sentinel (389539)
                    Family Flags: 76
+Hotfixed         : Base Value (20 -> 0)
 #3 (id=1035086)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 5 (33)
-                   Base Value: 20 | Scaled Value: 20 | Misc Value: 33 | Target: Self (1)
+                   Base Value: 0 | Scaled Value: 0 | Misc Value: 33 | Target: Self (1)
                    Affected Spells: Sentinel (389539)
                    Family Flags: 76
+Hotfixed         : Base Value (20 -> 0)
 #4 (id=1091237)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 4 (32)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 32 | Target: Self (1)
                    Affected Spells: Crusade (231895), Crusade (454373)
@@ -10803,7 +10810,7 @@ Duration         : 15 seconds
 Triggered By     : Divine Resonance (386732)
 Attributes       : Allow While Sitting (27), Allow Cast While Casting (135), Not In Spellbook (143)
 Effects          :
-#1 (id=1021012)  : : Apply Aura (6) | Periodic Trigger Spell (23): Divine Resonance every 5 seconds
+#1 (id=1021012)  : Apply Aura (6) | Periodic Trigger Spell (23): Divine Resonance every 5 seconds
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 386731 | Target: Self (1)
 #2 (id=1021013)  : Dummy (3)
                    Base Value: 15 | Scaled Value: 15
@@ -10916,7 +10923,7 @@ Spell Type       : Magic
 GCD              : 1.5 seconds
 Duration         : 6 seconds
 Charges          : 1 (60 seconds cooldown)
-Category         : 2284: Blessing of Dusk (385126 effect#13), Inmost Light (405757 effect#2)
+Category         : 2284 (Type 1): Blessing of Dusk (385126 effect#13), Inmost Light (405757 effect#2)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -11254,7 +11261,7 @@ Range            : 30 yards
 Duration         : 15 seconds
 Attributes       : Allow While Sitting (27), Not In Spellbook Until Learned (269)
 Effects          :
-#1 (id=1023012)  : : Apply Aura (6) | Periodic Trigger Spell (23): Divine Resonance every 5 seconds
+#1 (id=1023012)  : Apply Aura (6) | Periodic Trigger Spell (23): Divine Resonance every 5 seconds
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 387896 | Target: Self (1)
 #2 (id=1023013)  : Dummy (3)
                    Base Value: 15 | Scaled Value: 15
@@ -11310,7 +11317,7 @@ Spell Level      : 1
 Range            : 40 yards
 Duration         : 30 seconds
 Cooldown         : 45 seconds
-Category         : 1890
+Category         : 1890 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -11332,7 +11339,7 @@ Effects          :
                    Base Value: 0 | Scaled Value: 0 | Rating: Crit | Target: Friendly (21)
 #4 (id=1146585)  : Apply Aura (6) | Dummy (4)
                    Base Value: 12 | Scaled Value: 12 | PvP Coefficient: 1.5 | Target: Friendly (21)
-#5 (id=1146606)  : : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 1 seconds
+#5 (id=1146606)  : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 1 seconds
                    Base Value: 20 | Scaled Value: 20 | Target: Friendly (21)
 Description      : Bless an ally for $d, causing $s1% of all healing to be converted into damage onto a nearby enemy and $s4% of all damage to be converted into healing onto an injured ally within $448227A1 yds.
 
@@ -11363,7 +11370,7 @@ Spell Level      : 1
 Range            : 40 yards
 Duration         : 30 seconds
 Cooldown         : 45 seconds
-Category         : 1890
+Category         : 1890 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -11396,7 +11403,7 @@ Spell Level      : 48
 Range            : 40 yards
 Duration         : 30 seconds
 Cooldown         : 45 seconds
-Category         : 1890
+Category         : 1890 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -11464,7 +11471,7 @@ Spell Level      : 48
 Range            : 40 yards
 Duration         : 30 seconds
 Cooldown         : 45 seconds
-Category         : 1890
+Category         : 1890 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -11564,7 +11571,7 @@ School           : Holy
 Spell Type       : None
 Duration         : 16 seconds
 Cooldown         : 120 seconds
-Category         : 1550: Strive for Perfection (296320 effect#6), Strive for Perfection (299367 effect#6), Strive for Perfection (299369 effect#6), Benevolent Faerie (327710 effect#2), Benevolent Faerie Fermata (345453 effect#2), Haunted Mask (356968 effect#2)
+Category         : 1550 (Type 0): Strive for Perfection (296320 effect#6), Strive for Perfection (299367 effect#6), Strive for Perfection (299369 effect#6), Benevolent Faerie (327710 effect#2), Benevolent Faerie Fermata (345453 effect#2), Haunted Mask (356968 effect#2)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -11606,7 +11613,7 @@ Effects          :
                    Family Flags: 98
 #9 (id=1033320)  : Dummy (3)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
-#10 (id=1033321) : : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 1 seconds
+#10 (id=1033321) : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 1 seconds
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
 #11 (id=1033322) : Apply Aura (6) | Modify Max Health% (133)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
@@ -11642,7 +11649,7 @@ Range            : 40 yards
 Cast Time        : 2 seconds
 GCD              : 1.5 seconds
 Cooldown         : 600 seconds
-Category         : 26
+Category         : 26 (Type 0)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -12902,7 +12909,7 @@ Labels           : 26: Paladin Spells
                  : 292
 Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Include In Advanced Combat Log (72), Not In Spellbook (143)
 Effects          :
-#1 (id=1051258)  : : Apply Aura (6) | Periodic Trigger Spell (23): Inquisitor's Ire every 2 seconds
+#1 (id=1051258)  : Apply Aura (6) | Periodic Trigger Spell (23): Inquisitor's Ire every 2 seconds
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 403976 | Target: Self (1)
 Description      : Every $t1 sec, gain $403976s1% increased damage to your next Divine Storm, stacking up to $403976u times.
 
@@ -12955,7 +12962,7 @@ Range            : 50000 yards
 GCD              : 1.5 seconds
 Duration         : 5 seconds
 Charges          : 3 (5 seconds cooldown)
-Category         : 1659: Paladin (137026 effect#5), Blessing of Dusk (385126 effect#6)
+Category         : 1659 (Type 1): Paladin (137026 effect#5), Blessing of Dusk (385126 effect#6)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 117
@@ -14026,7 +14033,7 @@ Range            : 5 yards
 GCD              : 1 seconds
 Requires weapon  : One-handed Axe, Two-handed Axe, One-handed Mace, Two-handed Mace, Polearm, One-handed Sword, Two-handed Sword, Staff, Fist Weapon, Dagger, Spear
 Charges          : 1 (6 seconds cooldown)
-Category         : 1627: Paladin (137026 effect#4), Retribution Paladin (137027 effect#5), Holy Paladin (137029 effect#20), Divine Hammer (198034 effect#3), Fires of Justice (203316 effect#3), Avenging Crusader (216331 effect#2), Avenging Crusader (216331 effect#11), Swift Justice (383228 effect#2), Improved Crusader Strike (383254 effect#1), Blessing of Dusk (385126 effect#7), Templar Strikes (406646 effect#2), Templar Strikes (406646 effect#3)
+Category         : 1627 (Type 5): Paladin (137026 effect#4), Retribution Paladin (137027 effect#5), Holy Paladin (137029 effect#20), Divine Hammer (198034 effect#3), Fires of Justice (203316 effect#3), Avenging Crusader (216331 effect#2), Avenging Crusader (216331 effect#11), Swift Justice (383228 effect#2), Improved Crusader Strike (383254 effect#1), Blessing of Dusk (385126 effect#7), Templar Strikes (406646 effect#2), Templar Strikes (406646 effect#3)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -15506,7 +15513,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 3022
-Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Divine Purpose (223819 effects: #1, #4), Crusade (231895 effects: #1, #2), Mastery: Highlord's Judgment (267316 effects: #1, #2), Blessing of Dawn (337747 effects: #1, #2), Radiant Decree (383469 effect#3), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Divine Purpose (408458 effect#1), Retribution Paladin (412314 effects: #14, #15), Initial Paladin (417383 effects: #1, #2), Light's Deliverance (433732 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2)
+Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Paladin (137026 effect#8), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Divine Purpose (223819 effects: #1, #4), Crusade (231895 effects: #1, #2), Mastery: Highlord's Judgment (267316 effects: #1, #2), Blessing of Dawn (337747 effects: #1, #2), Radiant Decree (383469 effect#3), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Divine Purpose (408458 effect#1), Retribution Paladin (412314 effects: #14, #15), Initial Paladin (417383 effects: #1, #2), Light's Deliverance (433732 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2)
 Family Flags     : 27, 29, 65
 Attributes       : Not Shapeshifted (16), Do Not Sheath (18), No Aura Icon (60), Not In Spellbook (143), Aura Points On Client (268), Area Effects Use Target Radius (328), Allow Class Ability Procs (416)
 Effects          :
@@ -15606,9 +15613,15 @@ Effects          :
                    Base Value: 156 | Scaled Value: 156 | Target: Self (1)
                    Affected Spells: Judgment (20271), Judgment (197277), Judgment (214222), Judgment (275773), Judgment (275779), Boundless Judgment (383970), Judgment (383991)
                    Family Flags: 23
+#20 (id=1195722) : Apply Aura (6) | Add Percent Modifier (108): Spell Periodic Amount (22)
+                   Base Value: 18 | Scaled Value: 18 | Misc Value: 22 | Target: Self (1)
+                   Affected Spells: Dawnlight (431380), Dawnlight (431381)
+                   Family Flags: 1
+Hotfixed         : NEW EFFECT
 Description      : Holy Paladin core passive
 
 Name             : Hammer of Light (id=429826) [Spell Family (10)] 
+Hotfixed         : Attributes
 Class            : Paladin
 School           : Holy
 Spell Type       : Melee
@@ -15620,7 +15633,7 @@ Labels           : 16: Class Spells
 Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Judgment (197277 effect#1), Crusade (231895 effects: #1, #2), Mastery: Highlord's Judgment (267316 effects: #1, #2), Blessing of Dawn (337747 effects: #1, #2), Final Reckoning (343721 effect#3), Reckoning (343724 effect#2), Radiant Decree (383469 effect#3), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Divine Purpose (408458 effect#2), Retribution Paladin (412314 effects: #14, #15, #22), Initial Paladin (417383 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2), Sacred Strength (469337 effect#1)
 Triggered By     : Hammer of Light (427453)
 Family Flags     : 27, 65, 112
-Attributes       : Allow Dead Target (64), Not a Proc (105), Can Proc From Procs (122), Do Not Display Range (126), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Allow Dead Target (64), Do Not Reset Combat Timers (81), Not a Proc (105), Can Proc From Procs (122), Do Not Display Range (126), Not In Spellbook (143), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1114338)  : School Damage (2): holy
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 5.80645 | PvP Coefficient: 0.8 | Target: Enemy (6)
@@ -15663,7 +15676,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 2511: Penitence (403026 effect#1), Truth's Wake (403695 effect#5)
-Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Crusade (231895 effects: #1, #2), Mastery: Highlord's Judgment (267316 effects: #1, #2), Blessing of Dawn (337747 effects: #1, #2), Radiant Decree (383469 effect#3), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Retribution Paladin (412314 effects: #14, #15), Initial Paladin (417383 effects: #1, #2), Sun's Avatar (431425 effect#1), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2)
+Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Crusade (231895 effects: #1, #2), Mastery: Highlord's Judgment (267316 effects: #1, #2), Blessing of Dawn (337747 effects: #1, #2), Radiant Decree (383469 effect#3), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Retribution Paladin (412314 effects: #14, #15), Initial Paladin (417383 effects: #1, #2), Holy Paladin (428076 effect#20), Sun's Avatar (431425 effect#1), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2)
 Family Flags     : 1, 27, 65
 Attributes       : Extra Initial Period (169), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Bypass Visibility Check (320), Nameplate Personal Buffs/Debuffs (423)
 Effects          :
@@ -15688,7 +15701,7 @@ Duration         : 8 seconds
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Holy Paladin (137029 effects: #1, #2), Beacon of Faith (156910 effect#3), Sacred Dawn (243174 effect#1), Blessing of Dawn (337747 effects: #1, #2), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Initial Paladin (417383 effects: #3, #4), Sun's Avatar (431425 effect#1), Avenging Wrath (454351 effects: #2, #11), Heightened Wrath (456759 effects: #1, #2)
+Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Holy Paladin (137029 effects: #1, #2), Beacon of Faith (156910 effect#3), Sacred Dawn (243174 effect#1), Blessing of Dawn (337747 effects: #1, #2), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Initial Paladin (417383 effects: #3, #4), Holy Paladin (428076 effect#20), Sun's Avatar (431425 effect#1), Avenging Wrath (454351 effects: #2, #11), Heightened Wrath (456759 effects: #1, #2)
 Family Flags     : 1, 41, 46
 Attributes       : Extra Initial Period (169), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268)
 Effects          :
@@ -16149,7 +16162,7 @@ Labels           : 16: Class Spells
 Attributes       : Aura Points On Client (268), Allow Class Ability Procs (416), Nameplate Personal Buffs/Debuffs (423), Periodic Refresh Extends Duration (436)
 Aura Interrupt   : Change Specialization (38)
 Effects          :
-#1 (id=1119384)  : : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 2 seconds
+#1 (id=1119384)  : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 2 seconds
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
 Description      : $@spelldesc431533
 Tooltip          : Casting Empyrean Hammer on a nearby target every $t sec.
@@ -16394,7 +16407,8 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Velocity         : 20 yards/sec
 Charges          : 2 (60 seconds cooldown)
-Category         : 2220: Forewarning (432804 effect#1)
+Category         : 2220 (Type 1): Forewarning (432804 effect#1)
+Category Flags   : Reset Charges on Encounter End (4)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -16446,7 +16460,8 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Velocity         : 20 yards/sec
 Charges          : 2 (60 seconds cooldown)
-Category         : 2220: Forewarning (432804 effect#1)
+Category         : 2220 (Type 1): Forewarning (432804 effect#1)
+Category Flags   : Reset Charges on Encounter End (4)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -16497,7 +16512,7 @@ Effects          :
                    Base Value: 33 | Scaled Value: 33 | Misc Value: 3 | Target: Friendly (21)
                    Affected Spells: Devotion Aura (465), Crusader Aura (32223), Retribution Aura (183435), Concentration Aura (317920)
                    Family Flags: 6, 17, 26, 94
-#2 (id=1121231)  : : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 2 seconds
+#2 (id=1121231)  : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 2 seconds
                    Base Value: 150 | Scaled Value: 150 | Target: Friendly (21)
 #3 (id=1121452)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Friendly (21)
@@ -17246,7 +17261,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 8 seconds
 Charges          : 1 (8 seconds cooldown)
-Category         : 1512
+Category         : 1512 (Type 1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -17287,7 +17302,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 8 seconds
 Charges          : 1 (8 seconds cooldown)
-Category         : 1512
+Category         : 1512 (Type 1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -17504,7 +17519,7 @@ Attributes       : Passive (6), Not In Spellbook (143)
 Effects          :
 #1 (id=1146197)  : Apply Aura (6) | Trigger Spell Based on Health% (468)
                    Base Value: 80 | Scaled Value: 80 | Misc Value: 1 | Trigger Spell: 447998 | Target: Self (1)
-#2 (id=1146198)  : : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 1 seconds
+#2 (id=1146198)  : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 1 seconds
                    Base Value: 30 | Scaled Value: 30 | Target: Self (1)
 Description      : While above $s1% health, Holy Shock's healing is increased $447988s1%, but creates a heal absorb on you for $s2% of the amount healed that prevents Beacon of Light from healing you until it has dissipated.
 
@@ -17575,7 +17590,7 @@ Effects          :
 #1 (id=1146289)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
                    Base Value: -10 | Scaled Value: -10 | Misc Value: 3 | Misc Value 2: 3495 (Label) | Target: Self (1)
                    Affected Spells (Label): Light of the Martyr (447985)
-#2 (id=1146290)  : : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 5 seconds
+#2 (id=1146290)  : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 5 seconds
                    Base Value: 70 | Scaled Value: 70 | Target: Self (1)
 #3 (id=1146378)  : Apply Aura (6) | Trigger Spell Based on Health% (468)
                    Base Value: 70 | Scaled Value: 70 | Trigger Spell: 448088 | Target: Self (1)
@@ -18504,6 +18519,7 @@ Description      : $@spelldesc157047
 Tooltip          : Absorbs $w1 damage.
 
 Name             : Sacrosanct Crusade (id=461867) [Spell Family (10)] 
+Hotfixed         : Attributes
 Class            : Paladin
 School           : Holy
 Spell Type       : Magic
@@ -18512,7 +18528,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 3022
-Attributes       : Wearer Casts Proc Trigger (11), Not Shapeshifted (16), Do Not Sheath (18), No Aura Cancel (31), Fail on all targets immune (85), Aura Never Bounces (148), Ignore Healing Modifiers (219), Aura Points On Client (268), Reset cooldown upon ending an encounter (333), Allow Class Ability Procs (416)
+Attributes       : Wearer Casts Proc Trigger (11), Not Shapeshifted (16), Do Not Sheath (18), No Aura Cancel (31), Do Not Reset Combat Timers (81), Fail on all targets immune (85), Aura Never Bounces (148), Doesn't Reset Swing Timer if Instant (217), Ignore Healing Modifiers (219), Aura Points On Client (268), Reset cooldown upon ending an encounter (333), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1170661)  : Apply Aura (6) | Absorb Damage (69)
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 0x7f | Target: Self (1)
