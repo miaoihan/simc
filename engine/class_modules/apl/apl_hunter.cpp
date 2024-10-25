@@ -102,15 +102,17 @@ void beast_mastery( player_t* p )
 
   st->add_action( "barbed_shot,target_if=min:dot.barbed_shot.remains,if=pet.main.buff.frenzy.up&pet.main.buff.frenzy.remains<=gcd+0.25|pet.main.buff.frenzy.stack<3&(cooldown.bestial_wrath.ready&(!pet.main.buff.frenzy.up|talent.scent_of_blood)|talent.call_of_the_wild&cooldown.call_of_the_wild.ready)" );
   st->add_action( "kill_command,if=talent.call_of_the_wild&cooldown.call_of_the_wild.remains<gcd+0.25" );
-  st->add_action( "multishot,if=buff.beast_cleave.remains<gcd*1.25&talent.bleak_powder&(buff.deathblow.up|(cooldown.black_arrow.remains<gcd&(target.health.pct<20|target.health.pct>81)))" );
-  st->add_action( "black_arrow" );
+  st->add_action( "kill_shot,target_if=min:dot.serpent_sting.remains,if=talent.venoms_bite&(!active_dot.serpent_sting|dot.serpent_sting.refreshable)" );
   st->add_action( "call_of_the_wild" );
   st->add_action( "bloodshed" );
   st->add_action( "bestial_wrath" );
+  st->add_action( "kill_command,if=cooldown.kill_command.full_recharge_time<1.25*gcd" );
+  st->add_action( "multishot,if=buff.beast_cleave.remains<gcd*1.25&talent.bleak_powder&(buff.deathblow.up|(cooldown.black_arrow.remains<gcd&(target.health.pct<20|target.health.pct>81)))" );
+  st->add_action( "black_arrow" );
   st->add_action( "kill_command" );
   st->add_action( "dire_beast" );
-  st->add_action( "kill_shot,target_if=min:dot.serpent_sting.remains,if=talent.venoms_bite&(!active_dot.serpent_sting|dot.serpent_sting.refreshable)" );
   st->add_action( "barbed_shot,target_if=min:dot.barbed_shot.remains,if=talent.wild_call&charges_fractional>1.4|buff.call_of_the_wild.up|full_recharge_time<gcd&cooldown.bestial_wrath.remains|talent.scent_of_blood&(cooldown.bestial_wrath.remains<12+gcd)|talent.furious_assault|talent.black_arrow&(talent.barbed_scales|talent.savagery)|fight_remains<9" );
+  st->add_action( "cobra_shot,if=buff.bestial_wrath.up&talent.killer_cobra" );
   st->add_action( "kill_shot" );
   st->add_action( "lights_judgment,if=buff.bestial_wrath.down|target.time_to_die<5" );
   st->add_action( "cobra_shot" );
@@ -177,15 +179,17 @@ void beast_mastery_ptr( player_t* p )
 
   st->add_action( "barbed_shot,target_if=min:dot.barbed_shot.remains,if=pet.main.buff.frenzy.up&pet.main.buff.frenzy.remains<=gcd+0.25|pet.main.buff.frenzy.stack<3&(cooldown.bestial_wrath.ready&(!pet.main.buff.frenzy.up|talent.scent_of_blood)|talent.call_of_the_wild&cooldown.call_of_the_wild.ready)" );
   st->add_action( "kill_command,if=talent.call_of_the_wild&cooldown.call_of_the_wild.remains<gcd+0.25" );
-  st->add_action( "multishot,if=buff.beast_cleave.remains<gcd*1.25&talent.bleak_powder&(buff.deathblow.up|(cooldown.black_arrow.remains<gcd&(target.health.pct<20|target.health.pct>81)))" );
-  st->add_action( "black_arrow" );
+  st->add_action( "kill_shot,target_if=min:dot.serpent_sting.remains,if=talent.venoms_bite&(!active_dot.serpent_sting|dot.serpent_sting.refreshable)" );
   st->add_action( "call_of_the_wild" );
   st->add_action( "bloodshed" );
   st->add_action( "bestial_wrath" );
+  st->add_action( "kill_command,if=cooldown.kill_command.full_recharge_time<1.25*gcd" );
+  st->add_action( "multishot,if=buff.beast_cleave.remains<gcd*1.25&talent.bleak_powder&(buff.deathblow.up|(cooldown.black_arrow.remains<gcd&(target.health.pct<20|target.health.pct>81)))" );
+  st->add_action( "black_arrow" );
   st->add_action( "kill_command" );
   st->add_action( "dire_beast" );
-  st->add_action( "kill_shot,target_if=min:dot.serpent_sting.remains,if=talent.venoms_bite&(!active_dot.serpent_sting|dot.serpent_sting.refreshable)" );
   st->add_action( "barbed_shot,target_if=min:dot.barbed_shot.remains,if=talent.wild_call&charges_fractional>1.4|buff.call_of_the_wild.up|full_recharge_time<gcd&cooldown.bestial_wrath.remains|talent.scent_of_blood&(cooldown.bestial_wrath.remains<12+gcd)|talent.furious_assault|talent.black_arrow&(talent.barbed_scales|talent.savagery)|fight_remains<9" );
+  st->add_action( "cobra_shot,if=buff.bestial_wrath.up&talent.killer_cobra" );
   st->add_action( "kill_shot" );
   st->add_action( "lights_judgment,if=buff.bestial_wrath.down|target.time_to_die<5" );
   st->add_action( "cobra_shot" );
