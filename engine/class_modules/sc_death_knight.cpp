@@ -4771,7 +4771,9 @@ struct death_knight_action_t : public parse_action_effects_t<Base>
     }
 
     if ( p()->talent.deathbringer.reapers_mark.ok() && this->data().id() != p()->spell.reapers_mark_explosion->id() &&
-         this->data().id() != 66198 && this->data().id() != 439539 )  // TODO-TWW verify if offhand obliterate bug is fixed
+         this->data().id() != 66198 /* Obliterate offhand does not count */ &&
+         this->data().id() != p()->spell.hyperpyrexia_damage->id() &&
+         this->data().id() != p()->spell.icy_death_torrent_damage->id() )
     {
       death_knight_td_t* td = get_td( s->target );
       if ( td->debuff.reapers_mark->check() )
