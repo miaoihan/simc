@@ -517,6 +517,7 @@ public:
 
     cooldown_t* black_arrow;
     cooldown_t* bleak_powder;
+    cooldown_t* banshees_mark;
 
     cooldown_t* lunar_storm;
   } cooldowns;
@@ -961,6 +962,7 @@ public:
 
     cooldowns.black_arrow   = get_cooldown( "black_arrow" );
     cooldowns.bleak_powder  = get_cooldown( "bleak_powder_icd" );
+    cooldowns.banshees_mark = get_cooldown( "banshees_mark" );
 
     cooldowns.lunar_storm = get_cooldown( "lunar_storm" );
 
@@ -4417,9 +4419,10 @@ struct black_arrow_base_t : public kill_shot_base_t
     black_arrow_dot->execute_on_target( s->target );
 
     //The chance is not in spell data and is hardcoded into the tooltip
-    if ( p()->talents.banshees_mark.ok() && rng().roll( 0.25 ) )
+    if ( p()->talents.banshees_mark.ok() && rng().roll( 0.25 ) && p()->cooldowns.banshees_mark->up() )
     {
       p()->actions.a_murder_of_crows->execute_on_target( s->target ); 
+      p()->cooldowns.banshees_mark->start();
     }
 
     if ( p()->talents.bleak_powder.ok() && ( p()->buffs.trick_shots->check() || p()->buffs.beast_cleave->check() ) && p()->cooldowns.bleak_powder->up() )
@@ -7916,6 +7919,7 @@ void hunter_t::init_spells()
   // Cooldowns
   cooldowns.ruthless_marauder -> duration = talents.ruthless_marauder -> internal_cooldown();
   cooldowns.bleak_powder->duration = talents.bleak_powder->internal_cooldown();
+  cooldowns.banshees_mark->duration = talents.banshees_mark->internal_cooldown();
   cooldowns.legacy_of_the_windrunners->duration = talents.legacy_of_the_windrunners->internal_cooldown();
   cooldowns.lunar_storm->duration = talents.lunar_storm->internal_cooldown();
 }
