@@ -2374,7 +2374,7 @@ std::string spell_info::to_str( const dbc_t& dbc, const spell_data_t* spell, int
   if ( spell->category() > 0 )
   {
     s << "Category         : ";
-    std::string category_str = fmt::format( "{} (Type {})", spell->category(), spell->category_type() );
+    std::string category_str = fmt::format( "{} (Type {:#x})", spell->category(), spell->category_type() );
     auto affecting_effects = dbc.effect_categories_affecting_spell( spell );
     if ( affecting_effects.empty() )
     {

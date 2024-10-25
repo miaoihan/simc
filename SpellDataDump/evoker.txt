@@ -38,7 +38,7 @@ Spell Type       : None
 Spell Level      : 1
 Duration         : 1.1 seconds
 Charges          : 2 (20 seconds cooldown)
-Category         : 1365 (Type 9): Celerity (115173 effect#1), Celerity (115173 effect#2), Roll Buff (222625 effect#1), Time Spiral (375252 effect#1), Blessing of the Bronze (381751 effect#1), Lighter Than Air (449582 effect#1)
+Category         : 1365 (Type 0x9): Celerity (115173 effect#1), Celerity (115173 effect#2), Roll Buff (222625 effect#1), Time Spiral (375252 effect#1), Blessing of the Bronze (381751 effect#1), Lighter Than Air (449582 effect#1)
 Labels           : 16: Class Spells
                  : 22: Monk Spells
                  : 219
@@ -182,7 +182,7 @@ Spell Level      : 1
 Duration         : 0.65 seconds
 Cooldown         : 0.5 seconds
 Charges          : 2 (25 seconds cooldown)
-Category         : 1632 (Type 9): Flow of Time (336636 effect#2), Time Spiral (375240 effect#3), Blessing of the Bronze (381750 effect#2), Flow of Time (382268 effect#2)
+Category         : 1632 (Type 0x9): Flow of Time (336636 effect#2), Time Spiral (375240 effect#3), Blessing of the Bronze (381750 effect#2), Flow of Time (382268 effect#2)
 Labels           : 16: Class Spells
                  : 17: Mage Spells
                  : 292
@@ -235,7 +235,7 @@ Spell Type       : Magic
 GCD              : 1.5 seconds
 Duration         : 5 seconds
 Cooldown         : 45 seconds
-Category         : 44 (Type 0)
+Category         : 44 (Type 0x0)
 Labels           : 16: Class Spells
                  : 21: Druid Spells
                  : 219
@@ -1124,7 +1124,7 @@ Spell Type       : None
 Duration         : 6 seconds
 Cooldown         : 1 seconds
 Charges          : 1 (35 seconds cooldown)
-Category         : 1948 (Type 1): Aerial Mastery (365933 effect#1), Time Spiral (375234 effect#1), Blessing of the Bronze (381748 effect#1), Flow State (390148 effect#3), Time Skip (404977 effect#2), Interwoven Threads (412713 effect#2), Warp (429483 effect#1), Temporal Burst (431698 effect#4)
+Category         : 1948 (Type 0x1): Aerial Mastery (365933 effect#1), Time Spiral (375234 effect#1), Blessing of the Bronze (381748 effect#1), Flow State (390148 effect#3), Time Skip (404977 effect#2), Interwoven Threads (412713 effect#2), Warp (429483 effect#1), Temporal Burst (431698 effect#4)
 Labels           : 16: Class Spells
                  : 292
                  : 1216: Flow State (390148 effect#2), Flow State (390148 effect#9), Flow State (390148 effect#11), Time Skip (404977 effect#1), Interwoven Threads (412713 effect#1), Temporal Burst (431698 effect#3), Burning Adrenaline (444019 effect#1)
@@ -1455,7 +1455,7 @@ Max Targets      : 1
 GCD              : 1.5 seconds
 Duration         : 600 seconds
 Cooldown         : 30 seconds
-Category         : 2133 (Type 0)
+Category         : 2133 (Type 0x0)
 Labels           : 16: Class Spells
                  : 292
                  : 930
@@ -1510,7 +1510,7 @@ Resource         : 10% Base Mana (0) (id=305272) w/ Augmentation Evoker (id=3961
 Range            : 25 yards
 GCD              : 1.5 seconds
 Cooldown         : 24 seconds
-Category         : 1948 (Type 0): Aerial Mastery (365933 effect#1), Time Spiral (375234 effect#1), Blessing of the Bronze (381748 effect#1), Flow State (390148 effect#3), Time Skip (404977 effect#2), Interwoven Threads (412713 effect#2), Warp (429483 effect#1), Temporal Burst (431698 effect#4)
+Category         : 1948 (Type 0x0): Aerial Mastery (365933 effect#1), Time Spiral (375234 effect#1), Blessing of the Bronze (381748 effect#1), Flow State (390148 effect#3), Time Skip (404977 effect#2), Interwoven Threads (412713 effect#2), Warp (429483 effect#1), Temporal Burst (431698 effect#4)
 Labels           : 16: Class Spells
                  : 219
                  : 292
@@ -2005,7 +2005,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 4 seconds
 Charges          : 1 (240 seconds cooldown)
-Category         : 2035 (Type 1): Erasure (376210 effect#1), Temporal Artificer (381922 effect#1), Flow State (390148 effect#6), Temporal Burst (431698 effect#7)
+Category         : 2035 (Type 0x1): Erasure (376210 effect#1), Temporal Artificer (381922 effect#1), Flow State (390148 effect#6), Temporal Burst (431698 effect#7)
 Category Flags   : Reset Charges on Encounter End (4), Reset Coooldown on Encounter End (5)
 Labels           : 16: Class Spells
                  : 292
@@ -2054,7 +2054,7 @@ Spell Level      : 60
 Duration         : 12 seconds
 Cooldown         : 1 seconds
 Charges          : 1 (90 seconds cooldown)
-Category         : 2100 (Type 1): Symbol of Hope (265144 effect#4), Obsidian Bulwark (375406 effect#1), Flow State (390148 effect#4), Time Skip (404977 effect#3), Interwoven Threads (412713 effect#3), Temporal Burst (431698 effect#5)
+Category         : 2100 (Type 0x1): Symbol of Hope (265144 effect#4), Obsidian Bulwark (375406 effect#1), Flow State (390148 effect#4), Time Skip (404977 effect#3), Interwoven Threads (412713 effect#3), Temporal Burst (431698 effect#5)
 Labels           : 16: Class Spells
                  : 292
                  : 930
@@ -2260,7 +2260,7 @@ Range            : 30 yards
 GCD              : 1.5 seconds
 Duration         : 12 seconds
 Charges          : 1 (9 seconds cooldown)
-Category         : 2010 (Type 1): Preservation Evoker (356810 effect#8), Punctuality (371270 effect#1), Flow State (390148 effect#5), Temporal Burst (431698 effect#6)
+Category         : 2010 (Type 0x1): Preservation Evoker (356810 effect#8), Punctuality (371270 effect#1), Flow State (390148 effect#5), Temporal Burst (431698 effect#6)
 Labels           : 16: Class Spells
                  : 292
                  : 1216: Flow State (390148 effect#2), Flow State (390148 effect#9), Flow State (390148 effect#11), Time Skip (404977 effect#1), Interwoven Threads (412713 effect#1), Temporal Burst (431698 effect#3), Burning Adrenaline (444019 effect#1)
@@ -7575,7 +7575,7 @@ School           : Firestorm
 Spell Type       : None
 Duration         : Aura (infinite)
 Cooldown         : 3 seconds
-Category         : 2125 (Type 0)
+Category         : 2125 (Type 0x0)
 Labels           : 16: Class Spells
                  : 292
                  : 1216: Flow State (390148 effect#2), Flow State (390148 effect#9), Flow State (390148 effect#11), Time Skip (404977 effect#1), Interwoven Threads (412713 effect#1), Temporal Burst (431698 effect#3), Burning Adrenaline (444019 effect#1)
@@ -7598,7 +7598,7 @@ School           : Arcane
 Spell Type       : None
 Duration         : Aura (infinite)
 Cooldown         : 3 seconds
-Category         : 2125 (Type 0)
+Category         : 2125 (Type 0x0)
 Labels           : 16: Class Spells
                  : 292
                  : 1216: Flow State (390148 effect#2), Flow State (390148 effect#9), Flow State (390148 effect#11), Time Skip (404977 effect#1), Interwoven Threads (412713 effect#1), Temporal Burst (431698 effect#3), Burning Adrenaline (444019 effect#1)
@@ -8155,7 +8155,7 @@ Spell Type       : None
 Range            : 60 yards
 Duration         : 10 seconds
 Cooldown         : 180 seconds
-Category         : 1948 (Type 0): Aerial Mastery (365933 effect#1), Time Spiral (375234 effect#1), Blessing of the Bronze (381748 effect#1), Flow State (390148 effect#3), Time Skip (404977 effect#2), Interwoven Threads (412713 effect#2), Warp (429483 effect#1), Temporal Burst (431698 effect#4)
+Category         : 1948 (Type 0x0): Aerial Mastery (365933 effect#1), Time Spiral (375234 effect#1), Blessing of the Bronze (381748 effect#1), Flow State (390148 effect#3), Time Skip (404977 effect#2), Interwoven Threads (412713 effect#2), Warp (429483 effect#1), Temporal Burst (431698 effect#4)
 Labels           : 16: Class Spells
                  : 219
                  : 292
@@ -8701,7 +8701,7 @@ Range            : 25 yards
 Max Targets      : 1
 GCD              : 1.5 seconds
 Charges          : 2 (12 seconds cooldown)
-Category         : 2207 (Type 1): Time Skip (404977 effect#7), Interwoven Threads (412713 effect#7)
+Category         : 2207 (Type 0x1): Time Skip (404977 effect#7), Interwoven Threads (412713 effect#7)
 Labels           : 16: Class Spells
                  : 292
                  : 1216: Flow State (390148 effect#2), Flow State (390148 effect#9), Flow State (390148 effect#11), Time Skip (404977 effect#1), Interwoven Threads (412713 effect#1), Temporal Burst (431698 effect#3), Burning Adrenaline (444019 effect#1)
@@ -11836,7 +11836,7 @@ Range            : 25 yards
 GCD              : 1.5 seconds
 Cooldown         : 0.5 seconds
 Charges          : 1 (30 seconds cooldown)
-Category         : 2281 (Type 1): Red Hot (444081 effect#2)
+Category         : 2281 (Type 0x1): Red Hot (444081 effect#2)
 Labels           : 16: Class Spells
                  : 292
                  : 1216: Flow State (390148 effect#2), Flow State (390148 effect#9), Flow State (390148 effect#11), Time Skip (404977 effect#1), Interwoven Threads (412713 effect#1), Temporal Burst (431698 effect#3), Burning Adrenaline (444019 effect#1)

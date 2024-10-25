@@ -65,7 +65,7 @@ Spell Level      : 4
 Range            : 50000 yards
 Cooldown         : 1 seconds
 Charges          : 1 (20 seconds cooldown)
-Category         : 1449 (Type 9)
+Category         : 1449 (Type 0x9)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 219
@@ -140,7 +140,7 @@ School           : Physical
 Spell Type       : None
 Spell Level      : 4
 Duration         : Aura (infinite)
-Category         : 1239 (Type 0)
+Category         : 1239 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -163,7 +163,7 @@ Range            : 30 yards
 Cast Time        : 1.5 seconds
 GCD              : 1.5 seconds
 Duration         : 20 seconds
-Category         : 33 (Type 0)
+Category         : 33 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -429,7 +429,7 @@ Spell Level      : 20
 GCD              : 1.5 seconds
 Duration         : 60 seconds
 Cooldown         : 30 seconds
-Category         : 411 (Type 0)
+Category         : 411 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -491,7 +491,7 @@ Spell Level      : 10
 Range            : 5 yards
 GCD              : 1 seconds
 Cooldown         : 3 seconds
-Category         : 19 (Type 0)
+Category         : 19 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -522,7 +522,7 @@ GCD              : 1.5 seconds
 Velocity         : 100 yards/sec
 Requires weapon  : Bow, Gun, Crossbow
 Charges          : 2 (12 seconds cooldown)
-Category         : 1715 (Type 1): Marksmanship Hunter (137016 effect#6), Trueshot (288613 effect#3), Tactical Reload (400472 effect#2)
+Category         : 1715 (Type 0x1): Marksmanship Hunter (137016 effect#6), Trueshot (288613 effect#3), Tactical Reload (400472 effect#2)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -634,7 +634,7 @@ School           : Physical
 Spell Type       : None
 Spell Level      : 4
 Duration         : Aura (infinite)
-Category         : 1239 (Type 0)
+Category         : 1239 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -652,7 +652,7 @@ School           : Physical
 Spell Type       : None
 Spell Level      : 4
 Duration         : Aura (infinite)
-Category         : 1239 (Type 0)
+Category         : 1239 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -670,7 +670,7 @@ School           : Physical
 Spell Type       : None
 Spell Level      : 4
 Duration         : Aura (infinite)
-Category         : 1239 (Type 0)
+Category         : 1239 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -688,7 +688,7 @@ School           : Physical
 Spell Type       : None
 Spell Level      : 4
 Duration         : Aura (infinite)
-Category         : 1239 (Type 0)
+Category         : 1239 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -706,7 +706,7 @@ School           : Physical
 Spell Type       : None
 Spell Level      : 4
 Duration         : Aura (infinite)
-Category         : 1239 (Type 0)
+Category         : 1239 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -724,7 +724,7 @@ School           : Physical
 Spell Type       : None
 Spell Level      : 4
 Duration         : Aura (infinite)
-Category         : 1239 (Type 0)
+Category         : 1239 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -791,7 +791,7 @@ Spell Type       : Magic
 Spell Level      : 1
 Range            : 5 yards
 Cooldown         : 6 seconds
-Category         : 36 (Type 0)
+Category         : 36 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 62
@@ -816,7 +816,7 @@ Spell Type       : None
 Spell Level      : 14
 Duration         : Aura (infinite)
 Cooldown         : 10 seconds
-Category         : 38 (Type 0)
+Category         : 38 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 62
@@ -873,7 +873,7 @@ Range            : 50 yards
 GCD              : 1.5 seconds
 Cooldown         : 0.5 seconds
 Charges          : 1 (7.5 seconds cooldown)
-Category         : 2067 (Type 1): Hunter (137014 effect#12), Alpha Predator (269737 effect#3)
+Category         : 2067 (Type 0x1): Hunter (137014 effect#12), Alpha Predator (269737 effect#3)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 117
@@ -1151,7 +1151,7 @@ GCD              : 1.5 seconds
 Velocity         : 80 yards/sec
 Requires weapon  : Bow, Gun, Crossbow
 Charges          : 1 (10 seconds cooldown)
-Category         : 1873 (Type 1): Deadeye (321460 effect#1), Deadeye (321460 effect#2)
+Category         : 1873 (Type 0x1): Deadeye (321460 effect#1), Deadeye (321460 effect#2)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -1237,7 +1237,7 @@ Spell Level      : 14
 Range            : 30 yards
 Duration         : 6 seconds
 Cooldown         : 10 seconds
-Category         : 1247 (Type 0)
+Category         : 1247 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 62
@@ -1658,7 +1658,7 @@ Spell Type       : None
 Spell Level      : 14
 Duration         : Aura (infinite)
 Cooldown         : 10 seconds
-Category         : 38 (Type 0)
+Category         : 38 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 62
@@ -2146,7 +2146,7 @@ GCD              : 1.5 seconds
 Duration         : 3 seconds
 Requires weapon  : Bow, Gun, Crossbow
 Cooldown         : 20 seconds
-Category         : 85 (Type 0)
+Category         : 85 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -2857,7 +2857,7 @@ Spell Type       : Melee
 Spell Level      : 1
 Range            : 5 yards
 Cooldown         : 6 seconds
-Category         : 36 (Type 0)
+Category         : 36 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 62
@@ -3520,7 +3520,7 @@ Spell Level      : 18
 Range            : 5 yards
 Duration         : 3 seconds
 Cooldown         : 15 seconds
-Category         : 88 (Type 0)
+Category         : 88 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -3544,7 +3544,7 @@ Duration         : 3 seconds
 Requires weapon  : Two-handed Axe, Two-handed Mace, Polearm, Two-handed Sword, Staff
 Cooldown         : 1 seconds
 Charges          : 1 (30 seconds cooldown)
-Category         : 1635 (Type 1): Terms of Engagement (265895 effect#2)
+Category         : 1635 (Type 0x1): Terms of Engagement (265895 effect#2)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 219
@@ -4586,7 +4586,7 @@ Range            : 8 yards
 GCD              : 1.5 seconds
 Requires weapon  : Two-handed Axe, Two-handed Mace, Polearm, Two-handed Sword, Staff
 Charges          : 1 (15 seconds cooldown)
-Category         : 1616 (Type 1): Hunter (137014 effect#5)
+Category         : 1616 (Type 0x1): Hunter (137014 effect#5)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -4611,7 +4611,7 @@ School           : Fire
 Spell Type       : Ranged
 Spell Level      : 1
 Range            : 40 yards
-Category         : 1620 (Type 0)
+Category         : 1620 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -4683,7 +4683,7 @@ Velocity         : 50 yards/sec
 Duration         : 12 seconds
 Requires weapon  : Bow, Gun, Crossbow
 Charges          : 2 (18 seconds cooldown)
-Category         : 1675 (Type 1): Hunter (137014 effect#9), Bloodletting (341440 effect#2)
+Category         : 1675 (Type 0x1): Hunter (137014 effect#9), Bloodletting (341440 effect#2)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -4757,7 +4757,7 @@ Range            : 40 yards
 GCD              : 1 seconds
 Duration         : 8 seconds
 Cooldown         : 10 seconds
-Category         : 1378 (Type 0)
+Category         : 1378 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -5585,7 +5585,7 @@ Spell Level      : 11
 Range            : 50 yards
 GCD              : 1.5 seconds
 Charges          : 1 (6 seconds cooldown)
-Category         : 1171 (Type 1): Hunter (137014 effect#11), Alpha Predator (269737 effect#1)
+Category         : 1171 (Type 0x1): Hunter (137014 effect#11), Alpha Predator (269737 effect#1)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -5647,7 +5647,7 @@ GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Min Travel Time  : 0.05 seconds
 Charges          : 1 (18 seconds cooldown)
-Category         : 1716 (Type 1): Hunter (137014 effect#10), Guerrilla Tactics (264332 effect#1), Explosives Expert (378937 effect#1)
+Category         : 1716 (Type 0x1): Hunter (137014 effect#10), Guerrilla Tactics (264332 effect#1), Explosives Expert (378937 effect#1)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -6366,7 +6366,7 @@ Spell Type       : Melee
 Spell Level      : 1
 Range            : 5 yards
 Cooldown         : 6 seconds
-Category         : 36 (Type 0)
+Category         : 36 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 62
@@ -6390,7 +6390,7 @@ Spell Type       : Melee
 Spell Level      : 1
 Range            : 5 yards
 Cooldown         : 6 seconds
-Category         : 36 (Type 0)
+Category         : 36 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 62
@@ -6414,7 +6414,7 @@ Spell Type       : Melee
 Spell Level      : 1
 Range            : 5 yards
 Cooldown         : 6 seconds
-Category         : 36 (Type 0)
+Category         : 36 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 62
@@ -6438,7 +6438,7 @@ Spell Type       : Melee
 Spell Level      : 1
 Range            : 5 yards
 Cooldown         : 6 seconds
-Category         : 36 (Type 0)
+Category         : 36 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 62
@@ -6791,7 +6791,7 @@ Range            : 50000 yards
 GCD              : 1.5 seconds
 Duration         : 6 seconds
 Charges          : 1 (120 seconds cooldown)
-Category         : 1830 (Type 1): Lone Survivor (388039 effect#1), Padded Armor (459450 effect#1)
+Category         : 1830 (Type 0x1): Lone Survivor (388039 effect#1), Padded Armor (459450 effect#1)
 Category Flags   : Reset Charges on Encounter End (4), Reset Coooldown on Encounter End (5)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
@@ -7275,7 +7275,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Charges          : 1 (18 seconds cooldown)
-Category         : 1716 (Type 1): Hunter (137014 effect#10), Guerrilla Tactics (264332 effect#1), Explosives Expert (378937 effect#1)
+Category         : 1716 (Type 0x1): Hunter (137014 effect#10), Guerrilla Tactics (264332 effect#1), Explosives Expert (378937 effect#1)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -7353,7 +7353,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Charges          : 1 (18 seconds cooldown)
-Category         : 1716 (Type 1): Hunter (137014 effect#10), Guerrilla Tactics (264332 effect#1), Explosives Expert (378937 effect#1)
+Category         : 1716 (Type 0x1): Hunter (137014 effect#10), Guerrilla Tactics (264332 effect#1), Explosives Expert (378937 effect#1)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -7586,7 +7586,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Charges          : 1 (18 seconds cooldown)
-Category         : 1716 (Type 1): Hunter (137014 effect#10), Guerrilla Tactics (264332 effect#1), Explosives Expert (378937 effect#1)
+Category         : 1716 (Type 0x1): Hunter (137014 effect#10), Guerrilla Tactics (264332 effect#1), Explosives Expert (378937 effect#1)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -7771,7 +7771,7 @@ School           : Physical
 Spell Type       : None
 Range            : 100 yards
 Cooldown         : 120 seconds
-Category         : 2064 (Type 0)
+Category         : 2064 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -8358,7 +8358,7 @@ GCD              : 1.5 seconds
 Velocity         : 80 yards/sec
 Requires weapon  : Two-handed Axe, Two-handed Mace, Polearm, Two-handed Sword, Staff
 Charges          : 1 (10 seconds cooldown)
-Category         : 1873 (Type 1): Deadeye (321460 effect#1), Deadeye (321460 effect#2)
+Category         : 1873 (Type 0x1): Deadeye (321460 effect#1), Deadeye (321460 effect#2)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -11788,7 +11788,7 @@ Spell Type       : None
 Range            : 50000 yards
 Duration         : 10 seconds
 Cooldown         : 120 seconds
-Category         : 2064 (Type 0)
+Category         : 2064 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -12194,7 +12194,7 @@ Spell Type       : None
 Range            : 50000 yards
 Duration         : 10 seconds
 Cooldown         : 120 seconds
-Category         : 2064 (Type 0)
+Category         : 2064 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -16457,7 +16457,7 @@ GCD              : 1.5 seconds
 Velocity         : 80 yards/sec
 Requires weapon  : Bow, Gun, Crossbow
 Charges          : 1 (10 seconds cooldown)
-Category         : 1873 (Type 1): Deadeye (321460 effect#1), Deadeye (321460 effect#2)
+Category         : 1873 (Type 0x1): Deadeye (321460 effect#1), Deadeye (321460 effect#2)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292

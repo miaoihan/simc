@@ -42,7 +42,7 @@ Spell Level      : 10
 Range            : 5 yards
 GCD              : 1 seconds
 Cooldown         : 3 seconds
-Category         : 19 (Type 0)
+Category         : 19 (Type 0x0)
 Labels           : 16: Class Spells
                  : 23: Hunter Spells
                  : 292
@@ -142,7 +142,7 @@ Spell Level      : 44
 GCD              : 1.5 seconds
 Duration         : 4 seconds
 Cooldown         : 180 seconds
-Category         : 1650 (Type 0)
+Category         : 1650 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -185,7 +185,7 @@ Range            : 30 yards
 GCD              : 1.5 seconds
 Duration         : 10 seconds
 Charges          : 1 (30 seconds cooldown)
-Category         : 1877 (Type 1): Blood Death Knight (137008 effect#5), Death's Echo (356367 effect#1), Mawsworn Menace (444099 effect#1)
+Category         : 1877 (Type 0x1): Blood Death Knight (137008 effect#5), Death's Echo (356367 effect#1), Mawsworn Menace (444099 effect#1)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -288,7 +288,7 @@ Spell Level      : 12
 Range            : 30 yards
 Duration         : 60 seconds
 Cooldown         : 120 seconds
-Category         : 1245 (Type 0)
+Category         : 1245 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -406,7 +406,7 @@ Spell Level      : 7
 Range            : 15 yards
 Duration         : 3 seconds
 Cooldown         : 15 seconds
-Category         : 88 (Type 0)
+Category         : 88 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -458,7 +458,7 @@ Velocity         : 4 yards/sec
 Duration         : 20 seconds
 Cooldown         : 120 seconds
 Charges          : 0 (120 seconds cooldown)
-Category         : 1614 (Type 1): Seal of Necrofantasia (212216 effect#1), Seal of Necrofantasia (212216 effect#2), Strive for Perfection (296320 effect#5), Strive for Perfection (299367 effect#5), Strive for Perfection (299369 effect#5), Benevolent Faerie (327710 effect#5), Accelerated Cold (337822 effect#2), Benevolent Faerie Fermata (345453 effect#5), Haunted Mask (356968 effect#5)
+Category         : 1614 (Type 0x1): Seal of Necrofantasia (212216 effect#1), Seal of Necrofantasia (212216 effect#2), Strive for Perfection (296320 effect#5), Strive for Perfection (299367 effect#5), Strive for Perfection (299369 effect#5), Benevolent Faerie (327710 effect#5), Accelerated Cold (337822 effect#2), Benevolent Faerie Fermata (345453 effect#5), Haunted Mask (356968 effect#5)
 Category Flags   : Reset Charges on Encounter End (4)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
@@ -554,7 +554,7 @@ Spell Level      : 9
 Duration         : 10 seconds
 Cooldown         : 1 seconds
 Charges          : 1 (45 seconds cooldown)
-Category         : 1941 (Type 9): Death's Echo (356367 effect#3), Time Spiral (375226 effect#1), Blessing of the Bronze (381732 effect#1)
+Category         : 1941 (Type 0x9): Death's Echo (356367 effect#3), Time Spiral (375226 effect#1), Blessing of the Bronze (381732 effect#1)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 219
@@ -947,7 +947,7 @@ Range            : 30 yards
 GCD              : 0.5 seconds
 Cooldown         : 1 seconds
 Charges          : 1 (25 seconds cooldown)
-Category         : 1428 (Type 1): Blood Death Knight (137008 effect#4), Blood Death Knight (137008 effect#9), Grip of the Everlasting (334724 effect#1), Death's Echo (356367 effect#2)
+Category         : 1428 (Type 0x1): Blood Death Knight (137008 effect#4), Blood Death Knight (137008 effect#9), Grip of the Everlasting (334724 effect#1), Death's Echo (356367 effect#2)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -1064,7 +1064,7 @@ Spell Type       : Magic
 Spell Level      : 17
 GCD              : 1.5 seconds
 Charges          : 2 (7.5 seconds cooldown)
-Category         : 1611 (Type 1): Death Knight (137005 effect#3)
+Category         : 1611 (Type 0x1): Death Knight (137005 effect#3)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -1093,7 +1093,7 @@ Cast Time        : 4 seconds
 GCD              : 1.5 seconds
 Duration         : 60 seconds
 Cooldown         : 60 seconds
-Category         : 511 (Type 0)
+Category         : 511 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -1496,7 +1496,7 @@ School           : Physical
 Spell Type       : None
 Duration         : 10 seconds
 Cooldown         : 90 seconds
-Category         : 1641 (Type 0)
+Category         : 1641 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -1530,7 +1530,7 @@ Spell Level      : 9
 Range            : 30 yards
 Duration         : 3 seconds
 Cooldown         : 8 seconds
-Category         : 82 (Type 0)
+Category         : 82 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -1606,7 +1606,7 @@ School           : Physical
 Spell Type       : None
 Cast Time        : 1.5 seconds
 Cooldown         : 1.5 seconds
-Category         : 133 (Type 0)
+Category         : 133 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -1623,7 +1623,7 @@ School           : Physical
 Spell Type       : None
 Cast Time        : 1.5 seconds
 Cooldown         : 1.5 seconds
-Category         : 133 (Type 0)
+Category         : 133 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -1837,7 +1837,7 @@ Spell Level      : 19
 Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 600 seconds
-Category         : 1555 (Type 0)
+Category         : 1555 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -3221,7 +3221,7 @@ School           : Physical
 Spell Type       : None
 Cast Time        : 1.5 seconds
 Cooldown         : 1.5 seconds
-Category         : 133 (Type 0)
+Category         : 133 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -3275,7 +3275,7 @@ Range            : 30 yards
 GCD              : 1.5 seconds
 Duration         : 10 seconds
 Charges          : 1 (20 seconds cooldown)
-Category         : 1927 (Type 1): Death's Echo (356367 effect#4), Mawsworn Menace (444099 effect#2)
+Category         : 1927 (Type 0x1): Death's Echo (356367 effect#4), Mawsworn Menace (444099 effect#2)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 52
@@ -3846,7 +3846,7 @@ Spell Level      : 19
 Duration         : 4 seconds
 Cooldown         : 1.5 seconds
 Charges          : 2 (25 seconds cooldown)
-Category         : 1645 (Type 1)
+Category         : 1645 (Type 0x1)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -4696,7 +4696,7 @@ Range            : 5 yards
 GCD              : 1.5 seconds
 Duration         : 8 seconds
 Requires weapon  : One-handed Axe, Two-handed Axe, One-handed Mace, Two-handed Mace, Polearm, One-handed Sword, Two-handed Sword, Staff, Fist Weapon, Dagger, Spear
-Category         : 1207 (Type 0)
+Category         : 1207 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -5500,7 +5500,7 @@ Spell Type       : None
 Spell Level      : 1
 Range            : 30 yards
 Duration         : Aura (infinite)
-Category         : 1245 (Type 0)
+Category         : 1245 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -5893,7 +5893,7 @@ Class            : Death Knight
 School           : Shadow
 Spell Type       : None
 Charges          : 2 (60 seconds cooldown)
-Category         : 1644 (Type 1)
+Category         : 1644 (Type 0x1)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -6049,7 +6049,7 @@ Range            : 5 yards
 GCD              : 1.5 seconds
 Duration         : 8 seconds
 Requires weapon  : One-handed Axe, Two-handed Axe, One-handed Mace, Two-handed Mace, Polearm, One-handed Sword, Two-handed Sword, Staff, Fist Weapon, Dagger, Spear
-Category         : 1207 (Type 0)
+Category         : 1207 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -7786,7 +7786,7 @@ Range            : 20 yards
 GCD              : 1.5 seconds
 Duration         : 12 seconds
 Cooldown         : 120 seconds
-Category         : 2040 (Type 0)
+Category         : 2040 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -8449,7 +8449,7 @@ Range            : 30 yards
 GCD              : 1.5 seconds
 Duration         : 10 seconds
 Charges          : 1 (30 seconds cooldown)
-Category         : 1877 (Type 1): Blood Death Knight (137008 effect#5), Death's Echo (356367 effect#1), Mawsworn Menace (444099 effect#1)
+Category         : 1877 (Type 0x1): Blood Death Knight (137008 effect#5), Death's Echo (356367 effect#1), Mawsworn Menace (444099 effect#1)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -12055,7 +12055,7 @@ Range            : 20 yards
 GCD              : 1.5 seconds
 Duration         : 12 seconds
 Cooldown         : 120 seconds
-Category         : 2040 (Type 0)
+Category         : 2040 (Type 0x0)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
@@ -15555,7 +15555,7 @@ Spell Level      : 1
 Duration         : 10 seconds
 Cooldown         : 1 seconds
 Charges          : 1 (45 seconds cooldown)
-Category         : 1941 (Type 9): Death's Echo (356367 effect#3), Time Spiral (375226 effect#1), Blessing of the Bronze (381732 effect#1)
+Category         : 1941 (Type 0x9): Death's Echo (356367 effect#3), Time Spiral (375226 effect#1), Blessing of the Bronze (381732 effect#1)
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 67

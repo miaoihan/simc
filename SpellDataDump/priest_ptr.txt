@@ -92,7 +92,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 8 seconds
 Charges          : 1 (8 seconds cooldown)
-Category         : 1509 (Type 1)
+Category         : 1509 (Type 0x1)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -309,7 +309,7 @@ Spell Level      : 11
 Range            : 40 yards
 GCD              : 1.5 seconds
 Charges          : 1 (60 seconds cooldown)
-Category         : 1673 (Type 1): Miracle Worker (235587 effect#1)
+Category         : 1673 (Type 0x1): Miracle Worker (235587 effect#1)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -454,7 +454,7 @@ Range            : 40 yards
 Cast Time        : 1.5 seconds
 GCD              : 1.5 seconds
 Charges          : 1 (9 seconds cooldown)
-Category         : 1602 (Type 1): Priest (137030 effect#2), Discipline Priest (137032 effect#26), Mangaza's Madness (207701 effect#1), Voidform (250844 effect#5), Voidform (284508 effect#6), Dark Thought (341207 effect#1), Thought Harvester (406788 effect#1)
+Category         : 1602 (Type 0x1): Priest (137030 effect#2), Discipline Priest (137032 effect#26), Mangaza's Madness (207701 effect#1), Voidform (250844 effect#5), Voidform (284508 effect#6), Dark Thought (341207 effect#1), Thought Harvester (406788 effect#1)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -689,7 +689,7 @@ Spell Type       : Magic
 Spell Level      : 8
 Duration         : 10 seconds
 Cooldown         : 90 seconds
-Category         : 671 (Type 0): Angel's Mercy (238100 effect#1)
+Category         : 671 (Type 0x0): Angel's Mercy (238100 effect#1)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -896,7 +896,7 @@ Spell Level      : 14
 Range            : 40 yards
 GCD              : 1.5 seconds
 Charges          : 1 (10 seconds cooldown)
-Category         : 1169 (Type 1): Kiss of Death (336133 effect#2), Deathspeaker (392511 effect#3)
+Category         : 1169 (Type 0x1): Kiss of Death (336133 effect#2), Deathspeaker (392511 effect#3)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -974,7 +974,7 @@ Spell Level      : 43
 Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 12 seconds
-Category         : 1181 (Type 0)
+Category         : 1181 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -1022,7 +1022,7 @@ Range            : 40 yards
 Duration         : 8 seconds
 Cooldown         : 1.5 seconds
 Charges          : 1 (180 seconds cooldown)
-Category         : 2105 (Type 1): Protector of the Frail (373035 effect#3)
+Category         : 2105 (Type 0x1): Protector of the Frail (373035 effect#3)
 Category Flags   : Reset Charges on Encounter End (4), Reset Coooldown on Encounter End (5)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
@@ -1063,7 +1063,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 15 seconds
 Cooldown         : 180 seconds
-Category         : 1417 (Type 0)
+Category         : 1417 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -1098,7 +1098,7 @@ Spell Level      : 41
 Range            : 40 yards
 GCD              : 1.5 seconds
 Charges          : 1 (60 seconds cooldown)
-Category         : 2075 (Type 1): Miracle Worker (235587 effect#2)
+Category         : 2075 (Type 0x1): Miracle Worker (235587 effect#2)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -1290,7 +1290,7 @@ Spell Level      : 11
 Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 9 seconds
-Category         : 1230 (Type 0)
+Category         : 1230 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -1671,7 +1671,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 10 seconds
 Cooldown         : 180 seconds
-Category         : 1243 (Type 0)
+Category         : 1243 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -1940,7 +1940,7 @@ Range            : 40 yards
 Duration         : 4 seconds
 Cooldown         : 1 seconds
 Charges          : 1 (90 seconds cooldown)
-Category         : 2308 (Type 1): Move with Grace (337678 effect#1), Time Spiral (375254 effect#1), Move with Grace (390620 effect#1), Save the Day (458650 effect#1)
+Category         : 2308 (Type 0x1): Move with Grace (337678 effect#1), Time Spiral (375254 effect#1), Move with Grace (390620 effect#1), Save the Day (458650 effect#1)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -2362,7 +2362,7 @@ Range            : 27 yards
 GCD              : 1.5 seconds
 Duration         : 15 seconds
 Cooldown         : 15 seconds
-Category         : 1380 (Type 0)
+Category         : 1380 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -2582,7 +2582,7 @@ Cast Time        : 1.5 seconds
 GCD              : 1.5 seconds
 Duration         : 2.5 seconds
 Cooldown         : 60 seconds
-Category         : 1366 (Type 0)
+Category         : 1366 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -2637,7 +2637,7 @@ Cast Time        : 1.5 seconds
 GCD              : 1.5 seconds
 Duration         : 2.5 seconds
 Cooldown         : 60 seconds
-Category         : 1366 (Type 0)
+Category         : 1366 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -2731,7 +2731,7 @@ Spell Level      : 1
 Range            : 40 yards
 GCD              : 1.5 seconds
 Charges          : 3 (20 seconds cooldown)
-Category         : 1373 (Type 9)
+Category         : 1373 (Type 0x9)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 219
@@ -2774,7 +2774,7 @@ Range            : 27 yards
 GCD              : 1.5 seconds
 Duration         : 15 seconds
 Cooldown         : 15 seconds
-Category         : 1380 (Type 0)
+Category         : 1380 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -2828,7 +2828,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 12 seconds
 Cooldown         : 60 seconds
-Category         : 1417 (Type 0)
+Category         : 1417 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -3872,7 +3872,7 @@ Range            : 40 yards
 Cast Time        : 2 seconds
 GCD              : 1.5 seconds
 Charges          : 1 (18 seconds cooldown)
-Category         : 1690 (Type 1): Light's Promise (322115 effect#1), Bright Pupil (390684 effect#1)
+Category         : 1690 (Type 0x1): Light's Promise (322115 effect#1), Bright Pupil (390684 effect#1)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -4352,7 +4352,7 @@ Spell Type       : None
 Range            : 100 yards
 GCD              : 1 seconds
 Cooldown         : 1 seconds
-Category         : 1833 (Type 0)
+Category         : 1833 (Type 0x0)
 Labels           : 18: Priest Spells
                  : 292
 Category Cooldown: 1 seconds
@@ -4432,7 +4432,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 15 seconds
 Cooldown         : 60 seconds
-Category         : 1417 (Type 0)
+Category         : 1417 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -4772,7 +4772,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Velocity         : 50 yards/sec
 Cooldown         : 6 seconds
-Category         : 1660 (Type 0)
+Category         : 1660 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -4876,7 +4876,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 10 seconds
 Charges          : 2 (45 seconds cooldown)
-Category         : 1604 (Type 0)
+Category         : 1604 (Type 0x0)
 Labels           : 77
                  : 293
 Attributes       : Do Not Sheath (18), No Aura Cancel (31), Aura Points On Client (268), Allow Class Ability Procs (416)
@@ -5008,7 +5008,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 8 seconds
 Charges          : 1 (8 seconds cooldown)
-Category         : 1509 (Type 1)
+Category         : 1509 (Type 0x1)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -6922,7 +6922,7 @@ Spell Level      : 12
 Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 6 seconds
-Category         : 691 (Type 0)
+Category         : 691 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -8910,7 +8910,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Duration         : 120 seconds
 Cooldown         : 120 seconds
-Category         : 1145 (Type 0)
+Category         : 1145 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -12114,7 +12114,7 @@ Spell Level      : 11
 Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 9 seconds
-Category         : 1230 (Type 0)
+Category         : 1230 (Type 0x0)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -13299,7 +13299,7 @@ School           : Holy
 Spell Type       : Magic
 Duration         : 12 seconds
 Charges          : 1 (60 seconds cooldown)
-Category         : 2271 (Type 1): Perfect Vision (440661 effect#1), Divine Providence (440742 effect#1)
+Category         : 2271 (Type 0x1): Perfect Vision (440661 effect#1), Divine Providence (440742 effect#1)
 Category Flags   : Reset Charges on Encounter End (4), Unknown (7)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
@@ -13327,7 +13327,7 @@ Spell Type       : Magic
 Duration         : 15 seconds
 Cooldown         : 1 seconds
 Charges          : 1 (60 seconds cooldown)
-Category         : 2271 (Type 1): Perfect Vision (440661 effect#1), Divine Providence (440742 effect#1)
+Category         : 2271 (Type 0x1): Perfect Vision (440661 effect#1), Divine Providence (440742 effect#1)
 Category Flags   : Reset Charges on Encounter End (4), Unknown (7)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
@@ -13370,7 +13370,7 @@ Spell Type       : Magic
 Duration         : 20 seconds
 Cooldown         : 1 seconds
 Charges          : 1 (60 seconds cooldown)
-Category         : 2271 (Type 1): Perfect Vision (440661 effect#1), Divine Providence (440742 effect#1)
+Category         : 2271 (Type 0x1): Perfect Vision (440661 effect#1), Divine Providence (440742 effect#1)
 Category Flags   : Reset Charges on Encounter End (4), Unknown (7)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
@@ -13399,7 +13399,7 @@ Spell Type       : Magic
 Duration         : 20 seconds
 Cooldown         : 1 seconds
 Charges          : 1 (60 seconds cooldown)
-Category         : 2271 (Type 1): Perfect Vision (440661 effect#1), Divine Providence (440742 effect#1)
+Category         : 2271 (Type 0x1): Perfect Vision (440661 effect#1), Divine Providence (440742 effect#1)
 Category Flags   : Reset Charges on Encounter End (4), Unknown (7)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
@@ -13584,7 +13584,7 @@ Range            : 40 yards
 GCD              : 1.5 seconds
 Cooldown         : 8 seconds
 Charges          : 1 (8 seconds cooldown)
-Category         : 1509 (Type 1)
+Category         : 1509 (Type 0x1)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
@@ -13801,7 +13801,7 @@ School           : Holy
 Spell Type       : Magic
 Cooldown         : 1 seconds
 Charges          : 1 (60 seconds cooldown)
-Category         : 2271 (Type 1): Perfect Vision (440661 effect#1), Divine Providence (440742 effect#1)
+Category         : 2271 (Type 0x1): Perfect Vision (440661 effect#1), Divine Providence (440742 effect#1)
 Category Flags   : Reset Charges on Encounter End (4), Unknown (7)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
@@ -14361,7 +14361,7 @@ Range            : 40 yards
 Cast Time        : 1.5 seconds
 GCD              : 1.5 seconds
 Charges          : 1 (9 seconds cooldown)
-Category         : 1602 (Type 1): Priest (137030 effect#2), Discipline Priest (137032 effect#26), Mangaza's Madness (207701 effect#1), Voidform (250844 effect#5), Voidform (284508 effect#6), Dark Thought (341207 effect#1), Thought Harvester (406788 effect#1)
+Category         : 1602 (Type 0x1): Priest (137030 effect#2), Discipline Priest (137032 effect#26), Mangaza's Madness (207701 effect#1), Voidform (250844 effect#5), Voidform (284508 effect#6), Dark Thought (341207 effect#1), Thought Harvester (406788 effect#1)
 Labels           : 16: Class Spells
                  : 18: Priest Spells
                  : 292
