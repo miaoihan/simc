@@ -2678,12 +2678,31 @@ struct kill_command_sv_t : public hunter_main_pet_attack_t
 
     o()->buffs.exposed_flank->expire();
   }
+
+  double action_multiplier() const override
+  {
+    double am = hunter_main_pet_attack_t::action_multiplier();
+
+    if ( o()->buffs.exposed_flank->check() )
+      am *= 1 + o()->buffs.exposed_flank->data().effectN( 3 ).percent();
+
+    return am;
+  }
   
   void trigger_dot( action_state_t* s ) override
   {
     hunter_main_pet_attack_t::trigger_dot( s );
 
     o() -> trigger_bloodseeker_update();
+  }
+
+  //2024-10-25: Kill Command bleed ticks expire Exposed Flank
+  void tick( dot_t* d ) override
+  {
+    hunter_main_pet_attack_t::tick( d );
+
+    if( o()->bugs )
+      o()->buffs.exposed_flank->decrement();
   }
 
   void last_tick( dot_t* d ) override
