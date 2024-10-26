@@ -5110,6 +5110,28 @@ std::unique_ptr<expr_t> paladin_t::create_aw_expression( util::string_view name_
   }
   return player_t::create_expression( util::string_join( expr, "." ) );
 }
+
+std::unique_ptr<expr_t> paladin_t::create_vw_expression( util::string_view name_str )
+{
+  auto expr = util::string_split<util::string_view>( name_str, "." );
+  if ( expr.size() < 2 )
+  {
+    return nullptr;
+  }
+
+  if ( !util::str_compare_ci( expr[ 1 ], "vengeful_wrath" ) )
+  {
+    return nullptr;
+  }
+
+  if ( expr.size() >= 2 && util::str_compare_ci( expr[ 1 ], "vengeful_wrath" ) && util::str_compare_ci( expr[ 0 ], "talent" ) )
+  {
+    return make_fn_expr( "talent.vengeful_wrath", [ this ]() { return this->talents.vengeful_wrath->ok() ; } );
+  }
+
+  return player_t::create_expression( util::string_join( expr, "." ) );
+}
+
 std::unique_ptr<expr_t> paladin_t::create_expression( util::string_view name_str )
 {
   struct paladin_expr_t : public expr_t
@@ -5297,6 +5319,7 @@ std::unique_ptr<expr_t> paladin_t::create_expression( util::string_view name_str
 
   auto cons_expr = create_consecration_expression( name_str );
   auto aw_expr   = create_aw_expression( name_str );
+  auto vw_expr   = create_vw_expression( name_str );
   if ( cons_expr )
   {
     return cons_expr;
@@ -5304,6 +5327,10 @@ std::unique_ptr<expr_t> paladin_t::create_expression( util::string_view name_str
   if ( aw_expr )
   {
     return aw_expr;
+  }
+  if ( vw_expr )
+  {
+    return vw_expr;
   }
 
   struct time_until_next_csaa_expr_t : public paladin_expr_t

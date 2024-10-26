@@ -109,7 +109,6 @@ public:
     action_t* inner_light_damage;
     action_t* sanctified_wrath;
     action_t* virtuous_command;
-    action_t* create_aw_expression;
 
     // Required for seraphim
     action_t* sotr;
@@ -885,6 +884,7 @@ public:
   std::unique_ptr<expr_t> create_consecration_expression( util::string_view expr_str );
   std::unique_ptr<expr_t> create_ashen_hallow_expression( util::string_view expr_str );
   std::unique_ptr<expr_t> create_aw_expression( util::string_view expr_str );
+  std::unique_ptr<expr_t> create_vw_expression( util::string_view expr_str );
 
   ground_aoe_event_t* active_consecration;
   ground_aoe_event_t* active_boj_cons;
