@@ -4436,6 +4436,12 @@ struct priest_module_t final : public module_t
   }
   void register_hotfixes() const override
   {
+    hotfix::register_effect( "Priest", "2024-10-25", "Psychic Link coefficient changed to 30%", 293563,
+                             hotfix::HOTFIX_FLAG_LIVE )
+        .field( "base_value" )
+        .operation( hotfix::HOTFIX_SET )
+        .modifier( 30 )
+        .verification_value( 25 );
   }
   void combat_begin( sim_t* ) const override
   {
