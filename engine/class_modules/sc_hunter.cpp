@@ -6965,7 +6965,10 @@ struct trueshot_t: public hunter_spell_t
       p()->buffs.wailing_arrow_override->trigger();
     
     if ( p()->talents.withering_fire.ok() )
+    {
       p()->buffs.withering_fire->trigger( p()->buffs.trueshot->data().duration() );
+      p()->trigger_deathblow( target );
+    }
   }
 };
 
