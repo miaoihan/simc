@@ -1486,6 +1486,10 @@ struct hot_hand_buff_t : public buff_t
     set_cooldown( timespan_t::zero() );
     set_stack_change_callback(
         [ this ]( buff_t*, int, int ) { shaman->cooldown.lava_lash->adjust_recharge_multiplier(); } );
+    if ( p->talent.hot_hand.ok() )
+    {
+      set_chance( p->talent.hot_hand->proc_chance() );
+    }
   }
 
   bool trigger( int s, double v, double c, timespan_t d ) override
