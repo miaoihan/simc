@@ -1116,6 +1116,7 @@ public:
     const spell_data_t* improved_flametongue_weapon;
     const spell_data_t* earthen_rage;
     const spell_data_t* flowing_spirits_feral_spirit;
+    const spell_data_t* hot_hand;
   } spell;
 
   struct rng_obj_t
@@ -1480,11 +1481,9 @@ struct hot_hand_buff_t : public buff_t
 {
   shaman_t* shaman;
   hot_hand_buff_t( shaman_t* p )
-      : buff_t( p, "hot_hand", p->talent.hot_hand->effectN( 1 ).trigger() ), shaman( p )
+      : buff_t( p, "hot_hand", p->find_spell( 215785 ) ), shaman( p )
   {
     set_cooldown( timespan_t::zero() );
-    set_trigger_spell( shaman->talent.hot_hand );
-    set_default_value( shaman->talent.hot_hand->effectN( 2 ).percent() );
     set_stack_change_callback(
         [ this ]( buff_t*, int, int ) { shaman->cooldown.lava_lash->adjust_recharge_multiplier(); } );
   }
@@ -4888,7 +4887,14 @@ struct lava_lash_t : public shaman_attack_t
 
     if ( p()->buff.hot_hand->check() )
     {
-      m /= 1.0 + p()->buff.hot_hand->stack_value();
+      if ( p()->talent.hot_hand.ok() )
+      {
+        m /= 1.0 + p()->talent.hot_hand->effectN( 2 ).percent();
+      }
+      else
+      {
+        m /= 1.0 + p()->spell.hot_hand->effectN( 2 ).percent();
+      }
     }
 
     return m;
@@ -4900,7 +4906,14 @@ struct lava_lash_t : public shaman_attack_t
 
     if ( p()->buff.hot_hand->up() )
     {
-      m *= 1.0 + p()->talent.hot_hand->effectN( 3 ).percent();
+      if ( p()->talent.hot_hand.ok() )
+      {
+        m *= 1.0 + p()->talent.hot_hand->effectN( 3 ).percent();
+      }
+      else
+      {
+        m *= 1.0 + p()->spell.hot_hand->effectN( 3 ).percent();
+      }
     }
 
     // Flametongue imbue only increases Lava Lash damage if it is imbued on the off-hand
@@ -8490,7 +8503,17 @@ public:
     if ( p()->talent.ashen_catalyst.ok() && d->state->result_amount > 0 )
     {
       auto reduction = p()->talent.ashen_catalyst->effectN( 1 ).base_value() / 10.0;
-      reduction /= 1.0 + p()->buff.hot_hand->check_value();
+      if ( p()->buff.hot_hand->check() )
+      {
+        if ( p()->talent.hot_hand.ok() )
+        {
+          reduction /= 1.0 + p()->talent.hot_hand->effectN( 2 ).percent();
+        }
+        else
+        {
+          reduction /= 1.0 + p()->spell.hot_hand->effectN( 2 ).percent();
+        }
+      }
 
       p()->cooldown.lava_lash->adjust( timespan_t::from_seconds( -reduction ) );
       p()->buff.ashen_catalyst->trigger();
@@ -11641,6 +11664,7 @@ void shaman_t::init_spells()
   spell.improved_flametongue_weapon = find_spell( 382028 );
   spell.earthen_rage        = find_spell( 170377 );
   spell.flowing_spirits_feral_spirit = find_spell( 469329 );
+  spell.hot_hand            = find_spell( 201900 );
 
   spell.t28_2pc_enh        = sets->set( SHAMAN_ENHANCEMENT, T28, B2 );
   spell.t28_4pc_enh        = sets->set( SHAMAN_ENHANCEMENT, T28, B4 );
@@ -12006,6 +12030,11 @@ void shaman_t::trigger_stormbringer( const action_state_t* state, double overrid
 
 void shaman_t::trigger_hot_hand( const action_state_t* state )
 {
+  if ( !talent.hot_hand.ok() )
+  {
+    return;
+  }
+
   assert( debug_cast<shaman_attack_t*>( state->action ) != nullptr && "Hot Hand called on invalid action type" );
   shaman_attack_t* attack = debug_cast<shaman_attack_t*>( state->action );
 
