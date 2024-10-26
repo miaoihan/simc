@@ -1408,7 +1408,7 @@ struct arcane_phoenix_pet_t final : public mage_pet_t
     exceptional_spells_remaining = o()->talents.codex_of_the_sunstriders.ok() ? o()->buffs.spellfire_sphere->check() : 0;
 
     assert( !cast_event );
-    schedule_cast();
+    make_event( *sim, [ this ] { schedule_cast(); } );
   };
 
   void demise() override
