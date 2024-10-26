@@ -5233,6 +5233,18 @@ struct stormstrike_base_t : public shaman_attack_t
     state->stormblast = p()->talent.stormblast.ok() && p()->buff.stormblast->check() != 0;
   }
 
+  double recharge_multiplier( const cooldown_t& cd ) const override
+  {
+    double m = shaman_attack_t::recharge_multiplier( cd );
+
+    if ( p()->buff.ascendance->up() )
+    {
+      m *= 1.0 + p()->buff.ascendance->data().effectN( 9 ).percent();
+    }
+
+    return m;
+  }
+
   void init() override
   {
     shaman_attack_t::init();
@@ -10588,7 +10600,11 @@ inline bool ascendance_buff_t::trigger( int stacks, double value, double chance,
     lava_burst->cooldown->last_charged = timespan_t::zero();
   }
 
-  return buff_t::trigger( stacks, value, chance, duration );
+  buff_t::trigger( stacks, value, chance, duration );
+
+  p->cooldown.strike->adjust_recharge_multiplier();
+
+  return true;
 }
 
 inline void ascendance_buff_t::expire_override( int expiration_stacks, timespan_t remaining_duration )
@@ -10604,6 +10620,8 @@ inline void ascendance_buff_t::expire_override( int expiration_stacks, timespan_
     lava_burst->cooldown->last_charged = sim->current_time();
   }
   buff_t::expire_override( expiration_stacks, remaining_duration );
+
+  p->cooldown.strike->adjust_recharge_multiplier();
 }
 
 // ==========================================================================
