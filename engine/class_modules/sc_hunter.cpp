@@ -3498,6 +3498,7 @@ void hunter_t::trigger_deathblow( player_t* target )
     return;
 
   procs.deathblow->occur();
+  buffs.razor_fragments->trigger();
   
   if ( !buffs.withering_fire->check() )
   {
@@ -8106,7 +8107,6 @@ void hunter_t::create_buffs()
           // XXX: check refreshes
           if ( old == 0 ) {
             talents.black_arrow.ok() ? cooldowns.black_arrow->reset( true ) : cooldowns.kill_shot->reset( true );
-            buffs.razor_fragments->trigger();
           }
         } )
       -> set_activated( false );
