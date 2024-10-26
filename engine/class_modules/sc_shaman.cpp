@@ -4190,7 +4190,7 @@ struct windfury_attack_t : public shaman_attack_t
 
     if ( p()->buff.doom_winds->up() )
     {
-      m *= 1.0 + p()->talent.doom_winds->effectN( 2 ).percent();
+      m *= 1.0 + p()->talent.doom_winds->effectN( 1 ).trigger()->effectN( 2 ).percent();
     }
 
     if ( p()->talent.imbuement_mastery.ok() )
@@ -6297,7 +6297,7 @@ struct chain_lightning_t : public chained_base_t
       p()->buff.voltaic_blaze->trigger();
     }
 
-    if ( exec_type == spell_variant::NORMAL && state->chain_target == 0 )
+    if ( ( exec_type == spell_variant::NORMAL || exec_type == spell_variant::THORIMS_INVOCATION ) && state->chain_target == 0 )
     {
       p()->trigger_whirling_air( state );
     }
@@ -7162,7 +7162,7 @@ struct lightning_bolt_t : public shaman_spell_t
       p()->trigger_deeply_rooted_elements( execute_state );
     }
 
-    if ( exec_type == spell_variant::NORMAL )
+    if ( exec_type == spell_variant::NORMAL || exec_type == spell_variant::THORIMS_INVOCATION )
     {
       p()->trigger_whirling_air( execute_state );
     }
@@ -12353,8 +12353,7 @@ double shaman_t::windfury_proc_chance()
   proc_chance += cache.mastery() * proc_mul;
   if ( buff.doom_winds->up() )
   {
-    proc_chance *= talent.windfury_weapon.ok() *
-                  talent.doom_winds->effectN( 1 ).base_value();
+    proc_chance *= 1 + talent.doom_winds->effectN( 1 ).trigger()->effectN( 1 ).percent();
   }
 
   return proc_chance;
