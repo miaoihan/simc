@@ -1123,6 +1123,7 @@ public:
   {
     real_ppm_t* awakening_storms;
     real_ppm_t* lively_totems;
+    real_ppm_t* totemic_rebound;
 
     shuffled_rng_t* icefury;
     shuffled_rng_t* ancient_fellowship;
@@ -1301,7 +1302,7 @@ public:
   void trigger_fusion_of_elements( const action_state_t* state );
   void trigger_thunderstrike_ward( const action_state_t* state );
   void trigger_earthen_rage( const action_state_t* state );
-  void trigger_totemic_rebound( const action_state_t* state );
+  void trigger_totemic_rebound( const action_state_t* state, bool whirl = false );
   void trigger_ancestor( ancestor_cast cast, const action_state_t* state );
   void trigger_arc_discharge( const action_state_t* state );
   void trigger_flowing_spirits( const action_state_t* state );
@@ -12790,7 +12791,7 @@ void shaman_t::trigger_whirling_air( const action_state_t* state )
     for ( auto i = 0U;
           i < as<unsigned>( buff.whirling_air->data().effectN( 3 ).base_value() ); ++i )
     {
-      debug_cast<surging_totem_t*>( totem )->trigger_surging_bolt( state->target );
+      trigger_totemic_rebound( state, true );
     }
   }
 
@@ -12894,17 +12895,19 @@ void shaman_t::trigger_earthen_rage( const action_state_t* state )
   }
 }
 
-void shaman_t::trigger_totemic_rebound( const action_state_t* state )
+void shaman_t::trigger_totemic_rebound( const action_state_t* state, bool whirl )
 {
   if ( !pet.surging_totem.n_active_pets() )
   {
     return;
   }
 
-  if ( !buff.totemic_rebound->trigger() )
+  if ( !whirl && !rng_obj.totemic_rebound->trigger() )
   {
     return;
   }
+
+  buff.totemic_rebound->trigger();
 
   for ( auto totem : pet.surging_totem )
   {
@@ -13143,8 +13146,7 @@ void shaman_t::create_buffs()
     ->set_chance( talent.awakening_storms.ok() ? 1.0 : 0.0 );
 
   buff.totemic_rebound = make_buff( this, "totemic_rebound", find_spell( 458269 ) )
-    ->set_default_value_from_effect( 1 )
-    ->set_trigger_spell( talent.totemic_rebound );
+    ->set_default_value_from_effect( 1 );
 
   buff.flametongue_weapon = make_buff( this, "flametongue_weapon", find_class_spell( "Flametongue Weapon") );
 
@@ -13481,6 +13483,7 @@ void shaman_t::init_rng()
 
   rng_obj.awakening_storms = get_rppm( "awakening_storms", talent.awakening_storms );
   rng_obj.lively_totems = get_rppm( "lively_totems", talent.lively_totems );
+  rng_obj.totemic_rebound = get_rppm( "totemic_rebound", talent.totemic_rebound );
 
   if ( options.ancient_fellowship_positive == 0 ) {
     options.ancient_fellowship_positive = as<unsigned>( talent.ancient_fellowship->effectN( 3 ).base_value() );
