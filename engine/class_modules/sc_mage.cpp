@@ -566,7 +566,6 @@ public:
     timespan_t last_enlightened_update;
     timespan_t gained_full_icicles;
     bool had_low_mana;
-    bool trigger_dematerialize;
     bool trigger_ff_empowerment;
     bool ff_empowerment_crit;
     bool trigger_flash_freezeburn;
@@ -2554,9 +2553,6 @@ struct arcane_mage_spell_t : public mage_spell_t
         p()->buffs.leydrinker->trigger();
     }
 
-    // TODO: Consuming the 2nd stack of NP seems to stop Dematerialize from triggering
-    if ( p()->talents.dematerialize.ok() )
-      p()->state.trigger_dematerialize = !p()->bugs || old_stack == p()->buffs.nether_precision->max_stack();
     p()->trigger_splinter( t );
 
     if ( aethervision )
@@ -2564,6 +2560,57 @@ struct arcane_mage_spell_t : public mage_spell_t
   }
 };
 
+struct dematerialize_state_t final : public mage_spell_state_t
+{
+  bool dematerialize;
+
+  dematerialize_state_t( action_t* action, player_t* target ) :
+    mage_spell_state_t( action, target ),
+    dematerialize()
+  { }
+
+  void initialize() override
+  {
+    mage_spell_state_t::initialize();
+    dematerialize = false;
+  }
+
+  std::ostringstream& debug_str( std::ostringstream& s ) override
+  {
+    mage_spell_state_t::debug_str( s ) << " dematerialize=" << dematerialize;
+    return s;
+  }
+
+  void copy_state( const action_state_t* s ) override
+  {
+    mage_spell_state_t::copy_state( s );
+    dematerialize = debug_cast<const dematerialize_state_t*>( s )->dematerialize;
+  }
+};
+
+struct dematerialize_spell_t : public arcane_mage_spell_t
+{
+  dematerialize_spell_t( std::string_view n, mage_t* p, const spell_data_t* s = spell_data_t::nil() ) :
+    arcane_mage_spell_t( n, p, s )
+  { }
+
+  action_state_t* new_state() override
+  { return new dematerialize_state_t( this, target ); }
+
+  void snapshot_state( action_state_t* s, result_amount_type rt ) override
+  {
+    debug_cast<dematerialize_state_t*>( s )->dematerialize = p()->talents.dematerialize.ok() && p()->buffs.nether_precision->check() != 0;
+    arcane_mage_spell_t::snapshot_state( s, rt );
+  }
+
+  void impact( action_state_t* s ) override
+  {
+    arcane_mage_spell_t::impact( s );
+
+    if ( result_is_hit( s->result ) && debug_cast<dematerialize_state_t*>( s )->dematerialize )
+      residual_action::trigger( p()->action.dematerialize, s->target, p()->talents.dematerialize->effectN( 1 ).percent() * s->result_total );
+  }
+};
 
 // ==========================================================================
 // Fire Mage Spell
@@ -3367,7 +3414,7 @@ struct arcane_orb_t final : public arcane_mage_spell_t
   }
 };
 
-struct arcane_barrage_t final : public arcane_mage_spell_t
+struct arcane_barrage_t final : public dematerialize_spell_t
 {
   action_t* orb_barrage = nullptr;
   int snapshot_charges = -1;
@@ -3377,7 +3424,7 @@ struct arcane_barrage_t final : public arcane_mage_spell_t
   int intuition_charges = 0;
 
   arcane_barrage_t( std::string_view n, mage_t* p, std::string_view options_str ) :
-    arcane_mage_spell_t( n, p, p->find_specialization_spell( "Arcane Barrage" ) )
+    dematerialize_spell_t( n, p, p->find_specialization_spell( "Arcane Barrage" ) )
   {
     parse_options( options_str );
     base_aoe_multiplier *= data().effectN( 2 ).percent();
@@ -3413,7 +3460,7 @@ struct arcane_barrage_t final : public arcane_mage_spell_t
 
     p()->benefits.arcane_charge.arcane_barrage->update();
 
-    arcane_mage_spell_t::execute();
+    dematerialize_spell_t::execute();
 
     double mana_pct = p()->buffs.arcane_charge->check() * 0.01 * p()->spec.mana_adept->effectN( 1 ).percent();
     p()->resource_gain( RESOURCE_MANA, p()->resources.max[ RESOURCE_MANA ] * mana_pct, p()->gains.arcane_barrage, this );
@@ -3457,7 +3504,7 @@ struct arcane_barrage_t final : public arcane_mage_spell_t
 
   double composite_da_multiplier( const action_state_t* s ) const override
   {
-    double m = arcane_mage_spell_t::composite_da_multiplier( s );
+    double m = dematerialize_spell_t::composite_da_multiplier( s );
 
     m *= 1.0 + s->n_targets * p()->talents.resonance->effectN( 1 ).percent();
 
@@ -3472,7 +3519,7 @@ struct arcane_barrage_t final : public arcane_mage_spell_t
 
   double action_multiplier() const override
   {
-    double am = arcane_mage_spell_t::action_multiplier();
+    double am = dematerialize_spell_t::action_multiplier();
 
     am *= arcane_charge_multiplier( true );
     am *= 1.0 + p()->buffs.aethervision->check_stack_value();
@@ -3485,25 +3532,16 @@ struct arcane_barrage_t final : public arcane_mage_spell_t
 
   void impact( action_state_t* s ) override
   {
-    arcane_mage_spell_t::impact( s );
-
-    if ( !result_is_hit( s->result ) )
-      return;
-
-    if ( p()->state.trigger_dematerialize )
-    {
-      p()->state.trigger_dematerialize = false;
-      residual_action::trigger( p()->action.dematerialize, s->target, p()->talents.dematerialize->effectN( 1 ).percent() * s->result_total );
-    }
-
-    trigger_glorious_incandescence( s->target );
+    dematerialize_spell_t::impact( s );
+    if ( result_is_hit( s->result ) )
+      trigger_glorious_incandescence( s->target );
   }
 };
 
-struct arcane_blast_t final : public arcane_mage_spell_t
+struct arcane_blast_t final : public dematerialize_spell_t
 {
   arcane_blast_t( std::string_view n, mage_t* p, std::string_view options_str ) :
-    arcane_mage_spell_t( n, p, p->find_specialization_spell( "Arcane Blast" ) )
+    dematerialize_spell_t( n, p, p->find_specialization_spell( "Arcane Blast" ) )
   {
     parse_options( options_str );
     affected_by.arcane_debilitation = true;
@@ -3519,12 +3557,12 @@ struct arcane_blast_t final : public arcane_mage_spell_t
     // Add a small amount of travel time so that Arcane Blast's damage can be stored
     // in a Touch of the Magi cast immediately afterwards. Because simc has a default
     // sim_t::queue_delay of 5_ms, this needs to be consistently longer than that.
-    return std::max( arcane_mage_spell_t::travel_time(), 6_ms );
+    return std::max( dematerialize_spell_t::travel_time(), 6_ms );
   }
 
   double cost_pct_multiplier() const override
   {
-    double c = arcane_mage_spell_t::cost_pct_multiplier();
+    double c = dematerialize_spell_t::cost_pct_multiplier();
 
     c *= 1.0 + p()->buffs.arcane_charge->check() * p()->buffs.arcane_charge->data().effectN( 5 ).percent();
 
@@ -3535,7 +3573,7 @@ struct arcane_blast_t final : public arcane_mage_spell_t
   {
     p()->benefits.arcane_charge.arcane_blast->update();
 
-    arcane_mage_spell_t::execute();
+    dematerialize_spell_t::execute();
 
     p()->consume_burden_of_power();
     p()->trigger_arcane_charge();
@@ -3560,7 +3598,7 @@ struct arcane_blast_t final : public arcane_mage_spell_t
 
   double action_multiplier() const override
   {
-    double am = arcane_mage_spell_t::action_multiplier();
+    double am = dematerialize_spell_t::action_multiplier();
 
     am *= arcane_charge_multiplier();
     am *= 1.0 + p()->buffs.nether_precision->check_value();
@@ -3570,7 +3608,7 @@ struct arcane_blast_t final : public arcane_mage_spell_t
 
   double composite_da_multiplier( const action_state_t* s ) const override
   {
-    double m = arcane_mage_spell_t::composite_da_multiplier( s );
+    double m = dematerialize_spell_t::composite_da_multiplier( s );
 
     if ( p()->buffs.burden_of_power->check() )
       m *= 1.0 + p()->buffs.burden_of_power->data().effectN( 2 ).percent();
@@ -3583,7 +3621,7 @@ struct arcane_blast_t final : public arcane_mage_spell_t
     if ( p()->buffs.presence_of_mind->check() )
       return 0.0;
 
-    double mul = arcane_mage_spell_t::execute_time_pct_multiplier();
+    double mul = dematerialize_spell_t::execute_time_pct_multiplier();
 
     mul *= 1.0 + p()->buffs.arcane_charge->check() * p()->buffs.arcane_charge->data().effectN( 4 ).percent();
 
@@ -3592,16 +3630,10 @@ struct arcane_blast_t final : public arcane_mage_spell_t
 
   void impact( action_state_t* s ) override
   {
-    arcane_mage_spell_t::impact( s );
+    dematerialize_spell_t::impact( s );
 
     if ( !result_is_hit( s->result ) )
       return;
-
-    if ( p()->state.trigger_dematerialize )
-    {
-      p()->state.trigger_dematerialize = false;
-      residual_action::trigger( p()->action.dematerialize, s->target, p()->talents.dematerialize->effectN( 1 ).percent() * s->result_total );
-    }
 
     if ( p()->buffs.leydrinker->check() )
     {
