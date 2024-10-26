@@ -4236,14 +4236,14 @@ struct kill_shot_base_t : hunter_ranged_attack_t
   serpent_sting_t* venoms_bite = nullptr;
   razor_fragments_t* razor_fragments = nullptr;
 
-  kill_shot_base_t( util::string_view n, hunter_t* p, spell_data_ptr_t s ) :
+  kill_shot_base_t( util::string_view n, hunter_t* p, spell_data_ptr_t s, bool is_withering = false ) :
     hunter_ranged_attack_t( n, p, s ),
     health_threshold_pct( p -> talents.kill_shot -> effectN( 2 ).base_value() )
   {
     if ( p->talents.razor_fragments.ok() )
       razor_fragments = p -> get_background_action<razor_fragments_t>( "razor_fragments" );
 
-    if ( p->talents.venoms_bite.ok() )
+    if ( p->talents.venoms_bite.ok() && !is_withering )
       venoms_bite = p->get_background_action<serpent_sting_t>( "serpent_sting" );
   }
 
@@ -4288,7 +4288,6 @@ struct kill_shot_base_t : hunter_ranged_attack_t
       return as<int>( p()->talents.sic_em->effectN( 2 ).base_value() );
 
     //TODO 2024-10-14 There is a bug where only Kill Shots buffed by Deathblow bounce to additional targets.
-    // Needs more testing to determine if damage is affected. 
     if ( p()->talents.hunters_prey.ok() && ( !p()->bugs || p()->talents.black_arrow.ok() || p()->buffs.deathblow->check() ) )
     {
       int active = 0; 
@@ -4409,18 +4408,21 @@ struct black_arrow_base_t : public kill_shot_base_t
   black_arrow_dot_t* black_arrow_dot = nullptr;
   bleak_powder_t* bleak_powder = nullptr;
 
-  black_arrow_base_t( util::string_view n, hunter_t* p, spell_data_ptr_t s )
-    : kill_shot_base_t( n, p, s )
+  black_arrow_base_t( util::string_view n, hunter_t* p, spell_data_ptr_t s, bool is_withering = false )
+    : kill_shot_base_t( n, p, s, is_withering )
   {
     if ( !p->talents.black_arrow.ok() )
       background = true;
 
-    lower_health_threshold_pct = data().effectN( 2 ).base_value();
-    upper_health_threshold_pct = data().effectN( 3 ).base_value();
+    if ( !is_withering )
+    {
+      lower_health_threshold_pct = data().effectN( 2 ).base_value();
+      upper_health_threshold_pct = data().effectN( 3 ).base_value();      
+    }
 
     black_arrow_dot = p->get_background_action<black_arrow_dot_t>( "black_arrow_dot" );
 
-    if ( p->talents.bleak_powder.ok() )
+    if ( p->talents.bleak_powder.ok() && !is_withering )
       bleak_powder = p->get_background_action<bleak_powder_t>( "bleak_powder" );
   }
 
@@ -4445,7 +4447,7 @@ struct black_arrow_base_t : public kill_shot_base_t
       p()->cooldowns.banshees_mark->start();
     }
 
-    if ( p()->talents.bleak_powder.ok() && ( p()->buffs.trick_shots->check() || p()->buffs.beast_cleave->check() ) && p()->cooldowns.bleak_powder->up() )
+    if ( bleak_powder && ( p()->buffs.trick_shots->check() || p()->buffs.beast_cleave->check() ) && p()->cooldowns.bleak_powder->up() )
     {
       bleak_powder->execute_on_target( s->target );
       p()->cooldowns.bleak_powder->start();
@@ -4499,34 +4501,23 @@ struct phantom_pain_t final : hunter_ranged_attack_t
 struct black_arrow_withering_fire_main_t final : black_arrow_base_t
 {
   black_arrow_withering_fire_main_t( hunter_t* p ) 
-    : black_arrow_base_t( "black_arrow_wf_main", p, p->find_spell( 466930 ) )
+    : black_arrow_base_t( "black_arrow_wf_main", p, p->find_spell( 466930 ), true )
   {
     background = true;
   }
 };
 
-struct black_arrow_withering_fire_secondary_t final : hunter_ranged_attack_t
+struct black_arrow_withering_fire_secondary_t final : black_arrow_base_t
 {
-  black_arrow_dot_t* black_arrow_dot = nullptr;
-  
-  black_arrow_withering_fire_secondary_t( hunter_t* p ) : hunter_ranged_attack_t( "black_arrow_wf_secondary", p, p->find_spell( 468037 ) )
+  black_arrow_withering_fire_secondary_t( hunter_t* p ) : black_arrow_base_t( "black_arrow_wf_secondary", p, p->find_spell( 468037 ), true )
   {
-    background = dual = true;
-    aoe               = as<int>( p->talents.withering_fire->effectN( 3 ).base_value() );
-
-    black_arrow_dot = p->get_background_action<black_arrow_dot_t>( "black_arrow_dot" );
-  }
-
-  void impact( action_state_t* s ) override
-  {
-    hunter_ranged_attack_t::impact( s );
-
-    black_arrow_dot->execute_on_target( s->target );
+    background = true;
+    aoe        = as<int>( p->talents.withering_fire->effectN( 3 ).base_value() );
   }
 
   size_t available_targets( std::vector<player_t*>& tl ) const override
   {
-    hunter_ranged_attack_t::available_targets( tl );
+    black_arrow_base_t::available_targets( tl );
 
     // Cannot hit the original target.
     range::erase_remove( tl, target );
@@ -6808,7 +6799,7 @@ struct bestial_wrath_t: public hunter_spell_t
       if ( p()->buffs.withering_fire_build_up->at_max_stacks() )
       {
         p()->buffs.withering_fire->trigger();
-        p()->trigger_deathblow();
+        p()->trigger_deathblow( target );
         p()->buffs.withering_fire_build_up->expire();
       }
     }
