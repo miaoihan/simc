@@ -6808,6 +6808,7 @@ struct bestial_wrath_t: public hunter_spell_t
       if ( p()->buffs.withering_fire_build_up->at_max_stacks() )
       {
         p()->buffs.withering_fire->trigger();
+        p()->trigger_deathblow();
         p()->buffs.withering_fire_build_up->expire();
       }
     }
