@@ -90,7 +90,8 @@ enum class spell_variant : unsigned
   LIQUID_MAGMA_TOTEM,
   SURGE_OF_POWER,
   ARC_DISCHARGE,
-  REACTIVITY          // For 11.0.5 reactivity-based Sundering
+  REACTIVITY,         // For 11.0.5 reactivity-based Sundering
+  EARTHSURGE
 };
 
 enum class strike_variant : unsigned
@@ -333,6 +334,7 @@ static std::string action_name( util::string_view name, spell_variant t )
     case spell_variant::SURGE_OF_POWER: return fmt::format( "{}_sop", name );
     case spell_variant::ARC_DISCHARGE: return fmt::format( "{}_ad", name );
     case spell_variant::REACTIVITY: return fmt::format( "{}_re", name );
+    case spell_variant::EARTHSURGE: return fmt::format( "{}_es", name );
     default: return std::string( name );
   }
 }
@@ -350,6 +352,7 @@ static util::string_view exec_type_str( spell_variant t )
     case spell_variant::SURGE_OF_POWER: return "surge_of_power";
     case spell_variant::ARC_DISCHARGE: return "arc_discharge";
     case spell_variant::REACTIVITY: return "reactivity";
+    case spell_variant::EARTHSURGE: return "earthsurge";
     default: return "normal";
   }
 }
@@ -9921,26 +9924,20 @@ struct healing_stream_totem_spell_t : public shaman_totem_t<heal_totem_pet_t, sh
 
 struct surging_totem_pulse_t : public spell_totem_action_t
 {
-  bool sundered;
+  spell_variant variant;
 
-  surging_totem_pulse_t( spell_totem_pet_t* totem )
-    : spell_totem_action_t( "tremor", totem, totem->find_spell( 455622 ) ), sundered( false )
+  surging_totem_pulse_t( spell_totem_pet_t* totem, spell_variant var_ = spell_variant::NORMAL ) :
+    spell_totem_action_t( ::action_name( "tremor", var_ ), totem,
+      totem->find_spell( 455622 ) ), variant( var_ )
   {
     aoe          = -1;
     reduced_aoe_targets = as<double>( data().effectN( 2 ).base_value() );
     hasted_pulse = true;
   }
 
-  void trigger_earthsurge()
-  {
-    sundered = true;
-    execute();
-    sundered = false;
-  }
-
   double miss_chance( double hit, player_t* t ) const override
   {
-    if ( sundered || o()->options.surging_totem_miss_chance == 0.0 )
+    if ( variant == spell_variant::EARTHSURGE || o()->options.surging_totem_miss_chance == 0.0 )
     {
       return spell_totem_action_t::miss_chance( hit, t );
     }
@@ -9972,20 +9969,12 @@ struct surging_totem_pulse_t : public spell_totem_action_t
       m *= 1.0 + o()->talent.oversurge->effectN( 1 ).percent();
     }
 
-    // Hardcoded in tooltip
-    if ( sundered )
+    if ( variant == spell_variant::EARTHSURGE )
     {
-      m *= 3.0;
+      m *= 1.0 + o()->talent.earthsurge->effectN( 1 ).percent();
     }
 
     return m;
-  }
-
-  void reset() override
-  {
-    spell_totem_action_t::reset();
-
-    sundered = false;
   }
 };
 
@@ -10009,8 +9998,10 @@ struct surging_bolt_t : public spell_totem_action_t
 struct surging_totem_t : public spell_totem_pet_t
 {
   surging_bolt_t* surging_bolt;
+  surging_totem_pulse_t* earthsurge;
 
-  surging_totem_t( shaman_t* owner ) : spell_totem_pet_t( owner, "surging_totem" ), surging_bolt( nullptr )
+  surging_totem_t( shaman_t* owner ) : spell_totem_pet_t( owner, "surging_totem" ),
+    surging_bolt( nullptr ), earthsurge( nullptr )
   {
     pulse_amplitude = owner->find_spell(
       owner->specialization() == SHAMAN_ENHANCEMENT ? 455593 : 45594 )->effectN( 1 ).period();
@@ -10030,6 +10021,11 @@ struct surging_totem_t : public spell_totem_pet_t
     spell_totem_pet_t::init_spells();
 
     pulse_action = new surging_totem_pulse_t( this );
+
+    if ( o()->talent.earthsurge->ok() )
+    {
+      earthsurge = new surging_totem_pulse_t( this, spell_variant::EARTHSURGE );
+    }
 
     if ( o()->talent.totemic_rebound.ok() )
     {
@@ -12820,7 +12816,7 @@ void shaman_t::trigger_awakening_storms( const action_state_t* state )
   action.awakening_storms->execute_on_target( state->target );
 }
 
-void shaman_t::trigger_earthsurge( const action_state_t* /* state */ )
+void shaman_t::trigger_earthsurge( const action_state_t* state )
 {
   if ( !talent.earthsurge.ok() )
   {
@@ -12833,7 +12829,7 @@ void shaman_t::trigger_earthsurge( const action_state_t* /* state */ )
     return;
   }
 
-  debug_cast<surging_totem_pulse_t*>( totem->pulse_action )->trigger_earthsurge();
+  totem->earthsurge->execute_on_target( state->target );
 }
 
 void shaman_t::trigger_whirling_air( const action_state_t* state )
