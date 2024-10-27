@@ -1305,7 +1305,7 @@ public:
   void trigger_totemic_rebound( const action_state_t* state, bool whirl = false );
   void trigger_ancestor( ancestor_cast cast, const action_state_t* state );
   void trigger_arc_discharge( const action_state_t* state );
-  void trigger_flowing_spirits( const action_state_t* state );
+  void trigger_flowing_spirits( const action_state_t* state, bool windfurySourceTrigger = false );
   void trigger_lively_totems( const action_state_t* state );
 
   // Legendary
@@ -1804,6 +1804,7 @@ public:
   bool affected_by_ele_tww1_4pc_cd;
 
   bool may_proc_flowing_spirits;
+  proc_t *proc_fs;
 
   shaman_action_t( util::string_view n, shaman_t* player, const spell_data_t* s = spell_data_t::nil(),
                   spell_variant type_ = spell_variant::NORMAL )
@@ -1849,7 +1850,8 @@ public:
       affected_by_lightning_elemental_ta( false ),
       affected_by_ele_tww1_4pc_cc( false ),
       affected_by_ele_tww1_4pc_cd( false ),
-      may_proc_flowing_spirits( false )
+      may_proc_flowing_spirits( false ),
+      proc_fs( nullptr )
   {
     ab::may_crit = true;
     ab::track_cd_waste = s->cooldown() > timespan_t::zero() || s->charge_cooldown() > timespan_t::zero();
@@ -1986,6 +1988,9 @@ public:
     {
       p()->ability_cooldowns.push_back( this->cooldown );
     }
+
+    proc_fs = p()->get_proc( std::string( "Flowing Spirits: " ) + full_name() );
+    
   }
 
   static shaman_action_state_t* cast_state( action_state_t* s )
@@ -9022,6 +9027,7 @@ struct doom_winds_t : public shaman_attack_t
 
     weapon = &( player->main_hand_weapon );
     weapon_multiplier = 0.0;
+    may_proc_flowing_spirits = may_proc_flametongue = may_proc_stormbringer = may_proc_windfury = false;
 
     damage = new doom_winds_damage_t( player );
     add_child( damage );
@@ -12399,7 +12405,7 @@ void shaman_t::trigger_windfury_weapon( const action_state_t* state, double over
     // Winds is talented
     if ( talent.flowing_spirits.ok() && !talent.elemental_spirits.ok() )
     {
-      trigger_flowing_spirits( state );
+      trigger_flowing_spirits( state, true );
     }
 
     trigger_secondary_ability( state, a );
@@ -12414,7 +12420,7 @@ void shaman_t::trigger_windfury_weapon( const action_state_t* state, double over
       // Unruly Winds gets an additional proc chance, with half the proc chance
       if ( talent.flowing_spirits.ok() && !talent.elemental_spirits.ok() )
       {
-        trigger_flowing_spirits( state );
+        trigger_flowing_spirits( state, true );
       }
     }
 
@@ -12976,7 +12982,11 @@ void shaman_t::trigger_arc_discharge( const action_state_t* state )
   buff.arc_discharge->decrement();
 }
 
-void shaman_t::trigger_flowing_spirits( const action_state_t* state )
+//Flowing Spirits logic is real round-about all around the module, when Windfury procs it, it reports
+//the wrong ability as proc'ing it (like wind lash, auto attacks, mh ss/ws).
+//Kind of stuck between a rock and a hard place with the special handling for WF and the desire
+//to accurately track what proc'd flowing spirits, hence the optional parameter for procs coming from WF trigger function
+void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfurySourceTrigger)
 {
   if ( !talent.flowing_spirits.ok() )
   {
@@ -13045,6 +13055,26 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state )
     }
   }
 
+  if (windfurySourceTrigger)
+  {
+    shaman_attack_t* a = windfury_mh;
+    a->proc_fs->occur();
+  }
+  else
+  {
+    if ( state->action->type == ACTION_ATTACK )
+    {
+      shaman_action_t<melee_attack_t>* state_attack = debug_cast<shaman_action_t<melee_attack_t>*>( state->action );
+      state_attack->proc_fs->occur();
+    }
+
+    if ( state->action->type == ACTION_SPELL )
+    {
+      shaman_spell_t* state_spell = debug_cast<shaman_spell_t*>( state->action );
+      state_spell->proc_fs->occur();
+    }
+  } 
+  
   cooldown.flowing_spirit->start( talent.flowing_spirits->internal_cooldown() );
 }
 
