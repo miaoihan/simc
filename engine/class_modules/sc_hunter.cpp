@@ -4640,7 +4640,7 @@ struct symphonic_arsenal_t : hunter_ranged_attack_t
     hunter_ranged_attack_t::available_targets( tl );
 
     // Cannot hit the original target for Marksmanship.
-    if ( p()->specialization == HUNTER_MARKSMANSHIP )
+    if ( p()->specialization() == HUNTER_MARKSMANSHIP )
       range::erase_remove( tl, target );
 
     return tl.size();
