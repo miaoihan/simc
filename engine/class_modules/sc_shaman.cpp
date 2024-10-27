@@ -9447,6 +9447,8 @@ struct totem_pulse_action_t : public T
         this->stats = ( *it )->get_stats( this->name(), this );
       }
     }
+
+    this->snapshot_flags = this->update_flags = this->snapshot_flags & ~( STATE_MUL_PET | STATE_TGT_MUL_PET );
   }
 
   shaman_t* o() const
@@ -13076,6 +13078,7 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
   } 
   
   cooldown.flowing_spirit->start( talent.flowing_spirits->internal_cooldown() );
+  buff.feral_spirit_maelstrom->trigger(duration );
 }
 
 void shaman_t::trigger_lively_totems( const action_state_t* state )
@@ -14345,7 +14348,7 @@ double shaman_t::composite_player_pet_damage_multiplier( const action_state_t* s
     m *= 1.0 + spec.elemental_shaman->effectN( 3 ).percent();
     m *= 1.0 + spec.elemental_shaman->effectN( 28 ).percent();
 
-    m *= 1.0 + spec.enhancement_shaman->effectN( 3 ).percent();
+    m *= 1.0 + spec.enhancement_shaman->effectN( 4 ).percent();
 
     //m *= 1.0 + buff.elemental_equilibrium->value();  TODO: check what this was doing here
   }
@@ -14354,7 +14357,7 @@ double shaman_t::composite_player_pet_damage_multiplier( const action_state_t* s
     m *= 1.0 + spec.elemental_shaman->effectN( 4 ).percent();
     m *= 1.0 + spec.elemental_shaman->effectN( 28 ).percent();
 
-    m *= 1.0 + spec.enhancement_shaman->effectN( 13 ).percent();
+    m *= 1.0 + spec.enhancement_shaman->effectN( 3 ).percent();
   }
 
   return m;
