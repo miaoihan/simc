@@ -1307,7 +1307,7 @@ public:
   void trigger_fusion_of_elements( const action_state_t* state );
   void trigger_thunderstrike_ward( const action_state_t* state );
   void trigger_earthen_rage( const action_state_t* state );
-  void trigger_totemic_rebound( const action_state_t* state, bool whirl = false );
+  void trigger_totemic_rebound( const action_state_t* state, bool whirl = false, timespan_t delay = 300_ms );
   void trigger_ancestor( ancestor_cast cast, const action_state_t* state );
   void trigger_arc_discharge( const action_state_t* state );
   void trigger_flowing_spirits( const action_state_t* state, bool windfurySourceTrigger = false );
@@ -12854,7 +12854,8 @@ void shaman_t::trigger_whirling_air( const action_state_t* state )
     for ( auto i = 0U;
           i < as<unsigned>( buff.whirling_air->data().effectN( 3 ).base_value() ); ++i )
     {
-      trigger_totemic_rebound( state, true );
+      // First Whirling Air Surging Bolt seems to trigger around 300ms later
+      trigger_totemic_rebound( state, true, 300_ms + i * 500_ms );
     }
   }
 
@@ -12958,7 +12959,7 @@ void shaman_t::trigger_earthen_rage( const action_state_t* state )
   }
 }
 
-void shaman_t::trigger_totemic_rebound( const action_state_t* state, bool whirl )
+void shaman_t::trigger_totemic_rebound( const action_state_t* state, bool whirl, timespan_t delay )
 {
   if ( !pet.surging_totem.n_active_pets() )
   {
@@ -12972,10 +12973,17 @@ void shaman_t::trigger_totemic_rebound( const action_state_t* state, bool whirl 
 
   buff.totemic_rebound->trigger();
 
-  for ( auto totem : pet.surging_totem )
-  {
-    debug_cast<surging_totem_t*>( totem )->trigger_surging_bolt( state->target );
-  }
+  make_event( *sim, delay, [ this, t = state->target ] {
+    if ( t->is_sleeping() || !pet.surging_totem.n_active_pets() )
+    {
+      return;
+    }
+
+    for ( auto totem : pet.surging_totem )
+    {
+      debug_cast<surging_totem_t*>( totem )->trigger_surging_bolt( t );
+    }
+  } );
 }
 
 void shaman_t::trigger_ancestor( ancestor_cast cast, const action_state_t* state )
