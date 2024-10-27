@@ -9971,7 +9971,7 @@ struct surging_totem_pulse_t : public spell_totem_action_t
 
     if ( variant == spell_variant::EARTHSURGE )
     {
-      m *= 1.0 + o()->talent.earthsurge->effectN( 1 ).percent();
+      m *= o()->talent.earthsurge->effectN( 1 ).percent();
     }
 
     return m;
