@@ -2223,6 +2223,7 @@ struct crystalline_reflection_heal_t final : public priest_heal_t
     : priest_heal_t( "crystalline_reflection_heal", p, p.find_spell( 373462 ) )
   {
     spell_power_mod.direct = p.talents.crystalline_reflection->effectN( 3 ).sp_coeff();
+    background             = true;
   }
 
   void impact( action_state_t* s ) override
@@ -2241,6 +2242,8 @@ struct crystalline_reflection_damage_t final : public priest_spell_t
   crystalline_reflection_damage_t( priest_t& p )
     : priest_spell_t( "crystalline_reflection_damage", p, p.find_spell( 373464 ) )
   {
+    may_crit = may_miss = false;
+    background          = true;
   }
 };
 
