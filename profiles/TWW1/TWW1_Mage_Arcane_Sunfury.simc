@@ -1,11 +1,11 @@
-mage="TWW1_Mage_Arcane_Spellslinger"
+mage="TWW1_Mage_Arcane_Sunfury"
 source=default
 spec=arcane
 level=80
 race=mechagnome
 role=spell
 position=back
-talents=C4DAAAAAAAAAAAAAAAAAAAAAAYMMbzCmxMmFPAjZGGTzMmBAAAAAgBAABMzstssMzELAAAAAAAglhhZmZmxMMzYMzMmZmxYGD
+talents=C4DAAAAAAAAAAAAAAAAAAAAAAYMMbzCmxDMmFDjZGGTzMmBAAAAAgBAMzMtMLbzAAxGAAAAAAAYZGDmZmZMDzMGzMjZmZMmxA
 
 # Default consumables
 potion=tempered_potion_3
@@ -164,7 +164,7 @@ feet=tainted_earthshard_walkers,id=221082,ilevel=639,enchant_id=7424
 finger1=seal_of_the_poisoned_pact,id=225578,ilevel=639,gem_id=213482/213482,enchant_id=7340
 finger2=acidic_attendants_loop,id=225728,ilevel=639,gem_id=213482/213482,enchant_id=7340
 trinket1=spymasters_web,id=220202,ilevel=639
-trinket2=arakara_sacbrood,id=219314,ilevel=639
+trinket2=treacherous_transmitter,id=221023,ilevel=639
 main_hand=sovereigns_disdain,id=212394,ilevel=639,enchant_id=7460
 off_hand=vagabonds_torch,id=222566,bonus_id=11300,ilevel=636,crafted_stats=36/49
 
