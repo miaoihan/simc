@@ -9993,6 +9993,18 @@ struct surging_bolt_t : public spell_totem_action_t
     // Surging Bolt appears to be special and actually inherit guardian modifiers, so enable them
     snapshot_flags = update_flags = snapshot_flags | STATE_MUL_PET;
   }
+
+  double action_da_multiplier() const override
+  {
+    auto m = spell_totem_action_t::action_da_multiplier();
+
+    if ( o()->buff.ascendance->up() && o()->talent.oversurge.ok() )
+    {
+      m *= 1.0 + o()->talent.oversurge->effectN( 1 ).percent();
+    }
+
+    return m;
+  }
 };
 
 struct surging_totem_t : public spell_totem_pet_t
