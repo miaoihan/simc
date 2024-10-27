@@ -707,6 +707,7 @@ public:
 
     /// 11.0.5 rng options until proper formulas found
     double flowing_spirits_proc_chance = 0.0;
+    unsigned flowing_spirits_max_wolves = 0U;
     double imbuement_mastery_base_chance = 0.07;
     double ice_strike_base_chance = 0.07;
     double lively_totems_base_chance = 0.06;
@@ -11190,6 +11191,7 @@ void shaman_t::create_options()
 
   add_option( opt_float( "shaman.ice_strike_base_chance", options.ice_strike_base_chance, 0.0, 1.0 ) );
   add_option( opt_float( "shaman.flowing_spirits_proc_chance", options.flowing_spirits_proc_chance, 0.0, 1.0 ) );
+  add_option( opt_uint( "shaman.flowing_spirits_max_wolves", options.flowing_spirits_max_wolves, 0U, std::numeric_limits<unsigned>::max() ) );
 
   add_option( opt_float( "shaman.imbuement_mastery_base_chance", options.imbuement_mastery_base_chance, 0.0, 1.0 ) );
 
@@ -11240,6 +11242,7 @@ void shaman_t::copy_from( player_t* source )
   options.thunderstrike_ward_proc_chance = p->options.thunderstrike_ward_proc_chance;
   options.ice_strike_base_chance = p->options.ice_strike_base_chance;
   options.flowing_spirits_proc_chance = p->options.flowing_spirits_proc_chance;
+  options.flowing_spirits_max_wolves = p->options.flowing_spirits_max_wolves;
   options.imbuement_mastery_base_chance = p->options.imbuement_mastery_base_chance;
   options.lively_totems_base_chance = p->options.lively_totems_base_chance;
 
@@ -13044,7 +13047,7 @@ void shaman_t::trigger_arc_discharge( const action_state_t* state )
 //the wrong ability as proc'ing it (like wind lash, auto attacks, mh ss/ws).
 //Kind of stuck between a rock and a hard place with the special handling for WF and the desire
 //to accurately track what proc'd flowing spirits, hence the optional parameter for procs coming from WF trigger function
-void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfurySourceTrigger)
+void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfurySourceTrigger )
 {
   if ( !talent.flowing_spirits.ok() )
   {
@@ -13056,7 +13059,20 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
     return;
   }
 
-  double proc_chance = talent.flowing_spirits->effectN( 1 ).percent() * 2.0 / 3.0;
+  if ( options.flowing_spirits_max_wolves > 0 &&
+       pet.all_wolves.size() == options.flowing_spirits_max_wolves )
+  {
+    sim->print_debug( "{} flowing_spirits cap of {} reached", name(),
+      options.flowing_spirits_max_wolves );
+    return;
+  }
+
+  double proc_chance = talent.flowing_spirits->effectN( 1 ).percent();
+  if ( options.flowing_spirits_max_wolves == 0 )
+  {
+    proc_chance *= 2.0 / 3.0;
+  }
+
   if ( options.flowing_spirits_proc_chance != 0.0 )
   {
     proc_chance = options.flowing_spirits_proc_chance;
@@ -13085,7 +13101,9 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
 
   if ( talent.elemental_spirits.ok() )
   {
-    for ( unsigned i = 0; i < n_summons; ++i )
+    for ( unsigned i = 0;
+          i < n_summons && ( options.flowing_spirits_max_wolves == 0 || pet.all_wolves.size() < options.flowing_spirits_max_wolves );
+          ++i )
     {
       if ( dbc::is_school( state->action->get_school(), SCHOOL_FIRE ) )
       {
@@ -13106,14 +13124,16 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
   }
   else
   {
-    pet.spirit_wolves.spawn( duration, n_summons );
-    for ( unsigned i = 0; i < n_summons; ++i )
+    for ( unsigned i = 0;
+          i < n_summons && ( options.flowing_spirits_max_wolves == 0 || pet.all_wolves.size() < options.flowing_spirits_max_wolves );
+          ++i )
     {
+      pet.spirit_wolves.spawn( duration );
       buff.earthen_weapon->trigger( duration );
     }
   }
 
-  if (windfurySourceTrigger)
+  if ( windfurySourceTrigger )
   {
     shaman_attack_t* a = windfury_mh;
     a->proc_fs->occur();
