@@ -469,6 +469,7 @@ public:
     bool treat_bloodlust_as_time_warp = false;
     unsigned initial_spellfire_spheres = 5;
     arcane_phoenix_rotation arcane_phoenix_rotation_override = arcane_phoenix_rotation::DEFAULT;
+    bool ice_nova_consumes_winters_chill = false;
   } options;
 
   // Pets
@@ -5564,6 +5565,10 @@ struct ice_nova_t final : public frost_mage_spell_t
     aoe = -1;
     reduced_aoe_targets = data().effectN( 3 ).base_value();
 
+    // TODO: Excess Frost Ice Nova stops ANY Ice Nova cast from consuming Winter's Chill (even after switching hero talents)
+    if ( !p->talents.excess_frost.ok() && p->options.ice_nova_consumes_winters_chill )
+      consumes_winters_chill = true;
+
     if ( excess )
     {
       background = proc = true;
@@ -7746,6 +7751,7 @@ void mage_t::create_options()
                   throw std::invalid_argument( "valid options are 'default', 'st', and 'aoe'." );
                 return true;
               } ) );
+  add_option( opt_bool( "mage.ice_nova_consumes_winters_chill", options.ice_nova_consumes_winters_chill ) );
 
   player_t::create_options();
 }
