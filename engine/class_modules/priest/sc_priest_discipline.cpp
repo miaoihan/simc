@@ -403,7 +403,10 @@ public:
       parse_effect_data( ed );
     }
 
-    apply_affecting_aura( priest().talents.discipline.castigation );
+    if ( priest().talents.discipline.castigation.ok() )
+    {
+      base_tick_time *= 1 + priest().talents.discipline.castigation->effectN( 1 ).percent();
+    }
 
     // One is always tick zero
     default_bolts = floor( dot_duration / base_tick_time );
@@ -444,7 +447,7 @@ public:
   {
     timespan_t t = ab::tick_time( s );
 
-    sim->print_debug( "{} default bolts {} state bolts", default_bolts, cast_state( s )->bolts );
+    sim->print_debug( "{} default bolts {} state bolts", default_bolts + 1, cast_state( s )->bolts + 1 );
 
     t *= default_bolts / cast_state( s )->bolts;
 

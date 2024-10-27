@@ -2293,13 +2293,12 @@ struct power_word_shield_t final : public priest_absorb_t
 
     if ( priest().buffs.weal_and_woe->check() )
     {
-      m *= 1 + priest().talents.discipline.weal_and_woe->effectN( 2 ).percent() * priest().buffs.weal_and_woe->check();
+      m *= 1 + priest().buffs.weal_and_woe->data().effectN( 2 ).percent() * priest().buffs.weal_and_woe->check();
     }
 
     if ( priest().buffs.darkness_from_light->check() )
     {
-      m *= 1 + priest().buffs.darkness_from_light->data().effectN( 2 ).percent() *
-                   priest().buffs.darkness_from_light->check();
+      m *= 1 + priest().buffs.darkness_from_light->data().effectN( 2 ).percent() * priest().buffs.darkness_from_light->check();
     }
 
     return m;
