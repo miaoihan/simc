@@ -6332,14 +6332,14 @@ struct chain_lightning_t : public chained_base_t
       p()->buff.voltaic_blaze->trigger();
     }
 
-    if ( ( exec_type == spell_variant::NORMAL || exec_type == spell_variant::THORIMS_INVOCATION ) && state->chain_target == 0 )
-    {
-      p()->trigger_whirling_air( state );
-    }
-
     if ( state->chain_target == 0 )
     {
       p()->trigger_totemic_rebound( state );
+    }
+
+    if ( ( exec_type == spell_variant::NORMAL || exec_type == spell_variant::THORIMS_INVOCATION ) && state->chain_target == 0 )
+    {
+      p()->trigger_whirling_air( state );
     }
   }
 
@@ -7197,12 +7197,12 @@ struct lightning_bolt_t : public shaman_spell_t
       p()->trigger_deeply_rooted_elements( execute_state );
     }
 
+    p()->trigger_totemic_rebound( execute_state );
+
     if ( exec_type == spell_variant::NORMAL || exec_type == spell_variant::THORIMS_INVOCATION )
     {
       p()->trigger_whirling_air( execute_state );
     }
-
-    p()->trigger_totemic_rebound( execute_state );
   }
 
   void schedule_travel( action_state_t* s ) override
