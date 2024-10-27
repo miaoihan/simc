@@ -1117,6 +1117,7 @@ public:
     const spell_data_t* earthen_rage;
     const spell_data_t* flowing_spirits_feral_spirit;
     const spell_data_t* hot_hand;
+    const spell_data_t* elemental_weapons;
   } spell;
 
   struct rng_obj_t
@@ -1803,6 +1804,9 @@ public:
   bool affected_by_ele_tww1_4pc_cc;
   bool affected_by_ele_tww1_4pc_cd;
 
+  bool affected_by_elemental_weapons_da;
+  bool affected_by_elemental_weapons_ta;
+
   bool may_proc_flowing_spirits;
   proc_t *proc_fs;
 
@@ -1850,6 +1854,8 @@ public:
       affected_by_lightning_elemental_ta( false ),
       affected_by_ele_tww1_4pc_cc( false ),
       affected_by_ele_tww1_4pc_cd( false ),
+      affected_by_elemental_weapons_da( false ),
+      affected_by_elemental_weapons_ta( false ),
       may_proc_flowing_spirits( false ),
       proc_fs( nullptr )
   {
@@ -1945,6 +1951,11 @@ public:
       player->sets->set( SHAMAN_ELEMENTAL, TWW1, B4 )->effectN( 1 ).trigger()->effectN( 1 ) );
     affected_by_ele_tww1_4pc_cd = ab::data().affected_by(
       player->sets->set( SHAMAN_ELEMENTAL, TWW1, B4 )->effectN( 1 ).trigger()->effectN( 2 ) );
+
+    affected_by_elemental_weapons_da = p()->talent.elemental_weapons.ok() && ab::data().affected_by(
+      p()->spell.elemental_weapons->effectN( 1 ) );
+    affected_by_elemental_weapons_ta = p()->talent.elemental_weapons.ok() && ab::data().affected_by(
+      p()->spell.elemental_weapons->effectN( 2 ) );
   }
 
   std::string full_name() const
@@ -2128,6 +2139,13 @@ public:
       m *= 1.0 + p()->buff.fury_of_the_storms->data().effectN( 2 ).percent();
     }
 
+    if ( affected_by_elemental_weapons_da )
+    {
+      unsigned n_imbues = ( p()->main_hand_weapon.buff_type != 0 ) +
+        ( p()->off_hand_weapon.buff_type != 0 );
+      m *= 1.0 + p()->talent.elemental_weapons->effectN( 1 ).percent() / 10.0 * n_imbues;
+    }
+
     return m;
   }
 
@@ -2210,6 +2228,13 @@ public:
         !p()->buff.storm_elemental->up() && !p()->buff.lesser_storm_elemental->up())
     {
       m *= 1.0 + p()->buff.fury_of_the_storms->data().effectN( 3 ).percent();
+    }
+
+    if ( affected_by_elemental_weapons_ta )
+    {
+      unsigned n_imbues = ( p()->main_hand_weapon.buff_type != 0 ) +
+        ( p()->off_hand_weapon.buff_type != 0 );
+      m *= 1.0 + p()->talent.elemental_weapons->effectN( 1 ).percent() / 10.0 * n_imbues;
     }
 
     return m;
@@ -9399,6 +9424,9 @@ struct totem_pulse_action_t : public T
   bool affected_by_lotfw_da;
   bool affected_by_lotfw_ta;
 
+  bool affected_by_elemental_weapons_da;
+  bool affected_by_elemental_weapons_ta;
+
   totem_pulse_action_t( const std::string& token, shaman_totem_pet_t<T>* p, const spell_data_t* s )
     : T( token, p, s ), hasted_pulse( false ), pulse_multiplier( 1.0 ), totem( p ), pulse ( 0 )
   {
@@ -9431,6 +9459,11 @@ struct totem_pulse_action_t : public T
     affected_by_earthen_weapon_ta = T::data().affected_by( o()->buff.earthen_weapon->data().effectN( 2 ) );
     affected_by_lotfw_da = T::data().affected_by( o()->buff.legacy_of_the_frost_witch->data().effectN( 1 ) );
     affected_by_lotfw_ta = T::data().affected_by( o()->buff.legacy_of_the_frost_witch->data().effectN( 2 ) );
+
+    affected_by_elemental_weapons_da = o()->talent.elemental_weapons.ok() && T::data().affected_by(
+      o()->spell.elemental_weapons->effectN( 1 ) );
+    affected_by_elemental_weapons_ta = o()->talent.elemental_weapons.ok() && T::data().affected_by(
+      o()->spell.elemental_weapons->effectN( 2 ) );
   }
 
   void init() override
@@ -9523,6 +9556,13 @@ struct totem_pulse_action_t : public T
       }
     }
 
+    if ( affected_by_elemental_weapons_da )
+    {
+      unsigned n_imbues = ( o()->main_hand_weapon.buff_type != 0 ) +
+        ( o()->off_hand_weapon.buff_type != 0 );
+      m *= 1.0 + o()->talent.elemental_weapons->effectN( 1 ).percent() / 10.0 * n_imbues;
+    }
+
     return m;
   }
 
@@ -9572,6 +9612,13 @@ struct totem_pulse_action_t : public T
       {
         m *= 1.0 + o()->buff.earthen_weapon->value();
       }
+    }
+
+    if ( affected_by_elemental_weapons_ta )
+    {
+      unsigned n_imbues = ( o()->main_hand_weapon.buff_type != 0 ) +
+        ( o()->off_hand_weapon.buff_type != 0 );
+      m *= 1.0 + o()->talent.elemental_weapons->effectN( 1 ).percent() / 10.0 * n_imbues;
     }
 
     return m;
@@ -11678,6 +11725,7 @@ void shaman_t::init_spells()
   spell.earthen_rage        = find_spell( 170377 );
   spell.flowing_spirits_feral_spirit = find_spell( 469329 );
   spell.hot_hand            = find_spell( 201900 );
+  spell.elemental_weapons   = find_spell( 408390 );
 
   spell.t28_2pc_enh        = sets->set( SHAMAN_ENHANCEMENT, T28, B2 );
   spell.t28_4pc_enh        = sets->set( SHAMAN_ENHANCEMENT, T28, B4 );
