@@ -9995,6 +9995,14 @@ struct surging_bolt_t : public spell_totem_action_t
   {
     background = true;
   }
+
+  void init() override
+  {
+    spell_totem_action_t::init();
+
+    // Surging Bolt appears to be special and actually inherit guardian modifiers, so enable them
+    snapshot_flags = update_flags = snapshot_flags | STATE_MUL_PET;
+  }
 };
 
 struct surging_totem_t : public spell_totem_pet_t
@@ -14396,7 +14404,7 @@ double shaman_t::composite_player_pet_damage_multiplier( const action_state_t* s
     m *= 1.0 + spec.elemental_shaman->effectN( 3 ).percent();
     m *= 1.0 + spec.elemental_shaman->effectN( 28 ).percent();
 
-    m *= 1.0 + spec.enhancement_shaman->effectN( 4 ).percent();
+    m *= 1.0 + spec.enhancement_shaman->effectN( 3 ).percent();
 
     //m *= 1.0 + buff.elemental_equilibrium->value();  TODO: check what this was doing here
   }
@@ -14405,7 +14413,7 @@ double shaman_t::composite_player_pet_damage_multiplier( const action_state_t* s
     m *= 1.0 + spec.elemental_shaman->effectN( 4 ).percent();
     m *= 1.0 + spec.elemental_shaman->effectN( 28 ).percent();
 
-    m *= 1.0 + spec.enhancement_shaman->effectN( 3 ).percent();
+    m *= 1.0 + spec.enhancement_shaman->effectN( 4 ).percent();
   }
 
   return m;
