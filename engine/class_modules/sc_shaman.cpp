@@ -471,6 +471,9 @@ public:
   unsigned buff_state_lightning_rod;
   unsigned buff_state_lashing_flames;
 
+  /// Flowing Spirits tracking
+  std::vector<simple_sample_data_t> flowing_spirits_procs;
+
   // Cached actions
   struct actions_t
   {
@@ -5442,7 +5445,8 @@ struct windstrike_t : public stormstrike_base_t
     {
       action_t* spell = nullptr;
 
-      if ( p()->action.ti_trigger == p()->action.lightning_bolt_ti )
+      if ( p()->action.ti_trigger == p()->action.lightning_bolt_ti ||
+           p()->action.ti_trigger == nullptr )
       {
         if ( p()->buff.tempest->check() )
         {
@@ -5456,10 +5460,6 @@ struct windstrike_t : public stormstrike_base_t
       else if ( p()->action.ti_trigger == p()->action.chain_lightning_ti )
       {
         spell = p()->action.ti_trigger;
-      }
-      else
-      {
-        spell = p()->action.lightning_bolt_ti; // Default to lightning bolt if nothing is seen
       }
 
       spell->set_target( execute_state->target );
@@ -12494,7 +12494,6 @@ void shaman_t::trigger_windfury_weapon( const action_state_t* state, double over
     }
 
     attack->proc_wf->occur();
-
   }
 }
 
@@ -13171,6 +13170,12 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
   
   cooldown.flowing_spirit->start( talent.flowing_spirits->internal_cooldown() );
   buff.feral_spirit_maelstrom->trigger(duration );
+
+  // Track Flowing Spirits proc successes
+  if ( flowing_spirits_procs.size() <= pet.all_wolves.size() )
+  {
+    flowing_spirits_procs.resize( pet.all_wolves.size() );
+  }
 }
 
 void shaman_t::trigger_lively_totems( const action_state_t* state )
