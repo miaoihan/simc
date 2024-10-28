@@ -2,7 +2,7 @@ deathknight="TWW1_Death_Knight_Frost_Rider"
 source=default
 spec=frost
 level=80
-race=blood_elf
+race=mechagnome
 role=attack
 position=back
 talents=CsPAAAAAAAAAAAAAAAAAAAAAAAAzMjZmxYYGzMzMzMGmJzYYwgZGzMMzMzMzMLzMAAAAAAAAAAAAgFzihBGY20QDbYmZGzMA
@@ -220,7 +220,7 @@ hands=exhumed_centurions_gauntlets,id=212003,bonus_id=1540
 waist=nether_bountys_greatbelt,id=225589,bonus_id=7187/1520/6935,ilevel=639,gem_id=213458
 legs=exhumed_centurions_chausses,id=212001,bonus_id=1540,enchant=stormbound_armor_kit_3
 feet=boots_of_the_black_bulwark,id=225590,bonus_id=1540
-finger1=seal_of_the_poisoned_pact,id=225578,bonus_id=1540/10879,gem_id=213458/213458,enchant=radiant_critical_strike_3
+finger1=seal_of_the_poisoned_pact,id=225578,bonus_id=1540/10879,gem_id=213458/213458,enchant=radiant_haste_3
 finger2=band_of_the_roving_scalawag,id=162541,bonus_id=1514/3317/6646/8781,ilevel=639,gem_id=213482/213482,enchant=radiant_critical_strike_3
 trinket1=treacherous_transmitter,id=221023,bonus_id=7187/1520,ilevel=639
 trinket2=arakara_sacbrood,id=219314,bonus_id=10273/10390/3131
@@ -231,8 +231,8 @@ off_hand=charged_slicer,id=222451,bonus_id=11144/9627/9633/8902/10222/11300/8960
 # gear_ilvl=638.63
 # gear_strength=32574
 # gear_stamina=237354
-# gear_crit_rating=17541
-# gear_haste_rating=8834
+# gear_crit_rating=17226
+# gear_haste_rating=9149
 # gear_mastery_rating=14296
 # gear_versatility_rating=147
 # gear_armor=56297
