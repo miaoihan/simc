@@ -5454,7 +5454,7 @@ struct windstrike_t : public stormstrike_base_t
         }
         else
         {
-          spell = p()->action.ti_trigger;
+          spell = p()->action.ti_trigger ? p()->action.ti_trigger : p()->action.lightning_bolt_ti;
         }
       }
       else if ( p()->action.ti_trigger == p()->action.chain_lightning_ti )
