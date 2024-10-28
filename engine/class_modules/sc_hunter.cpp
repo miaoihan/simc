@@ -6797,7 +6797,7 @@ struct bestial_wrath_t: public hunter_spell_t
     if ( p()->talents.beast_of_opportunity.ok() )
       p()->pets.boo_stable_pet.spawn( p()->buffs.beast_of_opportunity->buff_duration(), as<int>( p()->buffs.beast_of_opportunity->data().effectN( 1 ).base_value() ) );
 
-    if ( p()->talents.withering_fire.ok() )
+    if ( p()->talents.withering_fire.ok() && !is_precombat )
     {
       p()->buffs.withering_fire_build_up->trigger();
       if ( p()->buffs.withering_fire_build_up->at_max_stacks() )
@@ -6968,7 +6968,7 @@ struct trueshot_t: public hunter_spell_t
     if ( p()->talents.readiness.ok() )
       p()->buffs.wailing_arrow_override->trigger();
     
-    if ( p()->talents.withering_fire.ok() )
+    if ( p()->talents.withering_fire.ok() && !is_precombat )
     {
       p()->buffs.withering_fire->trigger( p()->buffs.trueshot->data().duration() );
       p()->trigger_deathblow( target );
