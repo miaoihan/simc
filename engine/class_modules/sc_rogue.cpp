@@ -10028,10 +10028,6 @@ std::unique_ptr<expr_t> rogue_t::create_expression( util::string_view name_str )
     return make_fn_expr( name_str, [ this ]() {
       if ( buffs.master_assassin_aura->check() )
       {
-        // Shadow Dance has no lingering effect
-        if ( buffs.shadow_dance->check() )
-          return buffs.shadow_dance->remains();
-
         timespan_t nominal_duration = timespan_t::from_seconds( talent.assassination.master_assassin->effectN( 1 ).base_value() );
         timespan_t gcd_remains = timespan_t::from_seconds( std::max( ( gcd_ready - sim->current_time() ).total_seconds(), 0.0 ) );
         return gcd_remains + nominal_duration;
@@ -10047,10 +10043,6 @@ std::unique_ptr<expr_t> rogue_t::create_expression( util::string_view name_str )
     return make_fn_expr( name_str, [ this ]() {
       if ( buffs.indiscriminate_carnage_aura->check() )
       {
-        // Shadow Dance has no lingering effect
-        if ( buffs.shadow_dance->check() )
-          return buffs.shadow_dance->remains();
-
         timespan_t nominal_duration = spec.indiscriminate_carnage_buff->duration();
         timespan_t gcd_remains = timespan_t::from_seconds( std::max( ( gcd_ready - sim->current_time() ).total_seconds(), 0.0 ) );
         return gcd_remains + nominal_duration;
@@ -10067,17 +10059,9 @@ std::unique_ptr<expr_t> rogue_t::create_expression( util::string_view name_str )
       timespan_t remains;
       if ( buffs.improved_garrote_aura->check() )
       {
-        // Shadow Dance has no lingering effect
-        if ( buffs.shadow_dance->check() )
-        {
-          remains = buffs.shadow_dance->remains();
-        }
-        else
-        {
-          timespan_t nominal_duration = buffs.improved_garrote->base_buff_duration;
-          timespan_t gcd_remains = timespan_t::from_seconds( std::max( ( gcd_ready - sim->current_time() ).total_seconds(), 0.0 ) );
-          remains = gcd_remains + nominal_duration;
-        }
+        timespan_t nominal_duration = buffs.improved_garrote->base_buff_duration;
+        timespan_t gcd_remains = timespan_t::from_seconds( std::max( ( gcd_ready - sim->current_time() ).total_seconds(), 0.0 ) );
+        remains = gcd_remains + nominal_duration;
       }
       remains = std::max( { remains, buffs.improved_garrote->remains() } );
       return remains;
@@ -12389,14 +12373,6 @@ void rogue_t::reset()
   else
     shadow_techniques_counter = rng().range( 0, 4 );
 
-  if ( talent.rogue.supercharger->ok() )
-  {
-    for ( size_t i = 0; i < options.initial_supercharged_cp; i++ )
-    {
-      buffs.supercharger[ i ]->trigger();
-    }
-  }
-
   danse_macabre_tracker.clear();
   deathstalkers_mark_debuff = nullptr;
 
@@ -12589,6 +12565,14 @@ void rogue_t::arise()
       make_repeating_event( *sim, talent.assassination.serrated_bone_spike->effectN( 1 ).period(),
                             [ this ]() { buffs.serrated_bone_spike_charges->trigger(); } );
     } );
+  }
+
+  if ( talent.rogue.supercharger->ok() && options.initial_supercharged_cp > 0 )
+  {
+    for ( size_t i = 0; i < options.initial_supercharged_cp; i++ )
+    {
+      buffs.supercharger[ i ]->trigger();
+    }
   }
 
   if ( talent.subtlety.the_first_dance->ok() )
