@@ -14403,14 +14403,6 @@ double shaman_t::composite_player_multiplier( school_e school ) const
 
   m *= 1.0 + buff.elemental_equilibrium->value();
 
-  if ( talent.elemental_weapons.ok() &&
-       ( dbc::is_school( school, SCHOOL_FROST ) || dbc::is_school( school, SCHOOL_FIRE ) ||
-         dbc::is_school( school, SCHOOL_NATURE ) ) )
-  {
-    unsigned n_imbues = ( main_hand_weapon.buff_type != 0 ) + ( off_hand_weapon.buff_type != 0 );
-    m *= 1.0 + talent.elemental_weapons->effectN( 1 ).percent() / 10.0 * n_imbues;
-  }
-
   if ( dbc::is_school( school, SCHOOL_NATURE ) && buff.lightning_shield->up() &&
        talent.lightning_capacitor.ok() )
   {
