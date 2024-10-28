@@ -8389,7 +8389,7 @@ struct death_strike_t final : public death_knight_melee_attack_t
       heal( get_action<death_strike_heal_t>( "death_strike_heal", p ) ),
       oh_attack( nullptr ),
       improved_death_strike_reduction( 0 ),
-      sanguination_pct( 0.0 )
+      sanguination_pct( 1 + ( 0.25 * ( 1 + p->talent.unholy_bond->effectN( 1 ).percent() ) ) )
   {
     parse_options( options_str );
     may_parry = false;
@@ -8410,11 +8410,6 @@ struct death_strike_t final : public death_knight_melee_attack_t
       else
         improved_death_strike_reduction +=
             p->talent.improved_death_strike->effectN( 3 ).resource( RESOURCE_RUNIC_POWER );
-    }
-
-    if ( p->runeforge.rune_of_sanguination )
-    {
-      sanguination_pct = 1 + ( 0.25 * ( 1 + p->talent.unholy_bond->effectN( 1 ).percent() ) );
     }
   }
 
