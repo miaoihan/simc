@@ -13114,11 +13114,11 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
       -1.0 * sets->set( SHAMAN_ENHANCEMENT, T31, B4 )->effectN( 1 ).time_value() * n_summons );
   }
 
-  if ( talent.elemental_spirits.ok() )
+  for ( unsigned i = 0;
+        i < n_summons && ( options.flowing_spirits_max_wolves == 0 || pet.all_wolves.size() < options.flowing_spirits_max_wolves );
+        ++i )
   {
-    for ( unsigned i = 0;
-          i < n_summons && ( options.flowing_spirits_max_wolves == 0 || pet.all_wolves.size() < options.flowing_spirits_max_wolves );
-          ++i )
+    if ( talent.elemental_spirits.ok() )
     {
       if ( dbc::is_school( state->action->get_school(), SCHOOL_FIRE ) )
       {
@@ -13136,16 +13136,21 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
         buff.icy_edge->trigger( duration );
       }
     }
-  }
-  else
-  {
-    for ( unsigned i = 0;
-          i < n_summons && ( options.flowing_spirits_max_wolves == 0 || pet.all_wolves.size() < options.flowing_spirits_max_wolves );
-          ++i )
+    else
     {
       pet.spirit_wolves.spawn( duration );
       buff.earthen_weapon->trigger( duration );
     }
+  }
+
+  if ( flowing_spirits_procs.size() <= pet.all_wolves.size() + n_summons )
+  {
+    flowing_spirits_procs.resize( pet.all_wolves.size() + n_summons );
+  }
+
+  for ( auto idx = n_summons; idx < pet.all_wolves.size() + n_summons; idx += n_summons )
+  {
+    flowing_spirits_procs[ idx ].add( as<double>( pet.all_wolves.size() ) );
   }
 
   if ( windfurySourceTrigger )
@@ -13171,11 +13176,6 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
   cooldown.flowing_spirit->start( talent.flowing_spirits->internal_cooldown() );
   buff.feral_spirit_maelstrom->trigger(duration );
 
-  // Track Flowing Spirits proc successes
-  if ( flowing_spirits_procs.size() <= pet.all_wolves.size() )
-  {
-    flowing_spirits_procs.resize( pet.all_wolves.size() );
-  }
 }
 
 void shaman_t::trigger_lively_totems( const action_state_t* state )
@@ -14594,6 +14594,18 @@ void shaman_t::merge( player_t& other )
   }
 
   lvs_samples.merge( s.lvs_samples );
+
+  if ( s.flowing_spirits_procs.size() > flowing_spirits_procs.size() )
+  {
+    flowing_spirits_procs.resize( s.flowing_spirits_procs.size() );
+  }
+
+  for ( auto idx = 0U;
+        idx < std::min( s.flowing_spirits_procs.size(), flowing_spirits_procs.size() );
+        ++idx )
+  {
+    flowing_spirits_procs[ idx ].merge( s.flowing_spirits_procs[ idx ] );
+  }
 }
 
 // shaman_t::primary_role ===================================================
@@ -14662,6 +14674,47 @@ private:
 public:
   shaman_report_t( shaman_t& player ) : p( player )
   { }
+
+  void flowing_spirits_header( report::sc_html_stream& os )
+  {
+    os << "<table class=\"sc sort\" style=\"float: left;margin-right: 10px;\">\n"
+       << "<thead>\n"
+       << "<tr>\n"
+       << "<th colspan=\"3\"><strong>Flowing Spirits proc rates</strong></th>\n"
+       << "</tr>\n"
+       << "<tr>\n"
+       << "<th class=\"left\"># of wolves</th><th class=\"left\"># of procs<br/>(per iteration)</th><th class=\"left\">% of procs</th>\n"
+       << "</tr>\n"
+       << "</thead>\n";
+  }
+
+  void flowing_spirits_contents( report::sc_html_stream& os )
+  {
+    unsigned total_procs = range::accumulate( p.flowing_spirits_procs, 0U, &simple_sample_data_t::count );
+    unsigned row = 0;
+
+    for ( auto idx = 0U; idx < p.flowing_spirits_procs.size(); ++idx )
+    {
+      if ( p.flowing_spirits_procs[ idx ].count() == 0 )
+      {
+        continue;
+      }
+
+      os << fmt::format( "<tr class=\"{}\">\n", row++ & 1 ? "odd" : "even" );
+      os << fmt::format( "<td class=\"left\">{}</td>", idx );
+      os << fmt::format( "<td class=\"left\">{} ({:.3f})</td>",
+        p.flowing_spirits_procs[ idx ].count(),
+        util::round( p.flowing_spirits_procs[ idx ].count() / as<double>( p.sim->iterations ), 3 ) );
+      os << fmt::format( "<td class=\"left\">{:.3f}%</td>",
+        util::round( 100.0 * p.flowing_spirits_procs[ idx ].count() / total_procs, 3 ) );
+      os << "</tr>\n";
+    }
+  }
+
+  void flowing_spirits_footer( report::sc_html_stream& os )
+  {
+    os << "</table>\n";
+  }
 
   void mw_consumer_stack_header( report::sc_html_stream& os )
   {
@@ -15117,6 +15170,23 @@ public:
     if ( p.spec.lava_surge->ok() )
     {
       lvs_proc_distribution_contents( os );
+    }
+
+    if ( p.talent.flowing_spirits->ok() )
+    {
+      os << "\t\t\t\t<div class=\"player-section custom_section\">\n";
+      os << "\t\t\t\t\t<h3 class=\"toggle open\">Flowing Spirits Proc Details</h3>\n"
+         << "\t\t\t\t\t<div class=\"toggle-content\">\n";
+
+      flowing_spirits_header( os );
+      flowing_spirits_contents( os );
+      flowing_spirits_footer( os );
+
+      os << "\t\t\t\t\t</div>\n";
+
+      os << "<div class=\"clear\"></div>\n";
+
+      os << "\t\t\t\t\t</div>\n";
     }
   }
 };
