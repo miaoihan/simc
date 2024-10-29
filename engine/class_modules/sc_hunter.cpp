@@ -4635,7 +4635,8 @@ struct symphonic_arsenal_t : hunter_ranged_attack_t
   symphonic_arsenal_t( hunter_t* p ) : hunter_ranged_attack_t( "symphonic_arsenal", p, p->talents.symphonic_arsenal_dmg )
   {
     background = dual = true;
-    aoe = as<int>( p->talents.symphonic_arsenal->effectN( 1 ).base_value() );
+    //2024-10-19: Survival Symphonic Arsenal hits 6 targets instead of 5, due to the 6th target being the original target.
+    aoe = p->bugs && p->specialization() == HUNTER_SURVIVAL ? as<int>( p->talents.symphonic_arsenal->effectN( 1 ).base_value() + 1 ) : as<int>( p->talents.symphonic_arsenal->effectN( 1 ).base_value() );
     attack_power_mod.direct = p->specialization() == HUNTER_SURVIVAL ? p->talents.symphonic_arsenal_dmg->effectN( 3 ).ap_coeff() : p->talents.symphonic_arsenal_dmg->effectN( 1 ).ap_coeff();
   }
 
@@ -4651,8 +4652,8 @@ struct symphonic_arsenal_t : hunter_ranged_attack_t
   {
     hunter_ranged_attack_t::available_targets( tl );
 
-    // Cannot hit the original target for Marksmanship.
-    if ( p()->specialization() == HUNTER_MARKSMANSHIP )
+    // Can hit the original target for Survival.
+    if ( !p()->bugs && p()->specialization()==HUNTER_SURVIVAL || p()->specialization() == HUNTER_MARKSMANSHIP )
       range::erase_remove( tl, target );
 
     return tl.size();
