@@ -13085,7 +13085,7 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
   double proc_chance = talent.flowing_spirits->effectN( 1 ).percent();
   if ( options.flowing_spirits_max_wolves == 0 )
   {
-    proc_chance *= 2.0 / 3.0;
+    proc_chance *= 9.0 / 20.0;
   }
 
   if ( options.flowing_spirits_proc_chance != 0.0 )
