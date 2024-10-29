@@ -6989,9 +6989,12 @@ struct embedded_splinter_t final : public mage_spell_t
       vm->base_multiplier = old_mult;
     }
 
-    // If the dot ended due to the target dying, transfer the splinters to a nearby target.
+    // If the dot ended due to the target dying, transfer a random portion of the splinters to a nearby target.
     if ( d->target->is_sleeping() )
-      make_event( *sim, [ this, stack ] { p()->trigger_splinter( nullptr, stack ); } );
+    {
+      int transfer = 1 + rng().range( stack );
+      make_event( *sim, [ this, transfer ] { p()->trigger_splinter( nullptr, transfer ); } );
+    }
   }
 };
 
