@@ -4411,7 +4411,7 @@ struct black_arrow_base_t : public kill_shot_base_t
     size_t available_targets( std::vector<player_t*>& tl ) const override
     {
       hunter_ranged_attack_t::available_targets( tl );
-      
+
       // Cannot hit the original target.
       range::erase_remove( tl, target );
 
@@ -6019,7 +6019,7 @@ struct butchery_t : public hunter_melee_attack_t
     if ( p()->talents.frenzy_strikes.ok() )
       p()->cooldowns.wildfire_bomb->adjust( -frenzy_strikes.reduction * std::min( num_targets_hit, frenzy_strikes.cap ) );
 
-    if ( p()->talents.scattered_prey.ok() && !p()->bugs ) 
+    if ( p()->talents.scattered_prey.ok() ) 
       p() -> buffs.scattered_prey -> trigger();
 
     if ( p()->talents.merciless_blow.ok() )
