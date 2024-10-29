@@ -834,6 +834,7 @@ public:
     const spell_data_t* critical_strikes;
     const spell_data_t* dual_wield;
     const spell_data_t* enhancement_shaman;
+    const spell_data_t* enhancement_shaman2;
     const spell_data_t* maelstrom_weapon;
 
     const spell_data_t* windfury;
@@ -11464,7 +11465,8 @@ void shaman_t::init_spells()
   // Enhancement
   spec.critical_strikes   = find_specialization_spell( "Critical Strikes" );
   spec.dual_wield         = find_specialization_spell( "Dual Wield" );
-  spec.enhancement_shaman = find_specialization_spell( "Enhancement Shaman" );
+  spec.enhancement_shaman = find_specialization_spell( 137041 );
+  spec.enhancement_shaman2= find_specialization_spell( 1214207 );
   spec.stormbringer       = find_specialization_spell( "Stormsurge" );
   spec.maelstrom_weapon   = find_specialization_spell( "Maelstrom Weapon" );
 
@@ -13714,6 +13716,7 @@ void shaman_t::apply_affecting_auras( action_t& action )
   // Specialization
   action.apply_affecting_aura( spec.elemental_shaman );
   action.apply_affecting_aura( spec.enhancement_shaman );
+  action.apply_affecting_aura( spec.enhancement_shaman2 );
   action.apply_affecting_aura( spec.restoration_shaman );
   action.apply_affecting_aura( spec.lightning_bolt_2 );
 
