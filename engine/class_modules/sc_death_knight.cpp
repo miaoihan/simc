@@ -14854,6 +14854,8 @@ void death_knight_action_t<Base>::apply_action_effects()
   parse_effects(
       p()->buffs.essence_of_the_blood_queen,
       [ & ]( double v ) {
+        if ( p()->specialization() == DEATH_KNIGHT_BLOOD )
+          v += p()->spec.blood_death_knight->effectN( 19 ).percent();
         if ( p()->buffs.gift_of_the_sanlayn->check() )
           v *= 1.0 + p()->buffs.gift_of_the_sanlayn->check_value();
         return v;
