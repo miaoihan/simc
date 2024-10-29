@@ -2853,10 +2853,17 @@ struct pet_melee_t : public hunter_pet_melee_t<hunter_pet_t>
 
 struct basic_attack_base_t : public hunter_main_pet_attack_t
 {
+  struct {
+    double chance = 0.0; 
+  } frenzied_tear; 
+
   basic_attack_base_t( hunter_main_pet_t* p, util::string_view n, util::string_view suffix ):
     hunter_main_pet_attack_t( fmt::format("{}{}", n, suffix), p, p -> find_pet_spell( n ) )
   {
     school = SCHOOL_PHYSICAL;
+
+    if ( o()->talents.frenzied_tear.ok() )
+      frenzied_tear.chance = o()->talents.frenzied_tear->effectN( 1 ).percent() + o()->specs.survival_hunter->effectN( 18 ).percent();
   }
 
   void execute() override
@@ -2881,7 +2888,7 @@ struct basic_attack_base_t : public hunter_main_pet_attack_t
       o() -> buffs.howl_of_the_pack -> trigger();
     }
 
-    if ( rng().roll( o() -> talents.frenzied_tear -> effectN( 1 ).percent() ) )
+    if ( rng().roll( frenzied_tear.chance ) )
     {
       o()->cooldowns.kill_command->reset( true ); 
       o()->buffs.frenzied_tear->trigger(); 
@@ -4126,22 +4133,17 @@ struct explosive_shot_base_t : public hunter_ranged_attack_t
 
   void execute() override
   {
-    hunter_ranged_attack_t::execute();
-
-    if ( p() -> talents.explosive_venom.ok() ) 
+    if ( p()->talents.explosive_venom.ok() ) 
     {
-      p() -> buffs.explosive_venom -> up(); // Benefit tracking
-      if ( p() -> buffs.explosive_venom -> at_max_stacks() )
-      {
-        p() -> buffs.explosive_venom -> expire();
-        p() -> buffs.explosive_venom -> increment();
-      }
-      else 
-      {
-        p() -> buffs.explosive_venom -> increment();
-      }
+      p()->buffs.explosive_venom->up(); // Benefit tracking
+      p()->buffs.explosive_venom->increment();
     }
+
+    hunter_ranged_attack_t::execute();
     
+    if ( p()->buffs.explosive_venom->at_max_stacks() )
+      p()->buffs.explosive_venom->expire();
+
     p()->cooldowns.wildfire_bomb->adjust( -grenade_juggler_reduction );
     p()->buffs.bombardier->decrement();
   }
@@ -4400,19 +4402,31 @@ struct black_arrow_base_t : public kill_shot_base_t
       background = dual = true;
       aoe = -1;
     }
+
+    size_t available_targets( std::vector<player_t*>& tl ) const override
+    {
+      hunter_ranged_attack_t::available_targets( tl );
+
+      // Cannot hit the original target.
+      range::erase_remove( tl, target );
+
+      return tl.size();
+    }
   };
   
-  bool withering_proc;
+  bool is_withering_proc;
+  bool procs_bp_eb;
   double lower_health_threshold_pct;
   double upper_health_threshold_pct;
 
   black_arrow_dot_t* black_arrow_dot = nullptr;
   bleak_powder_t* bleak_powder = nullptr;
 
-  black_arrow_base_t( util::string_view n, hunter_t* p, spell_data_ptr_t s, bool is_withering = false, bool procs_bleak_powder = true )
+  black_arrow_base_t( util::string_view n, hunter_t* p, spell_data_ptr_t s, bool is_withering = false, bool can_proc_bp_eb = true )
     : kill_shot_base_t( n, p, s, is_withering )
   {
-    withering_proc = is_withering;
+    is_withering_proc = is_withering;
+    procs_bp_eb = can_proc_bp_eb;
 
     if ( !p->talents.black_arrow.ok() )
       background = true;
@@ -4425,7 +4439,7 @@ struct black_arrow_base_t : public kill_shot_base_t
 
     black_arrow_dot = p->get_background_action<black_arrow_dot_t>( "black_arrow_dot" );
 
-    if ( p->talents.bleak_powder.ok() && procs_bleak_powder )
+    if ( p->talents.bleak_powder.ok() && procs_bp_eb )
       bleak_powder = p->get_background_action<bleak_powder_t>( "bleak_powder" );
   }
 
@@ -4433,7 +4447,7 @@ struct black_arrow_base_t : public kill_shot_base_t
   {
     kill_shot_base_t::execute();
 
-    if ( !withering_proc && p()->talents.ebon_bowstring.ok() && rng().roll( p()->talents.ebon_bowstring->effectN( 1 ).percent() ) )
+    if ( procs_bp_eb && p()->talents.ebon_bowstring.ok() && rng().roll( p()->talents.ebon_bowstring->effectN( 1 ).percent() ) )
       p()->trigger_deathblow( target );
   }
 
@@ -4444,7 +4458,7 @@ struct black_arrow_base_t : public kill_shot_base_t
     black_arrow_dot->execute_on_target( s->target );
 
     //The chance is not in spell data and is hardcoded into the tooltip
-    if ( p()->talents.banshees_mark.ok() && rng().roll( 0.25 ) && p()->cooldowns.banshees_mark->up() && !withering_proc )
+    if ( p()->talents.banshees_mark.ok() && rng().roll( 0.25 ) && p()->cooldowns.banshees_mark->up() && !is_withering_proc )
     {
       p()->actions.a_murder_of_crows->execute_on_target( s->target ); 
       p()->cooldowns.banshees_mark->start();
@@ -4486,6 +4500,15 @@ struct shadow_surge_t final : hunter_ranged_attack_t
   {
     aoe = -1;
     background = dual = true;
+  }
+
+  double composite_da_multiplier( const action_state_t* s ) const override
+  {
+    double m = hunter_ranged_attack_t::composite_da_multiplier( s );
+    
+    m *= 1.0 + p()->specs.marksmanship_hunter->effectN( 14 ).percent();
+
+    return m;
   }
 };
 
@@ -4623,7 +4646,8 @@ struct symphonic_arsenal_t : hunter_ranged_attack_t
   symphonic_arsenal_t( hunter_t* p ) : hunter_ranged_attack_t( "symphonic_arsenal", p, p->talents.symphonic_arsenal_dmg )
   {
     background = dual = true;
-    aoe = as<int>( p->talents.symphonic_arsenal->effectN( 1 ).base_value() );
+    //2024-10-19: Survival Symphonic Arsenal hits 6 targets instead of 5, due to the 6th target being the original target.
+    aoe = p->bugs && p->specialization() == HUNTER_SURVIVAL ? as<int>( p->talents.symphonic_arsenal->effectN( 1 ).base_value() + 1 ) : as<int>( p->talents.symphonic_arsenal->effectN( 1 ).base_value() );
     attack_power_mod.direct = p->specialization() == HUNTER_SURVIVAL ? p->talents.symphonic_arsenal_dmg->effectN( 3 ).ap_coeff() : p->talents.symphonic_arsenal_dmg->effectN( 1 ).ap_coeff();
   }
 
@@ -4639,8 +4663,8 @@ struct symphonic_arsenal_t : hunter_ranged_attack_t
   {
     hunter_ranged_attack_t::available_targets( tl );
 
-    // Cannot hit the original target for Marksmanship.
-    if ( p()->specialization() == HUNTER_MARKSMANSHIP )
+    // Can hit the original target for Survival.
+    if ( !p()->bugs && p()->specialization()==HUNTER_SURVIVAL || p()->specialization() == HUNTER_MARKSMANSHIP )
       range::erase_remove( tl, target );
 
     return tl.size();
@@ -4713,7 +4737,16 @@ struct multishot_bm_t: public hunter_ranged_attack_t
 
   void execute() override
   {
+    if ( p()->talents.explosive_venom.ok() ) 
+    {
+      p()->buffs.explosive_venom->up(); // Benefit tracking
+      p()->buffs.explosive_venom->increment();
+    }
+    
     hunter_ranged_attack_t::execute();
+
+    if ( p()->buffs.explosive_venom->at_max_stacks() )
+      p()->buffs.explosive_venom->expire();
 
     if ( p()->talents.beast_cleave->ok() && p()->buffs.beast_cleave->buff_duration() > p()->buffs.beast_cleave->remains() ) {
 
@@ -4721,20 +4754,6 @@ struct multishot_bm_t: public hunter_ranged_attack_t
       
       for ( auto pet : pets::active<pets::hunter_pet_t>( p() -> pets.main, p() -> pets.animal_companion ) )
         pet -> buffs.beast_cleave -> trigger();
-    }
-
-    if ( p() -> talents.explosive_venom.ok() ) 
-    {
-      p() -> buffs.explosive_venom -> up(); // Benefit tracking
-      if ( p() -> buffs.explosive_venom -> at_max_stacks() ) 
-      {
-        p() -> buffs.explosive_venom -> expire();
-        p() -> buffs.explosive_venom -> increment();
-      }
-      else 
-      {
-        p() -> buffs.explosive_venom -> increment();
-      }
     }
 
     if ( p() -> talents.scattered_prey.ok() ) 
@@ -6002,7 +6021,7 @@ struct butchery_t : public hunter_melee_attack_t
     if ( p()->talents.frenzy_strikes.ok() )
       p()->cooldowns.wildfire_bomb->adjust( -frenzy_strikes.reduction * std::min( num_targets_hit, frenzy_strikes.cap ) );
 
-    if ( p()->talents.scattered_prey.ok() && !p()->bugs ) 
+    if ( p()->talents.scattered_prey.ok() ) 
       p() -> buffs.scattered_prey -> trigger();
 
     if ( p()->talents.merciless_blow.ok() )
