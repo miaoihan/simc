@@ -4133,22 +4133,17 @@ struct explosive_shot_base_t : public hunter_ranged_attack_t
 
   void execute() override
   {
-    hunter_ranged_attack_t::execute();
-
-    if ( p() -> talents.explosive_venom.ok() ) 
+    if ( p()->talents.explosive_venom.ok() ) 
     {
-      p() -> buffs.explosive_venom -> up(); // Benefit tracking
-      if ( p() -> buffs.explosive_venom -> at_max_stacks() )
-      {
-        p() -> buffs.explosive_venom -> expire();
-        p() -> buffs.explosive_venom -> increment();
-      }
-      else 
-      {
-        p() -> buffs.explosive_venom -> increment();
-      }
+      p()->buffs.explosive_venom->up(); // Benefit tracking
+      p()->buffs.explosive_venom->increment();
     }
+
+    hunter_ranged_attack_t::execute();
     
+    if ( p()->buffs.explosive_venom->at_max_stacks() )
+      p()->buffs.explosive_venom->expire();
+
     p()->cooldowns.wildfire_bomb->adjust( -grenade_juggler_reduction );
     p()->buffs.bombardier->decrement();
   }
@@ -4730,7 +4725,16 @@ struct multishot_bm_t: public hunter_ranged_attack_t
 
   void execute() override
   {
+    if ( p()->talents.explosive_venom.ok() ) 
+    {
+      p()->buffs.explosive_venom->up(); // Benefit tracking
+      p()->buffs.explosive_venom->increment();
+    }
+    
     hunter_ranged_attack_t::execute();
+
+    if ( p()->buffs.explosive_venom->at_max_stacks() )
+      p()->buffs.explosive_venom->expire();
 
     if ( p()->talents.beast_cleave->ok() && p()->buffs.beast_cleave->buff_duration() > p()->buffs.beast_cleave->remains() ) {
 
@@ -4738,20 +4742,6 @@ struct multishot_bm_t: public hunter_ranged_attack_t
       
       for ( auto pet : pets::active<pets::hunter_pet_t>( p() -> pets.main, p() -> pets.animal_companion ) )
         pet -> buffs.beast_cleave -> trigger();
-    }
-
-    if ( p() -> talents.explosive_venom.ok() ) 
-    {
-      p() -> buffs.explosive_venom -> up(); // Benefit tracking
-      if ( p() -> buffs.explosive_venom -> at_max_stacks() ) 
-      {
-        p() -> buffs.explosive_venom -> expire();
-        p() -> buffs.explosive_venom -> increment();
-      }
-      else 
-      {
-        p() -> buffs.explosive_venom -> increment();
-      }
     }
 
     if ( p() -> talents.scattered_prey.ok() ) 
