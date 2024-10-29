@@ -4499,6 +4499,15 @@ struct shadow_surge_t final : hunter_ranged_attack_t
     aoe = -1;
     background = dual = true;
   }
+
+  double composite_da_multiplier( const action_state_t* s ) const override
+  {
+    double m = hunter_ranged_attack_t::composite_da_multiplier( s );
+    
+    m *= 1.0 + p()->specs.marksmanship_hunter->effectN( 14 ).percent();
+
+    return m;
+  }
 };
 
 // Phantom Pain (Dark Ranger) =========================================================
