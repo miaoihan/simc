@@ -4414,17 +4414,19 @@ struct black_arrow_base_t : public kill_shot_base_t
     }
   };
   
-  bool withering_proc;
+  bool is_withering_proc;
+  bool procs_bp_eb;
   double lower_health_threshold_pct;
   double upper_health_threshold_pct;
 
   black_arrow_dot_t* black_arrow_dot = nullptr;
   bleak_powder_t* bleak_powder = nullptr;
 
-  black_arrow_base_t( util::string_view n, hunter_t* p, spell_data_ptr_t s, bool is_withering = false, bool procs_bleak_powder = true )
+  black_arrow_base_t( util::string_view n, hunter_t* p, spell_data_ptr_t s, bool is_withering = false, bool can_proc_bp_eb = true )
     : kill_shot_base_t( n, p, s, is_withering )
   {
-    withering_proc = is_withering;
+    is_withering_proc = is_withering;
+    procs_bp_eb = can_proc_bp_eb;
 
     if ( !p->talents.black_arrow.ok() )
       background = true;
@@ -4437,7 +4439,7 @@ struct black_arrow_base_t : public kill_shot_base_t
 
     black_arrow_dot = p->get_background_action<black_arrow_dot_t>( "black_arrow_dot" );
 
-    if ( p->talents.bleak_powder.ok() && procs_bleak_powder )
+    if ( p->talents.bleak_powder.ok() && procs_bp_eb )
       bleak_powder = p->get_background_action<bleak_powder_t>( "bleak_powder" );
   }
 
@@ -4445,7 +4447,7 @@ struct black_arrow_base_t : public kill_shot_base_t
   {
     kill_shot_base_t::execute();
 
-    if ( !withering_proc && p()->talents.ebon_bowstring.ok() && rng().roll( p()->talents.ebon_bowstring->effectN( 1 ).percent() ) )
+    if ( procs_bp_eb && p()->talents.ebon_bowstring.ok() && rng().roll( p()->talents.ebon_bowstring->effectN( 1 ).percent() ) )
       p()->trigger_deathblow( target );
   }
 
@@ -4456,7 +4458,7 @@ struct black_arrow_base_t : public kill_shot_base_t
     black_arrow_dot->execute_on_target( s->target );
 
     //The chance is not in spell data and is hardcoded into the tooltip
-    if ( p()->talents.banshees_mark.ok() && rng().roll( 0.25 ) && p()->cooldowns.banshees_mark->up() && !withering_proc )
+    if ( p()->talents.banshees_mark.ok() && rng().roll( 0.25 ) && p()->cooldowns.banshees_mark->up() && !is_withering_proc )
     {
       p()->actions.a_murder_of_crows->execute_on_target( s->target ); 
       p()->cooldowns.banshees_mark->start();
