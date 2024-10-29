@@ -3683,6 +3683,18 @@ struct dancing_rune_weapon_pet_t : public death_knight_pet_t
     bool is_reaper_of_souls;
   };
 
+  struct drw_auto_attack_t : public auto_attack_melee_t<dancing_rune_weapon_pet_t>
+  {
+    drw_auto_attack_t( dancing_rune_weapon_pet_t* p ) : auto_attack_melee_t( p )
+    {
+      weapon = &p->main_hand_weapon;
+      weapon->slot = SLOT_MAIN_HAND;
+      base_execute_time = p->main_hand_weapon.swing_time;
+    }
+  }; 
+
+  action_t* drw_auto_attack;
+
   struct abilities_t
   {
     action_t* blood_plague;
@@ -3697,7 +3709,7 @@ struct dancing_rune_weapon_pet_t : public death_knight_pet_t
   } ability;
 
   dancing_rune_weapon_pet_t( death_knight_t* owner, std::string_view drw_name = "dancing_rune_weapon" )
-    : death_knight_pet_t( owner, drw_name, true, true ), ability()
+    : death_knight_pet_t( owner, drw_name, true, false ), ability()
   {
     // The pet wields the same weapon type as its owner for spells with weapon requirements
     main_hand_weapon.type       = owner->main_hand_weapon.type;
@@ -3707,9 +3719,11 @@ struct dancing_rune_weapon_pet_t : public death_knight_pet_t
     resource_regeneration  = regen_type::DISABLED;
   }
 
-  void init_spells() override
+  void create_actions() override
   {
-    death_knight_pet_t::init_spells();
+    death_knight_pet_t::create_actions();
+
+    drw_auto_attack = new drw_auto_attack_t( this );
 
     // Dont init spells that dont exist, breaks reporting for auto's
     if ( dk()->talent.blood.blood_boil.ok() )
@@ -3755,6 +3769,7 @@ struct dancing_rune_weapon_pet_t : public death_knight_pet_t
   void arise() override
   {
     death_knight_pet_t::arise();
+    reschedule_drw();
     dk()->buffs.dancing_rune_weapon->trigger();
     if ( dk()->talent.sanlayn.gift_of_the_sanlayn.ok() )
       dk()->buffs.gift_of_the_sanlayn->trigger();
@@ -3768,9 +3783,21 @@ struct dancing_rune_weapon_pet_t : public death_knight_pet_t
       dk()->buffs.gift_of_the_sanlayn->expire();
   }
 
-  attack_t* create_main_hand_auto_attack() override
+  void reschedule_drw()
   {
-    return new auto_attack_melee_t<dancing_rune_weapon_pet_t>( this );
+    if ( executing || is_sleeping() || buffs.movement->check() || buffs.stunned->check() )
+      return;
+
+    else
+    {
+      drw_auto_attack->set_target( dk()->target );
+      drw_auto_attack->schedule_execute();
+    }
+  }
+
+  void schedule_ready( timespan_t /* delta_time */, bool /* waiting */ ) override
+  {
+    reschedule_drw();
   }
 };
 
