@@ -12101,7 +12101,7 @@ void death_knight_t::drw_action_execute( pets::dancing_rune_weapon_pet_t* drw, d
 
 void death_knight_t::trigger_drw_action( drw_actions action )
 {
-  if ( specialization() != DEATH_KNIGHT_BLOOD )
+  if ( specialization() != DEATH_KNIGHT_BLOOD || !talent.blood.dancing_rune_weapon.ok() )
     return;
 
   if ( pets.dancing_rune_weapon_pet.active_pet() == nullptr )
