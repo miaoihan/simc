@@ -7344,7 +7344,10 @@ struct elemental_blast_overload_t : public elemental_overload_spell_t
   {
     double m = elemental_overload_spell_t::action_multiplier();
 
-    m *= 1.0 + p()->buff.magma_chamber->check_stack_value();
+    if ( exec_type == spell_variant::NORMAL ) 
+    {
+      m *= 1.0 + p()->buff.magma_chamber->check_stack_value();
+    }
 
     if ( exec_type == spell_variant::FUSION_OF_ELEMENTS )
     {
@@ -7414,7 +7417,10 @@ struct elemental_blast_t : public shaman_spell_t
   {
     double m = shaman_spell_t::action_multiplier();
 
-    m *= 1.0 + p()->buff.magma_chamber->stack_value();
+    if ( exec_type == spell_variant::NORMAL ) 
+    {
+      m *= 1.0 + p()->buff.magma_chamber->stack_value();
+    }
 
     if ( exec_type == spell_variant::FUSION_OF_ELEMENTS )
     {
