@@ -2853,10 +2853,17 @@ struct pet_melee_t : public hunter_pet_melee_t<hunter_pet_t>
 
 struct basic_attack_base_t : public hunter_main_pet_attack_t
 {
+  struct {
+    double chance = 0.0; 
+  } frenzied_tear; 
+
   basic_attack_base_t( hunter_main_pet_t* p, util::string_view n, util::string_view suffix ):
     hunter_main_pet_attack_t( fmt::format("{}{}", n, suffix), p, p -> find_pet_spell( n ) )
   {
     school = SCHOOL_PHYSICAL;
+
+    if ( o()->talents.frenzied_tear.ok() )
+      frenzied_tear.chance = o()->talents.frenzied_tear->effectN( 1 ).percent() + o()->specs.survival_hunter->effectN( 18 ).percent();
   }
 
   void execute() override
@@ -2881,7 +2888,7 @@ struct basic_attack_base_t : public hunter_main_pet_attack_t
       o() -> buffs.howl_of_the_pack -> trigger();
     }
 
-    if ( rng().roll( o() -> talents.frenzied_tear -> effectN( 1 ).percent() ) )
+    if ( rng().roll( frenzied_tear.chance ) )
     {
       o()->cooldowns.kill_command->reset( true ); 
       o()->buffs.frenzied_tear->trigger(); 
@@ -4404,9 +4411,10 @@ struct black_arrow_base_t : public kill_shot_base_t
     size_t available_targets( std::vector<player_t*>& tl ) const override
     {
       hunter_ranged_attack_t::available_targets( tl );
+      
       // Cannot hit the original target.
       range::erase_remove( tl, target );
-  
+
       return tl.size();
     }
   };
