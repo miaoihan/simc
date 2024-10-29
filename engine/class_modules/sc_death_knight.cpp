@@ -1543,6 +1543,7 @@ public:
   struct modified_spells_t
   {
     modified_spell_data_t* infliction_of_sorrow;
+    modified_spell_data_t* vampiric_strike;
   } modified_spell;
 
   // RPPM
@@ -11979,7 +11980,7 @@ void death_knight_t::trigger_infliction_of_sorrow( player_t* target, bool is_vam
 
 void death_knight_t::trigger_vampiric_strike_proc( player_t* target )
 {
-  double chance    = talent.sanlayn.vampiric_strike->effectN( 1 ).percent();
+  double chance    = modified_spell.vampiric_strike->effectN( 1 ).percent();
   double target_hp = target->health_percentage();
 
   if ( talent.sanlayn.sanguine_scent.ok() && target_hp <= talent.sanlayn.sanguine_scent->effectN( 1 ).base_value() )
@@ -14787,6 +14788,9 @@ void death_knight_t::apply_effect_modifying_effects()
 {
   modified_spell.infliction_of_sorrow =
       get_modified_spell( talent.sanlayn.infliction_of_sorrow )->parse_effects( spec.blood_death_knight );
+
+  modified_spell.vampiric_strike =
+      get_modified_spell( talent.sanlayn.vampiric_strike )->parse_effects( spec.blood_death_knight );
 }
 
 template <class Base>
