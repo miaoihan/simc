@@ -1853,6 +1853,7 @@ public:
   void reapers_mark_explosion_wrapper( player_t* target, player_t* source, int stacks );
   // Blood
   void bone_shield_handler( const action_state_t* ) const;
+  void drw_action_execute( pets::dancing_rune_weapon_pet_t* drw, drw_actions action );
   void trigger_drw_action( drw_actions action );
   // Frost
   void trigger_killing_machine( bool predictable, proc_t* proc, proc_t* wasted_proc );
@@ -12064,6 +12065,40 @@ void death_knight_t::reapers_mark_explosion_wrapper( player_t* target, player_t*
   }
 }
 
+void death_knight_t::drw_action_execute( pets::dancing_rune_weapon_pet_t* drw, drw_actions action )
+{
+  switch ( action )
+  {
+    case DRW_ACTION_BLOOD_BOIL:
+      drw->ability.blood_boil->execute();
+      break;
+    case DRW_ACTION_DEATHS_CARESS:
+      drw->ability.deaths_caress->execute();
+      break;
+    case DRW_ACTION_DEATH_STRIKE:
+      drw->ability.death_strike->execute();
+      break;
+    case DRW_ACTION_HEART_STRIKE:
+      drw->ability.heart_strike->execute();
+      break;
+    case DRW_ACTION_MARROWREND:
+      drw->ability.marrowrend->execute();
+      break;
+    case DRW_ACTION_SOUL_REAPER:
+      drw->ability.soul_reaper->execute();
+      break;
+    case DRW_ACTION_CONSUMPTION:
+      drw->ability.consumption->execute();
+      break;
+    case DRW_ACTION_VAMPIRIC_STRIKE:
+      drw->ability.vampiric_strike->execute();
+      break;
+    default:
+      assert( false && "DRW Action Does not Exist" );
+      break;
+  }
+}
+
 void death_knight_t::trigger_drw_action( drw_actions action )
 {
   if ( specialization() != DEATH_KNIGHT_BLOOD )
@@ -12072,33 +12107,7 @@ void death_knight_t::trigger_drw_action( drw_actions action )
   if ( pets.dancing_rune_weapon_pet.active_pet() == nullptr )
     return;
 
-  switch ( action )
-  {
-    case DRW_ACTION_BLOOD_BOIL:
-      pets.dancing_rune_weapon_pet.active_pet()->ability.blood_boil->execute();
-      break;
-    case DRW_ACTION_DEATHS_CARESS:
-      pets.dancing_rune_weapon_pet.active_pet()->ability.deaths_caress->execute();
-      break;
-    case DRW_ACTION_DEATH_STRIKE:
-      pets.dancing_rune_weapon_pet.active_pet()->ability.death_strike->execute();
-      break;
-    case DRW_ACTION_HEART_STRIKE:
-      pets.dancing_rune_weapon_pet.active_pet()->ability.heart_strike->execute();
-      break;
-    case DRW_ACTION_MARROWREND:
-      pets.dancing_rune_weapon_pet.active_pet()->ability.marrowrend->execute();
-      break;
-    case DRW_ACTION_SOUL_REAPER:
-      pets.dancing_rune_weapon_pet.active_pet()->ability.soul_reaper->execute();
-      break;
-    case DRW_ACTION_CONSUMPTION:
-      pets.dancing_rune_weapon_pet.active_pet()->ability.consumption->execute();
-      break;
-    case DRW_ACTION_VAMPIRIC_STRIKE:
-      pets.dancing_rune_weapon_pet.active_pet()->ability.vampiric_strike->execute();
-      break;
-  }
+  drw_action_execute( pets.dancing_rune_weapon_pet.active_pet(), action );
 
   if ( !talent.blood.everlasting_bond.ok() )
     return;
@@ -12106,33 +12115,7 @@ void death_knight_t::trigger_drw_action( drw_actions action )
   if ( pets.everlasting_bond_pet.active_pet() == nullptr )
     return;
 
-  switch ( action )
-  {
-    case DRW_ACTION_BLOOD_BOIL:
-      pets.everlasting_bond_pet.active_pet()->ability.blood_boil->execute();
-      break;
-    case DRW_ACTION_DEATHS_CARESS:
-      pets.everlasting_bond_pet.active_pet()->ability.deaths_caress->execute();
-      break;
-    case DRW_ACTION_DEATH_STRIKE:
-      pets.everlasting_bond_pet.active_pet()->ability.death_strike->execute();
-      break;
-    case DRW_ACTION_HEART_STRIKE:
-      pets.everlasting_bond_pet.active_pet()->ability.heart_strike->execute();
-      break;
-    case DRW_ACTION_MARROWREND:
-      pets.everlasting_bond_pet.active_pet()->ability.marrowrend->execute();
-      break;
-    case DRW_ACTION_SOUL_REAPER:
-      pets.everlasting_bond_pet.active_pet()->ability.soul_reaper->execute();
-      break;
-    case DRW_ACTION_CONSUMPTION:
-      pets.everlasting_bond_pet.active_pet()->ability.consumption->execute();
-      break;
-    case DRW_ACTION_VAMPIRIC_STRIKE:
-      pets.everlasting_bond_pet.active_pet()->ability.vampiric_strike->execute();
-      break;
-  }
+  drw_action_execute( pets.everlasting_bond_pet.active_pet(), action );
 };
 
 double death_knight_t::psuedo_random_p_from_c( double c )
