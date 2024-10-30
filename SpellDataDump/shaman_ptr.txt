@@ -4894,6 +4894,7 @@ Description      : Shatters a line of earth in front of you with your main hand 
 Tooltip          : Incapacitated.
 
 Name             : Lightning Rod (id=197568) [Spell Family (11)] 
+Hotfixed         : Attributes
 Class            : Shaman
 School           : Nature
 Spell Type       : None
@@ -4903,7 +4904,7 @@ Labels           : 16: Class Spells
                  : 292
 Affecting Spells : Elemental Fury (60188 effect#1)
 Family Flags     : 121
-Attributes       : Can't Crit (93), Ignore Caster Modifiers (125), Do Not Display Range (126), Allow Class Ability Procs (416)
+Attributes       : Can't Crit (93), Ignore Caster Modifiers (125), Do Not Display Range (126), Ignore Damage Taken Modifiers (136), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=290283)   : School Damage (2): nature
                    Base Value: 1 | Scaled Value: 1 | Target: Enemy (6)
@@ -18126,6 +18127,7 @@ Effects          :
 Description      : $@spelldesc188389
 
 Name             : Stormblast (id=470466) [Spell Family (11)] 
+Hotfixed         : Proc Flags 1 (4112 -> 0), Internal Cooldown (500 -> 0)
 Class            : Shaman
 School           : Nature
 Spell Type       : None
@@ -18134,10 +18136,8 @@ Duration         : 12 seconds
 Labels           : 16: Class Spells
                  : 24: Shaman Spells
                  : 292
-Internal Cooldown: 0.5 seconds
 Stacks           : 2 maximum
 Proc Chance      : 101%
-Proc Flags       : Yellow Melee, Generic Hostile Spell
 Triggered By     : Stormblast (319930)
 Attributes       : Do Not Display Range (126), Aura Points On Client (268), Allow Class Ability Procs (416), Do Not Consume Aura Stack On Proc (428)
 Effects          :
