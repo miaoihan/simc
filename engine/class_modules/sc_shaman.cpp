@@ -472,7 +472,9 @@ public:
   unsigned buff_state_lashing_flames;
 
   /// Flowing Spirits tracking
-  std::vector<simple_sample_data_t> flowing_spirits_procs;
+  size_t active_flowing_spirits_proc;
+  // Attempts, successes
+  std::vector<std::tuple<simple_sample_data_t, simple_sample_data_t>> flowing_spirits_procs;
 
   // Cached actions
   struct actions_t
@@ -711,9 +713,9 @@ public:
 
     double earthquake_spell_power_coefficient = 0.3884;
 
-    /// 11.0.5 rng options until proper formulas found
-    double flowing_spirits_proc_chance = 0.0;
-    unsigned flowing_spirits_max_wolves = 0U;
+    // Proc rates for each active proc of Flowing Spirits, up to 5/10 active procs
+    std::vector<double> flowing_spirits_chances = { 0.0665, 0.0461, 0.0236, 0.0125, 0.0 };
+
     double imbuement_mastery_base_chance = 0.07;
     double ice_strike_base_chance = 0.07;
     double lively_totems_base_chance = 0.06;
@@ -1169,6 +1171,7 @@ public:
       accumulated_ascendance_extension_time( timespan_t::from_seconds( 0 ) ),
       ascendance_extension_cap( timespan_t::from_seconds( 0 ) ),
       tempest_counter( 0U ),
+      active_flowing_spirits_proc( 0U ),
       action(),
       pet( this ),
       constant(),
@@ -11195,8 +11198,6 @@ void shaman_t::create_options()
   add_option( opt_float( "shaman.earthquake_spell_power_coefficient", options.earthquake_spell_power_coefficient, 0.0, 100.0 ) );
 
   add_option( opt_float( "shaman.ice_strike_base_chance", options.ice_strike_base_chance, 0.0, 1.0 ) );
-  add_option( opt_float( "shaman.flowing_spirits_proc_chance", options.flowing_spirits_proc_chance, 0.0, 1.0 ) );
-  add_option( opt_uint( "shaman.flowing_spirits_max_wolves", options.flowing_spirits_max_wolves, 0U, std::numeric_limits<unsigned>::max() ) );
 
   add_option( opt_float( "shaman.imbuement_mastery_base_chance", options.imbuement_mastery_base_chance, 0.0, 1.0 ) );
 
@@ -11206,6 +11207,27 @@ void shaman_t::create_options()
   add_option( opt_float( "shaman.lively_totems_base_chance", options.lively_totems_base_chance, 0.0, 1.0 ) );
 
   add_option( opt_float( "shaman.surging_totem_miss_chance", options.surging_totem_miss_chance, 0.0, 1.0 ) );
+
+  add_option( opt_func( "shaman.flowing_spirits_proc_chances",
+    [ this ]( sim_t*, util::string_view, util::string_view value ) {
+      auto split = util::string_split( value, ":" );
+
+      options.flowing_spirits_chances.clear();
+
+      for ( auto chance_str : split )
+      {
+        auto chance = util::to_double( chance_str );
+        if ( chance > 1 )
+        {
+          chance /= 100.0;
+        }
+
+        options.flowing_spirits_chances.push_back( chance );
+      }
+
+      return true;
+    }
+  ) );
 }
 
 // shaman_t::create_profile ================================================
@@ -11246,10 +11268,9 @@ void shaman_t::copy_from( player_t* source )
 
   options.thunderstrike_ward_proc_chance = p->options.thunderstrike_ward_proc_chance;
   options.ice_strike_base_chance = p->options.ice_strike_base_chance;
-  options.flowing_spirits_proc_chance = p->options.flowing_spirits_proc_chance;
-  options.flowing_spirits_max_wolves = p->options.flowing_spirits_max_wolves;
   options.imbuement_mastery_base_chance = p->options.imbuement_mastery_base_chance;
   options.lively_totems_base_chance = p->options.lively_totems_base_chance;
+  options.flowing_spirits_chances = p->options.flowing_spirits_chances;
 
   options.dre_enhancement_base_chance = p->options.dre_enhancement_base_chance;
   options.dre_enhancement_forced_failures = p->options.dre_enhancement_forced_failures;
@@ -13072,38 +13093,35 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
     return;
   }
 
-  if ( options.flowing_spirits_max_wolves > 0 &&
-       pet.all_wolves.size() == options.flowing_spirits_max_wolves )
+  if ( flowing_spirits_procs.size() <= pet.all_wolves.size() + 1 )
   {
-    sim->print_debug( "{} flowing_spirits cap of {} reached", name(),
-      options.flowing_spirits_max_wolves );
+    flowing_spirits_procs.resize( pet.all_wolves.size() + 1 );
+  }
+
+  if ( active_flowing_spirits_proc >= options.flowing_spirits_chances.size() )
+  {
     return;
   }
 
-  double proc_chance = talent.flowing_spirits->effectN( 1 ).percent();
-  if ( options.flowing_spirits_max_wolves == 0 )
-  {
-    proc_chance *= 9.0 / 20.0;
-  }
+  bool triggered = rng().roll( options.flowing_spirits_chances[ active_flowing_spirits_proc ] );
 
-  if ( options.flowing_spirits_proc_chance != 0.0 )
-  {
-    proc_chance = options.flowing_spirits_proc_chance;
-  }
+  auto n_summons = 1U +
+    as<unsigned>( sets->set( SHAMAN_ENHANCEMENT, TWW1, B4 )->effectN( 1 ).base_value() );
 
-  bool triggered = rng().roll( proc_chance );
+  sim->print_debug( "{} attempts to proc flowing_spirits on {}, active_procs={}, chance={}: {}",
+    name(), windfurySourceTrigger ? "windfury_attack" : state->action->name(), active_flowing_spirits_proc,
+    options.flowing_spirits_chances[ active_flowing_spirits_proc ], triggered );
 
-  sim->print_debug( "{} attempts to proc flowing_spirits on {}: {}", name(),
-    state->action->name(), triggered );
+  std::get<0>( flowing_spirits_procs[ active_flowing_spirits_proc * n_summons ] ).add( 1.0 );
 
   if ( !triggered )
   {
     return;
   }
 
+  std::get<1>( flowing_spirits_procs[ active_flowing_spirits_proc * n_summons ] ).add( 1.0 );
+
   // DF4/T31 gives +1 summon per Flowing Spirit proc
-  auto n_summons = 1U +
-    as<unsigned>( sets->set( SHAMAN_ENHANCEMENT, TWW1, B4 )->effectN( 1 ).base_value() );
   auto duration = spell.flowing_spirits_feral_spirit->duration();
 
   if ( sets->has_set_bonus( SHAMAN_ENHANCEMENT, T31, B4 ) )
@@ -13112,9 +13130,7 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
       -1.0 * sets->set( SHAMAN_ENHANCEMENT, T31, B4 )->effectN( 1 ).time_value() * n_summons );
   }
 
-  for ( unsigned i = 0;
-        i < n_summons && ( options.flowing_spirits_max_wolves == 0 || pet.all_wolves.size() < options.flowing_spirits_max_wolves );
-        ++i )
+  for ( unsigned i = 0; i < n_summons; ++i )
   {
     if ( talent.elemental_spirits.ok() )
     {
@@ -13141,16 +13157,6 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
     }
   }
 
-  if ( flowing_spirits_procs.size() <= pet.all_wolves.size() + n_summons )
-  {
-    flowing_spirits_procs.resize( pet.all_wolves.size() + n_summons );
-  }
-
-  for ( auto idx = n_summons; idx < pet.all_wolves.size() + n_summons; idx += n_summons )
-  {
-    flowing_spirits_procs[ idx ].add( as<double>( pet.all_wolves.size() ) );
-  }
-
   if ( windfurySourceTrigger )
   {
     shaman_attack_t* a = windfury_mh;
@@ -13172,8 +13178,14 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
   } 
   
   cooldown.flowing_spirit->start( talent.flowing_spirits->internal_cooldown() );
-  buff.feral_spirit_maelstrom->trigger(duration );
+  buff.feral_spirit_maelstrom->trigger( duration );
 
+  ++active_flowing_spirits_proc;
+
+  make_event( *sim, duration, [ this ]() {
+    assert( active_flowing_spirits_proc > 0 );
+    --active_flowing_spirits_proc;
+  } );
 }
 
 void shaman_t::trigger_lively_totems( const action_state_t* state )
@@ -14549,6 +14561,8 @@ void shaman_t::reset()
     std::get<0>( it.second ) = timespan_t::min();
     std::get<1>( it.second ) = 0.0;
   }
+
+  active_flowing_spirits_proc = 0U;
 }
 
 
@@ -14601,7 +14615,8 @@ void shaman_t::merge( player_t& other )
         idx < std::min( s.flowing_spirits_procs.size(), flowing_spirits_procs.size() );
         ++idx )
   {
-    flowing_spirits_procs[ idx ].merge( s.flowing_spirits_procs[ idx ] );
+    std::get<0>( flowing_spirits_procs[ idx ] ).merge( std::get<0>( s.flowing_spirits_procs[ idx ] ) );
+    std::get<1>( flowing_spirits_procs[ idx ] ).merge( std::get<1>( s.flowing_spirits_procs[ idx ] ) );
   }
 }
 
@@ -14677,34 +14692,49 @@ public:
     os << "<table class=\"sc sort\" style=\"float: left;margin-right: 10px;\">\n"
        << "<thead>\n"
        << "<tr>\n"
-       << "<th colspan=\"3\"><strong>Flowing Spirits proc rates</strong></th>\n"
+       << "<th colspan=\"5\"><strong>Flowing Spirits proc rates</strong></th>\n"
        << "</tr>\n"
        << "<tr>\n"
-       << "<th class=\"left\"># of wolves</th><th class=\"left\"># of procs<br/>(per iteration)</th><th class=\"left\">% of procs</th>\n"
+       << "<th class=\"left\"># of wolves</th>"
+       << "<th class=\"left\">Proc chance%</th>"
+       << "<th class=\"left\"># of attempts<br/>(per iteration)</th>"
+       << "<th class=\"left\"># of procs<br/>(per iteration)</th>"
+       << "<th class=\"left\">% of procs</th>\n"
        << "</tr>\n"
        << "</thead>\n";
   }
 
   void flowing_spirits_contents( report::sc_html_stream& os )
   {
-    unsigned total_procs = range::accumulate( p.flowing_spirits_procs, 0U, &simple_sample_data_t::count );
+    unsigned total_procs = 0U;
+    for ( const auto& pair : p.flowing_spirits_procs )
+    {
+      total_procs += std::get<1>( pair ).count();
+    }
     unsigned row = 0;
+    unsigned active_proc = 0;
 
     for ( auto idx = 0U; idx < p.flowing_spirits_procs.size(); ++idx )
     {
-      if ( p.flowing_spirits_procs[ idx ].count() == 0 )
+      const auto& attempts = std::get<0>( p.flowing_spirits_procs[ idx ] );
+      const auto& procs = std::get<1>( p.flowing_spirits_procs[ idx ] );
+      if ( attempts.count() == 0 && procs.count() == 0 )
       {
         continue;
       }
 
       os << fmt::format( "<tr class=\"{}\">\n", row++ & 1 ? "odd" : "even" );
       os << fmt::format( "<td class=\"left\">{}</td>", idx );
-      os << fmt::format( "<td class=\"left\">{} ({:.3f})</td>",
-        p.flowing_spirits_procs[ idx ].count(),
-        util::round( p.flowing_spirits_procs[ idx ].count() / as<double>( p.sim->iterations ), 3 ) );
+      os << fmt::format( "<td class=\"left\">{:.3f}%</td>", 100.0 * p.options.flowing_spirits_chances[ active_proc ] );
+      os << fmt::format( "<td class=\"left\">{} ({:.3f})</td>", attempts.count(),
+        util::round( attempts.count() / as<double>( p.sim->iterations + p.sim->threads ), 3 ) );
+      os << fmt::format( "<td class=\"left\">{} ({:.3f})</td>", procs.count(),
+        util::round( procs.count() / as<double>( p.sim->iterations + p.sim->threads ), 3 ) );
       os << fmt::format( "<td class=\"left\">{:.3f}%</td>",
-        util::round( 100.0 * p.flowing_spirits_procs[ idx ].count() / total_procs, 3 ) );
+        util::round( 100.0 * procs.count() / total_procs, 3 ) );
       os << "</tr>\n";
+
+      ++active_proc;
     }
   }
 
