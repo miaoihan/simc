@@ -783,6 +783,7 @@ struct evoker_t : public player_t
     timespan_t simulate_bombardments_time_between_procs_stddev = 0.10_s;
     timespan_t allied_virtual_cd_time                          = 118_s;
     double simulate_bombardments_fixed_crit                    = 0.21;
+    int flameshaper_extra_dots                                 = 0;
   } option;
 
   // Action pointers
@@ -6142,9 +6143,10 @@ struct engulf_t : public evoker_spell_t
       const evoker_td_t* td = p()->find_target_data( target );
 
       if ( !td )
-        return 0;
+        return p()->option.flameshaper_extra_dots;
 
-      return td->dots.fire_breath->is_ticking() + td->dots.fire_breath_traveling_flame->is_ticking() + td->dots.enkindle->is_ticking() +
+      return p()->option.flameshaper_extra_dots + td->dots.fire_breath->is_ticking() +
+             td->dots.fire_breath_traveling_flame->is_ticking() + td->dots.enkindle->is_ticking() +
              td->dots.living_flame->is_ticking();
     }
 
@@ -8427,6 +8429,7 @@ void evoker_t::create_options()
   add_option( opt_timespan( "evoker.allied_virtual_cd_time", option.allied_virtual_cd_time, 0_s, 9999_s ) );
   add_option(
       opt_float( "evoker.simulate_bombardments_fixed_crit", option.simulate_bombardments_fixed_crit, 0.05, 1.0 ) );
+  add_option( opt_int( "evoker.flameshaper_extra_dots", option.flameshaper_extra_dots, 0, 4096 ) );
 }
 
 void evoker_t::analyze( sim_t& sim )
