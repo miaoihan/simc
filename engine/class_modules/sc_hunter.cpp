@@ -1313,6 +1313,10 @@ public:
       am *= 1 + amount;
     }
 
+    //2024-10-30: Bleak Powder gains the damage increase from Specialized Arsenal twice (it is already parsed in hunter_action_t once.)
+    if ( p()->bugs && p()->talents.specialized_arsenal.ok() && ( s->action->id == 467914 || s->action->id == 472084 ) )
+      am *= 1 + p()->talents.specialized_arsenal->effectN( 1 ).percent();
+
     int affected_by_tip = std::max( affected_by.tip_of_the_spear.direct, affected_by.tip_of_the_spear_explosive.direct );
     if ( affected_by_tip && p()->buffs.tip_of_the_spear->check() )
     {
