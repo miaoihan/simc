@@ -1161,6 +1161,8 @@ struct evoker_t : public player_t
   {
     propagate_const<proc_t*> ruby_essence_burst;
     propagate_const<proc_t*> azure_essence_burst;
+    propagate_const<proc_t*> titanic_precision_ruby_essence_burst;
+    propagate_const<proc_t*> titanic_precision_azure_essence_burst;
     propagate_const<proc_t*> emerald_trance;
     propagate_const<proc_t*> anachronism_essence_burst;
     propagate_const<proc_t*> echoing_strike;
@@ -3915,7 +3917,7 @@ struct azure_strike_t : public evoker_spell_t
          rng().roll( rng().roll( eb_chance ) ) )
     {
       p()->buff.essence_burst->trigger();
-      p()->proc.azure_essence_burst->occur();
+      p()->proc.titanic_precision_azure_essence_burst->occur();
     }
 
     if ( p()->talent.azure_essence_burst.ok() && ( p()->buff.dragonrage->up() || rng().roll( eb_chance ) ) )
@@ -4727,7 +4729,7 @@ struct living_flame_t : public evoker_spell_t
              rng().roll( composite_target_crit_chance( target ) && rng().roll( eb_chance ) ) )
         {
           p()->buff.essence_burst->trigger();
-          p()->proc.ruby_essence_burst->occur();
+          p()->proc.titanic_precision_ruby_essence_burst->occur();
         }
 
         if ( p()->buff.dragonrage->up() || rng().roll( eb_chance ) )
@@ -7715,21 +7717,23 @@ void evoker_t::init_gains()
   player_t::init_gains();
 
   gain.roar_of_exhilaration = get_gain( "Roar of Exhilaration" );
-  gain.energizing_flame = get_gain( "Energizing Flame" );
+  gain.energizing_flame     = get_gain( "Energizing Flame" );
 }
 
 void evoker_t::init_procs()
 {
   player_t::init_procs();
 
-  proc.ruby_essence_burst         = get_proc( "Ruby Essence Burst" );
-  proc.azure_essence_burst        = get_proc( "Azure Essence Burst" );
-  proc.emerald_trance             = get_proc( "Emerald Trance" );
-  proc.anachronism_essence_burst  = get_proc( "Anachronism" );
-  proc.echoing_strike             = get_proc( "Echoing Strike" );
-  proc.overwritten_leaping_flames = get_proc( "Overwritten Leaping Flames" );
-  proc.diverted_power             = get_proc( "Diverted Power" );
-  proc.destroyers_scarred_wards   = get_proc( "Evoker Devastation 11.0 Class Set 4pc" );
+  proc.ruby_essence_burst                    = get_proc( "Ruby Essence Burst" );
+  proc.azure_essence_burst                   = get_proc( "Azure Essence Burst" );
+  proc.titanic_precision_ruby_essence_burst  = get_proc( "Titanic Precision Ruby Essence Burst" );
+  proc.titanic_precision_azure_essence_burst = get_proc( "Titanic Precision Azure Essence Burst" );
+  proc.emerald_trance                        = get_proc( "Emerald Trance" );
+  proc.anachronism_essence_burst             = get_proc( "Anachronism" );
+  proc.echoing_strike                        = get_proc( "Echoing Strike" );
+  proc.overwritten_leaping_flames            = get_proc( "Overwritten Leaping Flames" );
+  proc.diverted_power                        = get_proc( "Diverted Power" );
+  proc.destroyers_scarred_wards              = get_proc( "Evoker Devastation 11.0 Class Set 4pc" );
 }
 
 void evoker_t::init_base_stats()
