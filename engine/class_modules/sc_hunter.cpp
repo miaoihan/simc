@@ -1301,8 +1301,14 @@ public:
     if ( affected_by.unnatural_causes.direct )
     {
       double amount = p()->talents.unnatural_causes_debuff->effectN( affected_by.unnatural_causes.direct ).percent();
-      if ( s->target->health_percentage() < p()->talents.unnatural_causes->effectN( 3 ).base_value() )
+      //2024-10-30: Bleak Powder is always affected by the base effect from Unnatural Causes twice
+      if ( p()->bugs && ( s->action->id == 467914 || s->action->id == 472084 ) )
+      {
+        amount += p()->talents.unnatural_causes_debuff->effectN( affected_by.unnatural_causes.direct ).percent();
+      } else if ( s->target->health_percentage() < p()->talents.unnatural_causes->effectN( 3 ).base_value() )
+      {
         amount *= 1 + p()->talents.unnatural_causes->effectN( 2 ).percent();
+      }
 
       am *= 1 + amount;
     }
@@ -7869,7 +7875,6 @@ void hunter_t::init_spells()
     talents.shadow_surge_dmg = talents.shadow_surge.ok() ? find_spell( 444269 ) : spell_data_t::not_found();
     talents.bleak_powder  = find_talent_spell( talent_tree::HERO, "Bleak Powder" );
     talents.bleak_powder_dmg = talents.bleak_powder.ok() ? specialization() == HUNTER_MARKSMANSHIP ? find_spell( 467914 ) : find_spell( 472084 )  : spell_data_t::not_found();
-
     talents.withering_fire = find_talent_spell( talent_tree::HERO, "Withering Fire" );
   }
 
