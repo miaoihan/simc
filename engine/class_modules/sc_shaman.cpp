@@ -4107,9 +4107,9 @@ struct stormblast_t : public shaman_attack_t
     weapon = &( p->main_hand_weapon );
     background = may_crit = callbacks = false;
 
-      affected_by_enh_mastery_da = true;
-      // [BUG] 2024-07-17: Stormblast has a mystery 50% damage bonus multiplier in-game
-      base_dd_multiplier *= p->bugs ? 1.5 : 1.0;
+    // Not handled by spell data
+    affected_by_enh_mastery_da = true;
+    affected_by_elemental_weapons_da = true;
   }
 
   void init() override
