@@ -2012,7 +2012,7 @@ public:
     }
 
     proc_fs = p()->get_proc( std::string( "Flowing Spirits: " ) + full_name() );
-    
+
   }
 
   static shaman_action_state_t* cast_state( action_state_t* s )
@@ -7348,7 +7348,7 @@ struct elemental_blast_overload_t : public elemental_overload_spell_t
   {
     double m = elemental_overload_spell_t::action_multiplier();
 
-    if ( exec_type == spell_variant::NORMAL ) 
+    if ( exec_type == spell_variant::NORMAL )
     {
       m *= 1.0 + p()->buff.magma_chamber->check_stack_value();
     }
@@ -7421,7 +7421,7 @@ struct elemental_blast_t : public shaman_spell_t
   {
     double m = shaman_spell_t::action_multiplier();
 
-    if ( exec_type == spell_variant::NORMAL ) 
+    if ( exec_type == spell_variant::NORMAL )
     {
       m *= 1.0 + p()->buff.magma_chamber->stack_value();
     }
@@ -7496,14 +7496,19 @@ struct elemental_blast_t : public shaman_spell_t
   {
     shaman_spell_t::impact( state );
 
-    if ( p()->bugs && p()->specialization() == SHAMAN_ENHANCEMENT && p()->talent.conductive_energy.ok() )
+    if ( p()->specialization() == SHAMAN_ENHANCEMENT && p()->talent.conductive_energy.ok() )
     {
-        accumulate_lightning_rod_damage( state );
+        if ( p()->bugs )
+        {
+            accumulate_lightning_rod_damage( state );
+        }
+
+        trigger_lightning_rod_debuff( state->target );
     }
 
-    if ( p()->talent.lightning_rod.ok() || p()->talent.conductive_energy.ok() )
+    if ( p()->specialization() == SHAMAN_ELEMENTAL && p()->talent.lightning_rod.ok() )
     {
-      trigger_lightning_rod_debuff( state->target );
+        trigger_lightning_rod_debuff( state->target );
     }
   }
 };
@@ -10447,10 +10452,7 @@ struct tempest_t : public shaman_spell_t
       accumulate_lightning_rod_damage( state );
     }
 
-    if ( state->chain_target == 0 &&
-         ( ( p()->specialization() == SHAMAN_ENHANCEMENT && p()->talent.conductive_energy.ok() ) ||
-         ( p()->specialization() == SHAMAN_ELEMENTAL && p()->talent.conductive_energy.ok() &&
-           p()->talent.lightning_rod.ok() ) ) )
+    if ( state->chain_target == 0 && p()->talent.conductive_energy.ok() )
     {
       trigger_lightning_rod_debuff( state->target );
     }
@@ -13175,8 +13177,8 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
       shaman_spell_t* state_spell = debug_cast<shaman_spell_t*>( state->action );
       state_spell->proc_fs->occur();
     }
-  } 
-  
+  }
+
   cooldown.flowing_spirit->start( talent.flowing_spirits->internal_cooldown() );
   buff.feral_spirit_maelstrom->trigger( duration );
 
