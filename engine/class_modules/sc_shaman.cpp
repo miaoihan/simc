@@ -7262,8 +7262,7 @@ struct lightning_bolt_t : public shaman_spell_t
   {
     shaman_spell_t::impact( state );
 
-    if ( ( p()->specialization() == SHAMAN_ENHANCEMENT && p()->talent.conductive_energy.ok() ) ||
-         ( p()->specialization() == SHAMAN_ELEMENTAL && p()->talent.lightning_rod.ok() ) )
+    if ( p()->talent.conductive_energy.ok() || p()->talent.lightning_rod.ok() )
     {
       accumulate_lightning_rod_damage( state );
     }
@@ -10446,8 +10445,7 @@ struct tempest_t : public shaman_spell_t
   {
     shaman_spell_t::impact( state );
 
-    if ( ( p()->specialization() == SHAMAN_ENHANCEMENT && p()->talent.conductive_energy.ok() ) ||
-         ( p()->specialization() == SHAMAN_ELEMENTAL && p()->talent.conductive_energy.ok()) )
+    if ( p()->talent.conductive_energy.ok() )
     {
       accumulate_lightning_rod_damage( state );
     }
