@@ -4265,9 +4265,6 @@ struct kill_shot_base_t : hunter_ranged_attack_t
 
     p()->buffs.deathblow->expire();
     p()->buffs.razor_fragments->decrement();
-
-    if ( venoms_bite )
-      venoms_bite->execute_on_target( target );
   }
 
   void impact( action_state_t* s ) override
@@ -4292,6 +4289,9 @@ struct kill_shot_base_t : hunter_ranged_attack_t
       if ( amount > 0 )
         residual_action::trigger( p()->actions.cull_the_herd, s -> target, amount );
     }
+
+    if ( venoms_bite )
+      venoms_bite->execute_on_target( s->target );
   }
 
   int n_targets() const override
