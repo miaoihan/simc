@@ -6372,19 +6372,25 @@ public:
   bool random;
 };
 
-struct undeath_dot_t final : public death_knight_disease_t
+struct undeath_dot_t final : public death_knight_spell_t
 {
-  undeath_dot_t( std::string_view name, death_knight_t* p )
-    : death_knight_disease_t( name, p, p->pet_spell.undeath_dot )
+  undeath_dot_t( std::string_view name, death_knight_t* p ) : death_knight_spell_t( name, p, p->pet_spell.undeath_dot )
   {
-    dot_behavior = DOT_NONE;
+    background = true;
+    may_miss = may_dodge = may_parry = false;
+    dot_behavior                     = DOT_NONE;
   }
 
   void tick( dot_t* d ) override
   {
-    death_knight_disease_t::tick( d );
+    death_knight_spell_t::tick( d );
     auto td = p()->get_target_data( d->target );
     auto cd = p()->cooldown.undeath_spread->get_cooldown( d->target );
+
+    if ( p()->talent.brittle.ok() && rng().roll( p()->talent.brittle->proc_chance() ) )
+    {
+      td->debuff.brittle->trigger();
+    }
 
     if ( !cd->down() )
     {
