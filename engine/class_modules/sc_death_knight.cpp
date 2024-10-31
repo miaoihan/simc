@@ -6388,6 +6388,11 @@ struct undeath_dot_t final : public death_knight_spell_t
     auto td = p()->get_target_data( d->target );
     auto cd = p()->cooldown.undeath_spread->get_cooldown( d->target );
 
+    if ( p()->talent.brittle.ok() && rng().roll( p()->talent.brittle->proc_chance() ) )
+    {
+      td->debuff.brittle->trigger();
+    }
+
     if ( !cd->down() )
     {
       td->dot.undeath->increment( 1 );
