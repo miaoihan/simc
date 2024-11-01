@@ -1,4 +1,4 @@
-SimulationCraft 1100-02 for World of Warcraft 11.0.5.57171 PTR
+SimulationCraft 1100-02 for World of Warcraft 11.0.7.57361 PTR
 Name             : Invisibility (id=66) [Spell Family (3)] 
 Class            : Mage
 School           : Arcane
@@ -648,7 +648,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -699,7 +699,6 @@ Attributes       : Not Shapeshifted (16), Do Not Sheath (18), Do Not Chain To Cr
 Effects          :
 #1 (id=20028)    : School Damage (2): arcane | Attributes: Always AOE Line of Sight (5), Chain from Initial Target (7), Area Effects Use Target Radius (17)
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | SP Coefficient: 0.66519 | PvP Coefficient: 1.45 | Chain Multiplier: 1 | Chain Targets: 1 | Target: Enemy (6)
-Hotfixed         : SP Coefficient (0.7391 -> 0.66519)
 #2 (id=20029)    : Energize Power (30)
                    Base Value: 1 | Scaled Value: 1 | Resource: none | Target: Self (1)
 Description      : Blasts the target with energy, dealing $30451s1 Arcane damage.
@@ -955,7 +954,6 @@ Attributes       : Not Shapeshifted (16), Do Not Chain To Crowd-Controlled Targe
 Effects          :
 #1 (id=36330)    : School Damage (2): arcane | Attributes: Area Effects Use Target Radius (17)
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | SP Coefficient: 0.3474 | PvP Coefficient: 1.15 | Chain Multiplier: 1 | Chain Targets: 1 | Target: Enemy (6)
-Hotfixed         : SP Coefficient (0.386 -> 0.3474)
 #2 (id=726826)   : Dummy (3)
                    Base Value: 40 | Scaled Value: 40 | Chain Multiplier: 1 | Target: Enemy (6)
 Description      : Launches bolts of arcane energy at the enemy target, causing $s1 Arcane damage. 
@@ -1295,7 +1293,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -1315,7 +1313,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -1335,7 +1333,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Attributes       : Not Shapeshifted (16), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Ignore Caster Modifiers (125), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Reset cooldown upon ending an encounter (333)
@@ -1354,7 +1352,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -1374,7 +1372,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Affecting Spells : Mastery: Deep Healing (77226 effect#1)
@@ -1395,7 +1393,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Affecting Spells : Norgannon's Foresight (236380 effect#1)
@@ -1489,7 +1487,7 @@ Cooldown         : 120 seconds
 Labels           : 219
 Attributes       : Allow While Stealthed (37), Reset cooldown upon ending an encounter (333)
 Effects          :
-#1 (id=71777)    : Apply Aura (6) | Increase Speed% (31)
+#1 (id=71777)    : Apply Aura (6) | Increase Movement Speed% (Stacking) (129)
                    Base Value: 40 | Scaled Value: 40 | Target: Self (1)
 #2 (id=104308)   : Apply Aura (6) | Unknown(358)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -2272,7 +2270,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Attributes       : Not Shapeshifted (16), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Ignore Caster Modifiers (125), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Reset cooldown upon ending an encounter (333)
@@ -5529,11 +5527,13 @@ Labels           : 1224
 Attributes       : Missile Speed is Delay (in sec) (292), Reset cooldown upon ending an encounter (333)
 Effects          :
 #1 (id=477694)   : Trigger Missiles (32)
-                   Base Value: 0 | Scaled Value: 0 | Trigger Spell: 256893 | Radius: 0 - 5 yards | Target: Enemy (6)
-Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards after 3 sec.
-Variables        : $damage=${$cond($gt($SP,$AP),$SP*3,$AP*3)*$pctD*(1+$@versadmg)}
+                   Base Value: 3 | Scaled Value: 3 | Trigger Spell: 256893 | Radius: 0 - 10 yards | Target: Enemy (6)
+#2 (id=1192214)  : Dummy (3)
+                   Base Value: 8 | Scaled Value: 8
+Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards after $s1 sec. Damage reduced beyond $s2 targets.
+Variables        : $damage=${$cond($gt($SP,$AP),$SP*4.2,$AP*4.2)*$pctD*(1+$@versadmg)}
 
-Name             : Holy Resistance (desc=Racial Passive) (id=255651) [Passive] 
+Name             : Holy Providence (desc=Racial Passive) (id=255651) [Passive] 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
 Race             : Lightforged Draenei (0x20000000)
 School           : Holy
@@ -5543,7 +5543,10 @@ Effects          :
 #1 (id=477698)   : Apply Aura (6) | Modify Damage Taken% (87)
                    Base Value: -1 | Scaled Value: -1 | Misc Value: 0x2 | Target: Self (1)
                    Affected School(s): Holy
-Description      : Reduces Holy damage taken by ${$s1/-1}%.
+#2 (id=1192226)  : Apply Aura (6) | Modify Healing% Done (136)
+                   Base Value: 1 | Scaled Value: 1 | Misc Value: 0x7f | Target: Self (1)
+                   Affected School(s): All
+Description      : Reduces Holy damage taken by ${$s1/-1}% and increases healing done by $s2%.
 
 Name             : Light's Reckoning (desc=Racial Passive) (id=255652) [Passive] 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
@@ -5613,9 +5616,9 @@ Cooldown         : 150 seconds
 Triggered By     : Light's Judgment (255647)
 Effects          :
 #1 (id=479673)   : School Damage (2): holy
-                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0.5 | Radius: 0 - 5 yards | Target: At Enemy (53) -> At Enemy in Area (16)
+                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0.5 | Radius: 0 - 10 yards | Target: At Enemy (53) -> At Enemy in Area (16)
 Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards.
-Variables        : $damage=${$cond($gt($SP,$AP),$SP*3,$AP*3)*$pctD*(1+$@versadmg)}
+Variables        : $damage=${$cond($gt($SP,$AP),$SP*4.2,$AP*4.2)*$pctD*(1+$@versadmg)}
 
 Name             : Light's Reckoning (desc=Racial Passive) (id=256896) 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
@@ -7656,7 +7659,6 @@ Effects          :
 Description      : Consuming Clearcasting increases the damage of your next 2 Arcane Blasts by |cFFFFFFFF$s1%|r.
 
 Name             : Nether Precision (id=336889) [Spell Family (3)] 
-Hotfixed         : Tooltip
 Class            : Mage
 School           : Arcane
 Spell Type       : None
@@ -8024,7 +8026,7 @@ Effects          :
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 342246 | Target: Self (1)
 #3 (id=843170)   : Dummy (3)
                    Base Value: 0 | Scaled Value: 0
-Description      : Alters the fabric of time, returning you to your current location and health when cast a second time, or after ${$110909d+$s3} sec.  Effect negated by long distance or death.
+Description      : Alters the fabric of time, returning you to your current location and health when cast a second time, or after ${$110909d+$s3} sec. Effect negated by long distance or death.
 
 Name             : Alter Time (id=342246) [Spell Family (3)] 
 Class            : Mage
@@ -8756,7 +8758,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Attributes       : Not Shapeshifted (16), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Ignore Caster Modifiers (125), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Reset cooldown upon ending an encounter (333)
@@ -9942,7 +9944,6 @@ Effects          :
 Description      : Consuming Clearcasting increases the damage of your next 2 Arcane Blasts or Arcane Barrages by $s1%.
 
 Name             : Nether Precision (id=383783) [Spell Family (3)] 
-Hotfixed         : Tooltip
 Class            : Mage
 School           : Arcane
 Spell Type       : None
@@ -11540,7 +11541,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Affecting Spells : Norgannon's Foresight (236380 effect#1)
@@ -12195,7 +12196,6 @@ Attributes       : No Aura Cancel (31), Aura Points On Client (268), Nameplate P
 Effects          :
 #1 (id=1118518)  : Apply Aura (6) | Modify Mastery% (318)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
-Hotfixed         : Base Value (1 -> 2)
 Description      : $@spelldesc431038
 Tooltip          : Mastery increased by $w1%.
 
@@ -12434,7 +12434,6 @@ Effects          :
                    Family Flags: 108
 #3 (id=1169876)  : Apply Aura (6) | Dummy (4) | Attributes: Suppress Points Stacking (6)
                    Base Value: 60 | Scaled Value: 60 | PvP Coefficient: 0.6 | Target: Self (1)
-Hotfixed         : Base Value (50 -> 60)
 Description      : $@spelldesc431176
 Tooltip          : Your next Frostfire Bolt always critically strikes, deals $s3% additional damage, explodes for $431176s2% of its damage to nearby enemies, and is instant cast.
 
@@ -12544,7 +12543,7 @@ Effects          :
                    Base Value: 125 | Scaled Value: 125 | Target: Self (1)
 #2 (id=1131311)  : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
-Description      : Reaching maximum stacks of Frost Mastery causes your next $?c2[Phoenix Flames]?c3[Flurry][] to also cast Ice Nova at $s1% effectiveness.
+Description      : Reaching maximum stacks of Frost Mastery causes your next $?c2[Phoenix Flames]?c3[Flurry][] to also cast Ice Nova at $s1% effectiveness. Ice Novas cast this way do not freeze enemies in place.
 
 When you consume Excess Frost, the cooldown of $?c2[Meteor]?c3[Comet Storm][] is reduced by $s2 sec.
 
@@ -12943,7 +12942,6 @@ Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log
 Effects          :
 #1 (id=1140588)  : Apply Aura (6) | Dummy (4)
                    Base Value: 4 | Scaled Value: 4 | Target: Self (1)
-Hotfixed         : Base Value (6 -> 4)
 #2 (id=1141267)  : Dummy (3)
                    Base Value: 10 | Scaled Value: 10
 #3 (id=1141870)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
@@ -13367,7 +13365,6 @@ Effects          :
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
                    Affected Spells: Cone of Cold (120), Frost Nova (122), Fireball (133), Arcane Explosion (1449), Flamestrike (2120), Scorch (2948), Arcane Missiles (7268), Pyroblast (11366), Arcane Blast (30451), Dragon's Breath (31661), Arcane Barrage (44425), Living Bomb (44461), Frozen Orb (84721), Fire Blast (108853), Nether Tempest (114923), Nether Tempest (114954), Icicle (148022), Meteor (153564), Comet Storm (153596), Arcane Orb (153640), Meteor Burn (155158), Supernova (157980), Blast Wave (157981), Ice Nova (157997), Blizzard (190357), Cinderstorm (198928), Ray of Frost (205021), Conflagration Flare Up (205345), Flame Patch (205472), Living Bomb (217694), Arcane Assault (225119), Conflagration (226757), Flurry (228354), Frostbolt (228597), Ice Lance (228598), Glacial Spike (228600), Frost Nova (235235), Blazing Barrier (235314), Time and Space (240689), Living Bomb (244813), Ebonbolt (257538), Phoenix Flames (257541), Phoenix Flames (257542), Blast Wave (268467), Blast Wave (268473), Blast Wave (268474), Blast Wave (268475), Trailing Embers (277703), Glacial Assault (279856), Radiant Spark (307443), Tormenting Backlash (317589), Fire Blast (319836), Agonizing Backlash (320035), Pyroblast (321712), Shifting Power (325130), Glacial Fragments (327498), Arcane Echo (342232), Tormenting Backlash (342375), Meteor (351140), Arcane Surge (365350), Glacial Assault (379029), Shifting Power (382445), Blast Wave (389631), Arcane Explosion (414381), Frostfire Bolt (431044), Frostfire Infusion (431171), Meteor (438607), Meteor (438608), Comet Storm (438609), Living Bomb (438671), Living Bomb (438672), Living Bomb (438674), Arcane Orb (440552), Frost Splinter (443722), Embedded Frost Splinter (443740), Splinterstorm (443747), Arcane Splinter (443763), Splinterstorm (444713), Embedded Arcane Splinter (444735), Volatile Magic (444966), Volatile Magic (444967), Volatile Magic (444968), Meteorite (449559), Meteorite (449560), Meteorite Burn (449561), Meteorite (449569), Flamestrike (450462), Phoenix Flames (450506), Living Bomb (453251), Arcane Surge (453326), Magi's Spark (453925), Nether Munitions (454004), Pyroblast (460475), Flamestrike (460476), Frigid Pulse (460623), Arcane Explosion (461508), Arcane Orb (463357), Living Bomb (464884), Frostfire Bolt (468655), Frostfire Burst (470596)
                    Family Flags: 3
-Hotfixed         : Base Value (2 -> 1)
 #2 (id=1147193)  : Dummy (3)
                    Base Value: 3 | Scaled Value: 3
 #3 (id=1148939)  : Apply Aura (6) | Add Flat Modifier (107): Spell Duration (1)
@@ -13381,7 +13378,6 @@ Hotfixed         : Base Value (2 -> 1)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 22 | Target: Self (1)
                    Affected Spells: Cone of Cold (120), Frost Nova (122), Fireball (133), Arcane Explosion (1449), Flamestrike (2120), Scorch (2948), Arcane Missiles (7268), Pyroblast (11366), Arcane Blast (30451), Dragon's Breath (31661), Arcane Barrage (44425), Living Bomb (44461), Frozen Orb (84721), Fire Blast (108853), Nether Tempest (114923), Nether Tempest (114954), Icicle (148022), Meteor (153564), Comet Storm (153596), Arcane Orb (153640), Meteor Burn (155158), Supernova (157980), Blast Wave (157981), Ice Nova (157997), Blizzard (190357), Cinderstorm (198928), Ray of Frost (205021), Conflagration Flare Up (205345), Flame Patch (205472), Living Bomb (217694), Arcane Assault (225119), Conflagration (226757), Flurry (228354), Frostbolt (228597), Ice Lance (228598), Glacial Spike (228600), Frost Nova (235235), Blazing Barrier (235314), Time and Space (240689), Living Bomb (244813), Ebonbolt (257538), Phoenix Flames (257541), Phoenix Flames (257542), Blast Wave (268467), Blast Wave (268473), Blast Wave (268474), Blast Wave (268475), Trailing Embers (277703), Glacial Assault (279856), Radiant Spark (307443), Tormenting Backlash (317589), Fire Blast (319836), Agonizing Backlash (320035), Pyroblast (321712), Shifting Power (325130), Glacial Fragments (327498), Arcane Echo (342232), Tormenting Backlash (342375), Meteor (351140), Arcane Surge (365350), Glacial Assault (379029), Shifting Power (382445), Blast Wave (389631), Arcane Explosion (414381), Frostfire Bolt (431044), Frostfire Infusion (431171), Meteor (438607), Meteor (438608), Comet Storm (438609), Living Bomb (438671), Living Bomb (438672), Living Bomb (438674), Arcane Orb (440552), Frost Splinter (443722), Embedded Frost Splinter (443740), Splinterstorm (443747), Arcane Splinter (443763), Splinterstorm (444713), Embedded Arcane Splinter (444735), Volatile Magic (444966), Volatile Magic (444967), Volatile Magic (444968), Meteorite (449559), Meteorite (449560), Meteorite Burn (449561), Meteorite (449569), Flamestrike (450462), Phoenix Flames (450506), Living Bomb (453251), Arcane Surge (453326), Magi's Spark (453925), Nether Munitions (454004), Pyroblast (460475), Flamestrike (460476), Frigid Pulse (460623), Arcane Explosion (461508), Arcane Orb (463357), Living Bomb (464884), Frostfire Bolt (468655), Frostfire Burst (470596)
                    Family Flags: 3
-Hotfixed         : Base Value (2 -> 1)
 #6 (id=1170851)  : Apply Aura (6) | Dummy (4)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
 Description      : Increases your spell damage by $?c1[$s1][$s6]%. Stacks up to $u times.
@@ -13476,12 +13472,10 @@ Aura Interrupt   : Change Specialization (38), Raid Encounter Start or M+ Start 
 Effects          :
 #1 (id=1148348)  : Apply Aura (6) | Modify All Haste% (193)
                    Base Value: 0.5 | Scaled Value: 0.5 | Target: Self (1)
-Hotfixed         : Base Value (1 -> 0.5)
 #2 (id=1186389)  : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
-Hotfixed         : Base Value (10 -> 5)
 Description      : $@spelldesc449293
-Tooltip          : Haste increased by $s1%
+Tooltip          : Haste increased by ${$s2/10}.1%
 
 Name             : Merely a Setback (id=449330) [Spell Family (3), Passive, Hidden] 
 Talent Entry     : Sunfury (Arcane, Fire) [tree=hero, row=3, col=1, max_rank=1, req_points=1]
@@ -14184,7 +14178,7 @@ Effects          :
                    Affected Spells: Flamestrike (2120), Flamestrike (450462), Flamestrike (460476)
                    Family Flags: 2
 Description      : $@spelldesc451035
-Tooltip          : Your next $?c1[Arcane Blast deals $s2% increased damage or your next Arcane Barrage deals $s4% increased damage][Pyroblast deals $s1% increased damage or your next Flamestrike deals $s3% increased damage].
+Tooltip          : Your next $?c1[Arcane Blast deals $s2% increased damage][Pyroblast deals $s1% increased damage or your next Flamestrike deals $s3% increased damage].
 
 Name             : Glorious Incandescence (id=451073) [Spell Family (3)] 
 Class            : Mage
@@ -14206,7 +14200,6 @@ Effects          :
                    Base Value: 20 | Scaled Value: 20 | Target: Self (1)
                    Affected Spells: Arcane Barrage (44425)
                    Family Flags: 47
-Hotfixed         : Base Value (30 -> 20)
 #3 (id=1186035)  : Apply Aura (6) | Add Flat Modifier (107): Spell Targets (17)
                    Base Value: 3 | Scaled Value: 3 | Misc Value: 17 | Target: Self (1)
                    Affected Spells: Fire Blast (108853), Fire Blast (319836)
@@ -14298,7 +14291,7 @@ Description      : Lit Fuse now turns up to $s1 targets into Living Bombs.
 
 Living Bombs can now spread to $s2 enemies.
 
-Name             : Explosivo (id=451757) [Spell Family (3), Passive] 
+Name             : Cratermaker (id=451757) [Spell Family (3), Passive] 
 Talent Entry     : Fire [tree=spec, row=9, col=7, max_rank=1, req_points=20]
 Class            : Mage
 School           : Physical
@@ -14311,7 +14304,7 @@ Effects          :
 #1 (id=1152487)  : Apply Aura (6) | Dummy (4)
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
 #2 (id=1171109)  : Apply Aura (6) | Dummy (4)
-                   Base Value: 30 | Scaled Value: 30 | Target: Self (1)
+                   Base Value: 40 | Scaled Value: 40 | Target: Self (1)
 Description      : Casting Combustion grants Lit Fuse and Living Bomb's damage is increased by $s2% while under the effects of Combustion.$?a450716[
 
 Your chance of gaining Lit Fuse is increased by $s1% while under the effects of Combustion.][]
@@ -14904,7 +14897,7 @@ Effects          :
 #1 (id=1155775)  : Apply Aura (6) | Dummy (4) | Attributes: Suppress Points Stacking (6)
                    Base Value: 25 | Scaled Value: 25 | Target: Self (1)
 Description      : $@spelldesc452196
-Tooltip          : Your next cast of Arcane Blast echoes for $452196s2 damage.
+Tooltip          : Your next cast of Arcane Blast echoes for $452196s2% damage.
 
 Name             : Leydrinker Echo (id=453770) [Spell Family (3)] 
 Class            : Mage
@@ -15574,12 +15567,10 @@ Effects          :
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
                    Affected Spells: Cone of Cold (120), Frost Nova (122), Fireball (133), Arcane Explosion (1449), Flamestrike (2120), Scorch (2948), Arcane Missiles (7268), Pyroblast (11366), Arcane Blast (30451), Dragon's Breath (31661), Arcane Barrage (44425), Living Bomb (44461), Frozen Orb (84721), Fire Blast (108853), Nether Tempest (114923), Nether Tempest (114954), Icicle (148022), Meteor (153564), Comet Storm (153596), Arcane Orb (153640), Meteor Burn (155158), Supernova (157980), Blast Wave (157981), Ice Nova (157997), Blizzard (190357), Cinderstorm (198928), Ray of Frost (205021), Conflagration Flare Up (205345), Flame Patch (205472), Living Bomb (217694), Arcane Assault (225119), Conflagration (226757), Flurry (228354), Frostbolt (228597), Ice Lance (228598), Glacial Spike (228600), Frost Nova (235235), Blazing Barrier (235314), Time and Space (240689), Living Bomb (244813), Ebonbolt (257538), Phoenix Flames (257541), Phoenix Flames (257542), Blast Wave (268467), Blast Wave (268473), Blast Wave (268474), Blast Wave (268475), Trailing Embers (277703), Glacial Assault (279856), Radiant Spark (307443), Tormenting Backlash (317589), Fire Blast (319836), Agonizing Backlash (320035), Pyroblast (321712), Shifting Power (325130), Glacial Fragments (327498), Arcane Echo (342232), Tormenting Backlash (342375), Meteor (351140), Arcane Surge (365350), Glacial Assault (379029), Shifting Power (382445), Blast Wave (389631), Arcane Explosion (414381), Frostfire Bolt (431044), Frostfire Infusion (431171), Meteor (438607), Meteor (438608), Comet Storm (438609), Living Bomb (438671), Living Bomb (438672), Living Bomb (438674), Arcane Orb (440552), Frost Splinter (443722), Embedded Frost Splinter (443740), Splinterstorm (443747), Arcane Splinter (443763), Splinterstorm (444713), Embedded Arcane Splinter (444735), Volatile Magic (444966), Volatile Magic (444967), Volatile Magic (444968), Meteorite (449559), Meteorite (449560), Meteorite Burn (449561), Meteorite (449569), Flamestrike (450462), Phoenix Flames (450506), Living Bomb (453251), Arcane Surge (453326), Magi's Spark (453925), Nether Munitions (454004), Pyroblast (460475), Flamestrike (460476), Frigid Pulse (460623), Arcane Explosion (461508), Arcane Orb (463357), Living Bomb (464884), Frostfire Bolt (468655), Frostfire Burst (470596)
                    Family Flags: 3
-Hotfixed         : Base Value (2 -> 1)
 #2 (id=1169332)  : Apply Aura (6) | Add Percent Modifier (108): Spell Periodic Amount (22)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 22 | Target: Self (1)
                    Affected Spells: Cone of Cold (120), Frost Nova (122), Fireball (133), Arcane Explosion (1449), Flamestrike (2120), Scorch (2948), Arcane Missiles (7268), Pyroblast (11366), Arcane Blast (30451), Dragon's Breath (31661), Arcane Barrage (44425), Living Bomb (44461), Frozen Orb (84721), Fire Blast (108853), Nether Tempest (114923), Nether Tempest (114954), Icicle (148022), Meteor (153564), Comet Storm (153596), Arcane Orb (153640), Meteor Burn (155158), Supernova (157980), Blast Wave (157981), Ice Nova (157997), Blizzard (190357), Cinderstorm (198928), Ray of Frost (205021), Conflagration Flare Up (205345), Flame Patch (205472), Living Bomb (217694), Arcane Assault (225119), Conflagration (226757), Flurry (228354), Frostbolt (228597), Ice Lance (228598), Glacial Spike (228600), Frost Nova (235235), Blazing Barrier (235314), Time and Space (240689), Living Bomb (244813), Ebonbolt (257538), Phoenix Flames (257541), Phoenix Flames (257542), Blast Wave (268467), Blast Wave (268473), Blast Wave (268474), Blast Wave (268475), Trailing Embers (277703), Glacial Assault (279856), Radiant Spark (307443), Tormenting Backlash (317589), Fire Blast (319836), Agonizing Backlash (320035), Pyroblast (321712), Shifting Power (325130), Glacial Fragments (327498), Arcane Echo (342232), Tormenting Backlash (342375), Meteor (351140), Arcane Surge (365350), Glacial Assault (379029), Shifting Power (382445), Blast Wave (389631), Arcane Explosion (414381), Frostfire Bolt (431044), Frostfire Infusion (431171), Meteor (438607), Meteor (438608), Comet Storm (438609), Living Bomb (438671), Living Bomb (438672), Living Bomb (438674), Arcane Orb (440552), Frost Splinter (443722), Embedded Frost Splinter (443740), Splinterstorm (443747), Arcane Splinter (443763), Splinterstorm (444713), Embedded Arcane Splinter (444735), Volatile Magic (444966), Volatile Magic (444967), Volatile Magic (444968), Meteorite (449559), Meteorite (449560), Meteorite Burn (449561), Meteorite (449569), Flamestrike (450462), Phoenix Flames (450506), Living Bomb (453251), Arcane Surge (453326), Magi's Spark (453925), Nether Munitions (454004), Pyroblast (460475), Flamestrike (460476), Frigid Pulse (460623), Arcane Explosion (461508), Arcane Orb (463357), Living Bomb (464884), Frostfire Bolt (468655), Frostfire Burst (470596)
                    Family Flags: 3
-Hotfixed         : Base Value (2 -> 1)
 Description      : Increases your spell damage by $?c1[$448604s1][$448604s6]%.
 Tooltip          : Spell damage increased by $w1%.
 
@@ -15991,10 +15982,8 @@ Attributes       : Not Shapeshifted (16), Allow While Mounted (24), Allow While 
 Effects          :
 #1 (id=1182508)  : School Damage (2): frostfire
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | SP Coefficient: 1.265 | PvP Coefficient: 2 | Target: Enemy (6)
-Hotfixed         : SP Coefficient (1.1 -> 1.265)
 #2 (id=1182509)  : Apply Aura (6) | Periodic Damage (3): frostfire every 1 seconds
                    Base Value: 0 | Scaled Value: 0 | SP Coefficient: 0.0575 | Target: Enemy (6)
-Hotfixed         : SP Coefficient (0.05 -> 0.0575)
 #3 (id=1182510)  : Apply Aura (6) | Decrease Movement Speed% (33) | Attributes: Suppress Points Stacking (6)
                    Base Value: -50 | Scaled Value: -50 | Mechanic: Snare | Target: Enemy (6)
 Description      : $@spelldesc431044
