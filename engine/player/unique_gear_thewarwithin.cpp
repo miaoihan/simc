@@ -4953,29 +4953,9 @@ void wayward_vrykuls_lantern( special_effect_t& effect )
         duration_multiplier( 0 ),
         last_activation_time( timespan_t::zero() )
     {
-      switch ( e.player->type )
-      {
-        case DEATH_KNIGHT:
-          for ( const auto& n : { "apocalypse" } )
-            if ( auto a = e.player->find_action( n ) )
-              proc_spell_id.insert( a->data().id() );
-          break;
-        case DEMON_HUNTER:
-        case DRUID:
-        case EVOKER:
-        case HUNTER:
-        case MAGE:
-        case MONK:
-        case PALADIN:
-        case PRIEST:
-        case ROGUE:
-        case SHAMAN:
-        case WARLOCK:
-        case WARRIOR:
-          break;
-        default:
-          return;
-      }
+      for ( auto& s : e.player->dbc->spells_by_label( 690 ) )
+        if ( s->is_class( e.player->type ) )
+          proc_spell_id.insert( s->id() );
 
       buff = create_buff<stat_buff_t>( e.player, e.trigger(), e.item )
                  ->add_stat_from_effect_type( A_MOD_RATING, e.driver()->effectN( 1 ).average( e ) );
@@ -4996,13 +4976,22 @@ void wayward_vrykuls_lantern( special_effect_t& effect )
       // Assume for the first proc its been at least 3 minutes since the last proc, triggering it at the maximum
       // duration.
       if ( last_activation_time == timespan_t::zero() )
+      {
         buff->trigger( buff->data().duration() * 5 );
+        last_activation_time = listener->sim->current_time();
+        return;
+      }
 
       // If there was a valid last activation time, calculate the duration based on the time since the last activation.
-      else
-        buff->trigger( ( listener->sim->current_time() - last_activation_time ) * duration_multiplier );
+      timespan_t trigger_dur = std::max(
+          buff->buff_duration(), ( listener->sim->current_time() - last_activation_time ) * duration_multiplier );
 
-      last_activation_time = listener->sim->current_time();
+      // Only trigger the buff if the new duration would be greater than the current remaining duration.
+      if ( buff->remains() < trigger_dur )
+      {
+        buff->trigger( trigger_dur );
+        last_activation_time = listener->sim->current_time();
+      }
     }
 
     void reset() override
