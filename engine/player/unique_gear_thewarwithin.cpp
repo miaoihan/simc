@@ -4931,6 +4931,90 @@ void heart_of_roccor( special_effect_t& effect )
   new dbc_proc_callback_t( effect.player, effect );
 }
 
+// Wayward Vrykul's Lantern
+// 467767 Driver
+// 472360 Buff
+void wayward_vrykuls_lantern( special_effect_t& effect )
+{
+  if ( !effect.player->is_ptr() )
+    return;
+  
+  struct wayward_vrykuls_lantern_cb_t : public dbc_proc_callback_t
+  {
+    std::set<unsigned> proc_spell_id;
+    buff_t* buff;
+    double duration_multiplier;
+    timespan_t last_activation_time;
+
+    wayward_vrykuls_lantern_cb_t( const special_effect_t& e )
+      : dbc_proc_callback_t( e.player, e ),
+        proc_spell_id(),
+        buff( nullptr ),
+        duration_multiplier( 0 ),
+        last_activation_time( timespan_t::zero() )
+    {
+      switch ( e.player->type )
+      {
+        case DEATH_KNIGHT:
+          for ( const auto& n : { "apocalypse" } )
+            if ( auto a = e.player->find_action( n ) )
+              proc_spell_id.insert( a->data().id() );
+          break;
+        case DEMON_HUNTER:
+        case DRUID:
+        case EVOKER:
+        case HUNTER:
+        case MAGE:
+        case MONK:
+        case PALADIN:
+        case PRIEST:
+        case ROGUE:
+        case SHAMAN:
+        case WARLOCK:
+        case WARRIOR:
+          break;
+        default:
+          return;
+      }
+
+      buff = create_buff<stat_buff_t>( e.player, e.trigger(), e.item )
+                 ->add_stat_from_effect_type( A_MOD_RATING, e.driver()->effectN( 1 ).average( e ) );
+
+      // Odd formula, but, appears to be 0.222222~ seconds added to the buff duration per 1 second of time between
+      // activations.
+      duration_multiplier = buff->data().duration().total_seconds() / 36;
+    }
+
+    void trigger( action_t* a, action_state_t* s ) override
+    {
+      if ( range::contains( proc_spell_id, a->data().id() ) )
+        return dbc_proc_callback_t::trigger( a, s );
+    }
+
+    void execute( action_t*, action_state_t* ) override
+    {
+      // Assume for the first proc its been at least 3 minutes since the last proc, triggering it at the maximum
+      // duration.
+      if ( last_activation_time == timespan_t::zero() )
+        buff->trigger( buff->data().duration() * 5 );
+
+      // If there was a valid last activation time, calculate the duration based on the time since the last activation.
+      else
+        buff->trigger( ( listener->sim->current_time() - last_activation_time ) * duration_multiplier );
+
+      last_activation_time = listener->sim->current_time();
+    }
+
+    void reset() override
+    {
+      dbc_proc_callback_t::reset();
+      last_activation_time = timespan_t::zero();
+    }
+  };
+
+  new wayward_vrykuls_lantern_cb_t( effect );
+}
+
 // Weapons
 // 443384 driver
 // 443585 damage
@@ -5881,6 +5965,7 @@ void register_special_effects()
   register_special_effect( 469922, items::doperels_calling_rune );
   register_special_effect( 469925, items::burst_of_knowledge );
   register_special_effect( 469768, items::heart_of_roccor );
+  register_special_effect( 467767, items::wayward_vrykuls_lantern );
 
   // Weapons
   register_special_effect( 443384, items::fateweaved_needle );
