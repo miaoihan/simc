@@ -5004,6 +5004,27 @@ void wayward_vrykuls_lantern( special_effect_t& effect )
   new wayward_vrykuls_lantern_cb_t( effect );
 }
 
+// Cursed Pirate Skull
+// 468035 Driver
+// 472228 Buff
+// 472232 Damage
+void cursed_pirate_skull( special_effect_t& effect )
+{
+  if ( !effect.player->is_ptr() )
+    return;
+
+  auto damage         = create_proc_action<generic_aoe_proc_t>( "cursed_pirate_skull", effect, 472232 );
+  damage->base_dd_min = damage->base_dd_max = effect.driver()->effectN( 1 ).average( effect );
+  // No Role Mult currently, likely to change in the future.
+  // damage->base_multiplier *= role_mult( effect );
+
+  auto buff = create_buff<buff_t>( effect.player, effect.trigger(), effect.item )
+                  ->set_tick_callback( [ damage ]( buff_t*, int, timespan_t ) { damage->execute(); } );
+
+  effect.custom_buff = buff;
+  new dbc_proc_callback_t( effect.player, effect );
+}
+
 // Weapons
 // 443384 driver
 // 443585 damage
@@ -5955,6 +5976,7 @@ void register_special_effects()
   register_special_effect( 469925, items::burst_of_knowledge );
   register_special_effect( 469768, items::heart_of_roccor );
   register_special_effect( 467767, items::wayward_vrykuls_lantern );
+  register_special_effect( 468035, items::cursed_pirate_skull );
 
   // Weapons
   register_special_effect( 443384, items::fateweaved_needle );
