@@ -5012,9 +5012,10 @@ void cursed_pirate_skull( special_effect_t& effect )
 {
   if ( !effect.player->is_ptr() )
     return;
-
-  auto damage         = create_proc_action<generic_aoe_proc_t>( "cursed_pirate_skull", effect, 472232 );
+  auto damage_spell   = effect.trigger()->effectN( 1 ).trigger();
+  auto damage         = create_proc_action<generic_proc_t>( "cursed_pirate_skull", effect, damage_spell );
   damage->base_dd_min = damage->base_dd_max = effect.driver()->effectN( 1 ).average( effect );
+  damage->aoe         = damage_spell->max_targets();
   // No Role Mult currently, likely to change in the future.
   // damage->base_multiplier *= role_mult( effect );
 
