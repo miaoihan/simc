@@ -5903,6 +5903,30 @@ void fury_of_the_stormrook( special_effect_t& effect )
 }
 }  // namespace sets
 
+namespace singing_citrines
+{
+enum singing_citrines_drivers_e
+{
+  // Thunder
+  STORM_SEWERS_CITRINE           = 462532,  // NYI - Absorb
+  ROARING_WARQUEENS_CITRINE      = 462526,  // NYI - Trigger 4 Nearby Ally Singing Thunder Citrines
+  STORMBRINGERS_RUNED_CITRINE    = 462536,  // NYI - Equal Secondary Stat Split
+  THUNDERLORDS_CRACKLING_CITRINE = 462540,  // NYI - ST Damage Proc
+
+  // Sea
+  MARINERS_HALLOWED_CITRINE    = 462530,  // NYI - Heal ally, jumps to 2 nearby.
+  SEABED_LEVIATHANS_CITRINE    = 462527,  // NYI - Stamina & Size increase. At >80% HP attacks take dmg.
+  FATHOMDWELLERS_RUNED_CITRINE = 462535,  // NYI - Mastery stat. All (?) other effects increased based on mastery.
+  UNDERSEA_OVERSEERS_CITRINE   = 462538,  // NYI - Damage, jumps to 2 nearby.
+
+  // Wind
+  OLD_SALTS_BARDIC_CITRINE   = 462531,  // NYI - Heal 5t AOE
+  LEGENDARY_SKIPPERS_CITRINE = 462528,  // NYI - Random other gem, 150% effect.
+  WINDSINGERS_RUNED_CITRINE  = 462534,  // NYI - Highest Secondary Stat
+  SQUALL_SAILORS_CITRINE     = 462539   // NYI - Damage 5t AOE
+};
+}  // namespace singing_citrines
+
 void register_special_effects()
 {
   // NOTE: use unique_gear:: namespace for static consumables so we don't activate them with enable_all_item_effects
