@@ -1124,6 +1124,14 @@ struct sentinel_buff_t : public buff_t
   {
     return damage_modifier;
   }
+  double get_healing_mod() const
+  {
+    return healing_modifier;
+  }
+  double get_crit_bonus() const
+  {
+    return crit_bonus;
+  }
   double get_damage_reduction_mod() const
   {
     return damage_reduction_modifier * ( this->check() );
@@ -1137,6 +1145,8 @@ struct sentinel_buff_t : public buff_t
 
 private:
   double damage_modifier;
+  double healing_modifier;
+  double crit_bonus;
   double damage_reduction_modifier;
   double health_bonus;
 };
@@ -1243,6 +1253,7 @@ public:
     this->affected_by.judgment            = this->data().affected_by( p->spells.judgment_debuff->effectN( 1 ) );
     this->clears_judgment                 = this->affected_by.judgment;
     this->affected_by.avenging_wrath      = this->data().affected_by( p->spells.avenging_wrath->effectN( 2 ) );
+    this->affected_by.sentinel            = this->data().affected_by( p->spells.sentinel->effectN( 1 ) );
     this->affected_by.divine_purpose_cost = this->data().affected_by( p->spells.divine_purpose_buff->effectN( 1 ) );
     this->affected_by.divine_purpose      = this->data().affected_by( p->spells.divine_purpose_buff->effectN( 2 ) );
     this->affected_by.seal_of_reprisal    = this->data().affected_by( p->talents.seal_of_reprisal->effectN( 1 ) );
@@ -1419,11 +1430,14 @@ public:
       }
     }
 
-    // Class talent's Avenging Wrath damage multiplier affects only if base talent is talented (Could still use AW with
-    // only Sentinel/AWM/Crusade/AC talented)
-    if ( affected_by.avenging_wrath && ( p()->buffs.avenging_wrath->up() || p()->buffs.sentinel->up() ) )
+    if ( affected_by.avenging_wrath && p()->buffs.avenging_wrath->up() )
     {
       am *= 1.0 + p()->buffs.avenging_wrath->get_damage_mod();
+    }
+
+    if (affected_by.sentinel && p()->buffs.sentinel->up())
+    {
+      am *= 1.0 + p()->buffs.sentinel->get_damage_mod();
     }
 
     if ( affected_by.rise_from_ash && p()->buffs.rise_from_ash->up() )

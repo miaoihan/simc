@@ -147,7 +147,7 @@ avenging_wrath_buff_t::avenging_wrath_buff_t( paladin_t* p )
 {
   healing_modifier = p->talents.avenging_wrath->effectN( 1 ).percent();
   damage_modifier  = p->talents.avenging_wrath->effectN( 1 ).percent();
-  crit_bonus       = p->talents.avenging_wrath->ok() ? p->talents.avenging_wrath->effectN( 3 ).percent() : 0;
+  crit_bonus       = p->talents.avenging_wrath->effectN( 3 ).percent();
 
   if ( p->talents.sanctified_wrath->ok() )
   {
@@ -4520,7 +4520,10 @@ double paladin_t::composite_spell_crit_chance() const
     h += talents.holy_aegis->effectN( 1 ).percent();
 
   if ( buffs.avenging_wrath -> up() )
-    h += buffs.avenging_wrath -> get_crit_bonus();
+    h += buffs.avenging_wrath->get_crit_bonus();
+
+  if ( buffs.sentinel->up() )
+    h += buffs.sentinel->get_crit_bonus();
 
   return h;
 }
@@ -4534,6 +4537,9 @@ double paladin_t::composite_melee_crit_chance() const
 
   if ( buffs.avenging_wrath -> up() )
     h += buffs.avenging_wrath -> get_crit_bonus();
+
+  if ( buffs.sentinel->up() )
+    h += buffs.sentinel->get_crit_bonus();
 
   return h;
 }
