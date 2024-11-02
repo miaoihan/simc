@@ -13402,6 +13402,15 @@ void shaman_t::create_buffs()
                                     ->set_refresh_behavior( buff_refresh_behavior::DURATION )
                                     ->set_tick_behavior( buff_tick_behavior::REFRESH )
                                     ->set_tick_zero( true )
+                                    ->set_stack_change_callback( [ this ]( buff_t* b, int, int new_ ) {
+                                      // In-game, Feral Spirit for Flowing Spirits will generate a
+                                      // stack of Maelstrom Weapon on the partial expiration tick.
+                                      if ( new_ == 0 && talent.flowing_spirits.ok() )
+                                      {
+                                        generate_maelstrom_weapon( action.feral_spirits,
+                                          as<int>( b->data().effectN( 1 ).base_value() ) );
+                                      }
+                                    } )
                                     ->set_tick_callback( [ this ]( buff_t* b, int, timespan_t ) {
                                       generate_maelstrom_weapon( action.feral_spirits,
                                                                as<int>( b->data().effectN( 1 ).base_value() ) );
