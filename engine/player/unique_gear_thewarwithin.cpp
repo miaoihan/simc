@@ -5037,6 +5037,9 @@ void cursed_pirate_skull( special_effect_t& effect )
 // 472637 Damage
 void runecasters_stormbound_rune( special_effect_t& effect )
 {
+  if ( !effect.player->is_ptr() )
+    return;
+
   auto damage_spell   = effect.player->find_spell( 472637 );
   auto damage         = create_proc_action<generic_proc_t>( "runecasters_stormbound_rune", effect, damage_spell );
   damage->base_dd_min = damage->base_dd_max = effect.driver()->effectN( 1 ).average( effect );
