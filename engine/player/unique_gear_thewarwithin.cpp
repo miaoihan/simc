@@ -5066,6 +5066,31 @@ void runecasters_stormbound_rune( special_effect_t& effect )
   } );
 }
 
+
+// Darktide Wavebender's Orb
+// 468034 Driver
+// 472336 Missile
+// 472337 Damage
+void darktide_wavebenders_orb( special_effect_t& effect )
+{
+  if ( !effect.player->is_ptr() )
+    return;
+
+  auto damage_spell   = effect.player->find_spell( 472337 );
+  auto damage         = create_proc_action<generic_proc_t>( "darktide_wavebenders_orb", effect, damage_spell );
+  damage->base_dd_min = damage->base_dd_max = effect.driver()->effectN( 1 ).average( effect );
+  damage->aoe         = damage_spell->max_targets();
+  // No Role Mult currently, likely to change in the future.
+  // damage->base_multiplier *= role_mult( effect );
+
+  auto missile_spell = effect.player->find_spell( 472336 );
+  auto missile       = create_proc_action<generic_proc_t>( "darktide_wavebenders_orb_missile", effect, missile_spell );
+  missile->impact_action = damage;
+
+  effect.execute_action = missile;
+  new dbc_proc_callback_t( effect.player, effect );
+}
+
 // Weapons
 // 443384 driver
 // 443585 damage
@@ -6019,6 +6044,7 @@ void register_special_effects()
   register_special_effect( 467767, items::wayward_vrykuls_lantern );
   register_special_effect( 468035, items::cursed_pirate_skull );
   register_special_effect( 468033, items::runecasters_stormbound_rune );
+  register_special_effect( 468034, items::darktide_wavebenders_orb );
 
   // Weapons
   register_special_effect( 443384, items::fateweaved_needle );
