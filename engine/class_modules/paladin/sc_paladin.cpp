@@ -2570,59 +2570,54 @@ void paladin_t::cast_holy_armaments( player_t* target, armament usedArmament, bo
     }
     else if ( sim->player_non_sleeping_list.size() > 1 )
     {
-      // We try to do this twice for the new option. In case every target is invalid per options.sacred_weapon_prefer_new_targets, we ignore the option and just take the first target we find.
+      // We try to do this twice. In case every target is invalid, we just take the first target we find.
       for ( int i = 0; i < 2; i++ )
       {
-        // We do not know who to cast Weapon/Bulwark randomly on. Determine it
-        if ( random_weapon_target == nullptr || ( options.sacred_weapon_prefer_new_targets && i == 0 ) )
+        player_t* first_dps    = nullptr;
+        player_t* first_healer = nullptr;
+        player_t* first_tank   = nullptr;
+        for ( auto& _p : sim->player_no_pet_list )
         {
-          player_t* first_dps    = nullptr;
-          player_t* first_healer = nullptr;
-          player_t* first_tank   = nullptr;
-          for ( auto& _p : sim->player_no_pet_list )
+          if ( _p->is_sleeping() || _p == this )
+            continue;
+
+          // Random targetting prefers targets without a buff. Only try to find a valid target on the first iteration.
+          if ( i == 0 )
           {
-            if ( _p->is_sleeping() || _p == this )
+            if ( ( usedArmament == SACRED_WEAPON && get_target_data( _p )->buffs.sacred_weapon->up() ) ||
+                  ( usedArmament == HOLY_BULWARK && get_target_data( _p )->buffs.holy_bulwark->up() ) )
               continue;
-
-            // We prefer our random targets to have no buff, this can be done ingame via hugging them over any other
-            // target, since it prefers to target closeby targets
-            if ( options.sacred_weapon_prefer_new_targets && i == 0 )
-            {
-              if ( ( usedArmament == SACRED_WEAPON && get_target_data( _p )->buffs.sacred_weapon->up() ) ||
-                   ( usedArmament == HOLY_BULWARK && get_target_data( _p )->buffs.holy_bulwark->up() ) )
-                continue;
-            }
-
-            switch ( _p->role )
-            {
-              case ROLE_HEAL:
-                if ( first_healer == nullptr )
-                  first_healer = _p;
-                break;
-              case ROLE_TANK:
-                if ( first_tank == nullptr )
-                  first_tank = _p;
-                break;
-              default:
-                if ( first_dps == nullptr )
-                  first_dps = _p;
-                break;
-            }
           }
-          if ( first_dps != nullptr )
-            random_weapon_target = first_dps;
-          else if ( first_healer != nullptr )
-            random_weapon_target = first_healer;
-          else
-            random_weapon_target = first_tank;
 
-          if ( first_tank != nullptr )
-            random_bulwark_target = first_tank;
-          else if ( first_healer != nullptr )
-            random_bulwark_target = first_healer;
-          else
-            random_bulwark_target = first_dps;
+          switch ( _p->role )
+          {
+            case ROLE_HEAL:
+              if ( first_healer == nullptr )
+                first_healer = _p;
+              break;
+            case ROLE_TANK:
+              if ( first_tank == nullptr )
+                first_tank = _p;
+              break;
+            default:
+              if ( first_dps == nullptr )
+                first_dps = _p;
+              break;
+          }
         }
+        if ( first_dps != nullptr )
+          random_weapon_target = first_dps;
+        else if ( first_healer != nullptr )
+          random_weapon_target = first_healer;
+        else
+          random_weapon_target = first_tank;
+
+        if ( first_tank != nullptr )
+          random_bulwark_target = first_tank;
+        else if ( first_healer != nullptr )
+          random_bulwark_target = first_healer;
+        else
+          random_bulwark_target = first_dps;
       }
       if ( random_weapon_target != nullptr )
       {
@@ -4975,7 +4970,6 @@ void paladin_t::create_options()
   add_option( opt_float( "proc_chance_ret_aura_sera", options.proc_chance_ret_aura_sera, 0.0, 1.0 ) );
   add_option( opt_int( "min_dg_heal_targets", options.min_dg_heal_targets, 0, 5 ) );
   add_option( opt_int( "max_dg_heal_targets", options.max_dg_heal_targets, 0, 5 ) );
-  add_option( opt_bool( "sacred_weapon_prefer_new_targets", options.sacred_weapon_prefer_new_targets ) );
   add_option( opt_bool( "fake_solidarity", options.fake_solidarity ) );
 
   player_t::create_options();
