@@ -14014,10 +14014,6 @@ void shaman_t::init_action_list_enhancement()
 
     //_Cooldowns
     def->add_action( "invoke_external_buff,name=power_infusion,if=(buff.ascendance.up|buff.feral_spirit.up|buff.doom_winds.up|(fight_remains%%120<=20)|(variable.min_talented_cd_remains>=120)|(!talent.ascendance.enabled&!talent.feral_spirit.enabled&!talent.doom_winds.enabled))" );
-    def->add_action( "primordial_wave,if=set_bonus.tier31_2pc&(raid_event.adds.in>(action.primordial_wave.cooldown%(1+set_bonus.tier31_4pc))|raid_event.adds.in<6)" );
-    def->add_action( "feral_spirit,if=talent.elemental_spirits.enabled|(talent.alpha_wolf.enabled&active_enemies>1)" );
-    def->add_action( "surging_totem" );
-    def->add_action( "ascendance,if=dot.flame_shock.ticking&((ti_lightning_bolt&active_enemies=1&raid_event.adds.in>=action.ascendance.cooldown%2)|(ti_chain_lightning&active_enemies>1))" );
 
     def->add_action( "call_action_list,name=single,if=active_enemies=1&!talent.surging_totem.enabled" );
     def->add_action( "call_action_list,name=single_totemic,if=active_enemies=1&talent.surging_totem.enabled" );
@@ -14085,12 +14081,12 @@ void shaman_t::init_action_list_enhancement()
     single->add_action( "flame_shock" );
 
     single_totemic->add_action( "surging_totem" );
-    single_totemic->add_action( "ascendance,if=ti_lightning_bolt&pet.surging_totem.remains>=4&buff.totemic_rebound.stack>=3&buff.maelstrom_weapon.stack>0" );
+    single_totemic->add_action( "ascendance,if=ti_lightning_bolt&pet.surging_totem.remains>4&(buff.totemic_rebound.stack>=3|buff.maelstrom_weapon.stack>0)" );
     single_totemic->add_action( "doom_winds,if=raid_event.adds.in>=action.doom_winds.cooldown&!talent.elemental_spirits.enabled&buff.legacy_of_the_frost_witch.up" );
-    single_totemic->add_action( "sundering,if=buff.ascendance.up&pet.surging_totem.active&talent.earthsurge.enabled&buff.legacy_of_the_frost_witch.up&buff.totemic_rebound.stack>=5" );
+    single_totemic->add_action( "sundering,if=buff.ascendance.up&pet.surging_totem.active&talent.earthsurge.enabled&buff.legacy_of_the_frost_witch.up&buff.totemic_rebound.stack>=5&buff.earthen_weapon.stack>=2" );
     single_totemic->add_action( "crash_lightning,if=talent.unrelenting_storms.enabled&talent.alpha_wolf.enabled&alpha_wolf_min_remains=0&buff.earthen_weapon.stack>=8" );
     single_totemic->add_action( "windstrike,if=talent.thorims_invocation.enabled&buff.maelstrom_weapon.stack>0&ti_lightning_bolt&!talent.elemental_spirits.enabled" );
-    single_totemic->add_action( "sundering,if=buff.legacy_of_the_frost_witch.up&cooldown.ascendance.remains>=10&pet.surging_totem.active&buff.totemic_rebound.stack>=3" );
+    single_totemic->add_action( "sundering,if=buff.legacy_of_the_frost_witch.up&cooldown.ascendance.remains>=10&pet.surging_totem.active&buff.totemic_rebound.stack>=3&!buff.ascendance.up" );
     single_totemic->add_action( "primordial_wave,if=!dot.flame_shock.ticking&talent.molten_assault.enabled&(raid_event.adds.in>action.primordial_wave.cooldown|raid_event.adds.in<6)" );
     single_totemic->add_action( "feral_spirit" );
     single_totemic->add_action( "elemental_blast,if=buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack&talent.elemental_spirits.enabled&feral_spirit.active>=6&(charges_fractional>=1.8|buff.ascendance.up)" );
@@ -14106,7 +14102,7 @@ void shaman_t::init_action_list_enhancement()
     single_totemic->add_action( "elemental_blast,if=buff.maelstrom_weapon.stack>=5&(charges_fractional>=1.8|(buff.molten_weapon.stack+buff.icy_edge.stack>=4))&talent.ascendance.enabled&(feral_spirit.active>=4|!talent.elemental_spirits.enabled)" );
     single_totemic->add_action( "elemental_blast,if=talent.ascendance.enabled&(buff.maelstrom_weapon.stack>=10|(buff.maelstrom_weapon.stack>=5&buff.whirling_air.up&!buff.legacy_of_the_frost_witch.up))" );
     single_totemic->add_action( "lightning_bolt,if=talent.ascendance.enabled&(buff.maelstrom_weapon.stack>=10|(buff.maelstrom_weapon.stack>=5&buff.whirling_air.up&!buff.legacy_of_the_frost_witch.up))" );
-    single_totemic->add_action( "lava_lash,if=buff.hot_hand.up&talent.molten_assault.enabled" );
+    single_totemic->add_action( "lava_lash,if=buff.hot_hand.up&talent.molten_assault.enabled&pet.searing_totem.active" );
     single_totemic->add_action( "windstrike" );
     single_totemic->add_action( "stormstrike" );
     single_totemic->add_action( "lava_lash,if=talent.molten_assault.enabled" );
@@ -14128,20 +14124,23 @@ void shaman_t::init_action_list_enhancement()
 
     aoe->add_action( "feral_spirit,if=talent.elemental_spirits.enabled|talent.alpha_wolf.enabled" );
     aoe->add_action( "ascendance,if=dot.flame_shock.ticking&ti_chain_lightning" );
-    aoe->add_action( "tempest,target_if=min:debuff.lightning_rod.remains,if=buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack|(buff.maelstrom_weapon.stack>=5&(tempest_mael_count>30|buff.awakening_storms.stack=2))" );
+    aoe->add_action( "tempest,target_if=min:debuff.lightning_rod.remains,if=!buff.arc_discharge.up&((buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack&!talent.raging_maelstrom.enabled)|(buff.maelstrom_weapon.stack>=8))|(buff.maelstrom_weapon.stack>=5&(tempest_mael_count>30|buff.awakening_storms.stack=2))" );
     aoe->add_action( "windstrike,target_if=min:debuff.lightning_rod.remains,if=talent.thorims_invocation.enabled&buff.maelstrom_weapon.stack>0&ti_chain_lightning" );
     aoe->add_action( "crash_lightning,if=talent.crashing_storms.enabled&((talent.unruly_winds.enabled&active_enemies>=10)|active_enemies>=15)" );
     aoe->add_action( "lightning_bolt,target_if=min:debuff.lightning_rod.remains,if=(!talent.tempest.enabled|(tempest_mael_count<=10&buff.awakening_storms.stack<=1))&((active_dot.flame_shock=active_enemies|active_dot.flame_shock=6)&buff.primordial_wave.up&buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack&(!buff.splintered_elements.up|fight_remains<=12|raid_event.adds.remains<=gcd))" );
+    aoe->add_action( "voltaic_blaze,if=buff.maelstrom_weapon.stack<=8" );
     aoe->add_action( "lava_lash,if=talent.molten_assault.enabled&(talent.primordial_wave.enabled|talent.fire_nova.enabled)&dot.flame_shock.ticking&(active_dot.flame_shock<active_enemies)&active_dot.flame_shock<6" );
     aoe->add_action( "primordial_wave,target_if=min:dot.flame_shock.remains,if=!buff.primordial_wave.up" );
     aoe->add_action( "chain_lightning,target_if=min:debuff.lightning_rod.remains,if=buff.arc_discharge.up&buff.maelstrom_weapon.stack>=5" );
     aoe->add_action( "elemental_blast,target_if=min:debuff.lightning_rod.remains,if=(!talent.elemental_spirits.enabled|(talent.elemental_spirits.enabled&(charges=max_charges|feral_spirit.active>=2)))&buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack&(!talent.crashing_storms.enabled|active_enemies<=3)" );
-    aoe->add_action( "chain_lightning,target_if=min:debuff.lightning_rod.remains,if=buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack" );
+    aoe->add_action( "chain_lightning,target_if=min:debuff.lightning_rod.remains,if=(buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack&!talent.raging_maelstrom.enabled)|(buff.maelstrom_weapon.stack>=7)" );
     aoe->add_action( "feral_spirit" );
-    aoe->add_action( "doom_winds" );
-    aoe->add_action( "crash_lightning,if=buff.doom_winds.up|!buff.crash_lightning.up|(talent.alpha_wolf.enabled&feral_spirit.active&alpha_wolf_min_remains=0)" );
+    aoe->add_action( "doom_winds,if=ti_chain_lightning&(buff.legacy_of_the_frost_witch.up|!talent.legacy_of_the_frost_witch.enabled)" );
+    aoe->add_action( "crash_lightning,if=(buff.doom_winds.up&active_enemies>=4)|!buff.crash_lightning.up|(talent.alpha_wolf.enabled&feral_spirit.active&alpha_wolf_min_remains=0)" );
     aoe->add_action( "sundering,if=buff.doom_winds.up|talent.earthsurge.enabled" );
     aoe->add_action( "fire_nova,if=active_dot.flame_shock=6|(active_dot.flame_shock>=4&active_dot.flame_shock=active_enemies)" );
+    aoe->add_action( "stormstrike,if=talent.stormblast.enabled&talent.stormflurry.enabled" );
+    aoe->add_action( "voltaic_blaze" );
     aoe->add_action( "lava_lash,target_if=min:debuff.lashing_flames.remains,if=talent.lashing_flames.enabled" );
     aoe->add_action( "lava_lash,if=talent.molten_assault.enabled&dot.flame_shock.ticking");
     aoe->add_action( "ice_strike,if=talent.hailstorm.enabled&!buff.ice_strike.up" );
@@ -14165,24 +14164,25 @@ void shaman_t::init_action_list_enhancement()
 
     aoe_totemic->add_action( "surging_totem" );
     aoe_totemic->add_action( "ascendance,if=ti_chain_lightning" );
-    aoe_totemic->add_action( "sundering,if=buff.ascendance.up&pet.surging_totem.active&talent.earthsurge.enabled&buff.legacy_of_the_frost_witch.up" );
+    aoe_totemic->add_action( "sundering,if=buff.ascendance.up&pet.surging_totem.active&talent.earthsurge.enabled&(buff.legacy_of_the_frost_witch.up|!talent.legacy_of_the_frost_witch.enabled)" );
     aoe_totemic->add_action( "crash_lightning,if=talent.crashing_storms.enabled&(active_enemies>=15-5*talent.unruly_winds.enabled)" );
     aoe_totemic->add_action( "lightning_bolt,if=((active_dot.flame_shock=active_enemies|active_dot.flame_shock=6)&buff.primordial_wave.up&buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack&(!buff.splintered_elements.up|fight_remains<=12|raid_event.adds.remains<=gcd))" );
-    aoe_totemic->add_action( "doom_winds,if=!talent.elemental_spirits.enabled&buff.legacy_of_the_frost_witch.up" );
+    aoe_totemic->add_action( "doom_winds,if=!talent.elemental_spirits.enabled&(buff.legacy_of_the_frost_witch.up|!talent.legacy_of_the_frost_witch.enabled)" );
     aoe_totemic->add_action( "lava_lash,if=talent.molten_assault.enabled&(talent.primordial_wave.enabled|talent.fire_nova.enabled)&dot.flame_shock.ticking&(active_dot.flame_shock<active_enemies)&active_dot.flame_shock<6" );
     aoe_totemic->add_action( "primordial_wave,target_if=min:dot.flame_shock.remains,if=!buff.primordial_wave.up" );
     aoe_totemic->add_action( "elemental_blast,if=(!talent.elemental_spirits.enabled|(talent.elemental_spirits.enabled&(charges=max_charges|feral_spirit.active>=2)))&buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack&(!talent.crashing_storms.enabled|active_enemies<=3)" );
     aoe_totemic->add_action( "chain_lightning,if=buff.maelstrom_weapon.stack>=10" );
     aoe_totemic->add_action( "feral_spirit" );
-    aoe_totemic->add_action( "doom_winds,if=buff.legacy_of_the_frost_witch.up" );
+    aoe_totemic->add_action( "doom_winds,if=buff.legacy_of_the_frost_witch.up|!talent.legacy_of_the_frost_witch.enabled" );
     aoe_totemic->add_action( "crash_lightning,if=buff.doom_winds.up|!buff.crash_lightning.up|(talent.alpha_wolf.enabled&feral_spirit.active&alpha_wolf_min_remains=0)" );
-    aoe_totemic->add_action( "sundering,if=buff.doom_winds.up|talent.earthsurge.enabled&buff.legacy_of_the_frost_witch.up&pet.surging_totem.active" );
+    aoe_totemic->add_action( "sundering,if=buff.doom_winds.up|talent.earthsurge.enabled&(buff.legacy_of_the_frost_witch.up|!talent.legacy_of_the_frost_witch.enabled)&pet.surging_totem.active" );
     aoe_totemic->add_action( "fire_nova,if=active_dot.flame_shock=6|(active_dot.flame_shock>=4&active_dot.flame_shock=active_enemies)" );
+    aoe_totemic->add_action( "voltaic_blaze" );
     aoe_totemic->add_action( "lava_lash,target_if=min:debuff.lashing_flames.remains,if=talent.lashing_flames.enabled" );
     aoe_totemic->add_action( "lava_lash,if=talent.molten_assault.enabled&dot.flame_shock.ticking" );
     aoe_totemic->add_action( "ice_strike,if=talent.hailstorm.enabled&!buff.ice_strike.up" );
     aoe_totemic->add_action( "frost_shock,if=talent.hailstorm.enabled&buff.hailstorm.up" );
-    aoe_totemic->add_action( "sundering,if=buff.legacy_of_the_frost_witch.up&pet.surging_totem.active" );
+    aoe_totemic->add_action( "sundering,if=(buff.legacy_of_the_frost_witch.up|!talent.legacy_of_the_frost_witch.enabled)&pet.surging_totem.active" );
     aoe_totemic->add_action( "flame_shock,if=talent.molten_assault.enabled&!ticking" );
     aoe_totemic->add_action( "flame_shock,target_if=min:dot.flame_shock.remains,if=(talent.fire_nova.enabled|talent.primordial_wave.enabled)&(active_dot.flame_shock<active_enemies)&active_dot.flame_shock<6" );
     aoe_totemic->add_action( "fire_nova,if=active_dot.flame_shock>=3" );

@@ -29,7 +29,7 @@ save=TWW1_Shaman_Elemental.simc
 
 shaman="TWW1_Shaman_Enhancement_Totemic"
 level=80
-race=goblin
+race=orc
 spec=enhancement
 role=attack
 position=back
@@ -56,7 +56,7 @@ save=TWW1_Shaman_Enhancement_Totemic.simc
 
 shaman="TWW1_Shaman_Enhancement"
 level=80
-race=goblin
+race=orc
 spec=enhancement
 role=attack
 position=back
