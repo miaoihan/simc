@@ -2624,19 +2624,21 @@ void paladin_t::cast_holy_armaments( player_t* target, armament usedArmament, bo
             random_bulwark_target = first_dps;
         }
       }
-      if ( usedArmament == SACRED_WEAPON )
+      if ( random_weapon_target != nullptr )
       {
-        nextArmament->execute_on_target( random_weapon_target );
-        sim->print_debug( "Player {} cast Holy Armaments (Sacred Weapon) on {} via Solidarity", name(),
-                          random_weapon_target->name() );
+        if ( usedArmament == SACRED_WEAPON )
+        {
+          nextArmament->execute_on_target( random_weapon_target );
+          sim->print_debug( "Player {} cast Holy Armaments (Sacred Weapon) on {} via Solidarity", name(),
+                            random_weapon_target->name() );
+        }
+        else
+        {
+          nextArmament->execute_on_target( random_bulwark_target );
+          sim->print_debug( "Player {} cast Holy Armaments (Holy Bulwark) on {} via Solidarity", name(),
+                            random_bulwark_target->name() );
+        }
       }
-      else
-      {
-        nextArmament->execute_on_target( random_bulwark_target );
-        sim->print_debug( "Player {} cast Holy Armaments (Holy Bulwark) on {} via Solidarity", name(),
-                          random_bulwark_target->name() );
-      }
-        
     }
   }
   if ( changeArmament )
