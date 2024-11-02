@@ -240,6 +240,7 @@ public:
       buff_t* rite_of_sanctification;
       buff_t* rite_of_adjuration;
       buff_t* blessing_of_the_forge;  // Sacred Weapon doodad, pseudo invisible buff
+      buff_t* fake_solidarity; // Stackable buff that fakes other people having a Sacred Weapon buff
     } lightsmith;
 
     struct

@@ -2424,7 +2424,7 @@ struct sacred_weapon_proc_damage_t : public paladin_spell_t
     double m = paladin_spell_t::composite_da_multiplier( s );
     // If we're faking Solidarity, we double the amount 
     if ( p()->talents.lightsmith.solidarity->ok() && p()->options.fake_solidarity )
-      m *= 2.0;
+      m *= 1.0 + p()->buffs.lightsmith.fake_solidarity->stack();
     return m;
   }
 };
@@ -2453,7 +2453,7 @@ struct sacred_weapon_proc_heal_t : public paladin_heal_t
     double m = paladin_heal_t::composite_da_multiplier( s );
     // If we're faking Solidarity, we double the amount 
     if ( p()->talents.lightsmith.solidarity->ok() && p()->options.fake_solidarity )
-      m *= 2.0;
+      m *= 1.0 + p()->buffs.lightsmith.fake_solidarity->stack();
     return m;
   }
 };
@@ -2636,6 +2636,12 @@ void paladin_t::cast_holy_armaments( player_t* target, armament usedArmament, bo
       }
     }
   }
+
+  if (options.fake_solidarity)
+  {
+    buffs.lightsmith.fake_solidarity->trigger();
+  }
+
   if ( changeArmament )
     next_armament = armament( ( next_armament + 1 ) % NUM_ARMAMENT );
   if ( random )
@@ -3853,7 +3859,11 @@ void paladin_t::create_buffs()
                                                  if ( new_ )
                                                    cast_holy_armaments( this, armament::SACRED_WEAPON, false, false );
                                                } );
-
+  buffs.lightsmith.fake_solidarity = make_buff( this, "fake_solidarity" )
+                                         ->set_duration( buffs.lightsmith.sacred_weapon->base_buff_duration )
+                                         ->set_chance( 1 )
+                                         ->set_max_stack( 10 )
+                                         ->set_stack_behavior( buff_stack_behavior::ASYNCHRONOUS );
 
   buffs.templar.hammer_of_light_ready =
       make_buff( this, "hammer_of_light_ready", find_spell( 427453 ) )
