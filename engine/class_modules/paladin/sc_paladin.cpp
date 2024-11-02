@@ -2568,7 +2568,7 @@ void paladin_t::cast_holy_armaments( player_t* target, armament usedArmament, bo
       nextArmament->execute_on_target( this );
       sim->print_debug( "Player {} cast Holy Armaments on self via Solidarity", name() );
     }
-    else if ( sim->player_no_pet_list.size() > 1 )
+    else if ( sim->player_non_sleeping_list.size() > 1 )
     {
       // We try to do this twice for the new option. In case every target is invalid per options.sacred_weapon_prefer_new_targets, we ignore the option and just take the first target we find.
       for ( int i = 0; i < 2; i++ )
