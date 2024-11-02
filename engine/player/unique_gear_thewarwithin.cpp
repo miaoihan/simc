@@ -5031,6 +5031,38 @@ void cursed_pirate_skull( special_effect_t& effect )
   new dbc_proc_callback_t( effect.player, effect );
 }
 
+// Runecaster's Stormbound Rune
+// 468033 Driver
+// 472636 Periodic Trigger Buff
+// 472637 Damage
+void runecasters_stormbound_rune( special_effect_t& effect )
+{
+  auto damage_spell   = effect.player->find_spell( 472637 );
+  auto damage         = create_proc_action<generic_proc_t>( "runecasters_stormbound_rune", effect, damage_spell );
+  damage->base_dd_min = damage->base_dd_max = effect.driver()->effectN( 1 ).average( effect );
+  // No Role Mult currently, likely to change in the future.
+  // damage->base_multiplier *= role_mult( effect );
+
+  auto buff_spell = effect.player->find_spell( 472636 );
+  auto buff       = create_buff<buff_t>( effect.player, buff_spell )
+                  ->set_tick_on_application( true )
+                  ->set_tick_callback( [ &, damage ]( buff_t*, int, timespan_t ) {
+                    if ( effect.player->sim->target_non_sleeping_list.size() > 0 )
+                    {
+                      auto target = effect.player->rng().range( effect.player->sim->target_non_sleeping_list );
+                      damage->execute_on_target( target );
+                    }
+                  } );
+
+  // TODO: Test if initial hit is truly on hit, or only enter combat. Proc flags on the driver are combat start.
+  effect.player->register_on_combat_state_callback( [ buff ]( player_t* p, bool c ) {
+    if ( c )
+      buff->trigger();
+    else
+      buff->expire();
+  } );
+}
+
 // Weapons
 // 443384 driver
 // 443585 damage
@@ -5983,6 +6015,7 @@ void register_special_effects()
   register_special_effect( 469768, items::heart_of_roccor );
   register_special_effect( 467767, items::wayward_vrykuls_lantern );
   register_special_effect( 468035, items::cursed_pirate_skull );
+  register_special_effect( 468033, items::runecasters_stormbound_rune );
 
   // Weapons
   register_special_effect( 443384, items::fateweaved_needle );
