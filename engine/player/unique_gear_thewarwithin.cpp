@@ -4938,20 +4938,22 @@ void wayward_vrykuls_lantern( special_effect_t& effect )
 {
   if ( !effect.player->is_ptr() )
     return;
-  
+
   struct wayward_vrykuls_lantern_cb_t : public dbc_proc_callback_t
   {
     std::set<unsigned> proc_spell_id;
     buff_t* buff;
     double duration_multiplier;
     timespan_t last_activation_time;
+    timespan_t max_dur;
 
     wayward_vrykuls_lantern_cb_t( const special_effect_t& e )
       : dbc_proc_callback_t( e.player, e ),
         proc_spell_id(),
         buff( nullptr ),
         duration_multiplier( 0 ),
-        last_activation_time( timespan_t::zero() )
+        last_activation_time( timespan_t::zero() ),
+        max_dur( timespan_t::zero() )
     {
       for ( auto& s : e.player->dbc->spells_by_label( 690 ) )
         if ( s->is_class( e.player->type ) )
@@ -4963,6 +4965,7 @@ void wayward_vrykuls_lantern( special_effect_t& effect )
       // Odd formula, but, appears to be 0.222222~ seconds added to the buff duration per 1 second of time between
       // activations.
       duration_multiplier = buff->data().duration().total_seconds() / 36;
+      max_dur             = buff->data().duration() * 5;
     }
 
     void trigger( action_t* a, action_state_t* s ) override
@@ -4977,14 +4980,15 @@ void wayward_vrykuls_lantern( special_effect_t& effect )
       // duration.
       if ( last_activation_time == timespan_t::zero() )
       {
-        buff->trigger( buff->data().duration() * 5 );
+        buff->trigger( max_dur );
         last_activation_time = listener->sim->current_time();
         return;
       }
 
       // If there was a valid last activation time, calculate the duration based on the time since the last activation.
       timespan_t trigger_dur = std::max(
-          buff->buff_duration(), ( listener->sim->current_time() - last_activation_time ) * duration_multiplier );
+          buff->buff_duration(),
+          std::min( max_dur, ( listener->sim->current_time() - last_activation_time ) * duration_multiplier ) );
 
       // Only trigger the buff if the new duration would be greater than the current remaining duration.
       if ( buff->remains() < trigger_dur )
@@ -5012,6 +5016,7 @@ void cursed_pirate_skull( special_effect_t& effect )
 {
   if ( !effect.player->is_ptr() )
     return;
+
   auto damage_spell   = effect.trigger()->effectN( 1 ).trigger();
   auto damage         = create_proc_action<generic_proc_t>( "cursed_pirate_skull", effect, damage_spell );
   damage->base_dd_min = damage->base_dd_max = effect.driver()->effectN( 1 ).average( effect );
