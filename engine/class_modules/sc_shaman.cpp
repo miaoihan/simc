@@ -2751,7 +2751,7 @@ public:
     if ( affected_by_maelstrom_weapon && mw_affected_stacks < 5 )
     {
       if ( this->p()->main_hand_attack && this->p()->main_hand_attack->execute_event &&
-           ( this->p()->bugs || !this->background ) )
+           !this->background )
       {
         if ( this->sim->debug )
         {
