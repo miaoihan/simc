@@ -14003,7 +14003,7 @@ void shaman_t::init_action_list_enhancement()
     funnel->add_action( "feral_spirit" );
     funnel->add_action( "doom_winds" );
     funnel->add_action( "stormstrike,if=buff.converging_storms.stack=buff.converging_storms.max_stack" );
-    funnel->add_action( "lava_burst,if=(buff.molten_weapon.stack+buff.volcanic_strength.up>buff.crackling_surge.stack)&buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack" );
+    funnel->add_action( "lava_burst,if=(buff.molten_weapon.stack>buff.crackling_surge.stack)&buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack" );
     funnel->add_action( "lightning_bolt,if=buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack&(variable.expected_lb_funnel>variable.expected_cl_funnel)" );
     funnel->add_action( "chain_lightning,if=buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack" );
     funnel->add_action( "crash_lightning,if=buff.doom_winds.up|!buff.crash_lightning.up|(talent.alpha_wolf.enabled&feral_spirit.active&alpha_wolf_min_remains=0)|(talent.converging_storms.enabled&buff.converging_storms.stack<buff.converging_storms.max_stack)" );
@@ -14024,7 +14024,7 @@ void shaman_t::init_action_list_enhancement()
     funnel->add_action( "crash_lightning" );
     funnel->add_action( "fire_nova,if=active_dot.flame_shock>=2" );
     funnel->add_action( "elemental_blast,if=(!talent.elemental_spirits.enabled|(talent.elemental_spirits.enabled&(charges=max_charges|buff.feral_spirit.up)))&buff.maelstrom_weapon.stack>=5" );
-    funnel->add_action( "lava_burst,if=(buff.molten_weapon.stack+buff.volcanic_strength.up>buff.crackling_surge.stack)&buff.maelstrom_weapon.stack>=5" );
+    funnel->add_action( "lava_burst,if=(buff.molten_weapon.stack>buff.crackling_surge.stack)&buff.maelstrom_weapon.stack>=5" );
     funnel->add_action( "lightning_bolt,if=buff.maelstrom_weapon.stack>=5&(variable.expected_lb_funnel>variable.expected_cl_funnel)" );
     funnel->add_action( "chain_lightning,if=buff.maelstrom_weapon.stack>=5" );
     funnel->add_action( "flame_shock,if=!ticking" );
