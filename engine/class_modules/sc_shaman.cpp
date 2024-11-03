@@ -58,8 +58,6 @@ enum wolf_type_e
 enum class feral_spirit_cast : unsigned
 {
   NORMAL = 0U,
-  TIER28,
-  TIER31, // .. and Dragonflight Season 4
   ROLLING_THUNDER
 };
 
@@ -90,7 +88,6 @@ enum class spell_variant : unsigned
   LIQUID_MAGMA_TOTEM,
   SURGE_OF_POWER,
   ARC_DISCHARGE,
-  REACTIVITY,         // For 11.0.5 reactivity-based Sundering
   EARTHSURGE
 };
 
@@ -333,7 +330,6 @@ static std::string action_name( util::string_view name, spell_variant t )
     case spell_variant::LIQUID_MAGMA_TOTEM: return fmt::format( "{}_lmt", name );
     case spell_variant::SURGE_OF_POWER: return fmt::format( "{}_sop", name );
     case spell_variant::ARC_DISCHARGE: return fmt::format( "{}_ad", name );
-    case spell_variant::REACTIVITY: return fmt::format( "{}_re", name );
     case spell_variant::EARTHSURGE: return fmt::format( "{}_es", name );
     default: return std::string( name );
   }
@@ -351,7 +347,6 @@ static util::string_view exec_type_str( spell_variant t )
     case spell_variant::LIQUID_MAGMA_TOTEM: return "liquid_magma_totem";
     case spell_variant::SURGE_OF_POWER: return "surge_of_power";
     case spell_variant::ARC_DISCHARGE: return "arc_discharge";
-    case spell_variant::REACTIVITY: return "reactivity";
     case spell_variant::EARTHSURGE: return "earthsurge";
     default: return "normal";
   }
@@ -501,8 +496,6 @@ public:
 
     action_t* stormblast;
 
-    action_t* feral_spirit_t28;
-    action_t* feral_spirit_t31;
     action_t* feral_spirit_rt;
 
     /// Totemic Recall last used totem (action)
@@ -674,15 +667,6 @@ public:
     buff_t* spiritwalkers_grace;
     buff_t* tidal_waves;
 
-    //Tier 29
-    buff_t* t29_2pc_enh;
-    buff_t* t29_4pc_enh;
-
-    // Tier 30
-    buff_t* t30_2pc_enh;
-    buff_t* t30_4pc_enh_damage;
-    buff_t* t30_4pc_enh_cl;
-
     // PvP
     buff_t* thundercharge;
 
@@ -808,7 +792,6 @@ public:
     proc_t* stormflurry;
     proc_t* stormflurry_failed;
     proc_t* windfury_uw;
-    proc_t* t28_4pc_enh;
     proc_t* reset_swing_mw;
     proc_t* molten_thunder;
 
@@ -1118,8 +1101,6 @@ public:
     const spell_data_t* storm_elemental;
     const spell_data_t* flametongue_weapon;
     const spell_data_t* windfury_weapon;
-    const spell_data_t* t28_2pc_enh;
-    const spell_data_t* t28_4pc_enh;
     const spell_data_t* inundate;
     const spell_data_t* storm_swell;
     const spell_data_t* lightning_rod;
@@ -1784,11 +1765,8 @@ public:
   bool affected_by_ans_cast_time;
   bool affected_by_enh_mastery_da;
   bool affected_by_enh_mastery_ta;
-  bool affected_by_enh_t29_2pc;
   bool affected_by_lotfw_da;
   bool affected_by_lotfw_ta;
-  bool affected_by_enh_t30_4pc_da;
-  bool affected_by_enh_t30_4pc_ta;
 
   bool affected_by_stormkeeper_cast_time;
   bool affected_by_stormkeeper_damage;
@@ -1843,11 +1821,8 @@ public:
       affected_by_ans_cast_time( false ),
       affected_by_enh_mastery_da( false ),
       affected_by_enh_mastery_ta( false ),
-      affected_by_enh_t29_2pc( false ),
       affected_by_lotfw_da( false ),
       affected_by_lotfw_ta( false ),
-      affected_by_enh_t30_4pc_da( false ),
-      affected_by_enh_t30_4pc_ta( false ),
       affected_by_stormkeeper_cast_time( false ),
       affected_by_stormkeeper_damage( false ),
       affected_by_arc_discharge( false ),
@@ -1924,15 +1899,6 @@ public:
     affected_by_enh_mastery_ta = ab::data().affected_by( player->mastery.enhanced_elements->effectN( 5 ) );
     affected_by_lotfw_da = ab::data().affected_by( player->find_spell( 384451 )->effectN( 1 ) );
     affected_by_lotfw_ta = ab::data().affected_by( player->find_spell( 384451 )->effectN( 2 ) );
-
-    //T29 Enhance 2pc
-    affected_by_enh_t29_2pc = ab::data().affected_by( player->find_spell( 394677 )->effectN( 1 ) );
-
-    if ( p()->sets->has_set_bonus( SHAMAN_ENHANCEMENT, T30, B4 ) )
-    {
-      affected_by_enh_t30_4pc_da = ab::data().affected_by( player->find_spell( 409833 )->effectN( 1 ) );
-      affected_by_enh_t30_4pc_ta = ab::data().affected_by( player->find_spell( 409833 )->effectN( 2 ) );
-    }
 
     affected_by_arc_discharge = ab::data().affected_by( player->buff.arc_discharge->data().effectN( 1 ) );
 
@@ -2101,16 +2067,6 @@ public:
       }
     }
 
-    if ( affected_by_enh_t29_2pc && p()->buff.t29_2pc_enh->check() )
-    {
-      m *= 1.0 + p()->buff.t29_2pc_enh->value();
-    }
-
-    if ( affected_by_enh_t30_4pc_da && p()->buff.t30_4pc_enh_damage->check() )
-    {
-      m *= 1.0 + p()->buff.t30_4pc_enh_damage->value();
-    }
-
     if ( affected_by_arc_discharge && p()->buff.arc_discharge->check() )
     {
       m *= 1.0 + p()->buff.arc_discharge->value();
@@ -2209,11 +2165,6 @@ public:
       {
         m *= 1.0 + p()->buff.earthen_weapon->value();
       }
-    }
-
-    if ( affected_by_enh_t30_4pc_ta && p()->buff.t30_4pc_enh_damage->check() )
-    {
-      m *= 1.0 + p()->buff.t30_4pc_enh_damage->value();
     }
 
     if ( affected_by_amplification_core_ta && p()->buff.amplification_core->check() )
@@ -2404,14 +2355,6 @@ public:
     if ( ( affected_by_ans_cast_time || affected_by_ans_cost ) && !(affected_by_stormkeeper_cast_time && p()->buff.stormkeeper->up()) && !ab::background)
     {
       p()->buff.ancestral_swiftness->decrement();
-    }
-
-    if ( exec_type != spell_variant::PRIMORDIAL_WAVE && affected_by_enh_t29_2pc &&
-         this->p()->buff.t29_2pc_enh->up() )
-    {
-      this->p()->generate_maelstrom_weapon( this->execute_state );
-      //this->p()->buff.maelstrom_weapon->increment( 1 );
-      this->p()->buff.t29_2pc_enh->expire();
     }
 
     if ( affected_by_storm_frenzy && !this->background && exec_type == spell_variant::NORMAL &&
@@ -3390,8 +3333,6 @@ struct spirit_bomb_t : public pet_melee_attack_t<T>
       m *= 1.0 + this->o()->buff.earthen_weapon->value();
     }
 
-    m *= 1.0 + this->o()->buff.t30_4pc_enh_damage->value();
-
     return m;
   }
 
@@ -3473,19 +3414,6 @@ struct wolf_base_auto_attack_t : public pet_melee_attack_t<T>
 
     this->base_execute_time = this->weapon->swing_time;
     this->school            = SCHOOL_PHYSICAL;
-  }
-
-  void execute() override
-  {
-    pet_melee_attack_t<T>::execute();
-
-    if ( this->p()->o()->sets->has_set_bonus( SHAMAN_ENHANCEMENT, T28, B4 ) &&
-         this->rng().roll( this->p()->o()->spell.t28_4pc_enh->effectN( 1 ).percent() ) )
-    {
-      this->p()->o()->buff.stormbringer->trigger();
-      this->p()->o()->cooldown.strike->reset( true );
-      this->p()->o()->proc.t28_4pc_enh->occur();
-    }
   }
 };
 
@@ -5355,11 +5283,6 @@ struct stormstrike_base_t : public shaman_attack_t
       p()->trigger_elemental_assault( execute_state );
     }
 
-    if ( p()->sets->has_set_bonus( SHAMAN_ENHANCEMENT, T29, B2 ) )
-    {
-      p()->buff.t29_2pc_enh->trigger();
-    }
-
     p()->trigger_awakening_storms( execute_state );
 
     if ( p()->cooldown.stormblast->up() )
@@ -5548,33 +5471,10 @@ struct sundering_t : public shaman_attack_t
     may_proc_stormbringer = may_proc_flametongue = true;
   }
 
-  double action_da_multiplier() const override
-  {
-    double m = shaman_attack_t::action_da_multiplier();
-
-    // In-Game, Sundering damage double dips on T30 4PC damage buff
-    if ( player->bugs )
-    {
-      m *= 1.0 + p()->buff.t30_4pc_enh_damage->value();
-    }
-
-    if ( exec_type == spell_variant::REACTIVITY )
-    {
-      m *= p()->talent.reactivity->effectN( 1 ).percent();
-    }
-
-    return m;
-  }
-
   void execute() override
   {
-    // In-game, Sundering that procs T30 4PC already benefits from the T30 damage buff
-    p()->buff.t30_4pc_enh_damage->trigger();
-    p()->buff.t30_4pc_enh_cl->trigger( p()->buff.t30_4pc_enh_cl->data().max_stacks() );
-
     shaman_attack_t::execute();
 
-    p()->buff.t30_2pc_enh->trigger();
     p()->trigger_earthsurge( execute_state );
   }
 };
@@ -6133,15 +6033,6 @@ struct chain_lightning_t : public chained_base_t
     }
   }
 
-  double action_da_multiplier() const override
-  {
-    double m = shaman_spell_t::action_da_multiplier();
-
-    m *= 1.0 + p()->buff.t30_4pc_enh_cl->value();
-
-    return m;
-  }
-
   size_t available_targets( std::vector<player_t*>& tl ) const override
   {
     tl.clear();
@@ -6273,19 +6164,6 @@ struct chain_lightning_t : public chained_base_t
     if ( p()->talent.thorims_invocation.ok() && exec_type == spell_variant::NORMAL )
     {
       p()->action.ti_trigger = p()->action.chain_lightning_ti;
-    }
-
-    if ( p()->buff.t30_4pc_enh_cl->check() )
-    {
-      auto refunded = as<int>(
-        std::ceil( mw_consumed_stacks * p()->buff.t30_4pc_enh_cl->data().effectN( 3 ).percent() ) );
-
-      p()->generate_maelstrom_weapon( execute_state, refunded );
-      // In-game, 0 stack Chain Lightning casts don't consume T30 4PC buff
-      if ( !p()->bugs || refunded > 0 )
-      {
-        p()->buff.t30_4pc_enh_cl->decrement();
-      }
     }
 
     if ( exec_type == spell_variant::NORMAL &&
@@ -6671,19 +6549,6 @@ struct fire_nova_explosion_t : public shaman_spell_t
     shaman_spell_t::init();
 
     may_proc_flowing_spirits = false;
-  }
-
-  double action_da_multiplier() const override
-  {
-    double m = shaman_spell_t::action_da_multiplier();
-
-    // In-game, Fire Nova damage double-dips on T30 4PC buff
-    if ( player->bugs )
-    {
-      m *= 1.0 + p()->buff.t30_4pc_enh_damage->value();
-    }
-
-    return m;
   }
 };
 
@@ -7601,21 +7466,14 @@ struct feral_spirit_spell_t : public shaman_spell_t
         n_summons = as<unsigned>( player->find_spell( 228562 )->effectN( 1 ).base_value() ) +
           as<unsigned>( player->sets->set( SHAMAN_ENHANCEMENT, TWW1, B4 )->effectN( 1 ).base_value() );
         break;
-      // TODO: Figure out the T31 driver
       case feral_spirit_cast::ROLLING_THUNDER:
-      case feral_spirit_cast::TIER31:
         duration = player->find_spell( 228562 )->duration();
         n_summons = 1U;
         background = true;
         cooldown = player->get_cooldown( "feral_spirit_proc" );
         cooldown->duration = 0_ms;
         break;
-      case feral_spirit_cast::TIER28:
-        duration = timespan_t::from_seconds( player->spell.t28_2pc_enh->effectN( 2 ).base_value() );
-        n_summons = 1U;
-        background = true;
-        cooldown = player->get_cooldown( "feral_spirit_proc" );
-        cooldown->duration = 0_ms;
+      default:
         break;
     }
 
@@ -7630,14 +7488,7 @@ struct feral_spirit_spell_t : public shaman_spell_t
   {
     shaman_spell_t::execute();
 
-    // Evaluate before n gets messed with
-    if ( player->sets->has_set_bonus( SHAMAN_ENHANCEMENT, T31, B4 ) )
-    {
-      p()->cooldown.primordial_wave->adjust( -1.0 *
-        player->sets->set( SHAMAN_ENHANCEMENT, T31, B4 )->effectN( 1 ).time_value() * n_summons );
-    }
-
-    if ( type == feral_spirit_cast::TIER31 || type == feral_spirit_cast::ROLLING_THUNDER )
+    if ( type == feral_spirit_cast::ROLLING_THUNDER )
     {
       p()->pet.lightning_wolves.spawn( duration );
       p()->buff.crackling_surge->trigger( n_summons, buff_t::DEFAULT_VALUE(), -1, duration );
@@ -7683,13 +7534,7 @@ struct feral_spirit_spell_t : public shaman_spell_t
       }
     }
 
-    // Enhancement T28 or T31 bonuses will only override the buff from manually cast spell
-    // if the new duration exceeds the remaining duration of the buff.
-    if ( type == feral_spirit_cast::NORMAL ||
-      duration > p()->buff.feral_spirit_maelstrom->remains() )
-    {
-      p()->buff.feral_spirit_maelstrom->trigger( 1, duration );
-    }
+    p()->buff.feral_spirit_maelstrom->trigger( 1, duration );
   }
 
   bool ready() override
@@ -10288,12 +10133,6 @@ struct primordial_wave_t : public shaman_spell_t
                                       as<int>( p()->talent.primal_maelstrom->effectN( 1 ).base_value() ) );
     }
 
-    if ( p()->sets->has_set_bonus( SHAMAN_ENHANCEMENT, T31, B2 ) )
-    {
-      p()->action.feral_spirit_t31->set_target( execute_state->target );
-      p()->action.feral_spirit_t31->execute();
-    }
-
     if ( p()->spec.lava_surge->ok() )
     {
       p()->buff.lava_surge->trigger();
@@ -11105,16 +10944,6 @@ void shaman_t::create_actions()
     action.stormflurry_ws = new windstrike_t( this, "", strike_variant::STORMFLURRY );
   }
 
-  if ( sets->has_set_bonus( SHAMAN_ENHANCEMENT, T28, B2 ) )
-  {
-    action.feral_spirit_t28 = new feral_spirit_spell_t( this, "", feral_spirit_cast::TIER28 );
-  }
-
-  if ( sets->has_set_bonus( SHAMAN_ENHANCEMENT, T31, B2 ) )
-  {
-    action.feral_spirit_t31 = new feral_spirit_spell_t( this, "", feral_spirit_cast::TIER31 );
-  }
-
   if ( talent.rolling_thunder.ok() && specialization() == SHAMAN_ENHANCEMENT )
   {
     action.feral_spirit_rt = new feral_spirit_spell_t( this, "", feral_spirit_cast::ROLLING_THUNDER );
@@ -11765,9 +11594,6 @@ void shaman_t::init_spells()
   spell.hot_hand            = find_spell( 201900 );
   spell.elemental_weapons   = find_spell( 408390 );
 
-  spell.t28_2pc_enh        = sets->set( SHAMAN_ENHANCEMENT, T28, B2 );
-  spell.t28_4pc_enh        = sets->set( SHAMAN_ENHANCEMENT, T28, B4 );
-
   // Misc spell-related init
   max_active_flame_shock   = as<unsigned>( find_class_spell( "Flame Shock" )->max_targets() );
 
@@ -12359,24 +12185,6 @@ void shaman_t::consume_maelstrom_weapon( const action_state_t* state, int stacks
     }
 
     trigger_legacy_of_the_frost_witch( state, stacks );
-
-    if ( sets->has_set_bonus( SHAMAN_ENHANCEMENT, T28, B2 ) &&
-         rng().roll( spell.t28_2pc_enh->effectN( 1 ).percent() * stacks ) )
-    {
-      if ( sim->debug )
-      {
-        sim->out_debug.print( "{} Enhancement T28 2PC", name() );
-      }
-
-      action.feral_spirit_t28->set_target( state->target );
-      action.feral_spirit_t28->execute();
-    }
-
-    if ( sets->has_set_bonus( SHAMAN_ENHANCEMENT, T29, B4 ) )
-    {
-      //4pc refreshes duration and adds stacks
-      buff.t29_4pc_enh->trigger( stacks );
-    }
 
     trigger_tempest( stacks );
 
@@ -13132,14 +12940,7 @@ void shaman_t::trigger_flowing_spirits( const action_state_t* state, bool windfu
 
   std::get<1>( flowing_spirits_procs[ active_flowing_spirits_proc * n_summons ] ).add( 1.0 );
 
-  // DF4/T31 gives +1 summon per Flowing Spirit proc
   auto duration = spell.flowing_spirits_feral_spirit->duration();
-
-  if ( sets->has_set_bonus( SHAMAN_ENHANCEMENT, T31, B4 ) )
-  {
-    cooldown.primordial_wave->adjust(
-      -1.0 * sets->set( SHAMAN_ENHANCEMENT, T31, B4 )->effectN( 1 ).time_value() * n_summons );
-  }
 
   for ( unsigned i = 0; i < n_summons; ++i )
   {
@@ -13456,26 +13257,6 @@ void shaman_t::create_buffs()
       talent.witch_doctors_ancestry )
     ->set_default_value_from_effect_type( A_ADD_FLAT_MODIFIER, P_PROC_CHANCE );
 
-  buff.t29_4pc_enh = make_buff<buff_t>( this, "fury_of_the_storm", find_spell( 396006 ) )  //, find_spell( 393693 ) )
-                         ->set_default_value_from_effect_type( A_HASTE_ALL )
-                         ->set_pct_buff_type( STAT_PCT_BUFF_HASTE );
-
-  buff.t29_2pc_enh = make_buff<buff_t>( this, "maelstrom_of_elements", find_spell( 394677 ) )
-                   ->set_default_value_from_effect( 1 )
-                   ->set_max_stack( 1 );
-
-  buff.t30_2pc_enh = make_buff<buff_t>( this, "earthen_might", find_spell( 409689 ) )
-    ->set_default_value_from_effect( 1 )
-    ->set_pct_buff_type( STAT_PCT_BUFF_MASTERY )
-    ->set_trigger_spell( sets->set( SHAMAN_ENHANCEMENT, T30, B2 ) );
-
-  buff.t30_4pc_enh_damage = make_buff<buff_t>( this, "volcanic_strength", find_spell( 409833 ) )
-    ->set_default_value_from_effect( 1 )
-    ->set_trigger_spell( sets->set( SHAMAN_ENHANCEMENT, T30, B4 ) );
-  buff.t30_4pc_enh_cl = make_buff<buff_t>( this, "crackling_thunder", find_spell( 409834 ) )
-    ->set_default_value_from_effect( 2 )
-    ->set_trigger_spell( sets->set( SHAMAN_ENHANCEMENT, T30, B4 ) );
-
   // Buffs stormstrike and lava lash after using crash lightning
   buff.crash_lightning = make_buff( this, "crash_lightning", find_spell( 187878 ) );
   // Buffs crash lightning with extra damage, after using chain lightning
@@ -13597,8 +13378,6 @@ void shaman_t::init_procs()
   proc.windfury_uw            = get_proc( "Windfury: Unruly Winds" );
   proc.stormflurry            = get_proc( "Stormflurry" );
   proc.stormflurry_failed     = get_proc( "Stormflurry (failed)" );
-
-  proc.t28_4pc_enh       = get_proc( "Set Bonus: Tier28 4PC Enhancement" );
 
   proc.reset_swing_mw            = get_proc( "Maelstrom Weapon Swing Reset" );
 
