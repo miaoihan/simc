@@ -783,7 +783,7 @@ public:
     double proc_chance_ret_aura_sera      = 0.10;
     int min_dg_heal_targets               = 1;
     int max_dg_heal_targets               = 5;
-    bool fake_solidarity                  = false;
+    bool fake_solidarity                  = true;
   } options;
   player_t* beacon_target;
 
