@@ -12707,7 +12707,7 @@ void shaman_t::trigger_primordial_wave_damage( shaman_spell_t* spell )
     return;
   }
 
-  if ( spell->exec_type != spell_variant::NORMAL || !buff.primordial_wave->up() )
+  if ( !buff.primordial_wave->up() )
   {
     return;
   }
@@ -12716,10 +12716,21 @@ void shaman_t::trigger_primordial_wave_damage( shaman_spell_t* spell )
 
   if ( specialization() == SHAMAN_ENHANCEMENT )
   {
+    if ( spell->exec_type != spell_variant::NORMAL &&
+         spell->exec_type != spell_variant::THORIMS_INVOCATION )
+    {
+      return;
+    }
+
     damage_spell = debug_cast<shaman_spell_t*>( action.lightning_bolt_pw );
   }
   else if ( specialization() == SHAMAN_ELEMENTAL )
   {
+    if ( spell->exec_type != spell_variant::NORMAL )
+    {
+      return;
+    }
+
     damage_spell = debug_cast<shaman_spell_t*>( action.lava_burst_pw );
   }
 
