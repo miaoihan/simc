@@ -153,7 +153,7 @@ actions.funnel+=/elemental_blast,if=(!talent.elemental_spirits.enabled|(talent.e
 actions.funnel+=/feral_spirit
 actions.funnel+=/doom_winds
 actions.funnel+=/stormstrike,if=buff.converging_storms.stack=buff.converging_storms.max_stack
-actions.funnel+=/lava_burst,if=(buff.molten_weapon.stack+buff.volcanic_strength.up>buff.crackling_surge.stack)&buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack
+actions.funnel+=/lava_burst,if=(buff.molten_weapon.stack>buff.crackling_surge.stack)&buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack
 actions.funnel+=/lightning_bolt,if=buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack&(variable.expected_lb_funnel>variable.expected_cl_funnel)
 actions.funnel+=/chain_lightning,if=buff.maelstrom_weapon.stack=buff.maelstrom_weapon.max_stack
 actions.funnel+=/crash_lightning,if=buff.doom_winds.up|!buff.crash_lightning.up|(talent.alpha_wolf.enabled&feral_spirit.active&alpha_wolf_min_remains=0)|(talent.converging_storms.enabled&buff.converging_storms.stack<buff.converging_storms.max_stack)
@@ -174,7 +174,7 @@ actions.funnel+=/lava_lash
 actions.funnel+=/crash_lightning
 actions.funnel+=/fire_nova,if=active_dot.flame_shock>=2
 actions.funnel+=/elemental_blast,if=(!talent.elemental_spirits.enabled|(talent.elemental_spirits.enabled&(charges=max_charges|buff.feral_spirit.up)))&buff.maelstrom_weapon.stack>=5
-actions.funnel+=/lava_burst,if=(buff.molten_weapon.stack+buff.volcanic_strength.up>buff.crackling_surge.stack)&buff.maelstrom_weapon.stack>=5
+actions.funnel+=/lava_burst,if=(buff.molten_weapon.stack>buff.crackling_surge.stack)&buff.maelstrom_weapon.stack>=5
 actions.funnel+=/lightning_bolt,if=buff.maelstrom_weapon.stack>=5&(variable.expected_lb_funnel>variable.expected_cl_funnel)
 actions.funnel+=/chain_lightning,if=buff.maelstrom_weapon.stack>=5
 actions.funnel+=/flame_shock,if=!ticking
