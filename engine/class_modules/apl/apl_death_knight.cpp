@@ -429,6 +429,7 @@ void unholy( player_t* p )
 
   aoe->add_action( "festering_strike,if=buff.festering_scythe.react", "AOE" );
   aoe->add_action( "wound_spender,target_if=max:debuff.festering_wound.stack,if=debuff.festering_wound.stack>=1&buff.death_and_decay.up&talent.bursting_sores&cooldown.apocalypse.remains>variable.apoc_timing" );
+  aoe->add_action( "death_coil,if=!variable.pooling_runic_power&active_enemies<variable.epidemic_targets" );
   aoe->add_action( "epidemic,if=!variable.pooling_runic_power" );
   aoe->add_action( "wound_spender,target_if=debuff.chains_of_ice_trollbane_slow.up" );
   aoe->add_action( "festering_strike,target_if=max:debuff.festering_wound.stack,if=cooldown.apocalypse.remains<variable.apoc_timing|buff.festering_scythe.react" );
@@ -436,9 +437,11 @@ void unholy( player_t* p )
   aoe->add_action( "wound_spender,target_if=max:debuff.festering_wound.stack,if=debuff.festering_wound.stack>=1&cooldown.apocalypse.remains>gcd|buff.vampiric_strike.react&dot.virulent_plague.ticking" );
 
   aoe_burst->add_action( "festering_strike,if=buff.festering_scythe.react", "AoE Burst" );
+  aoe_burst->add_action( "death_coil,if=!buff.vampiric_strike.react&active_enemies<variable.epidemic_targets&(!talent.bursting_sores|talent.bursting_sores&death_knight.fwounded_targets<active_enemies&death_knight.fwounded_targets<active_enemies*0.4&buff.sudden_doom.react|buff.sudden_doom.react&(talent.doomed_bidding&talent.menacing_magus|talent.rotten_touch|debuff.death_rot.remains<gcd))" );
   aoe_burst->add_action( "epidemic,if=!buff.vampiric_strike.react&(!talent.bursting_sores|talent.bursting_sores&death_knight.fwounded_targets<active_enemies&death_knight.fwounded_targets<active_enemies*0.4&buff.sudden_doom.react|buff.sudden_doom.react&(buff.a_feast_of_souls.up|debuff.death_rot.remains<gcd|debuff.death_rot.stack<10))" );
   aoe_burst->add_action( "wound_spender,target_if=debuff.chains_of_ice_trollbane_slow.up" );
   aoe_burst->add_action( "wound_spender,target_if=max:debuff.festering_wound.stack,if=debuff.festering_wound.stack>=1|buff.vampiric_strike.react" );
+  aoe_burst->add_action( "death_coil,if=active_enemies<variable.epidemic_targets" );
   aoe_burst->add_action( "epidemic" );
   aoe_burst->add_action( "festering_strike,target_if=min:debuff.festering_wound.stack,if=debuff.festering_wound.stack<=2" );
   aoe_burst->add_action( "wound_spender,target_if=max:debuff.festering_wound.stack" );
@@ -448,8 +451,10 @@ void unholy( player_t* p )
   aoe_setup->add_action( "wound_spender,target_if=debuff.chains_of_ice_trollbane_slow.up" );
   aoe_setup->add_action( "festering_strike,target_if=min:debuff.festering_wound.stack,if=!talent.vile_contagion" );
   aoe_setup->add_action( "festering_strike,target_if=max:debuff.festering_wound.stack,if=cooldown.vile_contagion.remains<5|death_knight.fwounded_targets=active_enemies&debuff.festering_wound.stack<=4" );
+  aoe_setup->add_action( "death_coil,if=!variable.pooling_runic_power&buff.sudden_doom.react&active_enemies<variable.epidemic_targets" );
   aoe_setup->add_action( "epidemic,if=!variable.pooling_runic_power&buff.sudden_doom.react" );
   aoe_setup->add_action( "festering_strike,target_if=min:debuff.festering_wound.stack,if=cooldown.apocalypse.remains<gcd&debuff.festering_wound.stack=0|death_knight.fwounded_targets<active_enemies" );
+  aoe_setup->add_action( "death_coil,if=!variable.pooling_runic_power&active_enemies<variable.epidemic_targets" );
   aoe_setup->add_action( "epidemic,if=!variable.pooling_runic_power" );
 
   cds->add_action( "dark_transformation,if=variable.st_planning&(cooldown.apocalypse.remains<8|!talent.apocalypse|active_enemies>=1)|fight_remains<20", "Non-San'layn Cooldowns" );
@@ -548,6 +553,7 @@ void unholy( player_t* p )
   variables->add_action( "variable,name=pop_wounds,op=setif,value=1,value_else=0,condition=(cooldown.apocalypse.remains>variable.apoc_timing|!talent.apocalypse)&(debuff.festering_wound.stack>=1&cooldown.unholy_assault.remains<20&talent.unholy_assault&variable.st_planning|debuff.rotten_touch.up&debuff.festering_wound.stack>=1|debuff.festering_wound.stack>=4-pet.abomination.active)|fight_remains<5&debuff.festering_wound.stack>=1" );
   variables->add_action( "variable,name=pooling_runic_power,op=setif,value=1,value_else=0,condition=talent.vile_contagion&cooldown.vile_contagion.remains<5&runic_power<30" );
   variables->add_action( "variable,name=spend_rp,op=setif,value=1,value_else=0,condition=(!talent.rotten_touch|talent.rotten_touch&!debuff.rotten_touch.up|runic_power.deficit<20)&((talent.improved_death_coil&(active_enemies=2|talent.coil_of_devastation)|rune<3|pet.gargoyle.active|buff.sudden_doom.react|!variable.pop_wounds&debuff.festering_wound.stack>=4))" );
+  variables->add_action( "variable,name=epidemic_targets,value=3+talent.improved_death_coil+(talent.frenzied_bloodthirst&buff.essence_of_the_blood_queen.stack>5)+(talent.hungering_thirst&talent.harbinger_of_doom&buff.sudden_doom.up)" );
 }
 //unholy_apl_end
 
