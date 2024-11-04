@@ -5969,6 +5969,9 @@ singing_citrine_type_e get_singing_citrine_type( unsigned driver )
 
 action_t* find_citrine_action( player_t* player, unsigned driver )
 {
+  if ( !player->is_ptr() )
+    return nullptr;
+
   switch ( driver )
   {
     // damage stones
@@ -6014,6 +6017,9 @@ action_t* find_citrine_action( player_t* player, unsigned driver )
 
 buff_t* find_citrine_proc_buff( player_t* player, unsigned driver )
 {
+  if ( !player->is_ptr() )
+    return nullptr;
+
   if ( get_singing_citrine_type( driver ) != CITRINE_TYPE_STAT )
     return nullptr;
 
@@ -6102,6 +6108,9 @@ struct squall_sailors_citrine_t : public damage_citrine_t
 
 action_t* create_citrine_action( const special_effect_t& effect, singing_citrines_drivers_e driver )
 {
+  if ( !effect.player->is_ptr() )
+    return nullptr;
+
   action_t* action = find_citrine_action( effect.player, driver );
   if ( action )
   {
@@ -6187,6 +6196,9 @@ struct windsingers_runed_citrine_proc_buff_t : buff_t
 
 buff_t* create_citrine_proc_buff( const special_effect_t& effect, singing_citrines_drivers_e driver )
 {
+  if ( !effect.player->is_ptr() )
+    return nullptr;
+
   if ( get_singing_citrine_type( driver ) != CITRINE_TYPE_STAT )
     return nullptr;
 
@@ -6239,6 +6251,9 @@ buff_t* create_citrine_proc_buff( const special_effect_t& effect, singing_citrin
  */
 void thunderlords_crackling_citrine( special_effect_t& effect )
 {
+  if ( !effect.player->is_ptr() )
+    return;
+
   effect.execute_action = create_citrine_action( effect, THUNDERLORDS_CRACKLING_CITRINE );
 
   new dbc_proc_callback_t( effect.player, effect );
@@ -6251,6 +6266,9 @@ void thunderlords_crackling_citrine( special_effect_t& effect )
  */
 void squall_sailors_citrine( special_effect_t& effect )
 {
+  if ( !effect.player->is_ptr() )
+    return;
+
   effect.execute_action = create_citrine_action( effect, SQUALL_SAILORS_CITRINE );
 
   new dbc_proc_callback_t( effect.player, effect );
@@ -6263,6 +6281,9 @@ void squall_sailors_citrine( special_effect_t& effect )
  */
 void undersea_overseers_citrine( special_effect_t& effect )
 {
+  if ( !effect.player->is_ptr() )
+    return;
+
   effect.execute_action = create_citrine_action( effect, UNDERSEA_OVERSEERS_CITRINE );
 
   new dbc_proc_callback_t( effect.player, effect );
@@ -6274,23 +6295,25 @@ void undersea_overseers_citrine( special_effect_t& effect )
  * id=465963 Proc Buff
  */
 void windsingers_runed_citrine( special_effect_t& effect )
-{        
+{
+  if ( !effect.player->is_ptr() )
+    return;
+
   auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
   auto stat_value   = cyrce_driver->effectN( 2 ).average( effect.item ) * effect.driver()->effectN( 2 ).percent() /
                     cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
-  
 
   auto haste_buff = create_buff<stat_buff_t>( effect.player, "windsingers_runed_citrine_haste", effect.driver() )
-          ->add_stat_from_effect( 1, stat_value );
+                        ->add_stat_from_effect( 1, stat_value );
 
   auto crit_buff = create_buff<stat_buff_t>( effect.player, "windsingers_runed_citrine_crit", effect.driver() )
-          ->add_stat_from_effect( 3, stat_value );
+                       ->add_stat_from_effect( 3, stat_value );
 
   auto vers_buff = create_buff<stat_buff_t>( effect.player, "windsingers_runed_citrine_vers", effect.driver() )
-          ->add_stat_from_effect( 4, stat_value );
+                       ->add_stat_from_effect( 4, stat_value );
 
   auto mastery_buff = create_buff<stat_buff_t>( effect.player, "windsingers_runed_citrine_mastery", effect.driver() )
-          ->add_stat_from_effect( 5, stat_value );
+                          ->add_stat_from_effect( 5, stat_value );
 
   static constexpr std::array<stat_e, 4> ratings = { STAT_VERSATILITY_RATING, STAT_MASTERY_RATING, STAT_HASTE_RATING,
                                                      STAT_CRIT_RATING };
@@ -6322,6 +6345,9 @@ void windsingers_runed_citrine( special_effect_t& effect )
  */
 void fathomdwellers_runed_citrine( special_effect_t& effect )
 {
+  if ( !effect.player->is_ptr() )
+    return;
+
   auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
   auto stat_value   = cyrce_driver->effectN( 2 ).average( effect.item ) * effect.driver()->effectN( 2 ).percent() /
                     cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
@@ -6339,6 +6365,9 @@ void fathomdwellers_runed_citrine( special_effect_t& effect )
  */
 void stormbringers_runed_citrine( special_effect_t& effect )
 {
+  if ( !effect.player->is_ptr() )
+    return;
+
   auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
   auto stat_value   = cyrce_driver->effectN( 2 ).average( effect.item ) * effect.driver()->effectN( 2 ).percent() /
                     cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
