@@ -7627,7 +7627,8 @@ struct chill_streak_damage_t final : public death_knight_spell_t
       return;
     }
 
-    if ( p()->talent.frost.enduring_chill.ok() && rng().roll( enduring_chill_chance ) )
+    if ( p()->talent.frost.enduring_chill.ok() && rng().roll( enduring_chill_chance ) &&
+           p()->sim->target_non_sleeping_list.size() != 1 )
     {
       current--;
       p()->procs.enduring_chill->occur();
