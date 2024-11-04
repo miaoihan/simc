@@ -6232,7 +6232,7 @@ buff_t* create_citrine_proc_buff( const special_effect_t& effect, singing_citrin
   return nullptr;
 }
 
-/**Thunderlords Crackling Citrine
+/** Thunderlords Crackling Citrine
  * id=462342 Ring Driver
  * id=462540 Driver
  * id=462951 Damage
@@ -6244,7 +6244,7 @@ void thunderlords_crackling_citrine( special_effect_t& effect )
   new dbc_proc_callback_t( effect.player, effect );
 }
 
-/**Thunderlords Crackling Citrine
+/** Squall SailorsCitrine
  * id=462342 Ring Driver
  * id=462539 Driver
  * id=462952 Damage
@@ -6256,7 +6256,7 @@ void squall_sailors_citrine( special_effect_t& effect )
   new dbc_proc_callback_t( effect.player, effect );
 }
 
-/**Thunderlords Crackling Citrine
+/** Undersea Overseers Citrine
  * id=462342 Ring Driver
  * id=462538 Driver
  * id=462953 Damage
@@ -6268,6 +6268,11 @@ void undersea_overseers_citrine( special_effect_t& effect )
   new dbc_proc_callback_t( effect.player, effect );
 }
 
+/** Windsingers Runed Citrine
+ * id=462342 Ring Driver
+ * id=462534 Driver
+ * id=465963 Proc Buff
+ */
 void windsingers_runed_citrine( special_effect_t& effect )
 {        
   auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
