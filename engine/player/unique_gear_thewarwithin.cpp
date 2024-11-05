@@ -6045,13 +6045,16 @@ template <typename BASE>
 struct citrine_base_t : public BASE
 {
   bool has_fathomdewellers;
+  const spell_data_t* cyrce_driver;
 
   template <typename... ARGS>
   citrine_base_t( const special_effect_t& effect, ARGS&&... args  )
     : BASE( effect, std::forward<ARGS>( args )... ),
-      has_fathomdewellers( find_special_effect( effect.player, FATHOMDWELLERS_RUNED_CITRINE ) )
+      has_fathomdewellers( find_special_effect( effect.player, FATHOMDWELLERS_RUNED_CITRINE ) ),
+      cyrce_driver( effect.player->find_spell( CYRCES_CIRCLET ) )
   {
     BASE::base_multiplier *= role_mult( effect );
+    BASE::base_dd_min = BASE::base_dd_max = cyrce_driver->effectN( 1 ).average( effect );
   }
 
   double action_multiplier() const override
@@ -6078,8 +6081,7 @@ struct thunderlords_crackling_citrine_t : public damage_citrine_t
     : damage_citrine_t( e, "thunderlords_crackling_citrine", 462951 )
   {
     auto driver = e.player->find_spell( THUNDERLORDS_CRACKLING_CITRINE );
-    auto cyrce_driver = e.player->find_spell( CYRCES_CIRCLET );
-    base_dd_min = base_dd_max = cyrce_driver->effectN( 1 ).average( e.item ) * driver->effectN( 2 ).percent();
+    base_multiplier *= driver->effectN( 2 ).percent();
   }
 };
 
@@ -6089,8 +6091,7 @@ struct undersea_overseers_citrine_t : public damage_citrine_t
     : damage_citrine_t( e, "undersea_overseers_citrine", 462953 )
   {
     auto driver       = e.player->find_spell( UNDERSEA_OVERSEERS_CITRINE );
-    auto cyrce_driver = e.player->find_spell( CYRCES_CIRCLET );
-    base_dd_min = base_dd_max = cyrce_driver->effectN( 1 ).average( e.item ) * driver->effectN( 2 ).percent();
+    base_multiplier *= driver->effectN( 2 ).percent();
   }
 };
 
@@ -6100,8 +6101,7 @@ struct squall_sailors_citrine_t : public damage_citrine_t
     : damage_citrine_t( e, "squall_sailors_citrine", 462952 )
   {
     auto driver       = e.player->find_spell( SQUALL_SAILORS_CITRINE );
-    auto cyrce_driver = e.player->find_spell( CYRCES_CIRCLET );
-    base_dd_min = base_dd_max = cyrce_driver->effectN( 1 ).average( e.item ) * driver->effectN( 2 ).percent();
+    base_multiplier *= driver->effectN( 2 ).percent();
   }
 };
 
@@ -6359,41 +6359,15 @@ void windsingers_runed_citrine( special_effect_t& effect )
     return;
 
   auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
-  auto stat_value   = cyrce_driver->effectN( 2 ).average( effect.item ) * effect.driver()->effectN( 2 ).percent() /
+  auto stat_value   = cyrce_driver->effectN( 2 ).average( effect ) * effect.driver()->effectN( 2 ).percent() /
                     cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
 
-  auto haste_buff = create_buff<stat_buff_t>( effect.player, "windsingers_runed_citrine_haste", effect.driver() )
-                        ->add_stat_from_effect( 1, stat_value );
+  std::unordered_map<stat_e, buff_t*> buffs;
 
-  auto crit_buff = create_buff<stat_buff_t>( effect.player, "windsingers_runed_citrine_crit", effect.driver() )
-                       ->add_stat_from_effect( 3, stat_value );
+  create_all_stat_buffs( effect, effect.driver(), stat_value, [ &buffs ]( stat_e s, buff_t* b ) { buffs[ s ] = b; } );
 
-  auto vers_buff = create_buff<stat_buff_t>( effect.player, "windsingers_runed_citrine_vers", effect.driver() )
-                       ->add_stat_from_effect( 4, stat_value );
-
-  auto mastery_buff = create_buff<stat_buff_t>( effect.player, "windsingers_runed_citrine_mastery", effect.driver() )
-                          ->add_stat_from_effect( 5, stat_value );
-
-  static constexpr std::array<stat_e, 4> ratings = { STAT_VERSATILITY_RATING, STAT_MASTERY_RATING, STAT_HASTE_RATING,
-                                                     STAT_CRIT_RATING };
-
-  effect.player->register_precombat_begin( [ haste_buff, crit_buff, vers_buff, mastery_buff ]( player_t* p ) {
-    auto highest_stat = util::highest_stat( p, ratings );
-    switch ( highest_stat )
-    {
-      case STAT_HASTE_RATING:
-        haste_buff->trigger();
-        break;
-      case STAT_CRIT_RATING:
-        crit_buff->trigger();
-        break;
-      case STAT_VERSATILITY_RATING:
-        vers_buff->trigger();
-        break;
-      case STAT_MASTERY_RATING:
-        mastery_buff->trigger();
-        break;
-    }
+  effect.player->register_precombat_begin( [ buffs ]( player_t* p ) {
+    buffs.at( util::highest_stat( p, secondary_ratings ) )->trigger();
   } );
 }
 
