@@ -679,6 +679,9 @@ public:
     int dre_flat_chance = -1;
     unsigned dre_forced_failures = 2U;
 
+    // Tempest options
+    int init_tempest_counter = -1;
+
     // Icefury Deck-of-Cards RNG parametrization
     unsigned icefury_positive = 0U;
     unsigned icefury_total = 0U;
@@ -11038,6 +11041,9 @@ void shaman_t::create_options()
 
     return true;
   } ) );
+
+  add_option( opt_int( "shaman.initial_tempest_counter", options.init_tempest_counter, -1, 299 ) );
+
   add_option( opt_obsoleted( "shaman.chain_harvest_allies" ) );
   add_option( opt_int( "shaman.dre_flat_chance", options.dre_flat_chance, -1, 1 ) );
   add_option( opt_uint( "shaman.dre_forced_failures", options.dre_forced_failures, 0U, 10U ) );
@@ -11115,6 +11121,8 @@ void shaman_t::copy_from( player_t* source )
   raptor_glyph = p->raptor_glyph;
   options.rotation = p->options.rotation;
   options.earthquake_spell_power_coefficient = p->options.earthquake_spell_power_coefficient;
+
+  options.init_tempest_counter = p->options.init_tempest_counter;
 
   options.dre_flat_chance = p->options.dre_flat_chance;
   options.dre_forced_failures = p->options.dre_forced_failures;
@@ -14455,11 +14463,23 @@ void shaman_t::reset()
 
   accumulated_ascendance_extension_time = timespan_t::from_seconds( 0.0 );
   ascendance_extension_cap = timespan_t::from_seconds( 0.0 );
-  tempest_counter = 0U;
+
+  unsigned tempest_threshold = as<unsigned>( talent.tempest->effectN(
+    specialization() == SHAMAN_ELEMENTAL ? 1 : 2 ).base_value() );
+
+  if ( options.init_tempest_counter == -1 )
+  {
+    tempest_counter = static_cast<unsigned>( rng().range( 0U, tempest_threshold ) );
+  }
+  else
+  {
+    tempest_counter = std::min( as<unsigned>( options.init_tempest_counter ),
+      tempest_threshold - 1 );
+  }
 
   lotfw_counter = 0U;
   dre_attempts = 0U;
-  lava_surge_attempts_normalized         = 0.0;
+  lava_surge_attempts_normalized = 0.0;
   action.ti_trigger = nullptr;
   action.totemic_recall_totem = nullptr;
 
