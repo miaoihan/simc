@@ -6419,6 +6419,9 @@ void fathomdwellers_runed_citrine( special_effect_t& effect )
 
 void legendary_skippers_citrine( special_effect_t& effect )
 {
+  if ( !effect.player->is_ptr() )
+    return;
+
   static constexpr std::array<singing_citrines_drivers_e, 10> possible_stones = {
       // DAMAGE
       THUNDERLORDS_CRACKLING_CITRINE,
