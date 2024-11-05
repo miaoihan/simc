@@ -6006,7 +6006,7 @@ action_t* find_citrine_action( player_t* player, unsigned driver )
     case LEGENDARY_SKIPPERS_CITRINE:
       return nullptr;
     case SEABED_LEVIATHANS_CITRINE:
-      return nullptr;
+      return player->find_action( "seabed_leviathans_citrine" );
 
     default:
       break;
@@ -6053,7 +6053,9 @@ struct citrine_base_t : public BASE
       has_fathomdewellers( find_special_effect( effect.player, FATHOMDWELLERS_RUNED_CITRINE ) ),
       cyrce_driver( effect.player->find_spell( CYRCES_CIRCLET ) )
   {
-    BASE::base_multiplier *= role_mult( effect );
+    if( has_role_mult( effect ) )
+      BASE::base_multiplier *= role_mult( effect );
+
     BASE::base_dd_min = BASE::base_dd_max = cyrce_driver->effectN( 1 ).average( effect );
   }
 
@@ -6090,18 +6092,28 @@ struct undersea_overseers_citrine_t : public damage_citrine_t
   undersea_overseers_citrine_t( const special_effect_t& e )
     : damage_citrine_t( e, "undersea_overseers_citrine", 462953 )
   {
-    auto driver       = e.player->find_spell( UNDERSEA_OVERSEERS_CITRINE );
+    auto driver = e.player->find_spell( UNDERSEA_OVERSEERS_CITRINE );
     base_multiplier *= driver->effectN( 2 ).percent();
   }
 };
 
 struct squall_sailors_citrine_t : public damage_citrine_t
 {
-  squall_sailors_citrine_t( const special_effect_t& e )
+  squall_sailors_citrine_t( const special_effect_t& e ) 
     : damage_citrine_t( e, "squall_sailors_citrine", 462952 )
   {
-    auto driver       = e.player->find_spell( SQUALL_SAILORS_CITRINE );
+    auto driver = e.player->find_spell( SQUALL_SAILORS_CITRINE );
     base_multiplier *= driver->effectN( 2 ).percent();
+  }
+};
+
+struct seabed_leviathans_citrine_t : public damage_citrine_t
+{
+  seabed_leviathans_citrine_t( const special_effect_t& e ) 
+    : damage_citrine_t( e, "seabed_leviathans_citrine", 468990 )
+  {
+    auto driver = e.player->find_spell( SEABED_LEVIATHANS_CITRINE );
+    base_multiplier *= driver->effectN( 5 ).percent();
   }
 };
 
@@ -6150,7 +6162,7 @@ action_t* create_citrine_action( const special_effect_t& effect, singing_citrine
     case LEGENDARY_SKIPPERS_CITRINE:
       return nullptr;
     case SEABED_LEVIATHANS_CITRINE:
-      return nullptr;
+      return new seabed_leviathans_citrine_t( effect );
 
     default:
       break;
@@ -6158,6 +6170,41 @@ action_t* create_citrine_action( const special_effect_t& effect, singing_citrine
 
   return nullptr;
 }
+
+struct seabed_leviathans_citrine_proc_buff_t : stat_buff_t
+{
+  seabed_leviathans_citrine_proc_buff_t( player_t* p, const special_effect_t& effect )
+    : stat_buff_t( p, "seabed_leviathans_citrine_proc", p->find_spell( 462963 ), effect.item )
+  {
+    const spell_data_t* cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
+    auto buff_driver                 = effect.player->find_spell( SEABED_LEVIATHANS_CITRINE );
+    double stat_value = cyrce_driver->effectN( 2 ).average( effect.item ) * buff_driver->effectN( 2 ).percent() /
+                        cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
+
+    add_stat_from_effect_type( A_MOD_STAT, stat_value );
+
+    auto damage_action     = create_citrine_action( effect, SEABED_LEVIATHANS_CITRINE );
+    auto proc_spell        = effect.player->find_spell( 462963 );
+    auto damage            = new special_effect_t( p );
+    damage->name_str       = "seabed_leviathans_citrine";
+    damage->item           = effect.item;
+    damage->spell_id       = proc_spell->id();
+    damage->proc_flags_    = PF_DAMAGE_TAKEN;
+    damage->proc_flags2_   = PF2_ALL_HIT;
+    damage->proc_chance_   = 1.0;
+    damage->execute_action = damage_action;
+    p->special_effects.push_back( damage );
+
+    effect.player->callbacks.register_callback_trigger_function(
+        proc_spell->id(), dbc_proc_callback_t::trigger_fn_type::CONDITION,
+        [ &, buff_driver ]( const dbc_proc_callback_t*, action_t*, const action_state_t* ) {
+          return p->health_percentage() > buff_driver->effectN( 6 ).base_value();
+        } );
+
+    auto damage_cb = new dbc_proc_callback_t( p, *damage );
+    damage_cb->activate_with_buff( this, true );
+  }
+};
 
 struct windsingers_runed_citrine_proc_buff_t : buff_t
 {
@@ -6506,6 +6553,43 @@ void stormbringers_runed_citrine( special_effect_t& effect )
 
   effect.player->register_precombat_begin( [ buff ]( player_t* p ) { buff->trigger(); } );
 }
+
+/** Seabed Leviathan's Citrine
+ * id=462342 Ring Driver
+ * id=462527 Driver
+ * id=462963 Proc Buff
+ * id=468990 Damage
+ */
+void seabed_leviathans_citrine( special_effect_t& effect )
+{
+  if ( !effect.player->is_ptr() )
+    return;
+
+  auto damage = create_citrine_action( effect, SEABED_LEVIATHANS_CITRINE );
+  // Manually setting the proc flags, Driver appears to use a 0 value absorb buff
+  // to check for incoming damage, rather than traditional proc flags.
+  effect.proc_flags_    = PF_DAMAGE_TAKEN;
+  effect.proc_flags2_   = PF2_ALL_HIT;
+  effect.proc_chance_   = 1.0;
+  effect.execute_action = damage;
+
+  effect.player->callbacks.register_callback_trigger_function(
+      effect.driver()->id(), dbc_proc_callback_t::trigger_fn_type::CONDITION,
+      [ & ]( const dbc_proc_callback_t*, action_t*, const action_state_t* ) {
+        return effect.player->health_percentage() > effect.driver()->effectN( 6 ).base_value();
+      } );
+
+  new dbc_proc_callback_t( effect.player, effect );
+
+  auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
+  auto stat_value   = cyrce_driver->effectN( 2 ).average( effect.item ) * effect.driver()->effectN( 2 ).percent() /
+                    cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
+
+  auto buff = create_buff<stat_buff_t>( effect.player, "seabed_leviathans_citrine", effect.driver() )
+                  ->set_stat_from_effect_type( A_MOD_STAT, stat_value );
+
+  effect.player->register_precombat_begin( [ buff ]( player_t* p ) { buff->trigger(); } );
+}
 }  // namespace singing_citrines
 
 void register_special_effects()
@@ -6689,7 +6773,7 @@ void register_special_effects()
   register_special_effect( singing_citrines::OLD_SALTS_BARDIC_CITRINE, DISABLED_EFFECT );   // Disable heal driver
   register_special_effect( singing_citrines::MARINERS_HALLOWED_CITRINE, DISABLED_EFFECT );  // Disable heal driver
   register_special_effect( singing_citrines::STORM_SEWERS_CITRINE, DISABLED_EFFECT );       // Disable absorb driver
-  register_special_effect( singing_citrines::SEABED_LEVIATHANS_CITRINE, DISABLED_EFFECT );  // Disable stamina driver
+  register_special_effect( singing_citrines::SEABED_LEVIATHANS_CITRINE, singing_citrines::seabed_leviathans_citrine );  // Disable stamina driver
 }
 
 void register_target_data_initializers( sim_t& )

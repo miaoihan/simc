@@ -5303,6 +5303,21 @@ void unique_gear::sort_special_effects()
   range::sort( __fallback_effect_db, cmp_special_effect );
 }
 
+bool unique_gear::has_role_mult( const special_effect_t& effect )
+{
+  // Failsafe if driver is spell_data_t::nil() or spell_data_t::not_found()
+  if( effect.driver()->ok() )
+    return false;
+
+  auto vars = effect.player->dbc->spell_desc_vars( effect.driver()->id() ).desc_vars();
+  std::regex get_var( R"(\$rolemult=\$(.*))" );
+
+  if( std::regex_search( vars, get_var ) )
+    return true;
+
+  return false;
+}
+
 double unique_gear::role_mult( player_t* player, const spell_data_t* s_data )
 {
   static constexpr const char* role_mult_str =
