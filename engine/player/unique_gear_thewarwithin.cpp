@@ -6184,21 +6184,22 @@ struct seabed_leviathans_citrine_proc_buff_t : stat_buff_t
     add_stat_from_effect_type( A_MOD_STAT, stat_value );
 
     auto damage_action     = create_citrine_action( effect, SEABED_LEVIATHANS_CITRINE );
+    auto hp_threshhold     = buff_driver->effectN( 6 ).base_value();
     auto proc_spell        = effect.player->find_spell( 462963 );
     auto damage            = new special_effect_t( p );
-    damage->name_str       = "seabed_leviathans_citrine";
+    damage->name_str       = "seabed_leviathans_citrine_proc";
     damage->item           = effect.item;
     damage->spell_id       = proc_spell->id();
     damage->proc_flags_    = PF_DAMAGE_TAKEN;
     damage->proc_flags2_   = PF2_ALL_HIT;
     damage->proc_chance_   = 1.0;
     damage->execute_action = damage_action;
-    p->special_effects.push_back( damage );
+    effect.player->special_effects.push_back( damage );
 
     effect.player->callbacks.register_callback_trigger_function(
         proc_spell->id(), dbc_proc_callback_t::trigger_fn_type::CONDITION,
-        [ &, buff_driver ]( const dbc_proc_callback_t*, action_t*, const action_state_t* ) {
-          return p->health_percentage() > buff_driver->effectN( 6 ).base_value();
+        [ &, hp_threshhold ]( const dbc_proc_callback_t*, action_t*, const action_state_t* ) {
+          return effect.player->health_percentage() > hp_threshhold;
         } );
 
     auto damage_cb = new dbc_proc_callback_t( p, *damage );
@@ -6341,7 +6342,7 @@ buff_t* create_citrine_proc_buff( const special_effect_t& effect, singing_citrin
     case WINDSINGERS_RUNED_CITRINE:
       return new windsingers_runed_citrine_proc_buff_t( effect.player, effect );
     case SEABED_LEVIATHANS_CITRINE:
-      return nullptr;
+      return new seabed_leviathans_citrine_proc_buff_t( effect.player, effect );
 
     default:
       break;
