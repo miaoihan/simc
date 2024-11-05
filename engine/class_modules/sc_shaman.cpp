@@ -10891,6 +10891,11 @@ std::unique_ptr<expr_t> shaman_t::create_expression( util::string_view name )
     return make_ref_expr( splits[ 0 ], tempest_counter );
   }
 
+  if ( util::str_compare_ci( splits[ 0 ], "lotfw_mael_count" ) )
+  {
+    return make_ref_expr( splits[ 0 ], lotfw_counter );
+  }
+
   if ( util::str_compare_ci( splits[ 0 ], "windfury_chance" ) )
   {
     return make_fn_expr( splits[ 0 ], [ this ]() {
