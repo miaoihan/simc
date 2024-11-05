@@ -6048,15 +6048,11 @@ struct citrine_base_t : public BASE
   const spell_data_t* cyrce_driver;
 
   template <typename... ARGS>
-  citrine_base_t( const special_effect_t& effect, ARGS&&... args  )
+  citrine_base_t( const special_effect_t& effect, ARGS&&... args )
     : BASE( effect, std::forward<ARGS>( args )... ),
       has_fathomdewellers( find_special_effect( effect.player, FATHOMDWELLERS_RUNED_CITRINE ) ),
       cyrce_driver( effect.player->find_spell( CYRCES_CIRCLET ) )
   {
-    if( has_role_mult( effect ) )
-      BASE::base_multiplier *= role_mult( effect );
-
-    BASE::base_dd_min = BASE::base_dd_max = cyrce_driver->effectN( 1 ).average( effect );
   }
 
   double action_multiplier() const override
@@ -6072,7 +6068,17 @@ struct citrine_base_t : public BASE
   }
 };
 
-using damage_citrine_t     = citrine_base_t<generic_proc_t>;
+struct damage_citrine_t : citrine_base_t<generic_proc_t>
+{
+  const spell_data_t* driver_spell;
+  damage_citrine_t( const special_effect_t& e, std::string_view name, unsigned spell, singing_citrines_drivers_e scd )
+    : citrine_base_t( e, name, spell ), driver_spell( e.player->find_spell( scd ) )
+  {
+    if ( has_role_mult( e.player, driver_spell ) )
+      this->base_multiplier *= role_mult( e.player, driver_spell );
+  }
+};
+
 using aoe_damage_citrine_t = citrine_base_t<generic_aoe_proc_t>;
 using heal_stone_t         = citrine_base_t<proc_heal_t>;
 using absorb_stone_t       = citrine_base_t<absorb_t>;
@@ -6080,40 +6086,36 @@ using absorb_stone_t       = citrine_base_t<absorb_t>;
 struct thunderlords_crackling_citrine_t : public damage_citrine_t
 {
   thunderlords_crackling_citrine_t( const special_effect_t& e )
-    : damage_citrine_t( e, "thunderlords_crackling_citrine", 462951 )
+    : damage_citrine_t( e, "thunderlords_crackling_citrine", 462951, THUNDERLORDS_CRACKLING_CITRINE )
   {
-    auto driver = e.player->find_spell( THUNDERLORDS_CRACKLING_CITRINE );
-    base_multiplier *= driver->effectN( 2 ).percent();
+    base_dd_min = base_dd_max = cyrce_driver->effectN( 1 ).average( e ) * driver_spell->effectN( 2 ).percent();
   }
 };
 
 struct undersea_overseers_citrine_t : public damage_citrine_t
 {
   undersea_overseers_citrine_t( const special_effect_t& e )
-    : damage_citrine_t( e, "undersea_overseers_citrine", 462953 )
+    : damage_citrine_t( e, "undersea_overseers_citrine", 462953, UNDERSEA_OVERSEERS_CITRINE )
   {
-    auto driver = e.player->find_spell( UNDERSEA_OVERSEERS_CITRINE );
-    base_multiplier *= driver->effectN( 2 ).percent();
+    base_dd_min = base_dd_max = cyrce_driver->effectN( 1 ).average( e ) * driver_spell->effectN( 2 ).percent();
   }
 };
 
 struct squall_sailors_citrine_t : public damage_citrine_t
 {
-  squall_sailors_citrine_t( const special_effect_t& e ) 
-    : damage_citrine_t( e, "squall_sailors_citrine", 462952 )
+  squall_sailors_citrine_t( const special_effect_t& e )
+    : damage_citrine_t( e, "squall_sailors_citrine", 462952, SQUALL_SAILORS_CITRINE )
   {
-    auto driver = e.player->find_spell( SQUALL_SAILORS_CITRINE );
-    base_multiplier *= driver->effectN( 2 ).percent();
+    base_dd_min = base_dd_max = cyrce_driver->effectN( 1 ).average( e ) * driver_spell->effectN( 2 ).percent();
   }
 };
 
 struct seabed_leviathans_citrine_t : public damage_citrine_t
 {
-  seabed_leviathans_citrine_t( const special_effect_t& e ) 
-    : damage_citrine_t( e, "seabed_leviathans_citrine", 468990 )
+  seabed_leviathans_citrine_t( const special_effect_t& e )
+    : damage_citrine_t( e, "seabed_leviathans_citrine", 468990, SEABED_LEVIATHANS_CITRINE )
   {
-    auto driver = e.player->find_spell( SEABED_LEVIATHANS_CITRINE );
-    base_multiplier *= driver->effectN( 5 ).percent();
+    base_dd_min = base_dd_max = cyrce_driver->effectN( 1 ).average( e ) * driver_spell->effectN( 5 ).percent();
   }
 };
 
