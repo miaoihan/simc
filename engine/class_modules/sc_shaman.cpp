@@ -8351,10 +8351,7 @@ public:
   {
     auto m = shaman_spell_t::action_da_multiplier();
 
-    if ( exec_type != spell_variant::PRIMORDIAL_WAVE )
-    {
-      m *= 1.0 + p()->buff.whirling_earth->stack_value();
-    }
+    m *= 1.0 + p()->buff.whirling_earth->stack_value();
 
     return m;
   }
@@ -8453,7 +8450,6 @@ public:
     {
       p()->buff.magma_chamber->trigger();
     }
-
   }
 
   void last_tick( dot_t* d ) override
@@ -8470,10 +8466,7 @@ public:
 
     p()->buff.voltaic_blaze->decrement();
 
-    if ( exec_type != spell_variant::PRIMORDIAL_WAVE )
-    {
-      p()->buff.whirling_earth->decrement();
-    }
+    p()->buff.whirling_earth->decrement();
   }
 
   void impact( action_state_t* state ) override
