@@ -469,7 +469,7 @@ public:
     bool treat_bloodlust_as_time_warp = false;
     unsigned initial_spellfire_spheres = 5;
     arcane_phoenix_rotation arcane_phoenix_rotation_override = arcane_phoenix_rotation::DEFAULT;
-    bool ice_nova_consumes_winters_chill = false;
+    bool ice_nova_consumes_winters_chill = true;
   } options;
 
   // Pets
