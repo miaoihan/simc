@@ -73,9 +73,11 @@ const spell_data_t* spell_from_spell_text( const special_effect_t& e )
   return spell_data_t::nil();
 }
 
+template <typename T = stat_buff_t>
 void create_all_stat_buffs( const special_effect_t& effect, const spell_data_t* buff_data, double amount,
                             std::function<void( stat_e, buff_t* )> add_fn )
 {
+  static_assert( std::is_base_of_v<stat_buff_t, T> );
   auto buff_name = util::tokenize_fn( buff_data->name_cstr() );
 
   for ( const auto& eff : buff_data->effects() )
@@ -89,7 +91,7 @@ void create_all_stat_buffs( const special_effect_t& effect, const spell_data_t* 
     range::transform( stats, std::back_inserter( stat_strs ), &util::stat_type_abbrev );
 
     auto name = fmt::format( "{}_{}", buff_name, util::string_join( stat_strs, "_" ) );
-    auto buff = create_buff<stat_buff_t>( effect.player, name, buff_data )
+    auto buff = create_buff<T>( effect.player, name, buff_data )
       ->add_stat( stats.front(), amount ? amount : eff.average( effect ) )
       ->set_name_reporting( util::string_join( stat_strs ) );
 
@@ -6044,13 +6046,13 @@ buff_t* find_citrine_proc_buff( player_t* player, unsigned driver )
 template <typename BASE>
 struct citrine_base_t : public BASE
 {
-  bool has_fathomdewellers;
+  bool has_fathomdwellers;
   const spell_data_t* cyrce_driver;
 
   template <typename... ARGS>
   citrine_base_t( const special_effect_t& effect, ARGS&&... args )
     : BASE( effect, std::forward<ARGS>( args )... ),
-      has_fathomdewellers( find_special_effect( effect.player, FATHOMDWELLERS_RUNED_CITRINE ) ),
+      has_fathomdwellers( find_special_effect( effect.player, FATHOMDWELLERS_RUNED_CITRINE ) ),
       cyrce_driver( effect.player->find_spell( CYRCES_CIRCLET ) )
   {
   }
@@ -6059,7 +6061,7 @@ struct citrine_base_t : public BASE
   {
     double m = BASE::action_multiplier();
 
-    if ( has_fathomdewellers )
+    if ( has_fathomdwellers )
     {
       m *= 1.0 + BASE::player->composite_mastery() / 100;
     }
@@ -6209,66 +6211,30 @@ struct seabed_leviathans_citrine_proc_buff_t : stat_buff_t
   }
 };
 
-struct windsingers_runed_citrine_proc_buff_t : buff_t
-{
-  stat_e gain = STAT_NONE;
-
-  windsingers_runed_citrine_proc_buff_t( player_t* p, const special_effect_t& effect )
-    : buff_t( p, "windsingers_runed_citrine_proc", p->find_spell( 465963 ), effect.item )
-  {
-    auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
-    auto buff_driver  = effect.player->find_spell( WINDSINGERS_RUNED_CITRINE );
-    default_value     = cyrce_driver->effectN( 2 ).average( effect ) * buff_driver->effectN( 2 ).percent() /
-                    cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
-  }
-
-  void bump( int stacks, double value ) override
-  {
-    auto stacks_before = check();
-
-    buff_t::bump( stacks, value );
-
-    static constexpr std::array<stat_e, 4> ratings = { STAT_VERSATILITY_RATING, STAT_MASTERY_RATING, STAT_HASTE_RATING,
-                                                       STAT_CRIT_RATING };
-
-    auto new_gain = util::highest_stat( player, ratings );
-    if ( new_gain != gain )
-    {
-      player->stat_loss( gain, current_value );
-      player->stat_gain( new_gain, current_value );
-      gain = new_gain;
-    }
-    else
-    {
-      if ( check() && stacks_before <= 0 )
-      {
-        gain = new_gain;
-        player->stat_gain( gain, current_value );
-      }
-    }
-  }
-
-  void expire_override( int expiration_stacks, timespan_t remaining_duration ) override
-  {
-    player->stat_loss( gain, current_value );
-    buff_t::expire_override( expiration_stacks, remaining_duration );
-  }
-
-  void reset() override
-  {
-    buff_t::reset();
-
-    gain = STAT_NONE;
-  }
-};
-
 // TODO: Convert this to a better way I was tired when I did this.
 struct stat_buff_current_value_t : stat_buff_t
 {
+  bool has_fathomdwellers;
+
   stat_buff_current_value_t( actor_pair_t q, util::string_view name, const spell_data_t* s,
                              const item_t* item = nullptr )
-    : stat_buff_t( q, name, s, item )
+    : stat_buff_t( q, name, s, item ),
+      has_fathomdwellers( find_special_effect(
+          player, FATHOMDWELLERS_RUNED_CITRINE ) )  // By default, initialise this to the status. If it does not apply
+                                                    // to current buff then after creation flag false.
   {
+  }
+
+  double get_buff_size()
+  {
+    double amount = current_value;
+
+    if ( has_fathomdwellers )
+    {
+      amount *= 1.0 + player->composite_mastery() / 100;
+    }
+
+    return amount;
   }
 
   void bump( int stacks, double value ) override
@@ -6280,7 +6246,7 @@ struct stat_buff_current_value_t : stat_buff_t
       if ( buff_stat.check_func && !buff_stat.check_func( *this ) )
         continue;
 
-      buff_stat.amount = current_value;
+      buff_stat.amount = get_buff_size();
 
       double delta = buff_stat_stack_amount( buff_stat, current_stack ) - buff_stat.current_value;
       if ( delta > 0 )
@@ -6295,6 +6261,77 @@ struct stat_buff_current_value_t : stat_buff_t
 
       buff_stat.current_value += delta;
     }
+  }
+};
+
+struct windsingers_runed_citrine_proc_buff_t : buff_t
+{
+  stat_e gain = STAT_NONE;
+  bool has_fathomdwellers;
+  double current_stat_amount;
+
+  windsingers_runed_citrine_proc_buff_t( player_t* p, const special_effect_t& effect )
+    : buff_t( p, "windsingers_runed_citrine_proc", p->find_spell( 465963 ), effect.item ),
+      has_fathomdwellers( find_special_effect( player, FATHOMDWELLERS_RUNED_CITRINE ) ),
+      current_stat_amount( 0.0 )
+  {
+    auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
+    auto buff_driver  = effect.player->find_spell( WINDSINGERS_RUNED_CITRINE );
+    default_value     = cyrce_driver->effectN( 2 ).average( effect ) * buff_driver->effectN( 2 ).percent() /
+                    cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
+  }
+
+  double get_buff_size()
+  {
+    double amount = current_value;
+
+    if ( has_fathomdwellers )
+    {
+      amount *= 1.0 + player->composite_mastery() / 100;
+    }
+
+    return amount;
+  }
+
+  void bump( int stacks, double value ) override
+  {
+    auto stacks_before = check();
+
+    buff_t::bump( stacks, value );
+
+    static constexpr std::array<stat_e, 4> ratings = { STAT_VERSATILITY_RATING, STAT_MASTERY_RATING, STAT_HASTE_RATING,
+                                                       STAT_CRIT_RATING };
+
+    auto new_gain = util::highest_stat( player, ratings );
+    if ( new_gain != gain )
+    {
+      player->stat_loss( gain, current_stat_amount );
+      player->stat_gain( new_gain, get_buff_size() );
+      gain = new_gain;
+    }
+    else
+    {
+      auto diff = get_buff_size() - current_stat_amount;
+      if ( diff > 0 )
+        player->stat_gain( gain, diff );
+      else
+        player->stat_loss( gain, -diff );
+    }
+
+    current_stat_amount = get_buff_size();
+  }
+
+  void expire_override( int expiration_stacks, timespan_t remaining_duration ) override
+  {
+    player->stat_loss( gain, current_value );
+    buff_t::expire_override( expiration_stacks, remaining_duration );
+  }
+
+  void reset() override
+  {
+    buff_t::reset();
+
+    gain = STAT_NONE;
   }
 };
 
@@ -6414,7 +6451,11 @@ void windsingers_runed_citrine( special_effect_t& effect )
 
   std::unordered_map<stat_e, buff_t*> buffs;
 
-  create_all_stat_buffs( effect, effect.driver(), stat_value, [ &buffs ]( stat_e s, buff_t* b ) { buffs[ s ] = b; } );
+  create_all_stat_buffs<stat_buff_current_value_t>( effect, effect.driver(), stat_value,
+                                                    [ &buffs, stat_value ]( stat_e s, buff_t* b ) {
+                                                      b->default_value = stat_value;
+                                                      buffs[ s ]       = b;
+                                                    } );
 
   effect.player->register_precombat_begin( [ buffs ]( player_t* p ) {
     buffs.at( util::highest_stat( p, secondary_ratings ) )->trigger();
@@ -6551,8 +6592,9 @@ void stormbringers_runed_citrine( special_effect_t& effect )
   auto stat_value   = cyrce_driver->effectN( 2 ).average( effect ) * effect.driver()->effectN( 2 ).percent() /
                     cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
 
-  auto buff = create_buff<stat_buff_t>( effect.player, "stormbringers_runed_citrine", effect.driver() )
-                  ->add_stat_from_effect( 1, stat_value );
+  auto buff = create_buff<stat_buff_current_value_t>( effect.player, "stormbringers_runed_citrine", effect.driver() )
+                  ->add_stat_from_effect( 1, stat_value )
+                  ->set_default_value( stat_value );
 
   effect.player->register_precombat_begin( [ buff ]( player_t* p ) { buff->trigger(); } );
 }
@@ -6588,8 +6630,9 @@ void seabed_leviathans_citrine( special_effect_t& effect )
   auto stat_value   = cyrce_driver->effectN( 2 ).average( effect ) * effect.driver()->effectN( 2 ).percent() /
                     cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
 
-  auto buff = create_buff<stat_buff_t>( effect.player, "seabed_leviathans_citrine", effect.driver() )
-                  ->set_stat_from_effect_type( A_MOD_STAT, stat_value );
+  auto buff = create_buff<stat_buff_current_value_t>( effect.player, "seabed_leviathans_citrine", effect.driver() )
+                  ->set_stat_from_effect_type( A_MOD_STAT, stat_value )
+                  ->set_default_value( stat_value );
 
   effect.player->register_precombat_begin( [ buff ]( player_t* p ) { buff->trigger(); } );
 }
