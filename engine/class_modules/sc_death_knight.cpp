@@ -8456,11 +8456,13 @@ struct death_strike_t final : public death_knight_melee_attack_t
     // No spelldata either, just "increase damage based on target's missing health"
     // Update 2021-06-16 Changed from 1% to 1.25% damage increase
     // Testing shows a linear 1.25% damage increase for every 1% missing health
-    // Unholy Bond increases this by 10% per point, with the formula 1 + ( 0.25 * ( 1 + unholy_bond % ) )
+    // Unholy Bond increases this by 20% with the formula 1 + ( 0.25 * ( 1 + unholy_bond % ) )
     if ( p()->runeforge.rune_of_sanguination )
     {
       m *= 1.0 + std::min( ( 1.0 - target->health_percentage() * 0.01 ) * sanguination_pct,
                            ( sanguination_pct * 80 ) * 0.01 );
+      // Unholy bond gives a 20% bonus to damage, on top of the 20% bonus to the sanguination scaled damage
+      m *= 1.0 + p()->talent.unholy_bond->effectN( 1 ).percent();
     }
 
     return m;
@@ -14778,6 +14780,18 @@ void pets::pet_action_t<T_PET, Base>::apply_pet_action_effects()
   // Rider of the Apocalypse
   parse_effects( dk()->buffs.mograines_might );
   parse_effects( dk()->buffs.a_feast_of_souls );
+
+  // San'layn
+  parse_effects(
+      dk()->buffs.essence_of_the_blood_queen,
+      [ & ]( double v ) {
+        if ( dk()->spec.blood_death_knight->ok() )
+          v += dk()->spec.blood_death_knight->effectN( 19 ).percent();
+        if ( dk()->buffs.gift_of_the_sanlayn->check() )
+          v *= 1.0 + dk()->buffs.gift_of_the_sanlayn->check_value();
+        return v;
+      },
+      dk()->talent.sanlayn.frenzied_bloodthirst );
 }
 
 template <class T_PET, class Base>
