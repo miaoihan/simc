@@ -6221,32 +6221,32 @@ struct stat_buff_current_value_t : stat_buff_t
     : stat_buff_t( q, name, s, item ),
       has_fathomdwellers( find_special_effect(
           player, FATHOMDWELLERS_RUNED_CITRINE ) )  // By default, initialise this to the status. If it does not apply
-                                                    // to current buff then after creation flag false.
+                                                     // to current buff then after creation flag false.
   {
   }
 
   double get_buff_size()
   {
-    double amount = current_value;
+    double amount = default_value;
 
     if ( has_fathomdwellers )
     {
-      amount *= 1.0 + player->composite_mastery() / 100;
+      // Seems to ignore base mastery
+      amount *= 1.0 + ( player->composite_mastery() - player->base.mastery ) / 100;
     }
 
     return amount;
   }
 
-  void bump( int stacks, double value ) override
+  void force_recalculate()
   {
-    buff_t::bump( stacks, value );
-
+    double value = get_buff_size();
     for ( auto& buff_stat : stats )
     {
       if ( buff_stat.check_func && !buff_stat.check_func( *this ) )
         continue;
 
-      buff_stat.amount = get_buff_size();
+      buff_stat.amount = value;
 
       double delta = buff_stat_stack_amount( buff_stat, current_stack ) - buff_stat.current_value;
       if ( delta > 0 )
@@ -6261,6 +6261,17 @@ struct stat_buff_current_value_t : stat_buff_t
 
       buff_stat.current_value += delta;
     }
+  }
+
+  void start( int stacks, double, timespan_t duration ) override
+  {
+    buff_t::start( stacks, get_buff_size(), duration );
+  }
+
+  void bump( int stacks, double value ) override
+  {
+    buff_t::bump( stacks, value );
+    force_recalculate();
   }
 };
 
@@ -6446,8 +6457,8 @@ void windsingers_runed_citrine( special_effect_t& effect )
     return;
 
   auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
-  auto stat_value   = cyrce_driver->effectN( 2 ).average( effect ) * effect.driver()->effectN( 2 ).percent() /
-                    cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
+  auto stat_value   = ( cyrce_driver->effectN( 2 ).average( effect ) / cyrce_driver->effectN( 3 ).base_value() ) *
+                    effect.driver()->effectN( 2 ).percent() * ( cyrce_driver->effectN( 5 ).base_value() / 3 );
 
   std::unordered_map<stat_e, buff_t*> buffs;
 
@@ -6457,9 +6468,8 @@ void windsingers_runed_citrine( special_effect_t& effect )
                                                       buffs[ s ]       = b;
                                                     } );
 
-  effect.player->register_precombat_begin( [ buffs ]( player_t* p ) {
-    buffs.at( util::highest_stat( p, secondary_ratings ) )->trigger();
-  } );
+  effect.player->register_on_arise_callback(
+      effect.player, [ &, buffs ] { buffs.at( util::highest_stat( effect.player, secondary_ratings ) )->trigger(); } );
 }
 
 /** Fathomdwellers Runed Citrine
@@ -6479,7 +6489,28 @@ void fathomdwellers_runed_citrine( special_effect_t& effect )
   auto buff = create_buff<stat_buff_t>( effect.player, "fathomdwellers_runed_citrine", effect.driver() )
                   ->add_stat_from_effect( 1, stat_value );
 
-  effect.player->register_precombat_begin( [ buff ]( player_t* p ) { buff->trigger(); } );
+  effect.player->register_on_arise_callback( effect.player, [ buff ] { buff->trigger(); } );
+  effect.player->register_precombat_begin( [ buff ]( player_t* p ) {
+    make_event( *p->sim, 0_ms, [ p ] {
+      auto stormbringer = buff_t::find( p, "stormbringers_runed_citrine", p );
+      auto windsinger   = buff_t::find( p, "windsingers_runed_citrine", p );
+      for ( int i = 0; i < 3; i++ )
+      {
+        // TODO: Windsinger output values off by roughly 3% still. Needs further investigation.
+        if ( windsinger && windsinger->check() )
+        {
+          make_event( *p->sim, 0_ms,
+                      [ windsinger ] { debug_cast<stat_buff_current_value_t*>( windsinger )->force_recalculate(); } );
+        }
+        if ( stormbringer && stormbringer->check() )
+        {
+          make_event( *p->sim, 0_ms, [ stormbringer ] {
+            debug_cast<stat_buff_current_value_t*>( stormbringer )->force_recalculate();
+          } );
+        }
+      }
+    } );
+  } );
 }
 
 void legendary_skippers_citrine( special_effect_t& effect )
@@ -6589,14 +6620,14 @@ void stormbringers_runed_citrine( special_effect_t& effect )
     return;
 
   auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
-  auto stat_value   = cyrce_driver->effectN( 2 ).average( effect ) * effect.driver()->effectN( 2 ).percent() /
-                    cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
+  auto stat_value   = ( cyrce_driver->effectN( 2 ).average( effect ) / cyrce_driver->effectN( 3 ).base_value() ) *
+                    effect.driver()->effectN( 2 ).percent() * ( cyrce_driver->effectN( 5 ).base_value() / 3 );
 
   auto buff = create_buff<stat_buff_current_value_t>( effect.player, "stormbringers_runed_citrine", effect.driver() )
                   ->add_stat_from_effect( 1, stat_value )
                   ->set_default_value( stat_value );
 
-  effect.player->register_precombat_begin( [ buff ]( player_t* p ) { buff->trigger(); } );
+  effect.player->register_on_arise_callback( effect.player, [ buff ] { buff->trigger(); } );
 }
 
 /** Seabed Leviathan's Citrine
@@ -6634,7 +6665,7 @@ void seabed_leviathans_citrine( special_effect_t& effect )
                   ->set_stat_from_effect_type( A_MOD_STAT, stat_value )
                   ->set_default_value( stat_value );
 
-  effect.player->register_precombat_begin( [ buff ]( player_t* p ) { buff->trigger(); } );
+  effect.player->register_on_arise_callback( effect.player, [ buff ] { buff->trigger(); } );
 }
 }  // namespace singing_citrines
 
