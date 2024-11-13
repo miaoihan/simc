@@ -5165,7 +5165,7 @@ struct aimed_shot_base_t : public hunter_ranged_attack_t
     }
 
     if ( p->talents.hydras_bite.ok() )
-      hydras_bite = p->get_background_action<serpent_sting_hydras_bite_t>( "serpent_sting" );
+      hydras_bite = p->get_background_action<serpent_sting_hydras_bite_t>( "serpent_sting_hydras_bite" );
   }
 
   double composite_target_da_multiplier( player_t* t ) const override
