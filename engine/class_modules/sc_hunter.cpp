@@ -6156,7 +6156,7 @@ struct fury_of_the_eagle_t : public hunter_melee_attack_t
     if ( procced_at_max_tip )
       p()->buffs.tip_of_the_spear->increment();
     
-    if ( p()->talents.ruthless_marauder )
+    if ( p()->talents.ruthless_marauder.ok() )
       p()->buffs.ruthless_marauder->trigger();
   }
 };
