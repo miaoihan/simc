@@ -5084,16 +5084,15 @@ struct aimed_shot_base_t : public hunter_ranged_attack_t
     {
       serpent_sting_t::available_targets( tl );
 
+      // Remove the cast target as it will get hit by Serpentstalker's Trickery
+      range::erase_remove( tl, target );
+
       if ( is_aoe() && tl.size() > 1 )
       {
         // Prefer targets without Serpent Sting ticking.
         auto start = tl.begin();
         std::partition( *start == target ? std::next( start ) : start, tl.end(),
                         [ this ]( player_t* t ) { return !( this->td( t )->dots.serpent_sting->is_ticking() ); } );
-
-        // Remove the cast target if it is already ticking, otherwise it remains as the first target.
-        if ( p()->get_target_data( target )->dots.serpent_sting->is_ticking() )
-          range::erase_remove( tl, target );
       }
 
       return tl.size();
