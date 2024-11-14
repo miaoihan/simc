@@ -5956,9 +5956,9 @@ singing_citrine_type_e get_singing_citrine_type( unsigned driver )
       return CITRINE_TYPE_ABSORB;
     case STORMBRINGERS_RUNED_CITRINE:
     case FATHOMDWELLERS_RUNED_CITRINE:
-    case WINDSINGERS_RUNED_CITRINE:
     case SEABED_LEVIATHANS_CITRINE:
       return CITRINE_TYPE_STAT;
+    case WINDSINGERS_RUNED_CITRINE:
     case LEGENDARY_SKIPPERS_CITRINE:
     case ROARING_WARQUEENS_CITRINE:
       return CITRINE_TYPE_OTHER;
@@ -6000,7 +6000,7 @@ action_t* find_citrine_action( player_t* player, unsigned driver )
     case FATHOMDWELLERS_RUNED_CITRINE:
       return nullptr;
     case WINDSINGERS_RUNED_CITRINE:
-      return nullptr;
+      return player->find_action( "windsingers_runed_citrine_proc" );
 
     // other
     case ROARING_WARQUEENS_CITRINE:
@@ -6031,8 +6031,6 @@ buff_t* find_citrine_proc_buff( player_t* player, unsigned driver )
       return buff_t::find( player, "stormbringers_runed_citrine_proc", player );
     case FATHOMDWELLERS_RUNED_CITRINE:
       return buff_t::find( player, "fathomdwellers_runed_citrine_proc", player );
-    case WINDSINGERS_RUNED_CITRINE:
-      return buff_t::find( player, "windsingers_runed_citrine_proc", player );
     case SEABED_LEVIATHANS_CITRINE:
       return buff_t::find( player, "seabed_leviathans_citrine_proc", player );
 
@@ -6042,6 +6040,87 @@ buff_t* find_citrine_proc_buff( player_t* player, unsigned driver )
 
   return nullptr;
 }
+
+// TODO: Convert this to a better way I was tired when I did this.
+struct stat_buff_current_value_t : stat_buff_t
+{
+  bool has_fathomdwellers;
+  bool skipper_proc;
+  double skipper_mult;
+
+  stat_buff_current_value_t( actor_pair_t q, util::string_view name, const spell_data_t* s,
+                             const item_t* item = nullptr )
+    : stat_buff_t( q, name, s, item ),
+      has_fathomdwellers( find_special_effect(
+          player, FATHOMDWELLERS_RUNED_CITRINE ) ),  // By default, initialise this to the status. If it does not apply
+                                                     // to current buff then after creation flag false.
+      skipper_proc( false ),
+      skipper_mult( 0 )
+  {
+    skipper_mult = player->find_spell( LEGENDARY_SKIPPERS_CITRINE )->effectN( 3 ).percent();
+  }
+
+  double get_buff_size()
+  {
+    double amount = default_value;
+
+    if ( has_fathomdwellers )
+    {
+      // Seems to ignore base mastery
+      amount *= 1.0 + ( player->composite_mastery() - player->base.mastery ) / 100;
+    }
+    if ( skipper_proc )
+    {
+      amount *= skipper_mult;
+    }
+
+    return amount;
+  }
+
+  void force_recalculate()
+  {
+    double value = get_buff_size();
+    for ( auto& buff_stat : stats )
+    {
+      if ( buff_stat.check_func && !buff_stat.check_func( *this ) )
+        continue;
+
+      buff_stat.amount = value;
+
+      double delta = buff_stat_stack_amount( buff_stat, current_stack ) - buff_stat.current_value;
+      if ( delta > 0 )
+      {
+        player->stat_gain( buff_stat.stat, delta, stat_gain, nullptr, buff_duration() > timespan_t::zero() );
+      }
+      else if ( delta < 0 )
+      {
+        player->stat_loss( buff_stat.stat, std::fabs( delta ), stat_gain, nullptr,
+                           buff_duration() > timespan_t::zero() );
+      }
+
+      buff_stat.current_value += delta;
+    }
+  }
+
+  void start( int stacks, double, timespan_t duration ) override
+  {
+    buff_t::start( stacks, get_buff_size(), duration );
+    if ( skipper_proc )
+      skipper_proc = false;
+  }
+
+  void reset() override
+  {
+    buff_t::reset();
+    skipper_proc = false;
+  }
+
+  void bump( int stacks, double value ) override
+  {
+    buff_t::bump( stacks, value );
+    force_recalculate();
+  }
+};
 
 template <typename BASE>
 struct citrine_base_t : public BASE
@@ -6121,6 +6200,48 @@ struct seabed_leviathans_citrine_t : public damage_citrine_t
   }
 };
 
+// Proxy action just to trigger the highest stat buff. Mostly for reporting purposes. 
+// Might be a better way to do this, but this will do for now. 
+struct windsingers_runed_citrine_proc_t : public generic_proc_t
+{
+  std::unordered_map<stat_e, buff_t*> buffs;
+  windsingers_runed_citrine_proc_t( const special_effect_t& e )
+    : generic_proc_t( e, "windsingers_runed_citrine_proc", WINDSINGERS_RUNED_CITRINE ), buffs()
+  {
+    background = true;
+    harmful = false;
+    const spell_data_t* buff_driver = e.player->find_spell( WINDSINGERS_RUNED_CITRINE );
+    const spell_data_t* buff_spell = e.player->find_spell( 465963 );
+    const spell_data_t* cyrce_driver = e.player->find_spell( CYRCES_CIRCLET );
+    double stat_value = cyrce_driver->effectN( 2 ).average( e ) * buff_driver->effectN( 2 ).percent() /
+      cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
+
+    create_all_stat_buffs<stat_buff_current_value_t>( e, buff_spell, stat_value,
+                                                      [ &, stat_value ]( stat_e s, buff_t* b )
+                                                      {
+                                                        b->default_value = stat_value;
+                                                        b->name_str_reporting = fmt::format( "{}_{}", b->name_str, "proc");
+                                                        buffs[ s ] = b;
+                                                      } );
+  }
+
+  void execute() override
+  {
+    generic_proc_t::execute();
+    // Ensure only one instance of Windsingers proc buff can be up at any time.
+    for ( auto& b : buffs )
+    {
+      if ( b.first == util::highest_stat( player, secondary_ratings ) )
+      {
+        debug_cast<stat_buff_current_value_t*>( b.second )->skipper_proc = true;
+        b.second->trigger();
+      }
+      else
+        b.second->expire();
+    }
+  }
+};
+
 action_t* create_citrine_action( const special_effect_t& effect, singing_citrines_drivers_e driver )
 {
   if ( !effect.player->is_ptr() )
@@ -6158,7 +6279,7 @@ action_t* create_citrine_action( const special_effect_t& effect, singing_citrine
     case FATHOMDWELLERS_RUNED_CITRINE:
       return nullptr;
     case WINDSINGERS_RUNED_CITRINE:
-      return nullptr;
+      return new windsingers_runed_citrine_proc_t( effect );
 
     // other
     case ROARING_WARQUEENS_CITRINE:
@@ -6211,141 +6332,6 @@ struct seabed_leviathans_citrine_proc_buff_t : stat_buff_t
   }
 };
 
-// TODO: Convert this to a better way I was tired when I did this.
-struct stat_buff_current_value_t : stat_buff_t
-{
-  bool has_fathomdwellers;
-
-  stat_buff_current_value_t( actor_pair_t q, util::string_view name, const spell_data_t* s,
-                             const item_t* item = nullptr )
-    : stat_buff_t( q, name, s, item ),
-      has_fathomdwellers( find_special_effect(
-          player, FATHOMDWELLERS_RUNED_CITRINE ) )  // By default, initialise this to the status. If it does not apply
-                                                     // to current buff then after creation flag false.
-  {
-  }
-
-  double get_buff_size()
-  {
-    double amount = default_value;
-
-    if ( has_fathomdwellers )
-    {
-      // Seems to ignore base mastery
-      amount *= 1.0 + ( player->composite_mastery() - player->base.mastery ) / 100;
-    }
-
-    return amount;
-  }
-
-  void force_recalculate()
-  {
-    double value = get_buff_size();
-    for ( auto& buff_stat : stats )
-    {
-      if ( buff_stat.check_func && !buff_stat.check_func( *this ) )
-        continue;
-
-      buff_stat.amount = value;
-
-      double delta = buff_stat_stack_amount( buff_stat, current_stack ) - buff_stat.current_value;
-      if ( delta > 0 )
-      {
-        player->stat_gain( buff_stat.stat, delta, stat_gain, nullptr, buff_duration() > timespan_t::zero() );
-      }
-      else if ( delta < 0 )
-      {
-        player->stat_loss( buff_stat.stat, std::fabs( delta ), stat_gain, nullptr,
-                           buff_duration() > timespan_t::zero() );
-      }
-
-      buff_stat.current_value += delta;
-    }
-  }
-
-  void start( int stacks, double, timespan_t duration ) override
-  {
-    buff_t::start( stacks, get_buff_size(), duration );
-  }
-
-  void bump( int stacks, double value ) override
-  {
-    buff_t::bump( stacks, value );
-    force_recalculate();
-  }
-};
-
-struct windsingers_runed_citrine_proc_buff_t : buff_t
-{
-  stat_e gain = STAT_NONE;
-  bool has_fathomdwellers;
-  double current_stat_amount;
-
-  windsingers_runed_citrine_proc_buff_t( player_t* p, const special_effect_t& effect )
-    : buff_t( p, "windsingers_runed_citrine_proc", p->find_spell( 465963 ), effect.item ),
-      has_fathomdwellers( find_special_effect( player, FATHOMDWELLERS_RUNED_CITRINE ) ),
-      current_stat_amount( 0.0 )
-  {
-    auto cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
-    auto buff_driver  = effect.player->find_spell( WINDSINGERS_RUNED_CITRINE );
-    default_value     = cyrce_driver->effectN( 2 ).average( effect ) * buff_driver->effectN( 2 ).percent() /
-                    cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
-  }
-
-  double get_buff_size()
-  {
-    double amount = current_value;
-
-    if ( has_fathomdwellers )
-    {
-      amount *= 1.0 + player->composite_mastery() / 100;
-    }
-
-    return amount;
-  }
-
-  void bump( int stacks, double value ) override
-  {
-    auto stacks_before = check();
-
-    buff_t::bump( stacks, value );
-
-    static constexpr std::array<stat_e, 4> ratings = { STAT_VERSATILITY_RATING, STAT_MASTERY_RATING, STAT_HASTE_RATING,
-                                                       STAT_CRIT_RATING };
-
-    auto new_gain = util::highest_stat( player, ratings );
-    if ( new_gain != gain )
-    {
-      player->stat_loss( gain, current_stat_amount );
-      player->stat_gain( new_gain, get_buff_size() );
-      gain = new_gain;
-    }
-    else
-    {
-      auto diff = get_buff_size() - current_stat_amount;
-      if ( diff > 0 )
-        player->stat_gain( gain, diff );
-      else
-        player->stat_loss( gain, -diff );
-    }
-
-    current_stat_amount = get_buff_size();
-  }
-
-  void expire_override( int expiration_stacks, timespan_t remaining_duration ) override
-  {
-    player->stat_loss( gain, current_value );
-    buff_t::expire_override( expiration_stacks, remaining_duration );
-  }
-
-  void reset() override
-  {
-    buff_t::reset();
-
-    gain = STAT_NONE;
-  }
-};
-
 buff_t* create_citrine_proc_buff( const special_effect_t& effect, singing_citrines_drivers_e driver )
 {
   if ( !effect.player->is_ptr() )
@@ -6389,11 +6375,8 @@ buff_t* create_citrine_proc_buff( const special_effect_t& effect, singing_citrin
 
       return buff;
     }
-    case WINDSINGERS_RUNED_CITRINE:
-      return new windsingers_runed_citrine_proc_buff_t( effect.player, effect );
     case SEABED_LEVIATHANS_CITRINE:
       return new seabed_leviathans_citrine_proc_buff_t( effect.player, effect );
-
     default:
       break;
   }
@@ -6605,7 +6588,8 @@ void legendary_skippers_citrine( special_effect_t& effect )
         {
           if ( auto buff = citrine_buffs[ ix - citrine_actions.size() ] )
           {
-            buff->trigger( 1, buff->default_value * multiplier );
+            debug_cast<stat_buff_current_value_t*>( buff )->skipper_proc = true;
+            buff->trigger();
           }
         }
       }
