@@ -4551,6 +4551,18 @@ struct black_arrow_withering_fire_secondary_t final : black_arrow_base_t
     aoe        = as<int>( p->talents.withering_fire->effectN( 3 ).base_value() );
   }
 
+  //Each secondary Withering Fire projectile can be multiplied by effects such as Hunter's Prey
+  int n_targets() const override
+  {
+    int n = black_arrow_base_t::n_targets();
+
+    if ( p()->talents.hunters_prey.ok() )
+    {
+      return n * aoe;
+    }
+    return n;
+  }
+
   size_t available_targets( std::vector<player_t*>& tl ) const override
   {
     black_arrow_base_t::available_targets( tl );
