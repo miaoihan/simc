@@ -78,7 +78,7 @@ actions.aoe_ss+=/call_action_list,name=movement
 
 actions.cds=use_item,name=imperfect_ascendancy_serum,if=buff.icy_veins.remains>19|fight_remains<25
 actions.cds+=/use_item,name=treacherous_transmitter,if=equipped.spymasters_web&(fight_remains<50|cooldown.icy_veins.remains<12)|!equipped.spymasters_web&(fight_remains<30|prev_off_gcd.icy_veins)
-actions.cds+=/do_treacherous_transmitter_task,use_off_gcd=1,if=fight_remains<18|(buff.cryptic_instructions.remains<?buff.realigning_nexus_convergence_divergence.remains<?buff.errant_manaforge_emission.remains)<(action.shifting_power.execute_time+1*talent.ray_of_frost)
+actions.cds+=/do_treacherous_transmitter_task,if=fight_remains<18|(buff.cryptic_instructions.remains<?buff.realigning_nexus_convergence_divergence.remains<?buff.errant_manaforge_emission.remains)<(action.shifting_power.execute_time+1*talent.ray_of_frost)
 actions.cds+=/use_item,name=burst_of_knowledge,if=buff.icy_veins.remains<21|fight_remains<25
 actions.cds+=/use_item,name=spymasters_web,if=fight_remains<22|buff.icy_veins.remains<19&(fight_remains<105|buff.spymasters_report.stack>=32)&(buff.icy_veins.remains>15|equipped.treacherous_transmitter&buff.icy_veins.remains>9)
 actions.cds+=/potion,if=fight_remains<35|buff.icy_veins.remains>10&(fight_remains>315|cooldown.icy_veins.remains+12>fight_remains)
