@@ -6296,15 +6296,17 @@ action_t* create_citrine_action( const special_effect_t& effect, singing_citrine
   return nullptr;
 }
 
-struct seabed_leviathans_citrine_proc_buff_t : stat_buff_t
+struct seabed_leviathans_citrine_proc_buff_t : stat_buff_current_value_t
 {
   seabed_leviathans_citrine_proc_buff_t( player_t* p, const special_effect_t& effect )
-    : stat_buff_t( p, "seabed_leviathans_citrine_proc", p->find_spell( 462963 ), effect.item )
+    : stat_buff_current_value_t( p, "seabed_leviathans_citrine_proc", p->find_spell( 462963 ), effect.item )
   {
     const spell_data_t* cyrce_driver = effect.player->find_spell( CYRCES_CIRCLET );
     auto buff_driver                 = effect.player->find_spell( SEABED_LEVIATHANS_CITRINE );
     double stat_value = cyrce_driver->effectN( 2 ).average( effect ) * buff_driver->effectN( 2 ).percent() /
                         cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
+
+    default_value = stat_value;
 
     add_stat_from_effect_type( A_MOD_STAT, stat_value );
 
