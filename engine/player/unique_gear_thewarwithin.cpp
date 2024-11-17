@@ -5060,7 +5060,7 @@ void runecasters_stormbound_rune( special_effect_t& effect )
                   } );
 
   // TODO: Test if initial hit is truly on hit, or only enter combat. Proc flags on the driver are combat start.
-  effect.player->register_on_combat_state_callback( [ buff ]( player_t* p, bool c ) {
+  effect.player->register_on_combat_state_callback( [ buff ]( player_t*, bool c ) {
     if ( c )
       buff->trigger();
     else

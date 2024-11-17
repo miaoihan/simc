@@ -12146,7 +12146,7 @@ void death_knight_t::trigger_drw_action( drw_actions action )
     return;
 
   drw_action_execute( pets.everlasting_bond_pet.active_pet(), action );
-};
+}
 
 double death_knight_t::psuedo_random_p_from_c( double c )
 {
