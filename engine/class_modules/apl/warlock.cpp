@@ -500,7 +500,7 @@ void destruction( player_t* p )
   havoc->add_action( "shadowburn,if=(cooldown.shadowburn.full_recharge_time<=gcd.max*3|debuff.eradication.remains<=gcd.max&talent.eradication&!action.chaos_bolt.in_flight&!talent.diabolic_ritual)&(talent.conflagration_of_chaos|talent.blistering_atrophy)" );
   havoc->add_action( "shadowburn,if=havoc_remains<=gcd.max*3" );
   havoc->add_action( "chaos_bolt,if=cast_time<havoc_remains&((!talent.improved_chaos_bolt&active_enemies<=2)|(talent.improved_chaos_bolt&((talent.wither&talent.inferno&active_enemies<=2)|(((talent.wither&talent.cataclysm)|(!talent.wither&talent.inferno))&active_enemies<=3)|(!talent.wither&talent.cataclysm&active_enemies<=4))))" );
-  havoc->add_action( "rain_of_fire,if=active_enemies>=3-talent.wither" );
+  havoc->add_action( "rain_of_fire,if=active_enemies>=3" );
   havoc->add_action( "channel_demonfire,if=soul_shard<4.5" );
   havoc->add_action( "conflagrate,if=!talent.backdraft" );
   havoc->add_action( "dimensional_rift,if=soul_shard<4.7&(charges>2|fight_remains<cooldown.dimensional_rift.duration)" );
