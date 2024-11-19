@@ -78,6 +78,8 @@ struct essence_devourer_t;
 struct atonement_t;
 struct divine_aegis_t;
 struct cauterizing_shadows_t;
+struct crystalline_reflection_heal_t;
+struct crystalline_reflection_damage_t;
 }  // namespace actions::heals
 
 /**
@@ -783,6 +785,8 @@ public:
     propagate_const<actions::spells::collapsing_void_damage_t*> collapsing_void;
     propagate_const<actions::spells::halo_t*> halo;
     propagate_const<actions::heals::cauterizing_shadows_t*> cauterizing_shadows;
+    propagate_const<actions::heals::crystalline_reflection_heal_t*> crystalline_reflection_heal;
+    propagate_const<actions::heals::crystalline_reflection_damage_t*> crystalline_reflection_damage;
   } background_actions;
 
   // Items

@@ -2255,16 +2255,12 @@ struct power_word_shield_t final : public priest_absorb_t
 {
   double insanity;
   timespan_t atonement_duration;
-  action_t* crystalline_reflection_heal;
-  action_t* crystalline_reflection_damage;
 
   power_word_shield_t( priest_t& p, util::string_view options_str )
     : priest_absorb_t( "power_word_shield", p, p.find_class_spell( "Power Word: Shield" ) ),
       insanity( priest().specs.hallucinations->effectN( 1 ).resource() ),
       atonement_duration( timespan_t::from_seconds( p.talents.discipline.atonement_buff->effectN( 3 ).base_value() +
-                                                    p.talents.discipline.indemnity->effectN( 1 ).base_value() ) ),
-      crystalline_reflection_heal( nullptr ),
-      crystalline_reflection_damage( nullptr )
+                                                    p.talents.discipline.indemnity->effectN( 1 ).base_value() ) )
   {
     parse_options( options_str );
 
@@ -2273,15 +2269,6 @@ struct power_word_shield_t final : public priest_absorb_t
 
     disc_mastery = true;
     harmful      = false;
-
-    if ( p.talents.crystalline_reflection.enabled() )
-    {
-      crystalline_reflection_heal   = new crystalline_reflection_heal_t( p );
-      crystalline_reflection_damage = new crystalline_reflection_damage_t( p );
-
-      add_child( crystalline_reflection_heal );
-      add_child( crystalline_reflection_damage );
-    }
   }
 
   // Manually create the buff so we can reference it with Void Shield
@@ -2335,9 +2322,9 @@ struct power_word_shield_t final : public priest_absorb_t
 
   void impact( action_state_t* s ) override
   {
-    if ( crystalline_reflection_heal )
+    if ( priest().talents.crystalline_reflection.enabled() )
     {
-      crystalline_reflection_heal->execute_on_target( s->target );
+      priest().background_actions.crystalline_reflection_heal->execute_on_target( s->target );
     }
 
     priest_absorb_t::impact( s );
@@ -2347,7 +2334,7 @@ struct power_word_shield_t final : public priest_absorb_t
       s->target->buffs.body_and_soul->trigger();
     }
 
-    if ( crystalline_reflection_damage )
+    if ( priest().talents.crystalline_reflection.enabled() )
     {
       auto cr_damage = s->result_amount * p().talents.crystalline_reflection->effectN( 1 ).percent() *
                        p().options.crystalline_reflection_damage_mult;
@@ -2369,7 +2356,7 @@ struct power_word_shield_t final : public priest_absorb_t
 
         if ( target )
         {
-          crystalline_reflection_damage->execute_on_target( target, cr_damage );
+          priest().background_actions.crystalline_reflection_damage->execute_on_target( target, cr_damage );
         }
       } );
     }
@@ -3943,6 +3930,12 @@ void priest_t::init_background_actions()
   if ( talents.discipline.divine_aegis.enabled() )
   {
     background_actions.divine_aegis = new actions::heals::divine_aegis_t( *this );
+  }
+
+  if ( talents.crystalline_reflection.enabled() )
+  {
+    background_actions.crystalline_reflection_heal   = new actions::heals::crystalline_reflection_heal_t( *this );
+    background_actions.crystalline_reflection_damage = new actions::heals::crystalline_reflection_damage_t( *this );
   }
 
   background_actions.shadow_word_death->background = true;
