@@ -1264,8 +1264,8 @@ dreadstalker_t::dreadstalker_t( warlock_t* owner ) : warlock_pet_t( owner, "drea
   action_list_str = "leap/dreadbite";
   resource_regeneration  = regen_type::DISABLED;
 
-  // 2023-09-20: Coefficient updated
-  owner_coeff.ap_from_sp = 0.686;
+  // 2024-11-16: Coefficient updated
+  owner_coeff.ap_from_sp = 0.825;
 
   owner_coeff.health = 0.4;
 
