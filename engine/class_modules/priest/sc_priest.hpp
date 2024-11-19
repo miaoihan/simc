@@ -714,6 +714,7 @@ public:
     propagate_const<gain_t*> insanity_maddening_touch;
     propagate_const<gain_t*> insanity_t30_2pc;
     propagate_const<gain_t*> cauterizing_shadows_health;
+    propagate_const<gain_t*> shield_discipline;
   } gains;
 
   // Benefits
@@ -1670,6 +1671,11 @@ public:
   priest_buff_t( priest_td_t& td, util::string_view name, const spell_data_t* s = spell_data_t::nil(),
                  const item_t* item = nullptr )
     : Base( td, name, s, item )
+  {
+  }
+  priest_buff_t( actor_pair_t q, util::string_view name, const spell_data_t* s = spell_data_t::nil(),
+                 const item_t* item = nullptr )
+    : Base( q, name, s, item )
   {
   }
 
