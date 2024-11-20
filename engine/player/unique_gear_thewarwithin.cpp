@@ -6142,7 +6142,8 @@ struct citrine_base_t : public BASE
 
     if ( has_fathomdwellers )
     {
-      m *= 1.0 + BASE::player->composite_mastery() / 100;
+      // Seems to ignore base mastery
+      m *= 1.0 + ( BASE::player->composite_mastery() - BASE::player->base.mastery ) / 100;
     }
 
     return m;
