@@ -6582,8 +6582,6 @@ void storm_sewers_citrine( special_effect_t& effect )
   if ( !effect.player->is_ptr() )
     return;
 
-  effect.proc_flags2_ = PF2_LANDED;
-
   effect.execute_action = create_citrine_action( effect, STORM_SEWERS_CITRINE );
 
   new dbc_proc_callback_t( effect.player, effect );
