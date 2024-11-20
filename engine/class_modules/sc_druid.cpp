@@ -3341,6 +3341,10 @@ struct celestial_alignment_buff_t final : public druid_buff_t
     if ( in_solar )
       eclipse_handler.advance_eclipse<eclipse_e::SOLAR>( true );
 
+    // harmony of the heavens counter resets if solar eclipse was active before CA is triggered
+    if ( !p()->bugs || in_solar )
+      eclipse_handler.harmony_cur = 0.0;
+
     if ( p()->active.orbital_strike )
       p()->active.orbital_strike->execute_on_target( p()->target );
 
