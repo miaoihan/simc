@@ -2342,7 +2342,7 @@ struct power_word_shield_t final : public priest_absorb_t
       return priest().buffs.power_word_shield;
     }
 
-    buff_t* b = buff_t::find( s->target, name_str );
+    buff_t* b = buff_t::find( s->target, name_str, player );
     if ( b )
       return debug_cast<absorb_buff_t*>( b );
 
