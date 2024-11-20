@@ -6130,10 +6130,11 @@ struct citrine_base_t : public BASE
 
   template <typename... ARGS>
   citrine_base_t( const special_effect_t& effect, ARGS&&... args )
-    : BASE( effect, std::forward<ARGS>( args )... ),
+    : BASE( std::forward<ARGS>( args )... ),
       has_fathomdwellers( find_special_effect( effect.player, FATHOMDWELLERS_RUNED_CITRINE ) ),
       cyrce_driver( effect.player->find_spell( CYRCES_CIRCLET ) )
   {
+    BASE::background = true;
   }
 
   double action_multiplier() const override
@@ -6154,16 +6155,62 @@ struct damage_citrine_t : citrine_base_t<generic_proc_t>
 {
   const spell_data_t* driver_spell;
   damage_citrine_t( const special_effect_t& e, std::string_view name, unsigned spell, singing_citrines_drivers_e scd )
-    : citrine_base_t( e, name, spell ), driver_spell( e.player->find_spell( scd ) )
+    : citrine_base_t( e, e, name, spell ), driver_spell( e.player->find_spell( scd ) )
   {
     if ( has_role_mult( e.player, driver_spell ) )
       this->base_multiplier *= role_mult( e.player, driver_spell );
   }
+  void execute() override
+  {
+    if ( !target->is_enemy() )
+    {
+      target = rng().range( target_list() );
+    }
+
+    citrine_base_t::execute();
+  }
 };
 
-using aoe_damage_citrine_t = citrine_base_t<generic_aoe_proc_t>;
-using heal_stone_t         = citrine_base_t<proc_heal_t>;
-using absorb_stone_t       = citrine_base_t<absorb_t>;
+struct heal_citrine_t : citrine_base_t<generic_heal_t>
+{
+  const spell_data_t* driver_spell;
+  heal_citrine_t( const special_effect_t& e, std::string_view name, unsigned spell, singing_citrines_drivers_e scd )
+    : citrine_base_t( e, e, name, spell ), driver_spell( e.player->find_spell( scd ) )
+  {
+    if ( has_role_mult( e.player, driver_spell ) )
+      this->base_multiplier *= role_mult( e.player, driver_spell );
+  }
+
+  void execute() override
+  {
+    if ( target->is_enemy() )
+    {
+      target = rng().range( target_list() );
+    }
+
+    citrine_base_t::execute();
+  }
+};
+
+struct absorb_citrine_t : citrine_base_t<absorb_t>
+{
+  const spell_data_t* driver_spell;
+  absorb_citrine_t( const special_effect_t& e, std::string_view name, unsigned spell, singing_citrines_drivers_e scd )
+    : citrine_base_t( e, name, e.player, e.player->find_spell( spell ) ), driver_spell( e.player->find_spell( scd ) )
+  {
+    if ( has_role_mult( e.player, driver_spell ) )
+      this->base_multiplier *= role_mult( e.player, driver_spell );
+  }
+  void execute() override
+  {
+    if ( target->is_enemy() )
+    {
+      target = rng().range( target_list() );
+    }
+
+    citrine_base_t::execute();
+  }
+};
 
 struct thunderlords_crackling_citrine_t : public damage_citrine_t
 {
@@ -6198,6 +6245,69 @@ struct seabed_leviathans_citrine_t : public damage_citrine_t
     : damage_citrine_t( e, "seabed_leviathans_citrine", 468990, SEABED_LEVIATHANS_CITRINE )
   {
     base_dd_min = base_dd_max = cyrce_driver->effectN( 1 ).average( e ) * driver_spell->effectN( 5 ).percent();
+  }
+};
+
+struct mariners_hallowed_citrine_t : public heal_citrine_t
+{
+  mariners_hallowed_citrine_t( const special_effect_t& e )
+    : heal_citrine_t( e, "mariners_hallowed_citrine", 462960, MARINERS_HALLOWED_CITRINE )
+  {
+    base_dd_min = base_dd_max = cyrce_driver->effectN( 1 ).average( e ) * driver_spell->effectN( 2 ).percent();
+  }
+};
+
+struct old_salts_bardic_citrine_t : public heal_citrine_t
+{
+  old_salts_bardic_citrine_t( const special_effect_t& e )
+    : heal_citrine_t( e, "old_salts_bardic_citrine", 462959, OLD_SALTS_BARDIC_CITRINE )
+  {
+    base_td = cyrce_driver->effectN( 1 ).average( e ) * driver_spell->effectN( 2 ).percent() / 6;
+  }
+};
+
+struct storm_sewers_citrine_t : public absorb_citrine_t
+{
+  struct storm_sewers_citrine_damage_t : public spell_t
+  {
+    storm_sewers_citrine_damage_t( player_t* p ) : spell_t( "storm_sewers_citrine_damage", p, p->find_spell( 468422 ) )
+    {
+    }
+  };
+
+  action_t* damage;
+  storm_sewers_citrine_t( const special_effect_t& e )
+    : absorb_citrine_t( e, "storm_sewers_citrine", 462958, STORM_SEWERS_CITRINE )
+  {
+    base_dd_min = base_dd_max = cyrce_driver->effectN( 1 ).average( e ) * driver_spell->effectN( 2 ).percent();
+    damage                    = new storm_sewers_citrine_damage_t( e.player );
+    add_child( damage );
+  }
+
+  void impact( action_state_t* s )
+  {
+    absorb_citrine_t::impact( s );
+
+    // Always execute the damage portion because normal sims do not have damage events to break the absorb shield.
+    if ( result_is_hit( s->result ) )
+    {
+      player_t* potential_target = s->action->player->target;
+      if ( !potential_target || !potential_target->is_enemy() || potential_target->is_sleeping() )
+      {
+        for ( auto* t : s->action->player->sim->target_non_sleeping_list )
+        {
+          if ( !t->is_enemy() || t->is_sleeping() )
+            continue;
+
+          potential_target = t;
+          break;
+        }
+      }
+      if ( potential_target && potential_target->is_enemy() && !potential_target->is_sleeping() )
+      {
+        damage->execute_on_target( potential_target, s->result_amount * driver_spell->effectN( 3 ).percent() );
+      }
+    }
   }
 };
 
@@ -6266,13 +6376,13 @@ action_t* create_citrine_action( const special_effect_t& effect, singing_citrine
 
     // healing stones
     case MARINERS_HALLOWED_CITRINE:
-      return nullptr;
+      return new mariners_hallowed_citrine_t( effect );
     case OLD_SALTS_BARDIC_CITRINE:
-      return nullptr;
+      return new old_salts_bardic_citrine_t( effect );
 
     // absorb stones
     case STORM_SEWERS_CITRINE:
-      return nullptr;
+      return new storm_sewers_citrine_t( effect );
 
     // Stat Stones
     case STORMBRINGERS_RUNED_CITRINE:
@@ -6402,7 +6512,7 @@ void thunderlords_crackling_citrine( special_effect_t& effect )
   new dbc_proc_callback_t( effect.player, effect );
 }
 
-/** Squall SailorsCitrine
+/** Squall Sailors Citrine
  * id=462342 Ring Driver
  * id=462539 Driver
  * id=462952 Damage
@@ -6428,6 +6538,53 @@ void undersea_overseers_citrine( special_effect_t& effect )
     return;
 
   effect.execute_action = create_citrine_action( effect, UNDERSEA_OVERSEERS_CITRINE );
+
+  new dbc_proc_callback_t( effect.player, effect );
+}
+/** Storm Sewers Citrine
+ * id=462342 Ring Driver
+ * id=462530 Driver
+ * id=462960 Heal
+ */
+void mariners_hallowed_citrine( special_effect_t& effect )
+{
+  if ( !effect.player->is_ptr() )
+    return;
+
+  effect.execute_action = create_citrine_action( effect, MARINERS_HALLOWED_CITRINE );
+
+  new dbc_proc_callback_t( effect.player, effect );
+}
+
+/**  Old Salts Bardic Citrine
+ * id=462342 Ring Driver
+ * id=462531 Driver
+ * id=462959 Heal
+ */
+void old_salts_bardic_citrine( special_effect_t& effect )
+{
+  if ( !effect.player->is_ptr() )
+    return;
+
+  effect.execute_action = create_citrine_action( effect, OLD_SALTS_BARDIC_CITRINE );
+
+  new dbc_proc_callback_t( effect.player, effect );
+}
+
+/** Storm Sewers Citrine
+ * id=462342 Ring Driver
+ * id=462532 Driver
+ * id=462958 Absorb
+ * id=468422 Damage
+ */
+void storm_sewers_citrine( special_effect_t& effect )
+{
+  if ( !effect.player->is_ptr() )
+    return;
+
+  effect.proc_flags2_ = PF2_LANDED;
+
+  effect.execute_action = create_citrine_action( effect, STORM_SEWERS_CITRINE );
 
   new dbc_proc_callback_t( effect.player, effect );
 }
@@ -6834,19 +6991,19 @@ void register_special_effects()
   register_special_effect( 443773, sets::fury_of_the_stormrook );
   
   // Singing Citrines
-  register_special_effect( singing_citrines::CYRCES_CIRCLET, DISABLED_EFFECT );  // Disable ring driver.
-  register_special_effect( singing_citrines::THUNDERLORDS_CRACKLING_CITRINE, singing_citrines::thunderlords_crackling_citrine );
-  register_special_effect( singing_citrines::UNDERSEA_OVERSEERS_CITRINE, singing_citrines::undersea_overseers_citrine );
-  register_special_effect( singing_citrines::SQUALL_SAILORS_CITRINE, singing_citrines::squall_sailors_citrine );
-  register_special_effect( singing_citrines::WINDSINGERS_RUNED_CITRINE, singing_citrines::windsingers_runed_citrine );
-  register_special_effect( singing_citrines::FATHOMDWELLERS_RUNED_CITRINE, singing_citrines::fathomdwellers_runed_citrine );
-  register_special_effect( singing_citrines::STORMBRINGERS_RUNED_CITRINE, singing_citrines::stormbringers_runed_citrine );
-  register_special_effect( singing_citrines::ROARING_WARQUEENS_CITRINE, DISABLED_EFFECT );  // Disable Ally Based Driver
-  register_special_effect( singing_citrines::LEGENDARY_SKIPPERS_CITRINE, singing_citrines::legendary_skippers_citrine );
-  register_special_effect( singing_citrines::OLD_SALTS_BARDIC_CITRINE, DISABLED_EFFECT );   // Disable heal driver
-  register_special_effect( singing_citrines::MARINERS_HALLOWED_CITRINE, DISABLED_EFFECT );  // Disable heal driver
-  register_special_effect( singing_citrines::STORM_SEWERS_CITRINE, DISABLED_EFFECT );       // Disable absorb driver
-  register_special_effect( singing_citrines::SEABED_LEVIATHANS_CITRINE, singing_citrines::seabed_leviathans_citrine );  // Disable stamina driver
+  register_special_effect( singing_citrines::CYRCES_CIRCLET,                    DISABLED_EFFECT );  // Disable ring driver.
+  register_special_effect( singing_citrines::THUNDERLORDS_CRACKLING_CITRINE,    singing_citrines::thunderlords_crackling_citrine );
+  register_special_effect( singing_citrines::UNDERSEA_OVERSEERS_CITRINE,        singing_citrines::undersea_overseers_citrine );
+  register_special_effect( singing_citrines::SQUALL_SAILORS_CITRINE,            singing_citrines::squall_sailors_citrine );
+  register_special_effect( singing_citrines::WINDSINGERS_RUNED_CITRINE,         singing_citrines::windsingers_runed_citrine );
+  register_special_effect( singing_citrines::FATHOMDWELLERS_RUNED_CITRINE,      singing_citrines::fathomdwellers_runed_citrine );
+  register_special_effect( singing_citrines::STORMBRINGERS_RUNED_CITRINE,       singing_citrines::stormbringers_runed_citrine );
+  register_special_effect( singing_citrines::ROARING_WARQUEENS_CITRINE,         DISABLED_EFFECT );  // Disable Ally Based Driver
+  register_special_effect( singing_citrines::LEGENDARY_SKIPPERS_CITRINE,        singing_citrines::legendary_skippers_citrine );
+  register_special_effect( singing_citrines::OLD_SALTS_BARDIC_CITRINE,          singing_citrines::old_salts_bardic_citrine );
+  register_special_effect( singing_citrines::MARINERS_HALLOWED_CITRINE,         singing_citrines::mariners_hallowed_citrine );
+  register_special_effect( singing_citrines::STORM_SEWERS_CITRINE,              singing_citrines::storm_sewers_citrine );
+  register_special_effect( singing_citrines::SEABED_LEVIATHANS_CITRINE,         singing_citrines::seabed_leviathans_citrine );
 }
 
 void register_target_data_initializers( sim_t& )

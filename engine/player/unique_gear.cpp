@@ -5314,7 +5314,7 @@ bool unique_gear::has_role_mult( player_t* player, const spell_data_t* s_data )
     return false;
 
   std::cmatch m;
-  std::regex get_var( R"(\$rolemult=\$(.*))" );
+  std::regex get_var( R"(\$(?:healing)?rolemult=\$(.*))" );
 
   return std::regex_search( vars, m, get_var );
 }
@@ -5337,7 +5337,7 @@ double unique_gear::role_mult( player_t* player, const spell_data_t* s_data )
   if ( vars )
   {
     std::cmatch m;
-    std::regex get_var( R"(\$rolemult=\$(.*))" );  // find the $rolemult= variable
+    std::regex get_var( R"(\$(?:healing)rolemult=\$(.*))" );  // find the $rolemult= variable
     if ( std::regex_search( vars, m, get_var ) )
     {
       const auto var = m.str( 1 );
