@@ -131,7 +131,7 @@ void protection( player_t* p )
   standard->add_action( "hammer_of_wrath" );
   standard->add_action( "divine_toll,if=(!raid_event.adds.exists|raid_event.adds.in>10)" );
   standard->add_action( "avengers_shield,if=talent.refining_fire.enabled&talent.lights_guidance.enabled" );
-  standard->add_action( "judgment,target_if=min:debuff.judgemnt.remains,if=(buff.avenging_wrath.up&talent.hammer_and_anvil.enabled)" );
+  standard->add_action( "judgment,target_if=min:debuff.judgment.remains,if=(buff.avenging_wrath.up&talent.hammer_and_anvil.enabled)" );
   standard->add_action( "holy_armaments,if=next_armament=holy_bulwark&charges=2" );
   standard->add_action( "judgment,target_if=min:debuff.judgment.remains" );
   standard->add_action( "avengers_shield,if=!buff.shake_the_heavens.up&talent.shake_the_heavens.enabled" );
