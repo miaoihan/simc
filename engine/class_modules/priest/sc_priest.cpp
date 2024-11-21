@@ -2402,6 +2402,7 @@ struct power_word_shield_t final : public priest_absorb_t
     }
 
     priest().buffs.weal_and_woe->expire();
+    priest().buffs.rapture->decrement();
   }
 
   void impact( action_state_t* s ) override
@@ -2455,6 +2456,36 @@ struct power_word_shield_t final : public priest_absorb_t
     {
       priest().buffs.light_weaving->trigger();
     }
+  }
+};
+
+// ==========================================================================
+// Rapture
+// TODO: add Rapture and Weal and Woe bonuses
+// ==========================================================================
+struct rapture_t : public priest_heal_t
+{
+  action_t* power_word_shield;
+  rapture_t( priest_t& p, util::string_view options_str ) : priest_heal_t( "rapture", p, p.talents.discipline.rapture )
+  {
+    parse_options( options_str );
+    power_word_shield = new power_word_shield_t( p, {} );
+    power_word_shield->background = true;
+    power_word_shield->base_costs[ RESOURCE_MANA ] = 0;
+    add_child( power_word_shield );
+  }
+
+  void execute() override
+  {
+    priest().buffs.rapture->trigger();
+    priest_heal_t::execute();
+  }
+
+  void impact( action_state_t* s ) override
+  {
+    priest_heal_t::impact( s );
+    power_word_shield->execute_on_target( s->target );
+    priest().cooldowns.power_word_shield->reset( false );
   }
 };
 
@@ -3458,6 +3489,10 @@ action_t* priest_t::create_action( util::string_view name, util::string_view opt
       return new void_blast_shadow_t( *this, options_str );
     if ( specialization() == PRIEST_DISCIPLINE )
       return new void_blast_disc_t( *this, options_str );
+  }
+  if ( name == "rapture" && specialization() == PRIEST_DISCIPLINE )
+  {
+    return new rapture_t( *this, options_str );
   }
 
   return base_t::create_action( name, options_str );

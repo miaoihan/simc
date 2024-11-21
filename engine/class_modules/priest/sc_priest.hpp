@@ -202,6 +202,7 @@ public:
     propagate_const<buff_t*> train_of_thought;
     propagate_const<buff_t*> wrath_unleashed;
     propagate_const<buff_t*> weal_and_woe;
+    propagate_const<buff_t*> rapture;
 
     // Holy
     propagate_const<buff_t*> apotheosis;
@@ -1217,6 +1218,10 @@ public:
       if ( p().sets->has_set_bonus( PRIEST_DISCIPLINE, TWW1, B4 ) )
       {
         parse_effects( p().buffs.darkness_from_light );
+      }
+      if ( p().talents.discipline.rapture.enabled() )
+      {
+        parse_effects( p().buffs.rapture );
       }
     }
 
