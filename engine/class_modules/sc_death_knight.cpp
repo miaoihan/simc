@@ -5728,7 +5728,12 @@ struct ams_parent_buff_t : public death_knight_absorb_buff_t
     max_absorb *= 1.0 + p()->talent.gloom_ward->effectN( 1 ).percent();
 
     if ( horsemen )
-      max_absorb *= 0.8;
+    {
+      if ( player->is_ptr() )
+        max_absorb *= p()->talent.rider.horsemens_aid->effectN( 1 ).percent();
+      else
+        max_absorb *= 0.8;
+    }
 
     return max_absorb;
   }
