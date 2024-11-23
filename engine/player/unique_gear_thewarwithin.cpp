@@ -6160,10 +6160,12 @@ struct damage_citrine_t : citrine_base_t<generic_proc_t>
     if ( has_role_mult( e.player, driver_spell ) )
       this->base_multiplier *= role_mult( e.player, driver_spell );
   }
+
   void execute() override
   {
     if ( !target->is_enemy() )
     {
+      target_cache.is_valid = false;
       target = rng().range( target_list() );
     }
 
@@ -6185,6 +6187,8 @@ struct heal_citrine_t : citrine_base_t<generic_heal_t>
   {
     if ( target->is_enemy() )
     {
+      target                = player;
+      target_cache.is_valid = false;
       target = rng().range( target_list() );
     }
 
@@ -6205,6 +6209,8 @@ struct absorb_citrine_t : citrine_base_t<absorb_t>
   {
     if ( target->is_enemy() )
     {
+      target                = player;
+      target_cache.is_valid = false;
       target = rng().range( target_list() );
     }
 
