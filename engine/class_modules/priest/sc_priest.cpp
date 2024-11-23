@@ -2472,7 +2472,6 @@ struct rapture_t : public priest_heal_t
     power_word_shield = new power_word_shield_t( p, {} );
     power_word_shield->background = true;
     power_word_shield->base_costs[ RESOURCE_MANA ] = 0;
-    add_child( power_word_shield );
   }
 
   void execute() override
