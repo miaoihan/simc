@@ -2034,7 +2034,7 @@ struct essence_base_t : public BASE
   {
     BASE::execute();
 
-    if ( BASE::p()->talent.chronowarden.master_of_destiny.ok() && BASE::base_costs[ RESOURCE_ESSENCE ] > 0 )
+    if ( !BASE::background && BASE::p()->talent.chronowarden.master_of_destiny.ok() && BASE::base_costs[ RESOURCE_ESSENCE ] > 0 )
     {
       for ( auto& b : BASE::p()->allied_thread_of_fate_buffs )
       {
@@ -2045,7 +2045,7 @@ struct essence_base_t : public BASE
       }
     }
 
-    if ( BASE::p()->talent.chronowarden.time_convergence.ok() )
+    if ( !BASE::background && BASE::p()->talent.chronowarden.time_convergence.ok() )
     {
       if ( BASE::p()->buff.time_convergence_intellect->check() )
       {
@@ -2053,7 +2053,7 @@ struct essence_base_t : public BASE
       }
     }
 
-    if ( BASE::p()->talent.scalecommander.extended_battle.ok() && BASE::base_costs[ RESOURCE_ESSENCE ] > 0 )
+    if ( !BASE::background && BASE::p()->talent.scalecommander.extended_battle.ok() && BASE::base_costs[ RESOURCE_ESSENCE ] > 0 )
     {
       for ( auto p_ : BASE::sim->target_non_sleeping_list )
       {
