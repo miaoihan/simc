@@ -1,11 +1,11 @@
-hunter="TWW1_Hunter_Beast_Mastery_Dark_Ranger"
+hunter="TWW1_Hunter_Beast_Mastery_Pack_Leader"
 source=default
 spec=beast_mastery
 level=80
 race=dwarf
 role=attack
 position=ranged_back
-talents=C0PAAAAAAAAAAAAAAAAAAAAAAYstMwAGwswWgxCAAAAAAGAAAAAAAzYYWmZMMzYmZMDzyMjxMzMZGGzMzMzYmxMMGmZgBzyMDb
+talents=C0PAAAAAAAAAAAAAAAAAAAAAAAMmxGDsAbDDNsBAAAAAgBAAAAAAYGLDzyMjhxYmZMMjZGjZmZyMMmxMjxMjZYMMzwsMDWmZYD
 
 # Default consumables
 potion=tempered_potion_3
@@ -86,17 +86,17 @@ actions.trinkets+=/use_item,use_off_gcd=1,slot=trinket1,if=trinket.1.has_use_buf
 actions.trinkets+=/use_item,use_off_gcd=1,slot=trinket2,if=trinket.2.has_use_buff&(variable.sync_ready&(variable.trinket_2_stronger|trinket.1.cooldown.remains)|!variable.sync_ready&(variable.trinket_2_stronger&(variable.sync_remains>trinket.2.cooldown.duration%3&fight_remains>trinket.2.cooldown.duration+20|trinket.1.has_use_buff&trinket.1.cooldown.remains>variable.sync_remains-15&trinket.1.cooldown.remains-5<variable.sync_remains&variable.sync_remains+45>fight_remains)|variable.trinket_1_stronger&(trinket.1.cooldown.remains&(trinket.1.cooldown.remains-5<variable.sync_remains&variable.sync_remains>=20|trinket.1.cooldown.remains-5>=variable.sync_remains&(variable.sync_remains>trinket.2.cooldown.duration%3|trinket.2.cooldown.duration<fight_remains&(variable.sync_remains+trinket.2.cooldown.duration>fight_remains)))|trinket.1.cooldown.ready&variable.sync_remains>20&variable.sync_remains<trinket.1.cooldown.duration%3)))|!trinket.2.has_use_buff&(trinket.2.cast_time=0|!variable.sync_active)&(!trinket.1.has_use_buff&(variable.trinket_2_stronger|trinket.1.cooldown.remains)|trinket.1.has_use_buff&(!variable.sync_active&variable.sync_remains>20|trinket.1.cooldown.remains>20))|fight_remains<25&(variable.trinket_2_stronger|trinket.1.cooldown.remains)
 
 head=lightless_scavengers_skull,id=212020,bonus_id=1808,ilevel=639,gem_id=213743
-neck=sureki_zealots_insignia,id=225577,bonus_id=8781,ilevel=639,gem_id=213479/213470
+neck=sureki_zealots_insignia,id=225577,bonus_id=8781,ilevel=639,gem_id=213467/213491
 shoulders=lightless_scavengers_taxidermy,id=212018,bonus_id=4795,ilevel=639
-back=wings_of_shattered_sorrow,id=225574,ilevel=639,enchant_id=7403
+back=royal_emblem_of_nerubar,id=212446,ilevel=639,enchant_id=7403
 chest=lightless_scavengers_tunic,id=212023,bonus_id=4795,ilevel=639,enchant_id=7364
-wrists=glyphetched_vambraces,id=219342,bonus_id=1808/11303/8960/8790,ilevel=636,gem_id=213494,enchant_id=7385
-hands=glyphetched_gauntlets,id=219341,bonus_id=11303/8960/8790,ilevel=636
-waist=lightless_scavengers_bonegirdle,id=212017,bonus_id=1808,ilevel=639,gem_id=213455
+wrists=glyphetched_vambraces,id=219342,bonus_id=1808/11303/8960/8791,ilevel=636,gem_id=213491,enchant_id=7385
+hands=glyphetched_gauntlets,id=219341,bonus_id=11303/8960/8791,ilevel=636
+waist=reinforced_antiintruder_chainmail,id=221075,bonus_id=1808,ilevel=639,gem_id=213491
 legs=lightless_scavengers_stalkings,id=212019,bonus_id=4795,ilevel=639,enchant_id=7601
-feet=lightless_scavengers_footpads,id=212022,bonus_id=4795,ilevel=639,enchant_id=7418
-finger1=seal_of_the_poisoned_pact,id=225578,bonus_id=8781,ilevel=639,gem_id=213455/213455,enchant_id=7340
-finger2=key_to_the_unseeming,id=212447,bonus_id=8781,ilevel=639,gem_id=213455/213455,enchant_id=7340
+feet=rashanans_grotesque_talons,id=225586,ilevel=639,enchant_id=7418
+finger1=seal_of_the_poisoned_pact,id=225578,bonus_id=8781,ilevel=639,gem_id=213491/213491,enchant_id=7334
+finger2=devout_zealots_ring,id=221136,bonus_id=8781,ilevel=639,gem_id=213479/213455,enchant_id=7334
 trinket1=skardyns_grace,id=133282,ilevel=639
 trinket2=mad_queens_mandate,id=212454,bonus_id=1540/10299/10376
 main_hand=shadetouched_silencer,id=212400,bonus_id=1540/10299,enchant_id=7460
@@ -105,9 +105,9 @@ main_hand=shadetouched_silencer,id=212400,bonus_id=1540/10299,enchant_id=7460
 # gear_ilvl=638.60
 # gear_agility=36154
 # gear_stamina=237111
-# gear_crit_rating=14168
-# gear_haste_rating=19076
-# gear_mastery_rating=5074
+# gear_crit_rating=17722
+# gear_haste_rating=13528
+# gear_mastery_rating=7068
 # gear_versatility_rating=588
 # gear_speed_rating=250
 # gear_avoidance_rating=1635

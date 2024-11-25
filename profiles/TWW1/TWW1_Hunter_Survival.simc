@@ -1,11 +1,11 @@
-hunter="TWW1_Hunter_Survival_Sentinel"
+hunter="TWW1_Hunter_Survival_Pack_Leader"
 source=default
 spec=survival
 level=80
 race=orc
 role=attack
 position=back
-talents=C8PAAAAAAAAAAAAAAAAAAAAAAMGYgtxox2AY2AbzM2mxMzYMjxwMDzMzMzMDAAAAAAAAAAAAAANDjZmZmZMzYGGDzMwMmxMYB
+talents=C8PAAAAAAAAAAAAAAAAAAAAAAMGMzMWWmZ0ssMsNMzWDWmZsNjZmZGzYMYmxMzMjZGAAAAAAAAAAAAAAaGGzMmZGzMmhxwMDMjZWmBL
 
 # Default consumables
 potion=tempered_potion_3
@@ -126,32 +126,32 @@ actions.sentst+=/wildfire_bomb,if=buff.tip_of_the_spear.stack>0&cooldown.lunar_s
 actions.sentst+=/raptor_bite,target_if=min:dot.serpent_sting.remains,if=!talent.contagious_reagents
 actions.sentst+=/raptor_bite,target_if=max:dot.serpent_sting.remains
 
-head=lightless_scavengers_skull,id=212020,bonus_id=1808,ilevel=639,gem_id=213743
-neck=trailspinner_pendant,id=178707,bonus_id=9948/10299/8781,gem_id=213473/213473
-shoulders=lightless_scavengers_taxidermy,id=212018,bonus_id=4795,ilevel=639
-back=consecrated_cloak,id=222817,bonus_id=10421/9633/8902/11144/10222/1485/11109/8960,enchant_id=7409,crafted_stats=32/49
-chest=lightless_scavengers_tunic,id=212023,bonus_id=4795,ilevel=639,enchant_id=7364
-wrists=vambraces_of_deepening_darkness,id=219501,bonus_id=1808,ilevel=636,gem_id=213473,enchant_id=7391
-hands=lightless_scavengers_mitts,id=212021,bonus_id=4795,ilevel=639
-waist=clasp_of_waning_shadow,id=178700,bonus_id=9948/10299/1808,gem_id=213473
-legs=unstoppable_zealots_legplates,id=159367,bonus_id=10047/10299,enchant_id=7601
-feet=surefoot_sabatons,id=159379,bonus_id=10047/10299,enchant_id=7424
-finger1=seal_of_the_poisoned_pact,id=225578,bonus_id=8781,ilevel=639,gem_id=213473/213482,enchant_id=7346
-finger2=writhing_ringworm,id=225576,bonus_id=8781,ilevel=639,gem_id=213458/213491,enchant_id=7346
-trinket1=skardyns_grace,id=133282,bonus_id=11342/10299
-trinket2=void_reapers_contract,id=212456,ilevel=639
-main_hand=harvesters_interdiction,id=221159,bonus_id=3131/10299,enchant_id=7463
+head=lightless_scavengers_skull,id=212020,bonus_id=6652/10397/10390/10371/10256/1527/10255,ilevel=639,gem_id=213743
+neck=sureki_zealots_insignia,id=225577,bonus_id=1540/10299/10376/8781,gem_id=213458/213473
+shoulders=whispering_voidlight_spaulders,id=212429,bonus_id=1540/10299/10376
+back=wings_of_shattered_sorrow,id=225574,bonus_id=6652/10380/10356/10299/1540/10255,enchant_id=7409
+chest=lightless_scavengers_tunic,id=212023,bonus_id=10355/10373/6652/10261/1524/10255,ilevel=639,enchant_id=7364
+wrists=glyphetched_vambraces,id=219342,bonus_id=10421/9633/8902/11144/10222/1485/1808/11303/8960,gem_id=213491,enchant_id=7391,crafted_stats=32/49
+hands=lightless_scavengers_mitts,id=212021,bonus_id=10356/10372/6652/10298/1537/10255,ilevel=639
+waist=lightless_scavengers_bonegirdle,id=212017,bonus_id=10397/10298/1537,ilevel=639,gem_id=213491
+legs=lightless_scavengers_stalkings,id=212019,bonus_id=6652/10390/10370/10256/1527/10255,ilevel=639,enchant_id=7601
+feet=glyphetched_stompers,id=219335,bonus_id=10421/9633/8902/9627/11143/8791/10222/11303/8960,ilevel=636,enchant_id=7424,crafted_stats=32/36
+finger1=seal_of_the_poisoned_pact,id=225578,bonus_id=1540/10299/10376/8781,gem_id=213491/213491,enchant_id=7346
+finger2=umbriss_band,id=133286,bonus_id=11342/10299/10376/8781,gem_id=213491/213482,enchant_id=7346
+trinket1=mad_queens_mandate,id=212454,bonus_id=1540/10299/10376
+trinket2=skardyns_grace,id=133282,bonus_id=10390/6652/10383/10256/10056/10255,ilevel=639
+main_hand=harvesters_interdiction,id=221159,bonus_id=3131/10299/10376,enchant_id=7463
 
 # Gear Summary
 # gear_ilvl=638.60
-# gear_agility=39782
-# gear_stamina=238188
+# gear_agility=36154
+# gear_stamina=238006
 # gear_attack_power=469
-# gear_crit_rating=10179
-# gear_haste_rating=4024
-# gear_mastery_rating=16846
-# gear_versatility_rating=5949
+# gear_crit_rating=15142
+# gear_haste_rating=9422
+# gear_mastery_rating=11544
+# gear_versatility_rating=2333
 # gear_leech_rating=3060
-# gear_armor=37985
+# gear_armor=37943
 # set_bonus=thewarwithin_season_1_2pc=1
 # set_bonus=thewarwithin_season_1_4pc=1
