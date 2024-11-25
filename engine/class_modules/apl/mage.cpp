@@ -213,7 +213,7 @@ void fire( player_t* p )
   default_->add_action( "potion,if=buff.potion.duration>variable.time_to_combustion+buff.combustion.duration" );
   default_->add_action( "variable,name=shifting_power_before_combustion,value=variable.time_to_combustion>cooldown.shifting_power.remains", "Variable that estimates whether Shifting Power will be used before the next Combustion." );
   default_->add_action( "variable,name=item_cutoff_active,value=(variable.time_to_combustion<variable.on_use_cutoff|buff.combustion.remains>variable.skb_duration&!cooldown.item_cd_1141.remains)&((trinket.1.has_cooldown&trinket.1.cooldown.remains<variable.on_use_cutoff)+(trinket.2.has_cooldown&trinket.2.cooldown.remains<variable.on_use_cutoff)>1)" );
-  default_->add_action( "use_item,effect_name=spymasters_web,if=(buff.combustion.remains>10&fight_remains<80)" );
+  default_->add_action( "use_item,effect_name=spymasters_web,if=(trinket.1.has_use&trinket.2.has_use&buff.combustion.remains>10&fight_remains<80)|((buff.combustion.remains>10&buff.spymasters_report.stack>35&fight_remains<60)|fight_remains<25)" );
   default_->add_action( "use_item,name=treacherous_transmitter,if=variable.time_to_combustion<10|fight_remains<25", "The War Within S1 On-Use items with special use timings" );
   default_->add_action( "do_treacherous_transmitter_task,use_off_gcd=1,if=buff.combustion.up|fight_remains<20" );
   default_->add_action( "use_item,name=imperfect_ascendancy_serum,if=variable.time_to_combustion<3" );
@@ -231,7 +231,7 @@ void fire( player_t* p )
   default_->add_action( "ice_nova,if=!scorch_execute.active" );
   default_->add_action( "scorch,if=buff.combustion.down" );
 
-  active_talents->add_action( "meteor,if=buff.combustion.up|(buff.sun_kings_blessing.max_stack-buff.sun_kings_blessing.stack>4|variable.time_to_combustion<=0|buff.combustion.remains>travel_time|!talent.sun_kings_blessing&(cooldown.meteor.duration<variable.time_to_combustion&fight_remains<variable.time_to_combustion))" );
+  active_talents->add_action( "meteor,if=(buff.combustion.up&buff.combustion.remains<cast_time)|(buff.sun_kings_blessing.max_stack-buff.sun_kings_blessing.stack>4|variable.time_to_combustion<=0|buff.combustion.remains>travel_time|!talent.sun_kings_blessing&(cooldown.meteor.duration<variable.time_to_combustion&fight_remains<variable.time_to_combustion))" );
   active_talents->add_action( "dragons_breath,if=talent.alexstraszas_fury&(buff.combustion.down&!buff.hot_streak.react)&(buff.feel_the_burn.up|time>15)&(!improved_scorch.active)", "With Alexstrasza's Fury when Combustion is not active, Dragon's Breath should be used to convert Heating Up to a Hot Streak." );
 
   combustion_cooldowns->add_action( "potion" );
@@ -261,6 +261,7 @@ void fire( player_t* p )
   combustion_phase->add_action( "pyroblast,if=buff.hyperthermia.react" );
   combustion_phase->add_action( "pyroblast,if=buff.hot_streak.react&buff.combustion.up" );
   combustion_phase->add_action( "pyroblast,if=prev_gcd.1.scorch&buff.heating_up.react&active_enemies<variable.combustion_flamestrike&buff.combustion.up" );
+  combustion_phase->add_action( "scorch,if=talent.sun_kings_blessing&improved_scorch.active&debuff.improved_scorch.remains<3*gcd.max" );
   combustion_phase->add_action( "flamestrike,if=buff.fury_of_the_sun_king.up&buff.fury_of_the_sun_king.remains>cast_time&active_enemies>=variable.skb_flamestrike&buff.fury_of_the_sun_king.expiration_delay_remains=0", "Spend Fury of the Sun King procs inside of combustion." );
   combustion_phase->add_action( "pyroblast,if=buff.fury_of_the_sun_king.up&buff.fury_of_the_sun_king.remains>cast_time&buff.fury_of_the_sun_king.expiration_delay_remains=0" );
   combustion_phase->add_action( "fireball,if=buff.frostfire_empowerment.up&!buff.hot_streak.react&!buff.excess_frost.up" );
@@ -290,12 +291,12 @@ void fire( player_t* p )
   standard_rotation->add_action( "fireball,if=buff.hot_streak.up&!buff.frostfire_empowerment.up&buff.hyperthermia.down&!cooldown.shifting_power.ready&cooldown.phoenix_flames.charges<1&!scorch_execute.active&!prev_gcd.1.fireball,line_cd=2*gcd.max", "When resources are low, fish for Hot Streaks." );
   standard_rotation->add_action( "pyroblast,if=(buff.hyperthermia.react|buff.hot_streak.react&(buff.hot_streak.remains<action.fireball.execute_time)|buff.hot_streak.react&(hot_streak_spells_in_flight|firestarter.active|talent.call_of_the_sun_king&action.phoenix_flames.charges)|buff.hot_streak.react&scorch_execute.active)" );
   standard_rotation->add_action( "flamestrike,if=active_enemies>=variable.skb_flamestrike&buff.fury_of_the_sun_king.up&buff.fury_of_the_sun_king.expiration_delay_remains=0" );
-  standard_rotation->add_action( "scorch,if=improved_scorch.active&debuff.improved_scorch.remains<action.pyroblast.cast_time+5*gcd.max&buff.fury_of_the_sun_king.up&!action.scorch.in_flight" );
+  standard_rotation->add_action( "scorch,if=improved_scorch.active&((talent.unleashed_inferno&debuff.improved_scorch.remains<action.pyroblast.cast_time+5*gcd.max)|(talent.sun_kings_blessing&debuff.improved_scorch.remains<4*gcd.max))&buff.fury_of_the_sun_king.up&!action.scorch.in_flight" );
   standard_rotation->add_action( "pyroblast,if=buff.fury_of_the_sun_king.up&buff.fury_of_the_sun_king.expiration_delay_remains=0" );
   standard_rotation->add_action( "fire_blast,use_off_gcd=1,use_while_casting=1,if=!firestarter.active&(!variable.fire_blast_pooling|talent.spontaneous_combustion)&buff.fury_of_the_sun_king.down&(((action.fireball.executing&(action.fireball.execute_remains<0.5|!talent.hyperthermia)|action.pyroblast.executing&(action.pyroblast.execute_remains<0.5))&buff.heating_up.react)|(scorch_execute.active&(!improved_scorch.active|debuff.improved_scorch.stack=debuff.improved_scorch.max_stack|full_recharge_time<3)&(buff.heating_up.react&!action.scorch.executing|!buff.hot_streak.react&!buff.heating_up.react&action.scorch.executing&!hot_streak_spells_in_flight)))", "During the standard rotation, only use Fire Blasts when they are not being pooled for Combustion. Use Fire Blast either during a Fireball/Pyroblast cast when Heating Up is active or during execute with Searing Touch." );
-  standard_rotation->add_action( "fire_blast,use_off_gcd=1,use_while_casting=1,if=!firestarter.active&(!variable.fire_blast_pooling|talent.spontaneous_combustion)&buff.fury_of_the_sun_king.down&(buff.heating_up.up&hot_streak_spells_in_flight<1&(prev_gcd.1.phoenix_flames|prev_gcd.1.scorch))|(((buff.bloodlust.up&charges_fractional>1.5)|charges_fractional>2.5|buff.feel_the_burn.remains<0.5|full_recharge_time*1-(0.5*cooldown.shifting_power.ready)<buff.hyperthermia.duration)&buff.heating_up.react)", "We will munch Fireblasts during Hyperthermia, and use them after instant casts in filler." );
+  standard_rotation->add_action( "fire_blast,use_off_gcd=1,use_while_casting=1,if=!firestarter.active&((!variable.fire_blast_pooling&talent.unleashed_inferno)|talent.spontaneous_combustion)&buff.fury_of_the_sun_king.down&(buff.heating_up.up&hot_streak_spells_in_flight<1&(prev_gcd.1.phoenix_flames|prev_gcd.1.scorch))|(((buff.bloodlust.up&charges_fractional>1.5)|charges_fractional>2.5|buff.feel_the_burn.remains<0.5|full_recharge_time*1-(0.5*cooldown.shifting_power.ready)<buff.hyperthermia.duration)&buff.heating_up.react)", "We will munch Fireblasts during Hyperthermia, and use them after instant casts in filler." );
   standard_rotation->add_action( "pyroblast,if=prev_gcd.1.scorch&buff.heating_up.react&scorch_execute.active&active_enemies<variable.hot_streak_flamestrike" );
-  standard_rotation->add_action( "scorch,if=improved_scorch.active&debuff.improved_scorch.remains<gcd.max" );
+  standard_rotation->add_action( "scorch,if=improved_scorch.active&debuff.improved_scorch.remains<4*gcd.max" );
   standard_rotation->add_action( "fireball,if=buff.frostfire_empowerment.up&!buff.hot_streak.react&!buff.excess_frost.up" );
   standard_rotation->add_action( "scorch,if=buff.heat_shimmer.react&(talent.scald|talent.improved_scorch)&active_enemies<variable.combustion_flamestrike" );
   standard_rotation->add_action( "phoenix_flames,if=!buff.hot_streak.up&(hot_streak_spells_in_flight<1&(!prev_gcd.1.fireball|(buff.heating_up.down&buff.hot_streak.down)))|(hot_streak_spells_in_flight<2&buff.flames_fury.react)" );
