@@ -1261,7 +1261,8 @@ struct evoker_t : public player_t
   void bounce_naszuro( player_t*, timespan_t );
 
   // Augmentation Helpers
-  void spawn_mote_of_possibility( player_t* = nullptr, timespan_t = timespan_t::zero() );
+  void spawn_mote_of_possibility( player_t* = nullptr, mote_buffs_e = mote_buffs_e::MAX,
+                                  timespan_t = timespan_t::zero() );
   void extend_ebon( timespan_t );
   double get_molten_embers_multiplier( player_t*, bool = false) const;
   void apply_bombardments( player_t* );
@@ -8929,43 +8930,83 @@ void evoker_t::bounce_naszuro( player_t* s, timespan_t remains = timespan_t::min
   get_target_data( p )->buffs.unbound_surge->trigger( remains );
 }
 
-void evoker_t::spawn_mote_of_possibility( player_t* prospective_player, timespan_t delay )
+void evoker_t::spawn_mote_of_possibility( player_t* prospective_player, mote_buffs_e mote_buff, timespan_t delay )
 {
   player_t* target = prospective_player;
 
   if ( target && target->is_sleeping() )
     target = nullptr;
 
-  if ( !target && allies_with_my_ebon.size() > 0 )
+  if ( mote_buff == mote_buffs_e::MAX )
+    mote_buff = mote_buffs_e( rng().range<unsigned>( mote_buffs_e::MAX ) );
+
+  if ( target )
   {
-    target = allies_with_my_ebon[ rng().range<size_t>( allies_with_my_ebon.size() ) ];
+    auto td = get_target_data( target );
+    switch ( mote_buff )
+    {
+      case mote_buffs_e::INFERNOS_BLESSING:
+        td->buffs.infernos_blessing->trigger();
+        return;
+      case mote_buffs_e::SHIFTING_SANDS:
+        td->buffs.shifting_sands->current_value = cache.mastery_value();
+        td->buffs.shifting_sands->trigger();
+        return;
+      default:
+        return;
+    }
   }
-
-  if ( !target )
+  else
   {
-    // Use loose Exponential Backoff to delay the event until Ebon Might becomes active.
-    timespan_t new_delay = rng().range( 0_s, 1_s ) + delay * 1.1;
-    make_event( sim, new_delay, [ this, new_delay ] { spawn_mote_of_possibility( nullptr, new_delay ); } );
-    return;
+    switch ( mote_buff )
+    {
+      case mote_buffs_e::INFERNOS_BLESSING:
+        get_target_data( this )->buffs.infernos_blessing->trigger();
+        return;
+      case mote_buffs_e::SYMBIOTIC_BLOOM:
+        return;
+      case mote_buffs_e::SHIFTING_SANDS:
+        if ( !target && allies_with_my_ebon.size() > 0 )
+        {
+          std::vector<player_t*> helper = allies_with_my_ebon.data();
+          rng().shuffle( helper.begin(), helper.end() );
+          auto it = range::partition( helper, [ this ]( player_t* t ) { 
+              return !get_target_data( t )->buffs.shifting_sands->check();
+          } );
+          
+          if ( it != helper.begin() )
+          {
+            std::partition( helper.begin(), it, [ this ]( player_t* t ) {
+              return t->role != ROLE_HYBRID && t->role != ROLE_HEAL && t->role != ROLE_TANK &&
+                     t->specialization() != EVOKER_AUGMENTATION;
+            } );
+          }
+          else
+          {
+            spawn_mote_of_possibility( this, mote_buff );
+            return;
+          }
+
+          auto td                                 = get_target_data( helper.front() );
+          td->buffs.shifting_sands->current_value = cache.mastery_value();
+          td->buffs.shifting_sands->trigger();
+        }
+        else
+        {
+          // Use loose Exponential Backoff to delay the event until Ebon Might becomes active.
+          timespan_t new_delay = rng().range( 0_s, 1_s ) + delay * 1.1;
+          make_event( sim, new_delay,
+                      [ this, mote_buff, new_delay ] { spawn_mote_of_possibility( nullptr, mote_buff, new_delay ); } );
+          return;
+        }
+        return;
+      default:
+        return;
+    }
   }
+  
 
-  auto td = get_target_data( target );
 
-  mote_buffs_e mote_buff = mote_buffs_e( rng().range<unsigned>( mote_buffs_e::MAX ) );
-
-  switch ( mote_buff )
-  {
-    case mote_buffs_e::INFERNOS_BLESSING:
-      td->buffs.infernos_blessing->trigger();
-      break;
-    case mote_buffs_e::SHIFTING_SANDS:
-      td->buffs.shifting_sands->current_value = cache.mastery_value();
-      td->buffs.shifting_sands->trigger();
-      break;
-    case mote_buffs_e::SYMBIOTIC_BLOOM:
-    default:
-      break;
-  }
 }
 
 void evoker_t::extend_ebon( timespan_t extend )
