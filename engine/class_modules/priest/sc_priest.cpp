@@ -1922,7 +1922,7 @@ struct collapsing_void_damage_t final : public priest_spell_t
 
     if ( parent_stacks > 0 )
     {
-      m *= 1.0 + ( parent_stacks * priest().talents.voidweaver.collapsing_void->effectN( 3 ).percent() );
+      m *= 1.0 + ( parent_stacks * priest().buffs.collapsing_void->default_value );
     }
 
     return m;
@@ -1932,7 +1932,7 @@ struct collapsing_void_damage_t final : public priest_spell_t
   {
     // The first trigger of the buff on the spawn of the rift does not count towards the damage mod stacks
     // Only relevant if you didn't extend the rift at all while active
-    parent_stacks = stacks - 1;
+    parent_stacks = stacks;
 
     player->sim->print_debug( "{} triggered collapsing_void_damage on target {} with {} stacks", priest(), *target,
                               parent_stacks );
@@ -1993,7 +1993,7 @@ struct entropic_rift_damage_t final : public priest_spell_t
 
     // The initial stack does not count for increasing damage
     // TODO: use the buff data better
-    double mod = ( priest().buffs.collapsing_void->check() - 1 ) * priest().buffs.collapsing_void->default_value;
+    double mod = priest().buffs.collapsing_void->check() * priest().buffs.collapsing_void->default_value;
     m *= 1.0 + mod;
 
     return m;
@@ -3939,6 +3939,7 @@ void priest_t::create_buffs()
           {
             buffs.voidheart->expire();
             buffs.darkening_horizon->expire();
+            background_actions.collapsing_void->trigger( state.last_entropic_rift_target, buffs.collapsing_void->check() );
             buffs.collapsing_void->expire();
           }
         } );
@@ -3953,13 +3954,8 @@ void priest_t::create_buffs()
 
   buffs.collapsing_void = make_buff( this, "collapsing_void", talents.voidweaver.collapsing_void )
                               ->set_default_value_from_effect( specialization() == PRIEST_SHADOW ? 3 : 4, 0.01 )
+                              ->set_duration( 0_s )
                               ->set_constant_behavior( buff_constant_behavior::NEVER_CONSTANT )
-                              ->set_stack_change_callback( [ this ]( buff_t*, int old_, int new_ ) {
-                                if ( new_ == 0 )
-                                {
-                                  background_actions.collapsing_void->trigger( state.last_entropic_rift_target, old_ );
-                                }
-                              } )
                               ->set_max_stack( 10 );
 
   // Unknown what this piece of spell data is for. Discipline testing shows a maximum of 10 stacks.
@@ -4489,15 +4485,6 @@ void priest_t::trigger_entropic_rift()
 {
   // Spawn Entropic Rift
   background_actions.entropic_rift->execute();
-
-  // Trigger the first stack of collapsing rift
-  // This stack does not count for the damage mod
-  if ( !talents.voidweaver.collapsing_void.enabled() )
-  {
-    return;
-  }
-
-  buffs.collapsing_void->trigger();
 }
 
 void priest_t::expand_entropic_rift()
