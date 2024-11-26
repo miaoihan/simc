@@ -394,7 +394,9 @@ struct divine_guidance_damage_t : public paladin_spell_t
   {
     proc = may_crit         = true;
     may_miss                = false;
-    attack_power_mod.direct = 1;
+    attack_power_mod.direct = ( p->talents.lightsmith.divine_guidance->effectN( 1 ).base_value() +
+                                p->spec.protection_paladin->effectN( 25 ).base_value() ) /
+                              10.0;
     aoe                     = -1;
     split_aoe_damage        = true;
   }
@@ -413,7 +415,9 @@ struct divine_guidance_heal_t : public paladin_heal_t
   {
     proc = may_crit         = true;
     may_miss                = false;
-    attack_power_mod.direct = 1;
+    attack_power_mod.direct = ( p->talents.lightsmith.divine_guidance->effectN( 1 ).base_value() +
+                                p->spec.protection_paladin->effectN( 25 ).base_value() ) /
+                              10.0;
     aoe                     = 1;
   }
 
