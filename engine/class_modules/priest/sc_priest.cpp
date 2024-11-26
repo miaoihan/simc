@@ -1991,10 +1991,7 @@ struct entropic_rift_damage_t final : public priest_spell_t
   {
     double m = priest_spell_t::composite_da_multiplier( s );
 
-    // The initial stack does not count for increasing damage
-    // TODO: use the buff data better
-    double mod = priest().buffs.collapsing_void->check() * priest().buffs.collapsing_void->default_value;
-    m *= 1.0 + mod;
+    m *= 1.0 + priest().buffs.collapsing_void->check_stack_value();
 
     return m;
   }
