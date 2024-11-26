@@ -2522,8 +2522,9 @@ struct essence_devourer_t final : public priest_heal_t
 {
   essence_devourer_t( priest_t& p )
     : priest_heal_t( "essence_devourer", p,
-                     p.talents.shared.mindbender.enabled() ? p.talents.essence_devourer_mindbender
-                                                           : p.talents.essence_devourer_shadowfiend )
+                     p.talents.shared.mindbender.enabled() && !p.talents.voidweaver.voidwraith.enabled()
+                         ? p.talents.essence_devourer_mindbender
+                         : p.talents.essence_devourer_shadowfiend )
   {
     harmful = false;
     proc    = true;
