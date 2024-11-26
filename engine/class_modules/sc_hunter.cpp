@@ -4581,6 +4581,7 @@ struct vicious_hunt_t final : hunter_ranged_attack_t
   vicious_hunt_t( hunter_t* p ) : hunter_ranged_attack_t( "vicious_hunt", p, p->find_spell( 445431 ) )
   {
     background = true;
+    attack_power_mod.direct = data().effectN( 1 ).ap_coeff() * ( 1 + p->specs.survival_hunter->effectN( 19 ).percent() );
   }
 
   void execute() override
