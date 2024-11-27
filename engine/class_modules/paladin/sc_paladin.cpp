@@ -4152,8 +4152,7 @@ void paladin_t::init_special_effects()
 
     auto const divine_inspiration_driver = new special_effect_t( this );
     divine_inspiration_driver->name_str  = "divine_inspiration_driver";
-    // Since proc chance is hidden, this is just a guess. Average proc rate seems to match, though
-    divine_inspiration_driver->ppm_        = -1.2;
+    divine_inspiration_driver->ppm_        = -.55;
     divine_inspiration_driver->rppm_scale_ = RPPM_HASTE;
     divine_inspiration_driver->type        = SPECIAL_EFFECT_EQUIP;
     divine_inspiration_driver->proc_flags_ =
