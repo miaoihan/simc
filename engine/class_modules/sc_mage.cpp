@@ -1896,6 +1896,7 @@ struct mage_spell_t : public spell_t
     bool chill = false;
     bool clearcasting = false;
     bool from_the_ashes = false;
+    bool frostfire_infusion = true;
     bool frostfire_mastery = true;
     bool ignite = false;
     bool overflowing_energy = true;
@@ -2281,7 +2282,7 @@ public:
 
     if ( dbc::has_common_school( get_school(), SCHOOL_FROSTFIRE ) && s->result_type == result_amount_type::DMG_DIRECT )
     {
-      if ( p()->rppm.frostfire_infusion->trigger() )
+      if ( triggers.frostfire_infusion && p()->rppm.frostfire_infusion->trigger() )
         p()->action.frostfire_infusion->execute_on_target( s->target );
       p()->buffs.frostfire_empowerment->trigger();
     }
@@ -6391,6 +6392,7 @@ struct scorch_t final : public custom_state_spell_t<fire_mage_spell_t, scorch_da
     parse_options( options_str );
     triggers.hot_streak = triggers.calefaction = triggers.unleashed_inferno = triggers.kindling = TT_MAIN_TARGET;
     affected_by.unleashed_inferno = triggers.ignite = triggers.from_the_ashes = true;
+    triggers.frostfire_infusion = false;
     // There is a tiny delay between Scorch dealing damage and Hot Streak
     // state being updated. Here we model it as a tiny travel time.
     travel_delay = p->options.scorch_delay.total_seconds();
