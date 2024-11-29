@@ -372,6 +372,8 @@ struct simplified_player_t : public player_t
     // Using a background repeating action as a replacement for a foreground action. Change Ready Type to trigger so we
     // can wake up the pet when it needs to re-execute this action.
     ready_type = READY_TRIGGER;
+
+    _spec = SPEC_PET;
   }
 
   buff_t* make_damage_buff( std::string_view name, double value, timespan_t duration, timespan_t cooldown, timespan_t delay_from_start = 0_s )
