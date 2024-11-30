@@ -10605,9 +10605,13 @@ void warrior_t::apply_affecting_auras( action_t& action )
 
   // Mountain Thane
   action.apply_affecting_aura( talents.mountain_thane.strength_of_the_mountain );
-  action.apply_affecting_aura( talents.mountain_thane.thunder_blast );
   action.apply_affecting_aura( talents.mountain_thane.storm_bolts );
   action.apply_affecting_aura( talents.mountain_thane.thorims_might );
+  if ( specialization() == WARRIOR_PROTECTION )
+  {
+    action.apply_affecting_aura( talents.mountain_thane.thunder_blast );
+    // Effect 2 is not properly flagged as Protection only in Spell Data. Effect 1 & 3 are manually handled elsewhere.
+  }
 }
 
 /* Report Extension Class
