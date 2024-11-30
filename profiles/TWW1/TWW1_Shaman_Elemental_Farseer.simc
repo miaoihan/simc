@@ -1,11 +1,11 @@
-shaman="TWW1_Shaman_Elemental"
+shaman="TWW1_Shaman_Elemental_Farseer"
 source=default
 spec=elemental
 level=80
 race=tauren
 role=spell
 position=ranged_back
-talents=CYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAMbz2yMjZGzysMzMAzMDAAAAAAbmxwGsAzohGbAgZbaGw2iZmphZmZMsNzMDmlBLjxgxMz2YA
+talents=CYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAMbzyyMjZGzysMGMYmZAAAAAwiZ2gBMgZjJkZBAMbTzA2WMzMNMzMjhtZmZwsMYZMzYmhZ2YA
 
 # Default consumables
 potion=tempered_potion_3
