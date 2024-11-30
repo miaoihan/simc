@@ -7089,7 +7089,7 @@ struct lightning_bolt_t : public shaman_spell_t
 
     p()->trigger_thunderstrike_ward( execute_state );
 
-    if ( exec_type == spell_variant::NORMAL )
+    if ( exec_type == spell_variant::NORMAL || exec_type == spell_variant::THORIMS_INVOCATION )
     {
       p()->trigger_arc_discharge( execute_state );
     }
