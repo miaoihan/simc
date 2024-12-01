@@ -471,6 +471,9 @@ public:
   // Attempts, successes
   std::vector<std::tuple<simple_sample_data_t, simple_sample_data_t>> flowing_spirits_procs;
 
+  // Surging Totem Despawn time, required for refresh cases to suppress t=0 bolt
+  timespan_t surging_totem_despawn;
+
   // Cached actions
   struct actions_t
   {
@@ -9924,7 +9927,10 @@ struct surging_totem_t : public spell_totem_pet_t
   {
     spell_totem_pet_t::summon( duration );
 
-    pulse_action->execute_on_target( target );
+    if ( o()->surging_totem_despawn < sim->current_time() )
+    {
+      pulse_action->execute_on_target( target );
+    }
   }
 
   void demise() override
@@ -14502,6 +14508,7 @@ void shaman_t::reset()
   }
 
   active_flowing_spirits_proc = 0U;
+  surging_totem_despawn = timespan_t::min();
 }
 
 
@@ -15294,6 +15301,10 @@ shaman_t::pets_t::pets_t( shaman_t* s ) :
   lightning_wolves.set_event_callback( { spawner::pet_event_type::ARISE, spawner::pet_event_type::DEMISE }, event_fn );
 
   surging_totem.set_max_pets( 1U );
+  surging_totem.set_event_callback( spawner::pet_event_type::DESPAWN,
+    [ s ]( spawner::pet_event_type, spell_totem_pet_t* ) {
+        s->surging_totem_despawn = s->sim->current_time();
+    });
 }
 
 }  // namespace
