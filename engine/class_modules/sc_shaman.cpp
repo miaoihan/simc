@@ -15292,6 +15292,8 @@ shaman_t::pets_t::pets_t( shaman_t* s ) :
   fire_wolves.set_event_callback( { spawner::pet_event_type::ARISE, spawner::pet_event_type::DEMISE }, event_fn );
   frost_wolves.set_event_callback( { spawner::pet_event_type::ARISE, spawner::pet_event_type::DEMISE }, event_fn );
   lightning_wolves.set_event_callback( { spawner::pet_event_type::ARISE, spawner::pet_event_type::DEMISE }, event_fn );
+
+  surging_totem.set_max_pets( 1U );
 }
 
 }  // namespace
