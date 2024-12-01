@@ -3069,25 +3069,26 @@ struct hot_streak_spell_t : public custom_state_spell_t<fire_mage_spell_t, hot_s
       trigger_tracking_buff( p()->buffs.sun_kings_blessing, p()->buffs.fury_of_the_sun_king );
       p()->trigger_lit_fuse();
       p()->trigger_mana_cascade();
+    }
 
-      // TODO: Test the proc chance and whether this works with Hyperthermia and Lit Fuse.
-      if ( p()->cooldowns.pyromaniac->up() && p()->accumulated_rng.pyromaniac->trigger() )
+    // TODO: Test the proc chance and whether this works with Hyperthermia and Lit Fuse.
+    // TODO: Pyromaniac seems to proc regardless of Hot Streak state
+    if ( ( last_hot_streak || p()->bugs ) && p()->cooldowns.pyromaniac->up() && p()->accumulated_rng.pyromaniac->trigger() )
+    {
+      p()->cooldowns.pyromaniac->start( p()->talents.pyromaniac->internal_cooldown() );
+
+      trigger_tracking_buff( p()->buffs.sun_kings_blessing, p()->buffs.fury_of_the_sun_king );
+      p()->trigger_lit_fuse();
+      p()->trigger_spellfire_spheres();
+      p()->trigger_mana_cascade();
+
+      assert( pyromaniac_action );
+      // Pyromaniac Pyroblast actually casts on the Mage's target, but that is probably a bug.
+      make_event( *sim, 500_ms, [ this, t = target ]
       {
-        p()->cooldowns.pyromaniac->start( p()->talents.pyromaniac->internal_cooldown() );
-
-        trigger_tracking_buff( p()->buffs.sun_kings_blessing, p()->buffs.fury_of_the_sun_king );
-        p()->trigger_lit_fuse();
-        p()->trigger_spellfire_spheres();
-        p()->trigger_mana_cascade();
-
-        assert( pyromaniac_action );
-        // Pyromaniac Pyroblast actually casts on the Mage's target, but that is probably a bug.
-        make_event( *sim, 500_ms, [ this, t = target ]
-        {
-          pyromaniac_action->execute_on_target( t );
-          p()->buffs.sparking_cinders->decrement();
-        } );
-      }
+        pyromaniac_action->execute_on_target( t );
+        p()->buffs.sparking_cinders->decrement();
+      } );
     }
   }
 };
