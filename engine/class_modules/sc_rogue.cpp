@@ -8712,7 +8712,7 @@ void actions::rogue_action_t<Base>::trigger_shadow_techniques( const action_stat
                          p()->talent.subtlety.improved_shadow_techniques->effectN( 1 ).base_value();
     p()->resource_gain( RESOURCE_ENERGY, energy_gain, p()->gains.shadow_techniques, state->action );
     // 2024-11-28 -- Shadowcraft's implementation appears to trigger the energize twice
-    if ( p()->talent.subtlety.shadowcraft->ok() && p()->bugs )
+    if ( p()->bugs && p()->talent.subtlety.shadowcraft->ok() && p()->buffs.symbols_of_death->check() )
     {
       p()->resource_gain( RESOURCE_ENERGY, energy_gain, p()->gains.shadow_techniques, state->action );
     }
