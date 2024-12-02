@@ -5337,7 +5337,7 @@ struct eruption_t : public essence_spell_t
                     p()->talent.ricocheting_pyroclast->effectN( 1 ).percent();
     }
 
-    if ( p()->buff.mass_eruption_stacks->check() )
+    if ( p()->buff.mass_eruption_stacks->check() && !is_overlord )
     {
       da *= 1 + ( mass_eruption_max_targets - mass_eruption_targets() ) * mass_eruption_mult;
     }
