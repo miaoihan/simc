@@ -11180,16 +11180,16 @@ double death_knight_t::resource_loss( resource_e resource_type, double amount, g
       summon_rider( spell.summon_whitemane_2->duration(), true );
     }
 
-    if ( talent.rider.nazgrims_conquest.ok() && buffs.apocalyptic_conquest->check() )
-    {
-      debug_cast<buffs::apocalyptic_conquest_buff_t*>( buffs.apocalyptic_conquest )->nazgrims_conquest +=
-          as<int>( amount );
-      invalidate_cache( CACHE_STRENGTH );
-    }
-
     // Effects that require the player to actually spend runes
     if ( actual_amount > 0 )
     {
+      if ( talent.rider.nazgrims_conquest.ok() && buffs.apocalyptic_conquest->check() &&
+           action->data().id() != spec.remorseless_winter->id() )
+      {
+        debug_cast<buffs::apocalyptic_conquest_buff_t*>( buffs.apocalyptic_conquest )->nazgrims_conquest +=
+            as<int>( amount );
+        invalidate_cache( CACHE_STRENGTH );
+      }
     }
   }
 
