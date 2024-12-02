@@ -647,7 +647,89 @@ struct simplified_player_t : public player_t
       started_waiting = sim->current_time();
     }
 
-    player_t::acquire_target( event, context );
+    // TODO: This skips certain very custom targets (such as Soul Effigy), is it a problem (since those
+    // usually are handled in action target cache regeneration)?
+    if ( sim->debug )
+    {
+      sim->out_debug.printf( "%s retargeting event=%s context=%s current_target=%s", name(),
+                             util::retarget_event_string( event ), context ? context->name() : "NONE",
+                             target ? target->name() : "NONE" );
+    }
+
+    player_t* candidate_target    = nullptr;
+    player_t* first_invuln_target = nullptr;
+
+    // TODO: Fancier system
+    for ( auto enemy : sim->target_non_sleeping_list )
+    {
+      if ( enemy->debuffs.invulnerable != nullptr && enemy->debuffs.invulnerable->check() )
+      {
+        if ( first_invuln_target == nullptr )
+        {
+          first_invuln_target = enemy;
+        }
+        continue;
+      }
+
+      if ( !enemy->is_enemy() || enemy->is_sleeping() )
+        continue;
+
+      if ( !candidate_target || enemy->max_health() > candidate_target->max_health() )
+        candidate_target = enemy;
+
+      if ( sim->fixed_time )
+        break;
+    }
+
+    // Invulnerable targets are currently not in the target_non_sleeping_list, so fall back to
+    // checking if the first target has the invulnerability buff up, and use that as the fallback
+    auto first_target = sim->target_list.data().front();
+    if ( !first_invuln_target && first_target->debuffs.invulnerable->check() )
+    {
+      first_invuln_target = first_target;
+    }
+
+    // Only perform target acquisition if the actor's current target would change (to the candidate
+    // target).
+    if ( candidate_target )
+    {
+      if ( sim->debug )
+      {
+        sim->out_debug.printf( "%s acquiring (potentially new) target, current=%s candidate=%s", name(),
+                               target ? target->name() : "NONE", candidate_target ? candidate_target->name() : "NONE" );
+      }
+
+      target = candidate_target;
+      range::for_each( action_list, [ event, context, candidate_target ]( action_t* action ) {
+        action->acquire_target( event, context, candidate_target );
+      } );
+    }
+    // If we really cannot find any sensible target, fall back to the first invulnerable target
+    else if ( !candidate_target && first_invuln_target )
+    {
+      if ( sim->debug )
+      {
+        sim->out_debug.printf( "%s acquiring (potentially new) target, current=%s candidate=%s [invulnerable fallback]", name(),
+                               target ? target->name() : "NONE",
+                               first_invuln_target ? first_invuln_target->name() : "NONE" );
+      }
+
+      target = first_invuln_target;
+      range::for_each( action_list, [ event, context, first_invuln_target ]( action_t* action ) {
+        action->acquire_target( event, context, first_invuln_target );
+      } );
+    }
+
+    if ( candidate_target || first_invuln_target )
+    {
+      // Finally, re-acquire targeting for all dynamic targeting actions. This needs to be done
+      // separately, as their targeting is not strictly bound to player_t::target (i.e., "the players
+      // target")
+      range::for_each(
+          dynamic_target_action_list, [ event, context, candidate_target, first_invuln_target ]( action_t* action ) {
+            action->acquire_target( event, context, candidate_target ? candidate_target : first_invuln_target );
+          } );
+    }
 
     if ( !ability->execute_event )
       trigger_ready();
