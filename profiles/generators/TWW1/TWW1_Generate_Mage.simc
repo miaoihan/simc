@@ -29,7 +29,7 @@ trinket1=spymasters_web,id=220202,ilevel=639
 main_hand=sovereigns_disdain,id=212394,enchant_id=7460,ilevel=639
 off_hand=vagabonds_torch,id=222566,ilevel=636,bonus_id=11300,crafted_stats=36/49
 
-save=TWW1_Mage_Arcane_Spellslinger.simc
+save=TWW1_Mage_Arcane.simc
 
 mage="TWW1_Mage_Arcane_Sunfury"
 spec=arcane
@@ -128,7 +128,7 @@ trinket2=spymasters_web,id=220202,ilevel=639
 main_hand=sovereigns_disdain,id=212394,ilevel=639,enchant_id=7460
 off_hand=vagabonds_torch,id=222566,bonus_id=11300/8792,ilevel=636,crafted_stats=36/49
 
-save=TWW1_Mage_Fire_Frostfire.simc
+save=TWW1_Mage_Fire.simc
 
 mage="TWW1_Mage_Frost_Spellslinger"
 spec=frost
@@ -161,7 +161,7 @@ trinket2=spymasters_web,id=220202,ilevel=639
 main_hand=unceremonious_bloodletter,id=221165,bonus_id=4786/3131/10299,enchant_id=7460
 off_hand=vagabonds_torch,id=222566,bonus_id=11300/8795,ilevel=636,crafted_stats=32/36
 
-save=TWW1_Mage_Frost_Spellslinger.simc
+save=TWW1_Mage_Frost.simc
 
 mage="TWW1_Mage_Frost_Frostfire"
 spec=frost
