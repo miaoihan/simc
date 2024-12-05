@@ -1668,7 +1668,10 @@ struct ice_floes_t final : public buff_t
     if ( !check() )
       return;
 
-    if ( sim->current_time() - last_trigger > 0.5_s )
+    // The grace period seems to be present only if you have a single
+    // Ice Floes stack; this is a change introduced most likely in 11.0.5
+    // TODO: Some spells still follow the old behavior (Flamestrike, Pyroblast, Arcane Missiles)
+    if ( check() > 1 || sim->current_time() - last_trigger > 0.5_s )
       buff_t::decrement( stacks, value );
     else
       sim->print_debug( "Ice Floes removal ignored due to 500 ms protection" );
