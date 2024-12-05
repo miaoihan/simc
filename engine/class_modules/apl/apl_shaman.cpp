@@ -101,7 +101,7 @@ void elemental( player_t* p )
   single_target->add_action( "stormkeeper", "Just use Stormkeeper." );
   single_target->add_action( "primordial_wave,if=!buff.surge_of_power.up", "Use Primordial Wave as much as possible." );
   single_target->add_action( "ancestral_swiftness" );
-  single_target->add_action( "ascendance,if=(buff.spymasters_web.up|!(variable.spymaster_in_1st|variable.spymaster_in_2nd))&(buff.stormkeeper.up&cooldown.stormkeeper.remains>40|!talent.fury_of_the_storms)&(buff.primordial_wave.up|!talent.primordial_wave)" );
+  single_target->add_action( "ascendance,if=(time<10|buff.spymasters_web.up|!(variable.spymaster_in_1st|variable.spymaster_in_2nd))&(buff.stormkeeper.up&cooldown.stormkeeper.remains>40|!talent.fury_of_the_storms)&(buff.primordial_wave.up|!talent.primordial_wave)" );
   single_target->add_action( "tempest,if=buff.surge_of_power.up", "Surge of Power is strong and should be used.©" );
   single_target->add_action( "lightning_bolt,if=buff.surge_of_power.up" );
   single_target->add_action( "tempest,if=buff.storm_frenzy.stack=2&!talent.surge_of_power.enabled", "Dont waste Storm Frenzy (minimal gain)." );
@@ -195,7 +195,7 @@ void elemental_ptr( player_t* p )
   single_target->add_action( "stormkeeper", "Just use Stormkeeper." );
   single_target->add_action( "primordial_wave,if=!buff.surge_of_power.up", "Use Primordial Wave as much as possible." );
   single_target->add_action( "ancestral_swiftness" );
-  single_target->add_action( "ascendance,if=(buff.spymasters_web.up|!(variable.spymaster_in_1st|variable.spymaster_in_2nd))&(buff.stormkeeper.up&cooldown.stormkeeper.remains>40|!talent.fury_of_the_storms)&(buff.primordial_wave.up|!talent.primordial_wave)" );
+  single_target->add_action( "ascendance,if=(time<10|buff.spymasters_web.up|!(variable.spymaster_in_1st|variable.spymaster_in_2nd))&(buff.stormkeeper.up&cooldown.stormkeeper.remains>40|!talent.fury_of_the_storms)&(buff.primordial_wave.up|!talent.primordial_wave)" );
   single_target->add_action( "tempest,if=buff.surge_of_power.up", "Surge of Power is strong and should be used.©" );
   single_target->add_action( "lightning_bolt,if=buff.surge_of_power.up" );
   single_target->add_action( "tempest,if=buff.storm_frenzy.stack=2&!talent.surge_of_power.enabled", "Dont waste Storm Frenzy (minimal gain)." );
