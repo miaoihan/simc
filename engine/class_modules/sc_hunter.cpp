@@ -1301,11 +1301,7 @@ public:
     if ( affected_by.unnatural_causes.direct )
     {
       double amount = p()->talents.unnatural_causes_debuff->effectN( affected_by.unnatural_causes.direct ).percent();
-      //2024-10-30: Bleak Powder is always affected by the base effect from Unnatural Causes twice
-      if ( p()->bugs && ( s->action->id == 467914 || s->action->id == 472084 ) )
-      {
-        amount += p()->talents.unnatural_causes_debuff->effectN( affected_by.unnatural_causes.direct ).percent();
-      } else if ( s->target->health_percentage() < p()->talents.unnatural_causes->effectN( 3 ).base_value() )
+      if ( s->target->health_percentage() < p()->talents.unnatural_causes->effectN( 3 ).base_value() )
       {
         amount *= 1 + p()->talents.unnatural_causes->effectN( 2 ).percent();
       }
