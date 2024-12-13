@@ -6045,8 +6045,11 @@ buff_t* find_citrine_proc_buff( player_t* player, unsigned driver )
 struct stat_buff_current_value_t : stat_buff_t
 {
   bool has_fathomdwellers;
+  double fathomdwellers_mult;
   bool skipper_proc;
   double skipper_mult;
+  bool is_proc;
+  double proc_mult;
 
   stat_buff_current_value_t( actor_pair_t q, util::string_view name, const spell_data_t* s,
                              const item_t* item = nullptr )
@@ -6055,9 +6058,22 @@ struct stat_buff_current_value_t : stat_buff_t
           player, FATHOMDWELLERS_RUNED_CITRINE ) ),  // By default, initialise this to the status. If it does not apply
                                                      // to current buff then after creation flag false.
       skipper_proc( false ),
-      skipper_mult( 0 )
+      skipper_mult( 0 ),
+      fathomdwellers_mult( 1.0 ),
+      is_proc( false ),
+      proc_mult( 1.3 )
   {
     skipper_mult = player->find_spell( LEGENDARY_SKIPPERS_CITRINE )->effectN( 3 ).percent();
+    if ( has_fathomdwellers )
+    {
+      source->register_on_arise_callback( source, [ & ] {
+        // Seems to only apply to rating
+        fathomdwellers_mult =
+            1.0 + ( player->apply_combat_rating_dr(
+                      RATING_MASTERY, player->composite_mastery_rating() / player->current.rating.mastery ) ) /
+                      120;
+      } );
+    }
   }
 
   double get_buff_size()
@@ -6065,14 +6081,12 @@ struct stat_buff_current_value_t : stat_buff_t
     double amount = default_value;
 
     if ( has_fathomdwellers )
-    {
-      // Seems to only apply to rating
-      amount *= 1.0 + ( player->apply_combat_rating_dr( RATING_MASTERY, player->composite_mastery_rating() / player->current.rating.mastery ) ) / 120;
-    }
+      amount *= fathomdwellers_mult;
     if ( skipper_proc )
-    {
       amount *= skipper_mult;
-    }
+    // Windsingers Mastery proc doesnt seem to be affected by this... for reasons?
+    if ( is_proc && ( data().id() == 465963 && util::highest_stat( source, secondary_ratings ) != STAT_MASTERY_RATING || data().id() != 465963 ) )
+      amount *= proc_mult;
 
     return amount;
   }
@@ -6104,6 +6118,8 @@ struct stat_buff_current_value_t : stat_buff_t
 
   void start( int stacks, double, timespan_t duration ) override
   {
+    // Framework setup for if Roaring War Queen is implemented. 
+    is_proc = skipper_proc;
     buff_t::start( stacks, get_buff_size(), duration );
     if ( skipper_proc )
       skipper_proc = false;
@@ -6126,6 +6142,7 @@ template <typename BASE>
 struct citrine_base_t : public BASE
 {
   bool has_fathomdwellers;
+  double fathomdwellers_mult;
   const spell_data_t* cyrce_driver;
 
   template <typename... ARGS>
@@ -6135,6 +6152,15 @@ struct citrine_base_t : public BASE
       cyrce_driver( effect.player->find_spell( CYRCES_CIRCLET ) )
   {
     BASE::background = true;
+    if ( has_fathomdwellers )
+    {
+      effect.player->register_on_arise_callback( effect.player, [ &, effect ] {
+        fathomdwellers_mult =
+            1.0 + ( effect.player->apply_combat_rating_dr(
+                      RATING_MASTERY, effect.player->composite_mastery_rating() / effect.player->current.rating.mastery ) ) /
+                      120;
+      } );
+    }
   }
 
   double action_multiplier() const override
@@ -6144,7 +6170,7 @@ struct citrine_base_t : public BASE
     if ( has_fathomdwellers )
     {
       // Seems to only use gear rating
-       m *= 1.0 + ( BASE::player->apply_combat_rating_dr( RATING_MASTERY, BASE::player->composite_mastery_rating() / BASE::player->current.rating.mastery ) ) / 120;
+      m *= fathomdwellers_mult;
     }
 
     return m;
@@ -6154,11 +6180,13 @@ struct citrine_base_t : public BASE
 struct damage_citrine_t : citrine_base_t<generic_proc_t>
 {
   const spell_data_t* driver_spell;
+
   damage_citrine_t( const special_effect_t& e, std::string_view name, unsigned spell, singing_citrines_drivers_e scd )
     : citrine_base_t( e, e, name, spell ), driver_spell( e.player->find_spell( scd ) )
   {
     // TODO: Confirm bug behaviour
-    // Currently the role multiplier of damaging citrines does not appear to be applying. Tested Discipline Priest and Holy Priest 13/12/2024.
+    // Currently the role multiplier of damaging citrines does not appear to be applying. Tested Discipline Priest and
+    // Holy Priest 13/12/2024.
     if ( has_role_mult( e.player, driver_spell ) && !e.player->bugs )
       this->base_multiplier *= role_mult( e.player, driver_spell );
   }
@@ -6168,7 +6196,7 @@ struct damage_citrine_t : citrine_base_t<generic_proc_t>
     if ( !target->is_enemy() )
     {
       target_cache.is_valid = false;
-      target = rng().range( target_list() );
+      target                = rng().range( target_list() );
     }
 
     citrine_base_t::execute();
@@ -6319,6 +6347,17 @@ struct storm_sewers_citrine_t : public absorb_citrine_t
   }
 };
 
+// Currently does nothing. Just a placeholder for future implementation, and accuracy in Legendary Skippers Citrine.
+struct roaring_warqueen_citrine_t : public generic_proc_t
+{
+  roaring_warqueen_citrine_t( const special_effect_t& e )
+    : generic_proc_t( e, "roaring_warqueens_citrine", ROARING_WARQUEENS_CITRINE )
+  {
+    harmful = false;
+    background = true;
+  }
+};
+
 // Proxy action just to trigger the highest stat buff. Mostly for reporting purposes. 
 // Might be a better way to do this, but this will do for now. 
 struct windsingers_runed_citrine_proc_t : public generic_proc_t
@@ -6402,6 +6441,7 @@ action_t* create_citrine_action( const special_effect_t& effect, singing_citrine
 
     // other
     case ROARING_WARQUEENS_CITRINE:
+      // return new roaring_warqueen_citrine_t( effect );
       return nullptr;
     case LEGENDARY_SKIPPERS_CITRINE:
       return nullptr;
@@ -6693,10 +6733,10 @@ void legendary_skippers_citrine( special_effect_t& effect )
 
       // Heal
       MARINERS_HALLOWED_CITRINE,
-      OLD_SALTS_BARDIC_CITRINE
+      OLD_SALTS_BARDIC_CITRINE,
 
       // Ally Trigger
-      // ROARING_WARQUEENS_CITRINE,
+      // ROARING_WARQUEENS_CITRINE
 
       // Itself
       // LEGENDARY_SKIPPERS_CITRINE,
@@ -6750,7 +6790,7 @@ void legendary_skippers_citrine( special_effect_t& effect )
             action->base_multiplier = old_base;
           }
         }
-        else
+        else if ( ix < citrine_actions.size() + citrine_buffs.size() )
         {
           if ( auto buff = citrine_buffs[ ix - citrine_actions.size() ] )
           {
