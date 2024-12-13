@@ -6067,7 +6067,7 @@ struct stat_buff_current_value_t : stat_buff_t
     if ( has_fathomdwellers )
     {
       // Seems to ignore base mastery
-      amount *= 1.0 + ( player->composite_mastery() - player->base.mastery ) / 100;
+      amount *= 1.0 + ( player->composite_mastery() - player->base.mastery ) / 120;
     }
     if ( skipper_proc )
     {
@@ -6144,7 +6144,7 @@ struct citrine_base_t : public BASE
     if ( has_fathomdwellers )
     {
       // Seems to ignore base mastery
-      m *= 1.0 + ( BASE::player->composite_mastery() - BASE::player->base.mastery ) / 100;
+      m *= 1.0 + ( BASE::player->composite_mastery() - BASE::player->base.mastery ) / 120;
     }
 
     return m;
