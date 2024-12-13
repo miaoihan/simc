@@ -6157,7 +6157,9 @@ struct damage_citrine_t : citrine_base_t<generic_proc_t>
   damage_citrine_t( const special_effect_t& e, std::string_view name, unsigned spell, singing_citrines_drivers_e scd )
     : citrine_base_t( e, e, name, spell ), driver_spell( e.player->find_spell( scd ) )
   {
-    if ( has_role_mult( e.player, driver_spell ) )
+    // TODO: Confirm bug behaviour
+    // Currently the role multiplier of damaging citrines does not appear to be applying. Tested Discipline Priest and Holy Priest 13/12/2024.
+    if ( has_role_mult( e.player, driver_spell ) && !e.player->bugs )
       this->base_multiplier *= role_mult( e.player, driver_spell );
   }
 
