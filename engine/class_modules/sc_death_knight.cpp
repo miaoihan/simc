@@ -3190,6 +3190,8 @@ struct army_ghoul_pet_t final : public base_ghoul_pet_t
     {
       // Currently has a 1.12x modifier, also not in spell data
       owner_coeff.ap_from_ap *= 0.9996;
+      if( dk()->is_ptr() )
+        owner_coeff.ap_from_ap *= 1.3;
     }
   }
 
@@ -15230,37 +15232,50 @@ struct death_knight_module_t : public module_t
     unique_gear::register_special_effect( 326982, runeforge::unending_thirst );
   }
 
-  /*
   void register_hotfixes() const override
   {
-    hotfix::register_effect( "Death Knight", "2024-09-13", "Vampiric Strike Proc chance increased to 25%", 1123520,
-                             hotfix::HOTFIX_FLAG_LIVE )
+    hotfix::register_effect( "Death Knight", "2024-12-13", "Rotten Touch Debuff incrased to 60%", 1026981,
+                             hotfix::HOTFIX_FLAG_PTR )
         .field( "base_value" )
         .operation( hotfix::HOTFIX_SET )
-        .modifier( 25 )
-        .verification_value( 10 );
+        .modifier( 60 )
+        .verification_value( 50 );
 
-    hotfix::register_effect( "Death Knight", "2024-09-13", "Frenzied Bloodthirst increased to 5%", 1123820,
-                             hotfix::HOTFIX_FLAG_LIVE )
-        .field( "base_value" )
-        .operation( hotfix::HOTFIX_SET )
-        .modifier( 5 )
-        .verification_value( 4 );
-
-    hotfix::register_effect( "Death Knight", "2024-09-13", "Visceral Strength buffed to 8%", 1123972,
-                             hotfix::HOTFIX_FLAG_LIVE )
-        .field( "base_value" )
-        .operation( hotfix::HOTFIX_SET )
-        .modifier( 8 )
-        .verification_value( 6 );
-
-    hotfix::register_effect( "Death Knight", "2024-09-13", "Vampiric Strike byuffed by 20%", 1124444,
-                             hotfix::HOTFIX_FLAG_LIVE )
+    hotfix::register_effect( "Death Knight", "2024-12-13", "Death Coil buffed by 8%", 39872,
+                             hotfix::HOTFIX_FLAG_PTR )
         .field( "ap_coefficient" )
         .operation( hotfix::HOTFIX_SET )
-        .modifier( 0.5814504 )
-        .verification_value( 0.484542 );
-  }*/
+        .modifier( 0.64368 )
+        .verification_value( 0.596 );
+
+    hotfix::register_effect( "Death Knight", "2024-12-13", "Scourge Strike Physical buffed by 10%", 48019,
+                             hotfix::HOTFIX_FLAG_PTR )
+      .field( "ap_coefficient" )
+      .operation( hotfix::HOTFIX_SET )
+      .modifier( 0.641784 )
+      .verification_value( 0.58344 );
+
+    hotfix::register_effect( "Death Knight", "2024-12-13", "Scourge Strike Shadow buffed by 10%", 214692,
+                             hotfix::HOTFIX_FLAG_PTR )
+      .field( "ap_coefficient" )
+      .operation( hotfix::HOTFIX_SET )
+      .modifier( 0.35354 )
+      .verification_value( 0.3214 );
+
+    hotfix::register_effect( "Death Knight", "2024-12-13", "Clawing Shadows buffed by 10%", 324719,
+                             hotfix::HOTFIX_FLAG_PTR )
+      .field( "ap_coefficient" )
+      .operation( hotfix::HOTFIX_SET )
+      .modifier( 1.177 )
+      .verification_value( 1.07 );
+
+    hotfix::register_effect( "Death Knight", "2024-12-13", "Vampiric Strike buffed by 10%", 1123513,
+                             hotfix::HOTFIX_FLAG_PTR )
+      .field( "ap_coefficient" )
+      .operation( hotfix::HOTFIX_SET )
+      .modifier( 1.144 )
+      .verification_value( 1.04 );
+  }
 
   void init( player_t* ) const override
   {
