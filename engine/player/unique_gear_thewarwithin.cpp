@@ -6066,8 +6066,9 @@ struct stat_buff_current_value_t : stat_buff_t
 
     if ( has_fathomdwellers )
     {
-      // Seems to ignore base mastery
-      amount *= 1.0 + ( player->composite_mastery() - player->base.mastery ) / 120;
+      // Seems to ignore base mastery and skyfury
+      // amount *= 1.0 + ( player->apply_combat_rating_dr( RATING_MASTERY, player->composite_mastery_rating() / player->current.rating.mastery ) ) / 120;
+      amount *= 1.0 + ( player->composite_mastery() - player->base.mastery - sim->auras.skyfury->check_value() ) / 120;
     }
     if ( skipper_proc )
     {
@@ -6144,7 +6145,11 @@ struct citrine_base_t : public BASE
     if ( has_fathomdwellers )
     {
       // Seems to ignore base mastery
-      m *= 1.0 + ( BASE::player->composite_mastery() - BASE::player->base.mastery ) / 120;
+      // m *= 1.0 + ( BASE::player->apply_combat_rating_dr( RATING_MASTERY, BASE::player->composite_mastery_rating() /
+      // BASE::player->current.rating.mastery ) ) / 120;
+      m *= 1.0 + ( BASE::player->composite_mastery() - BASE::player->base.mastery -
+                   BASE::sim->auras.skyfury->check_value() ) /
+                     120;
     }
 
     return m;
