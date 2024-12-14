@@ -2003,6 +2003,7 @@ class SpellDataGenerator(DataGenerator):
           ( 451137, 0 ), ( 450511, 0 ), ( 451031, 0 ),  # Call of the Ancestors spells
           ( 447419, 0 ),                                # Call of the Ancestor Lava Burst
           ( 447427, 0 ),                                # Call of the Ancestor Elemental Blast
+          ( 465717, 0 ),                                # Call of the Ancestor Elemental Blast NEW
           ( 447425, 0 ),                                # Call of the Ancestor Chain Lightning
           ( 470058, 0 ),                                # Voltaic Blaze override buff
           ( 467283, 0 ),                                # Reactivity proc
