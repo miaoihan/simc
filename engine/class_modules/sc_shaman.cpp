@@ -4075,7 +4075,7 @@ struct ancestor_t : public shaman_pet_t
 
   struct elemental_blast_t : public pet_spell_t<ancestor_t>
   {
-    elemental_blast_t( ancestor_t* p ) : super( p, "elemental_blast", p->find_spell( 447427 ) )
+    elemental_blast_t( ancestor_t* p ) : super( p, "elemental_blast", p->find_spell( 465717 ) )
     {
         background = true;
         spell_power_mod.direct = data().effectN( 1 ).sp_coeff();
