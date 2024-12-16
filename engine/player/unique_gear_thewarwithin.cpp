@@ -6345,7 +6345,7 @@ struct roaring_warqueen_citrine_t : public generic_heal_t
     : generic_heal_t( e, "roaring_warqueens_citrine", 462964 ), max_targets( 0 ), num_hit( 0 )
   {
     background  = true;
-    max_targets = as<int>( data().effectN( 2 ).base_value() );
+    max_targets = as<int>( e.player->find_spell( ROARING_WARQUEENS_CITRINE)->effectN( 2 ).base_value() );
     // Prevent feedback loop from proccing other war queen citrines
     cooldown->duration = 100_ms;
   }
@@ -6365,7 +6365,7 @@ struct roaring_warqueen_citrine_t : public generic_heal_t
 
     for ( auto* t : player->sim->player_no_pet_list )
     {
-      if ( t->is_sleeping() )
+      if ( t->is_sleeping() || t == player )
         continue;
 
       special_effect_t* circlet = unique_gear::find_special_effect( t, CYRCES_CIRCLET );
