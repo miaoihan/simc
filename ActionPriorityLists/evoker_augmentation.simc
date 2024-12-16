@@ -6,10 +6,7 @@
 # SimulationCraft is always looking for updates and improvements to the default action lists.
 
 # Executed before combat begins. Accepts non-harmful actions only.
-actions.precombat=flask
-actions.precombat+=/food
-actions.precombat+=/augmentation
-actions.precombat+=/snapshot_stats
+actions.precombat=snapshot_stats
 actions.precombat+=/variable,name=spam_heal,default=1,op=reset
 actions.precombat+=/variable,name=minimum_opener_delay,op=reset,default=0
 actions.precombat+=/variable,name=opener_delay,value=variable.minimum_opener_delay,if=!talent.interwoven_threads
