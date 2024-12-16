@@ -3188,10 +3188,8 @@ struct army_ghoul_pet_t final : public base_ghoul_pet_t
 
     if ( name_str == "apoc_ghoul" )
     {
-      // Currently has a 1.12x modifier, also not in spell data
-      owner_coeff.ap_from_ap *= 0.9996;
-      if( dk()->is_ptr() )
-        owner_coeff.ap_from_ap *= 1.3;
+      // Currently has a 1.29948x modifier as of 12-18-2024, also not in spell data
+      owner_coeff.ap_from_ap *= 1.29948;
     }
   }
 
@@ -5723,10 +5721,7 @@ struct ams_parent_buff_t : public death_knight_absorb_buff_t
 
     if ( horsemen )
     {
-      if ( player->is_ptr() )
-        max_absorb *= p()->talent.rider.horsemens_aid->effectN( 1 ).percent();
-      else
-        max_absorb *= 0.8;
+      max_absorb *= p()->talent.rider.horsemens_aid->effectN( 1 ).percent();
     }
 
     return max_absorb;
@@ -15235,42 +15230,42 @@ struct death_knight_module_t : public module_t
   void register_hotfixes() const override
   {
     hotfix::register_effect( "Death Knight", "2024-12-13", "Rotten Touch Debuff incrased to 60%", 1026981,
-                             hotfix::HOTFIX_FLAG_PTR )
+                             hotfix::HOTFIX_FLAG_LIVE )
         .field( "base_value" )
         .operation( hotfix::HOTFIX_SET )
         .modifier( 60 )
         .verification_value( 50 );
 
     hotfix::register_effect( "Death Knight", "2024-12-13", "Death Coil buffed by 8%", 39872,
-                             hotfix::HOTFIX_FLAG_PTR )
+                             hotfix::HOTFIX_FLAG_LIVE )
         .field( "ap_coefficient" )
         .operation( hotfix::HOTFIX_SET )
         .modifier( 0.64368 )
         .verification_value( 0.596 );
 
     hotfix::register_effect( "Death Knight", "2024-12-13", "Scourge Strike Physical buffed by 10%", 48019,
-                             hotfix::HOTFIX_FLAG_PTR )
+                             hotfix::HOTFIX_FLAG_LIVE )
       .field( "ap_coefficient" )
       .operation( hotfix::HOTFIX_SET )
       .modifier( 0.641784 )
       .verification_value( 0.58344 );
 
     hotfix::register_effect( "Death Knight", "2024-12-13", "Scourge Strike Shadow buffed by 10%", 214692,
-                             hotfix::HOTFIX_FLAG_PTR )
+                             hotfix::HOTFIX_FLAG_LIVE )
       .field( "ap_coefficient" )
       .operation( hotfix::HOTFIX_SET )
       .modifier( 0.35354 )
       .verification_value( 0.3214 );
 
     hotfix::register_effect( "Death Knight", "2024-12-13", "Clawing Shadows buffed by 10%", 324719,
-                             hotfix::HOTFIX_FLAG_PTR )
+                             hotfix::HOTFIX_FLAG_LIVE )
       .field( "ap_coefficient" )
       .operation( hotfix::HOTFIX_SET )
       .modifier( 1.177 )
       .verification_value( 1.07 );
 
     hotfix::register_effect( "Death Knight", "2024-12-13", "Vampiric Strike buffed by 10%", 1123513,
-                             hotfix::HOTFIX_FLAG_PTR )
+                             hotfix::HOTFIX_FLAG_LIVE )
       .field( "ap_coefficient" )
       .operation( hotfix::HOTFIX_SET )
       .modifier( 1.144 )
