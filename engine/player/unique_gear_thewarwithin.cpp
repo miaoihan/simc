@@ -5897,9 +5897,10 @@ namespace singing_citrines
 {
 enum singing_citrines_drivers_e
 {
+  CITRINE_DRIVER_NONE = 0,
   // Thunder
-  STORM_SEWERS_CITRINE           = 462532,  // NYI - Absorb
-  ROARING_WARQUEENS_CITRINE      = 462526,  // NYI - Trigger 4 Nearby Ally Singing Thunder Citrines
+  STORM_SEWERS_CITRINE           = 462532,  // Absorb
+  ROARING_WARQUEENS_CITRINE      = 462526,  // Trigger 4 Nearby Ally Singing Thunder Citrines
   STORMBRINGERS_RUNED_CITRINE    = 462536,  // Equal Secondary Stat Split
   THUNDERLORDS_CRACKLING_CITRINE = 462540,  // ST Damage Proc
 
@@ -5916,7 +5917,8 @@ enum singing_citrines_drivers_e
   SQUALL_SAILORS_CITRINE     = 462539,  // Damage 5t AOE
 
   // Ring Driver
-  CYRCES_CIRCLET = 462342 // The ring itself. Never implemented and not a stone. Easier to reference for setting up stones.
+  CYRCES_CIRCLET =
+      462342  // The ring itself. Never implemented and not a stone. Easier to reference for setting up stones.
 };
 
 enum singing_citrine_type_e
@@ -5963,7 +5965,7 @@ action_t* find_citrine_action( player_t* player, unsigned driver )
   {
     // damage stones
     case THUNDERLORDS_CRACKLING_CITRINE:
-      return player->find_action( "shining_obsidian_stone" );
+      return player->find_action( "thunderlords_crackling_citrine" );
     case UNDERSEA_OVERSEERS_CITRINE:
       return player->find_action( "undersea_overseers_citrine" );
     case SQUALL_SAILORS_CITRINE:
@@ -6030,6 +6032,7 @@ struct stat_buff_current_value_t : stat_buff_t
   double fathomdwellers_mult;
   bool skipper_proc;
   double skipper_mult;
+  bool queen_proc;
   bool is_proc;
   double proc_mult;
 
@@ -6101,11 +6104,13 @@ struct stat_buff_current_value_t : stat_buff_t
 
   void start( int stacks, double, timespan_t duration ) override
   {
-    // Framework setup for if Roaring War Queen is implemented. 
-    is_proc = skipper_proc;
+    if ( skipper_proc || queen_proc )
+      is_proc = true;
+    else
+      is_proc = false;
     buff_t::start( stacks, get_buff_size(), duration );
-    if ( skipper_proc )
-      skipper_proc = false;
+    if ( skipper_proc || queen_proc )
+      skipper_proc = queen_proc = false;
   }
 
   void reset() override
@@ -6329,14 +6334,76 @@ struct storm_sewers_citrine_t : public absorb_citrine_t
   }
 };
 
-// Currently does nothing. Just a placeholder for future implementation, and accuracy in Legendary Skippers Citrine.
-struct roaring_warqueen_citrine_t : public generic_proc_t
+struct roaring_warqueen_citrine_t : public generic_heal_t
 {
+  static constexpr std::array<singing_citrines_drivers_e, 4> CITRINE_DRIVERS = {
+      STORM_SEWERS_CITRINE, STORMBRINGERS_RUNED_CITRINE, THUNDERLORDS_CRACKLING_CITRINE, ROARING_WARQUEENS_CITRINE };
+  int max_targets;
+  int num_hit;
+
   roaring_warqueen_citrine_t( const special_effect_t& e )
-    : generic_proc_t( e, "roaring_warqueens_citrine", ROARING_WARQUEENS_CITRINE )
+    : generic_heal_t( e, "roaring_warqueens_citrine", 462964 ), max_targets( 0 ), num_hit( 0 )
   {
-    harmful = false;
-    background = true;
+    background  = true;
+    max_targets = as<int>( data().effectN( 2 ).base_value() );
+  }
+
+  void execute() override
+  {
+    if ( target->is_enemy() )
+    {
+      target                = player;
+      target_cache.is_valid = false;
+      target                = rng().range( target_list() );
+    }
+
+    num_hit = 0;
+
+    generic_heal_t::execute();
+
+    for ( auto* t : player->sim->player_no_pet_list )
+    {
+      if ( t->is_sleeping() )
+        continue;
+
+      special_effect_t* circlet = unique_gear::find_special_effect( t, CYRCES_CIRCLET );
+      if ( !circlet )
+        continue;
+
+      singing_citrines_drivers_e citrine = CITRINE_DRIVER_NONE;
+      for ( auto& d : CITRINE_DRIVERS )
+      {
+        if ( auto eff = unique_gear::find_special_effect( t, d ) )
+        {
+          citrine = d;
+          break;
+        }
+      }
+
+      if ( citrine == CITRINE_DRIVER_NONE )
+        continue;
+
+      if ( auto proc_buff = find_citrine_proc_buff( t, citrine ) )
+      {
+        auto buff        = debug_cast<stat_buff_current_value_t*>( proc_buff );
+        buff->queen_proc = true;
+        buff->trigger();
+      }
+
+      if ( auto proc_action = find_citrine_action( t, citrine ) )
+        proc_action->execute();
+
+      if ( ++num_hit >= max_targets )
+        break;
+      else
+        continue;
+    }
+  }
+
+  void reset() override
+  {
+    generic_heal_t::reset();
+    num_hit = 0;
   }
 };
 
@@ -6420,8 +6487,7 @@ action_t* create_citrine_action( const special_effect_t& effect, singing_citrine
 
     // other
     case ROARING_WARQUEENS_CITRINE:
-      // return new roaring_warqueen_citrine_t( effect );
-      return nullptr;
+      return new roaring_warqueen_citrine_t( effect );
     case LEGENDARY_SKIPPERS_CITRINE:
       return nullptr;
     case SEABED_LEVIATHANS_CITRINE:
@@ -6493,9 +6559,10 @@ buff_t* create_citrine_proc_buff( const special_effect_t& effect, singing_citrin
       double stat_value = cyrce_driver->effectN( 2 ).average( effect ) * buff_driver->effectN( 2 ).percent() /
                           cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
 
-      buff_t* buff = create_buff<stat_buff_current_value_t>( effect.player, "stormbringers_runed_citrine_proc", buff_spell )
-                         ->add_stat_from_effect( 1, stat_value )
-                         ->set_default_value( stat_value );
+      buff_t* buff =
+          create_buff<stat_buff_current_value_t>( effect.player, "stormbringers_runed_citrine_proc", buff_spell )
+              ->add_stat_from_effect( 1, stat_value )
+              ->set_default_value( stat_value );
       return buff;
     }
     case FATHOMDWELLERS_RUNED_CITRINE:
@@ -6506,7 +6573,8 @@ buff_t* create_citrine_proc_buff( const special_effect_t& effect, singing_citrin
       double stat_value = cyrce_driver->effectN( 2 ).average( effect ) * buff_driver->effectN( 2 ).percent() /
                           cyrce_driver->effectN( 3 ).base_value() * cyrce_driver->effectN( 5 ).base_value() / 3;
 
-      buff_t* buff = create_buff<stat_buff_current_value_t>( effect.player, "fathomdwellers_runed_citrine_proc", buff_spell )
+      buff_t* buff =
+          create_buff<stat_buff_current_value_t>( effect.player, "fathomdwellers_runed_citrine_proc", buff_spell )
               ->add_stat_from_effect( 1, stat_value )
               ->set_default_value( stat_value );
 
@@ -6694,7 +6762,7 @@ void fathomdwellers_runed_citrine( special_effect_t& effect )
 
 void legendary_skippers_citrine( special_effect_t& effect )
 {
-  static constexpr std::array<singing_citrines_drivers_e, 10> possible_stones = {
+  static constexpr std::array<singing_citrines_drivers_e, 11> possible_stones = {
       // DAMAGE
       THUNDERLORDS_CRACKLING_CITRINE,
       UNDERSEA_OVERSEERS_CITRINE,
@@ -6714,7 +6782,7 @@ void legendary_skippers_citrine( special_effect_t& effect )
       OLD_SALTS_BARDIC_CITRINE,
 
       // Ally Trigger
-      // ROARING_WARQUEENS_CITRINE
+      ROARING_WARQUEENS_CITRINE
 
       // Itself
       // LEGENDARY_SKIPPERS_CITRINE,
@@ -6801,6 +6869,8 @@ void stormbringers_runed_citrine( special_effect_t& effect )
                   ->add_stat_from_effect( 1, stat_value )
                   ->set_default_value( stat_value );
 
+  // Always create stormbringers proc buff in case another player has Roaring Warqueen's Citrine
+  create_citrine_proc_buff( effect, STORMBRINGERS_RUNED_CITRINE );
   effect.player->register_on_arise_callback( effect.player, [ buff ] { buff->trigger(); } );
 }
 
@@ -6837,6 +6907,13 @@ void seabed_leviathans_citrine( special_effect_t& effect )
                   ->set_default_value( stat_value );
 
   effect.player->register_on_arise_callback( effect.player, [ buff ] { buff->trigger(); } );
+}
+
+void roaring_warqueens_citrine( special_effect_t& effect )
+{
+  effect.execute_action = create_citrine_action( effect, ROARING_WARQUEENS_CITRINE );
+
+  new dbc_proc_callback_t( effect.player, effect );
 }
 }  // namespace singing_citrines
 
@@ -7016,7 +7093,7 @@ void register_special_effects()
   register_special_effect( singing_citrines::WINDSINGERS_RUNED_CITRINE,         singing_citrines::windsingers_runed_citrine );
   register_special_effect( singing_citrines::FATHOMDWELLERS_RUNED_CITRINE,      singing_citrines::fathomdwellers_runed_citrine );
   register_special_effect( singing_citrines::STORMBRINGERS_RUNED_CITRINE,       singing_citrines::stormbringers_runed_citrine );
-  register_special_effect( singing_citrines::ROARING_WARQUEENS_CITRINE,         DISABLED_EFFECT );  // Disable Ally Based Driver
+  register_special_effect( singing_citrines::ROARING_WARQUEENS_CITRINE,         singing_citrines::roaring_warqueens_citrine );
   register_special_effect( singing_citrines::LEGENDARY_SKIPPERS_CITRINE,        singing_citrines::legendary_skippers_citrine );
   register_special_effect( singing_citrines::OLD_SALTS_BARDIC_CITRINE,          singing_citrines::old_salts_bardic_citrine );
   register_special_effect( singing_citrines::MARINERS_HALLOWED_CITRINE,         singing_citrines::mariners_hallowed_citrine );
