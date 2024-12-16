@@ -1,4 +1,4 @@
-SimulationCraft 1100-02 for World of Warcraft 11.0.5.57689 Live
+SimulationCraft 1100-02 for World of Warcraft 11.0.7.58046 Live
 Name             : Block (desc=Passive) (id=107) [Passive] 
 Class            : Warrior, Paladin, Shaman
 School           : Physical
@@ -370,7 +370,6 @@ Attributes       : Not Shapeshifted (16), Do Not Sheath (18), Allow Class Abilit
 Effects          :
 #1 (id=3248)     : School Damage (2): nature
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | SP Coefficient: 5.0886 | PvP Coefficient: 0.85 | Target: Enemy (6)
-Hotfixed         : PvP Coefficient (1 -> 0.85)
 Description      : Instantly shocks the target with concussive force, causing $s1 Nature damage.$?a190493[
 
 Earth Shock will consume all stacks of Fulmination to deal extra Nature damage to your target.][]
@@ -593,7 +592,7 @@ Family Flags     : 23, 39, 58
 Attributes       : Not a Proc (105), Requires Main-Hand Weapon (106), Do Not Display Range (126), Not In Spellbook Until Learned (269), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=15497)    : School Damage (2): physical
-                   Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.3105 | Target: Enemy (6)
+                   Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.3105 | PvP Coefficient: 1.6 | Target: Enemy (6)
 Description      : $@spelldesc33757
 
 Name             : Gift of the Naaru (desc=Racial) (id=28880) [Spell Family (4)] 
@@ -603,7 +602,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -1309,7 +1308,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -1329,7 +1328,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -1349,7 +1348,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Attributes       : Not Shapeshifted (16), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Ignore Caster Modifiers (125), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Reset cooldown upon ending an encounter (333)
@@ -1368,7 +1367,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -1388,7 +1387,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Affecting Spells : Mastery: Deep Healing (77226 effect#1)
@@ -1409,7 +1408,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Affecting Spells : Norgannon's Foresight (236380 effect#1)
@@ -1614,11 +1613,11 @@ Race             : Worgen (0x200000)
 School           : Physical
 Spell Type       : None
 Duration         : 10 seconds
-Cooldown         : 120 seconds
+Cooldown         : 90 seconds
 Labels           : 219
 Attributes       : Allow While Stealthed (37), Reset cooldown upon ending an encounter (333)
 Effects          :
-#1 (id=71777)    : Apply Aura (6) | Increase Speed% (31)
+#1 (id=71777)    : Apply Aura (6) | Increase Movement Speed% (Stacking) (129)
                    Base Value: 40 | Scaled Value: 40 | Target: Self (1)
 #2 (id=104308)   : Apply Aura (6) | Unknown(358)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -2836,7 +2835,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Attributes       : Not Shapeshifted (16), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Ignore Caster Modifiers (125), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Reset cooldown upon ending an encounter (333)
@@ -2978,7 +2977,6 @@ Effects          :
                    Base Value: 259 | Scaled Value: 259 | Target: Self (1)
                    Affected Spells: Lava Burst (51505), Lava Burst (285452)
                    Family Flags: 44
-Hotfixed         : Base Value (176 -> 259)
 #10 (id=880173)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 34 | Scaled Value: 34
                    Affected Spells: Frost Shock (196840)
@@ -3001,12 +2999,10 @@ Hotfixed         : Base Value (176 -> 259)
                    Base Value: 263 | Scaled Value: 263 | Target: Self (1)
                    Affected Spells: Flame Shock (188389), Flame Shock (470411)
                    Family Flags: 28
-Hotfixed         : Base Value (179 -> 263)
 #18 (id=1040709) : Apply Aura (6) | Add Percent Modifier (108): Spell Periodic Amount (22)
                    Base Value: 263 | Scaled Value: 263 | Misc Value: 22 | Target: Self (1)
                    Affected Spells: Flame Shock (188389), Flame Shock (470411)
                    Family Flags: 28
-Hotfixed         : Base Value (179 -> 263)
 #19 (id=1040710) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 22 | Scaled Value: 22 | PvP Coefficient: 1.83 | Target: Self (1)
                    Affected Spells: Healing Surge (8004)
@@ -3038,17 +3034,14 @@ Hotfixed         : Base Value (179 -> 263)
                    Base Value: -23 | Scaled Value: -23 | PvP Coefficient: 0 | Target: Self (1)
                    Affected Spells: Flame Shock (188389), Flame Shock (470411)
                    Family Flags: 28
-Hotfixed         : Base Value (0 -> -23), Affects Spells
 #28 (id=1131881) : Apply Aura (6) | Add Percent Modifier (108): Spell Periodic Amount (22)
                    Base Value: -23 | Scaled Value: -23 | PvP Coefficient: 0 | Misc Value: 22 | Target: Self (1)
                    Affected Spells: Flame Shock (188389), Flame Shock (470411)
                    Family Flags: 28
-Hotfixed         : Base Value (0 -> -23), Misc Value (0 -> 22), Affects Spells
 #29 (id=1131882) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: -23 | Scaled Value: -23 | PvP Coefficient: 0 | Target: Self (1)
                    Affected Spells: Lava Burst (51505), Lava Burst (285452)
                    Family Flags: 44
-Hotfixed         : Base Value (0 -> -23), Misc Value (22 -> 0), Affects Spells
 #30 (id=1172531) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
                    Base Value: -15 | Scaled Value: -15 | Misc Value: 3 | Misc Value 2: 3958 (Label) | Target: Self (1)
                    Affected Spells (Label): Ancestral Guidance (108281)
@@ -3101,17 +3094,14 @@ Effects          :
                    Base Value: 151 | Scaled Value: 151 | Target: Self (1)
                    Affected Spells: Chain Lightning Overload (45297), Chain Lightning (188443)
                    Family Flags: 1, 63
-Hotfixed         : Base Value (128 -> 151)
 #12 (id=1012737) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: -57 | Scaled Value: -57 | PvP Coefficient: 0 | Target: Self (1)
                    Affected Spells: Lightning Bolt Overload (45284), Lightning Bolt (188196), Lightning Bolt (214815), Lightning Bolt Overload (214816)
                    Family Flags: 0, 96
-Hotfixed         : Base Value (-53 -> -57)
 #13 (id=1026048) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: -28 | Scaled Value: -28 | PvP Coefficient: 0 | Target: Self (1)
                    Affected Spells: Lava Burst (51505), Lava Burst (285452), Lava Burst Overload (285466)
                    Family Flags: 44, 86
-Hotfixed         : Base Value (-17 -> -28)
 #14 (id=1026052) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 128 | Scaled Value: 128 | Target: Self (1)
                    Affected Spells: Tempest (452201), Tempest Overload (463351)
@@ -3143,12 +3133,10 @@ Hotfixed         : Base Value (-17 -> -28)
                    Base Value: 90 | Scaled Value: 90 | Target: Self (1)
                    Affected Spells: Lava Burst (51505), Lava Burst (285452), Lava Burst Overload (285466)
                    Family Flags: 44, 86
-Hotfixed         : Base Value (65 -> 90)
 #22 (id=1070607) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 181 | Scaled Value: 181 | Target: Self (1)
                    Affected Spells: Lightning Bolt Overload (45284), Lightning Bolt (188196), Lightning Bolt (214815), Lightning Bolt Overload (214816)
                    Family Flags: 0, 96
-Hotfixed         : Base Value (155 -> 181)
 #23 (id=1070608) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 25 | Scaled Value: 25 | Target: Self (1)
                    Affected Spells: Chain Heal (1064)
@@ -3159,7 +3147,6 @@ Hotfixed         : Base Value (155 -> 181)
                    Base Value: -21 | Scaled Value: -21 | PvP Coefficient: 0 | Target: Self (1)
                    Affected Spells: Chain Lightning Overload (45297), Chain Lightning (188443)
                    Family Flags: 1, 63
-Hotfixed         : Base Value (-13 -> -21)
 #26 (id=1142940) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 2 (12)
                    Base Value: -5 | Scaled Value: -5 | Misc Value: 12 | Misc Value 2: 4240 (Label) | Target: Self (1)
                    Affected Spells (Label): Preeminence (462443)
@@ -3265,7 +3252,6 @@ Effects          :
                    Base Value: -8 | Scaled Value: -8 | PvP Coefficient: 0 | Target: Self (1)
                    Affected Spells: Elemental Blast (117014)
                    Family Flags: 98
-Hotfixed         : Base Value (0 -> -8)
 #23 (id=1123762) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 12 | Scaled Value: 12 | Target: Self (1)
                    Affected Spells: Elemental Blast (117014)
@@ -5492,10 +5478,10 @@ Effects          :
 #1 (id=297542)   : Apply Aura (6) | Proc Trigger Spell (42): Hot Hand
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 215785 | Target: Self (1)
 #2 (id=1027011)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 2 (12)
-                   Base Value: 61 | Scaled Value: 61 | Misc Value: 12 | Misc Value 2: 1935 (Label)
+                   Base Value: 50 | Scaled Value: 50 | Misc Value: 12 | Misc Value 2: 1935 (Label)
                    Affected Spells (Label): Hot Hand (215785)
 #3 (id=1027012)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
-                   Base Value: 50 | Scaled Value: 50 | Misc Value: 3 | Misc Value 2: 1935 (Label)
+                   Base Value: 15 | Scaled Value: 15 | Misc Value: 3 | Misc Value 2: 1935 (Label)
                    Affected Spells (Label): Hot Hand (215785)
 Description      : Melee auto-attacks with Flametongue Weapon active have a $h% chance to reduce the cooldown of Lava Lash by ${100*(1-(100/(100+$m2)))}% and increase the damage of Lava Lash by $s3% for $215785d.
 
@@ -6524,11 +6510,13 @@ Labels           : 1224
 Attributes       : Missile Speed is Delay (in sec) (292), Reset cooldown upon ending an encounter (333)
 Effects          :
 #1 (id=477694)   : Trigger Missiles (32)
-                   Base Value: 0 | Scaled Value: 0 | Trigger Spell: 256893 | Radius: 0 - 5 yards | Target: Enemy (6)
-Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards after 3 sec.
-Variables        : $damage=${$cond($gt($SP,$AP),$SP*3,$AP*3)*$pctD*(1+$@versadmg)}
+                   Base Value: 3 | Scaled Value: 3 | Trigger Spell: 256893 | Radius: 0 - 10 yards | Target: Enemy (6)
+#2 (id=1192214)  : Dummy (3)
+                   Base Value: 8 | Scaled Value: 8
+Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards after $s1 sec. Damage reduced beyond $s2 targets.
+Variables        : $damage=${$cond($gt($SP,$AP),$SP*4.2,$AP*4.2)*$pctD*(1+$@versadmg)}
 
-Name             : Holy Resistance (desc=Racial Passive) (id=255651) [Passive] 
+Name             : Holy Providence (desc=Racial Passive) (id=255651) [Passive] 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
 Race             : Lightforged Draenei (0x20000000)
 School           : Holy
@@ -6538,7 +6526,10 @@ Effects          :
 #1 (id=477698)   : Apply Aura (6) | Modify Damage Taken% (87)
                    Base Value: -1 | Scaled Value: -1 | Misc Value: 0x2 | Target: Self (1)
                    Affected School(s): Holy
-Description      : Reduces Holy damage taken by ${$s1/-1}%.
+#2 (id=1192226)  : Apply Aura (6) | Modify Healing% Done (136)
+                   Base Value: 1 | Scaled Value: 1 | Misc Value: 0x7f | Target: Self (1)
+                   Affected School(s): All
+Description      : Reduces Holy damage taken by ${$s1/-1}% and increases healing done by $s2%.
 
 Name             : Light's Reckoning (desc=Racial Passive) (id=255652) [Passive] 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
@@ -6573,9 +6564,9 @@ Cooldown         : 150 seconds
 Triggered By     : Light's Judgment (255647)
 Effects          :
 #1 (id=479673)   : School Damage (2): holy
-                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0.5 | Radius: 0 - 5 yards | Target: At Enemy (53) -> At Enemy in Area (16)
+                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0.5 | Radius: 0 - 10 yards | Target: At Enemy (53) -> At Enemy in Area (16)
 Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards.
-Variables        : $damage=${$cond($gt($SP,$AP),$SP*3,$AP*3)*$pctD*(1+$@versadmg)}
+Variables        : $damage=${$cond($gt($SP,$AP),$SP*4.2,$AP*4.2)*$pctD*(1+$@versadmg)}
 
 Name             : Light's Reckoning (desc=Racial Passive) (id=256896) 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
@@ -6870,7 +6861,6 @@ Attributes       : Allow Cast While Casting (135), Do Not Display Duration (170)
 Effects          :
 #1 (id=706799)   : Apply Aura (6) | Modify All Haste% (193)
                    Base Value: 4 | Scaled Value: 4 | PvP Coefficient: 1.5 | Target: Self (1)
-Hotfixed         : PvP Coefficient (1 -> 1.5)
 Description      : $@spelldesc192249
 Tooltip          : Haste increased by $w1%.
 
@@ -10686,7 +10676,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Attributes       : Not Shapeshifted (16), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Ignore Caster Modifiers (125), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Reset cooldown upon ending an encounter (333)
@@ -10724,7 +10714,6 @@ Effects          :
                    Base Value: 0 | Scaled Value: 0 | Resource: maelstrom | Target: Self (1)
 #3 (id=1002732)  : Dummy (3)
                    Base Value: 50 | Scaled Value: 50 | PvP Coefficient: 0.5 | Target: Any Target (25)
-Hotfixed         : PvP Coefficient (1 -> 0.5)
 #4 (id=1002733)  : Dummy (3)
                    Base Value: 175 | Scaled Value: 175 | PvP Coefficient: 0.42857 | Target: Any Target (25)
 #5 (id=1033574)  : Dummy (3)
@@ -13427,7 +13416,7 @@ Triggered By     : Spiritwalker's Tidal Totem (404522)
 Attributes       : Aura Points On Client (268), Nameplate Personal Buffs/Debuffs (423)
 Aura Interrupt   : Change Specialization (38), Raid Encounter End or M+ Start (41), Change Talent (46)
 Effects          :
-#1 (id=1052127)  : Apply Aura (6) | Add Percent Modifier (108): Spell Cast Time (10)
+#1 (id=1052127)  : Apply Aura (6) | Add Percent Modifier (108): Spell Cast Time (10) | Attributes: Suppress Points Stacking (6)
                    Base Value: -100 | Scaled Value: -100 | Misc Value: 10 | Target: Self (1)
                    Affected Spells: Healing Surge (8004)
                    Family Flags: 7
@@ -13862,7 +13851,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Affecting Spells : Norgannon's Foresight (236380 effect#1)
@@ -14442,17 +14431,14 @@ Effects          :
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
 #2 (id=1143539)  : Apply Aura (6) | Dummy (4)
                    Base Value: 8 | Scaled Value: 8 | Target: Self (1)
-Hotfixed         : Base Value (5 -> 8)
 #3 (id=1143553)  : Apply Aura (6) | Dummy (4)
                    Base Value: 6 | Scaled Value: 6 | Target: Self (1)
 #4 (id=1143554)  : Apply Aura (6) | Dummy (4)
                    Base Value: 40 | Scaled Value: 40 | Target: Self (1)
 #5 (id=1143555)  : Apply Aura (6) | Dummy (4)
                    Base Value: 4 | Scaled Value: 4 | Target: Self (1)
-Hotfixed         : Base Value (2 -> 4)
 #6 (id=1143556)  : Apply Aura (6) | Dummy (4)
                    Base Value: 50 | Scaled Value: 50 | Target: Self (1)
-Hotfixed         : Base Value (40 -> 50)
 #7 (id=1175566)  : Dummy (3)
                    Base Value: 6 | Scaled Value: 6
 Description      : $?a137040[Lightning Bolt, Lava Burst, Chain Lightning, Icefury, and Frost Shock casts have a $s2][Riptide has a $s1]% chance to call an Ancestor to your side for $445624d.
@@ -14490,7 +14476,6 @@ Effects          :
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
                    Affected Spells: Earth Shock (8042), Earthquake (61882), Earthquake (77478), Elemental Blast (117014), Elemental Blast Overload (120588), Earthquake (298762), Earthquake Overload (298765), Earthquake (329801), Earthquake (336740), Elemental Blast (344645), Earth Shock Overload (381725), Earthquake (462620)
                    Family Flags: 20, 83, 98, 108
-Hotfixed         : Base Value (8 -> 15)
 #2 (id=1144457)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 8 | Scaled Value: 8 | Target: Self (1)
                    Affected Spells: Chain Heal (1064), Healing Surge (8004), Healing Wave (77472), Wellspring (197995), Wellspring (197997), Downpour (207778), Downpour (462603)
@@ -14536,7 +14521,6 @@ Effects          :
 #1 (id=1139369)  : Apply Aura (6) | Apply Percent Modifier w/ Label (218): Spell Direct Amount (0)
                    Base Value: 25 | Scaled Value: 25 | Misc Value 2: 3494 (Label) | Target: Self (1)
                    Affected Spells (Label): Hydrobubble (444490), Lava Burst (447419), Chain Lightning (447425), Elemental Blast (465717)
-Hotfixed         : Base Value (20 -> 25)
 Description      : Your Ancestors' spells are $s1% more powerful.
 
 Name             : Call of the Ancestors (id=443450) [Spell Family (11), Passive, Hidden] 
@@ -15053,7 +15037,6 @@ Attributes       : Do Not Display Range (126), Allow Class Ability Procs (416), 
 Effects          :
 #1 (id=1145367)  : School Damage (2): fire
                    Base Value: 0 | Scaled Value: 0 | SP Coefficient: 1.51294 | PvP Coefficient: 0.44 | Target: Any Target (25)
-Hotfixed         : SP Coefficient (1.3156 -> 1.51294)
 #2 (id=1146251)  : Dummy (3)
                    Base Value: 100 | Scaled Value: 100
 #3 (id=1146252)  : Dummy (3)
@@ -15074,7 +15057,6 @@ Attributes       : Do Not Display Range (126), Allow Class Ability Procs (416), 
 Effects          :
 #1 (id=1145374)  : School Damage (2): nature
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | SP Coefficient: 2.73273 | PvP Coefficient: 0.714 | Chain Multiplier: 1 | Chain Targets: 3 | Target: Enemy (6)
-Hotfixed         : SP Coefficient (2.1021 -> 2.73273)
 Description      : Hurls a lightning bolt at the enemy, dealing $s1 Nature damage and then jumping to additional nearby enemies. Affects $x1 total targets.
 
 Name             : Elemental Blast (id=447427) [Spell Family (11), Hidden] 
@@ -17024,8 +17006,8 @@ Labels           : 16: Class Spells
                  : 292
 Attributes       : Allow Cast While Casting (135), Allow Cast While Channeling (308), Allow Class Ability Procs (416)
 Effects          :
-#1 (id=1173002)  : Unknown(108)
-                   Base Value: 10 | Scaled Value: 10 | Misc Value: 11 | Target: Friendly (21)
+#1 (id=1173002)  : Dummy (3)
+                   Base Value: 0 | Scaled Value: 0 | Target: Friendly (21)
 Description      : $@spelldesc462817
 
 Name             : Fusion of Elements (id=462840) [Spell Family (11), Passive, Hidden] 
@@ -17803,7 +17785,6 @@ Effects          :
 #2 (id=1182455)  : Apply Aura (6) | Apply Percent Modifier w/ Label (218): Spell Effect 2 (12)
                    Base Value: 25 | Scaled Value: 25 | PvP Coefficient: 2 | Misc Value: 12 | Misc Value 2: 3986 (Label) | Target: Self (1)
                    Affected Spells (Label): Lightning Rod (210689), Conductive Energy (455123)
-Hotfixed         : PvP Coefficient (1 -> 2)
 Description      : Increases the duration of Lightning Rod by ${$s1/1000} sec and its damage bonus by $s2%.
 
 Name             : Earthshatter (id=468626) [Spell Family (11), Passive, Hidden] 
@@ -18255,12 +18236,10 @@ Effects          :
                    Base Value: -17 | Scaled Value: -17 | PvP Coefficient: 0 | Target: Self (1)
                    Affected Spells: Lightning Bolt (188196), Lightning Bolt (214815), Lightning Bolt Overload (214816)
                    Family Flags: 0
-Hotfixed         : Base Value (-10 -> -17)
 #3 (id=1196252)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: -17 | Scaled Value: -17 | PvP Coefficient: 0 | Target: Self (1)
                    Affected Spells: Chain Lightning (188443)
                    Family Flags: 1
-Hotfixed         : Base Value (-10 -> -17)
 #4 (id=1196253)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
                    Affected Spells: Tempest (452201)
@@ -18269,6 +18248,5 @@ Hotfixed         : Base Value (-10 -> -17)
                    Base Value: -22 | Scaled Value: -22 | PvP Coefficient: 0 | Target: Self (1)
                    Affected Spells: Tempest (452201)
                    Family Flags: 107
-Hotfixed         : Base Value (-15 -> -22)
 
 

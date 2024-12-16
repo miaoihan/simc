@@ -1,4 +1,4 @@
-SimulationCraft 1100-02 for World of Warcraft 11.0.5.57689 Live
+SimulationCraft 1100-02 for World of Warcraft 11.0.7.58046 Live
 Name             : Dual Wield (desc=Passive) (id=674) [Passive] 
 Class            : Frost Death Knight, Warrior, Hunter, Rogue, Monk, Demon Hunter
 School           : Physical
@@ -154,7 +154,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -210,7 +210,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -230,7 +230,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -250,7 +250,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Attributes       : Not Shapeshifted (16), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Ignore Caster Modifiers (125), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Reset cooldown upon ending an encounter (333)
@@ -269,7 +269,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Family Flags     : 95
@@ -289,7 +289,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Affecting Spells : Mastery: Deep Healing (77226 effect#1)
@@ -310,7 +310,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Affecting Spells : Norgannon's Foresight (236380 effect#1)
@@ -398,11 +398,11 @@ Race             : Worgen (0x200000)
 School           : Physical
 Spell Type       : None
 Duration         : 10 seconds
-Cooldown         : 120 seconds
+Cooldown         : 90 seconds
 Labels           : 219
 Attributes       : Allow While Stealthed (37), Reset cooldown upon ending an encounter (333)
 Effects          :
-#1 (id=71777)    : Apply Aura (6) | Increase Speed% (31)
+#1 (id=71777)    : Apply Aura (6) | Increase Movement Speed% (Stacking) (129)
                    Base Value: 40 | Scaled Value: 40 | Target: Self (1)
 #2 (id=104308)   : Apply Aura (6) | Unknown(358)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -1819,7 +1819,6 @@ Attributes       : Active Threat (94), Not a Proc (105), Not In Spellbook (143),
 Effects          :
 #1 (id=133162)   : School Damage (2): physical
                    Base Value: 0 | Scaled Value: 0 | AP Coefficient: 1.38 | Radius: 0 - 8 yards | Target: At Self (22) -> Cone Enemy (24)
-Hotfixed         : AP Coefficient (1.15 -> 1.38)
 #2 (id=155264)   : Trigger Spell (64): Fists of Fury Visual Target
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 123154 | Radius: 0 - 8 yards | Target: At Self (22) -> Cone Enemy (24)
 Description      : $@spelldesc113656
@@ -2214,7 +2213,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Attributes       : Not Shapeshifted (16), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Ignore Caster Modifiers (125), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Reset cooldown upon ending an encounter (333)
@@ -3728,7 +3727,6 @@ Effects          :
                    Base Value: 43 | Scaled Value: 43 | Target: Self (1)
                    Affected Spells: Blackout Kick (100784), Blackout Kick (205523), Blackout Kick (228649)
                    Family Flags: 4
-Hotfixed         : Base Value (32 -> 43)
 #25 (id=1082767) : Apply Aura (6) | Apply Percent Modifier w/ Label (218): Spell Direct Amount (0)
                    Base Value: -90 | Scaled Value: -90 | Misc Value 2: 3448 (Label) | Target: Self (1)
                    Affected Spells (Label): Celestial Conduit (443039)
@@ -5899,11 +5897,13 @@ Labels           : 1224
 Attributes       : Missile Speed is Delay (in sec) (292), Reset cooldown upon ending an encounter (333)
 Effects          :
 #1 (id=477694)   : Trigger Missiles (32)
-                   Base Value: 0 | Scaled Value: 0 | Trigger Spell: 256893 | Radius: 0 - 5 yards | Target: Enemy (6)
-Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards after 3 sec.
-Variables        : $damage=${$cond($gt($SP,$AP),$SP*3,$AP*3)*$pctD*(1+$@versadmg)}
+                   Base Value: 3 | Scaled Value: 3 | Trigger Spell: 256893 | Radius: 0 - 10 yards | Target: Enemy (6)
+#2 (id=1192214)  : Dummy (3)
+                   Base Value: 8 | Scaled Value: 8
+Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards after $s1 sec. Damage reduced beyond $s2 targets.
+Variables        : $damage=${$cond($gt($SP,$AP),$SP*4.2,$AP*4.2)*$pctD*(1+$@versadmg)}
 
-Name             : Holy Resistance (desc=Racial Passive) (id=255651) [Passive] 
+Name             : Holy Providence (desc=Racial Passive) (id=255651) [Passive] 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
 Race             : Lightforged Draenei (0x20000000)
 School           : Holy
@@ -5913,7 +5913,10 @@ Effects          :
 #1 (id=477698)   : Apply Aura (6) | Modify Damage Taken% (87)
                    Base Value: -1 | Scaled Value: -1 | Misc Value: 0x2 | Target: Self (1)
                    Affected School(s): Holy
-Description      : Reduces Holy damage taken by ${$s1/-1}%.
+#2 (id=1192226)  : Apply Aura (6) | Modify Healing% Done (136)
+                   Base Value: 1 | Scaled Value: 1 | Misc Value: 0x7f | Target: Self (1)
+                   Affected School(s): All
+Description      : Reduces Holy damage taken by ${$s1/-1}% and increases healing done by $s2%.
 
 Name             : Light's Reckoning (desc=Racial Passive) (id=255652) [Passive] 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
@@ -5948,9 +5951,9 @@ Cooldown         : 150 seconds
 Triggered By     : Light's Judgment (255647)
 Effects          :
 #1 (id=479673)   : School Damage (2): holy
-                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0.5 | Radius: 0 - 5 yards | Target: At Enemy (53) -> At Enemy in Area (16)
+                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0.5 | Radius: 0 - 10 yards | Target: At Enemy (53) -> At Enemy in Area (16)
 Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards.
-Variables        : $damage=${$cond($gt($SP,$AP),$SP*3,$AP*3)*$pctD*(1+$@versadmg)}
+Variables        : $damage=${$cond($gt($SP,$AP),$SP*4.2,$AP*4.2)*$pctD*(1+$@versadmg)}
 
 Name             : Light's Reckoning (desc=Racial Passive) (id=256896) 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
@@ -6680,7 +6683,9 @@ Effects          :
                    Base Value: 15 | Scaled Value: 15
 #3 (id=815156)   : Dummy (3)
                    Base Value: 35 | Scaled Value: 35 | Target: Enemy (6)
-Description      : You exploit the enemy target's weakest point, instantly killing $?s322113[creatures if they have less health than you.][them.
+#4 (id=1190553)  : Dummy (3)
+                   Base Value: 100 | Scaled Value: 100
+Description      : You exploit the enemy target's weakest point, instantly dealing damage equal to $s4% of your maximum health to $?s322113[creatures if they have less health than you.][them.
 
 Only usable on creatures that have less health than you]$?s322113[ Deals damage equal to $s3% of your maximum health against players and stronger creatures under $s2% health.][.]$?s325095[
 
@@ -9540,7 +9545,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Attributes       : Not Shapeshifted (16), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Ignore Caster Modifiers (125), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Reset cooldown upon ending an encounter (333)
@@ -12097,10 +12102,8 @@ Effects          :
                    Base Value: 20 | Scaled Value: 20 | Target: Self (1)
                    Affected Spells: Blackout Kick (100784), Blackout Kick (205523), Blackout Kick (228649)
                    Family Flags: 4
-Hotfixed         : Base Value (10 -> 20)
 #3 (id=1155573)  : Apply Aura (6) | Dummy (4)
                    Base Value: 80 | Scaled Value: 80 | Target: Self (1)
-Hotfixed         : Base Value (70 -> 80)
 Description      : Blackout Kick damage increased by $s2% and strikes an additional $s1 $ltarget;targets at $s3% effectiveness.
 
 Name             : Strike of the Windlord (id=392983) [Spell Family (53)] 
@@ -13777,7 +13780,7 @@ School           : Holy
 Spell Type       : Magic
 Range            : 40 yards
 Duration         : 5 seconds
-Cooldown         : 180 seconds
+Cooldown         : 120 seconds
 Labels           : 1224
 Stance Mask      : 0x89000000
 Affecting Spells : Norgannon's Foresight (236380 effect#1)
@@ -14259,7 +14262,6 @@ Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1120518)  : Apply Aura (6) | Modify Dodge% (49)
                    Base Value: 10 | Scaled Value: 10 | PvP Coefficient: 0.2 | Target: Self (1)
-Hotfixed         : PvP Coefficient (1 -> 0.2)
 Description      : $@spelldesc432181
 Tooltip          : Your dodge chance is increased by $w1% until you dodge an attack.
 
@@ -14768,7 +14770,6 @@ Attributes       : Is Ability (4), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1138821)  : School Damage (2): nature
                    Base Value: 0 | Scaled Value: 0 | AP Coefficient: 2 | Radius: 0 - 10 yards | Target: At Enemy (53) -> At Enemy in Area (16)
-Hotfixed         : AP Coefficient (1 -> 2)
 Description      : $@spelldesc443110
 
 Name             : Flight of the Red Crane (id=443255) [Spell Family (53), Passive] 
@@ -14806,7 +14807,6 @@ Attributes       : Bouncy Chain Missiles (146), Allow Class Ability Procs (416),
 Effects          :
 #1 (id=1139056)  : School Damage (2): physical
                    Base Value: 0 | Scaled Value: 0 | AP Coefficient: 2 | Chain Multiplier: 1 | Chain Targets: 5 | Target: Enemy (6)
-Hotfixed         : AP Coefficient (1 -> 2)
 Description      : $@spelldesc443255
 
 Name             : Flight of the Red Crane (id=443272) [Spell Family (53)] 
@@ -15125,7 +15125,6 @@ Attributes       : Bouncy Chain Missiles (146), Allow Class Ability Procs (416),
 Effects          :
 #1 (id=1139667)  : School Damage (2): physical
                    Base Value: 0 | Scaled Value: 0 | AP Coefficient: 4 | Chain Multiplier: 1 | Chain Targets: 5 | Target: Enemy (6)
-Hotfixed         : AP Coefficient (2 -> 4)
 Description      : $@spelldesc443260
 
 Name             : Flight of the Red Crane (id=443614) [Spell Family (53)] 
@@ -15717,6 +15716,7 @@ Duration         : Aura (infinite)
 Labels           : 16: Class Spells
                  : 22: Monk Spells
                  : 292
+                 : 3023
 Attributes       : Aura Is Buff (140), Aura Points On Client (268), Nameplate Personal Buffs/Debuffs (423), Aura Always Shown (438)
 Aura Interrupt   : Change Specialization (38), Raid Encounter Start or M+ Start (40), Change Talent (46)
 Effects          :
@@ -15733,6 +15733,7 @@ Duration         : Aura (infinite)
 Labels           : 16: Class Spells
                  : 22: Monk Spells
                  : 292
+                 : 3023
 Attributes       : Aura Is Buff (140), Aura Points On Client (268), Nameplate Personal Buffs/Debuffs (423), Aura Always Shown (438)
 Aura Interrupt   : Change Specialization (38), Raid Encounter Start or M+ Start (40), Change Talent (46)
 Effects          :
@@ -15770,6 +15771,7 @@ Duration         : Aura (infinite)
 Labels           : 16: Class Spells
                  : 22: Monk Spells
                  : 292
+                 : 3023
                  : 3536
 Attributes       : Aura Is Buff (140), Nameplate Personal Buffs/Debuffs (423), Aura Always Shown (438)
 Aura Interrupt   : Change Specialization (38), Raid Encounter Start or M+ Start (40), Change Talent (46)
@@ -16091,8 +16093,8 @@ Labels           : 16: Class Spells
                  : 292
 Attributes       : Allow Class Ability Procs (416)
 Effects          :
-#1 (id=1150646)  : Unknown(108)
-                   Base Value: 1 | Scaled Value: 1 | Misc Value: 11 | Target: Self (1)
+#1 (id=1150646)  : Dummy (3)
+                   Base Value: 0 | Scaled Value: 0 | Target: Self (1)
 Description      : $@spelldesc450622
 
 Name             : Energy Transfer (id=450631) [Spell Family (53), Passive] 
@@ -17219,7 +17221,6 @@ Effects          :
                    Base Value: 200 | Scaled Value: 200 | PvP Coefficient: 0.6 | Misc Value: 23 | Target: Self (1)
                    Affected Spells: Blackout Kick! (116768)
                    Family Flags: 21
-Hotfixed         : Base Value (125 -> 200)
 Description      : The Blackout Kick! effect also increases the damage of your next Blackout Kick by $s1%.
 
 Name             : Energy Burst (id=451498) [Spell Family (53), Passive] 
@@ -17685,7 +17686,6 @@ Attributes       : Suppress Weapon Procs (151), Aura Points On Client (268), Are
 Effects          :
 #1 (id=1153059)  : School Damage (2): physical
                    Base Value: 0 | Scaled Value: 0 | AP Coefficient: 0.392 | Radius: 10 yards | Target: Cone to Enemy (104)
-Hotfixed         : AP Coefficient (0.28 -> 0.392)
 Description      : $@spelldesc452137
 
 Name             : Flurry of Xuen (id=452137) [Spell Family (53), Passive, Hidden] 
@@ -18440,7 +18440,6 @@ Attributes       : Is Ability (4), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1163531)  : School Damage (2): physical
                    Base Value: 0 | Scaled Value: 0 | AP Coefficient: 3.375 | Target: Enemy (6)
-Hotfixed         : AP Coefficient (2.5 -> 3.375)
 Description      : $@spelldesc443087
 
 Name             : Jadefire Fists (id=457974) [Spell Family (53), Passive] 
@@ -18861,9 +18860,11 @@ Attributes       : Can Proc From Procs (122), Aura Points On Client (268), Allow
 Aura Interrupt   : Leave World (19), Enter World (22), Change Specialization (38), Raid Encounter Start or M+ Start (40), Change Talent (46)
 Effects          :
 #1 (id=1180337)  : Apply Aura (6) | Dummy (4)
+                   Base Value: 1 | Scaled Value: 1 | Target: Friendly (21)
+#2 (id=1190517)  : Apply Aura (6) | Dummy (4)
                    Base Value: 40 | Scaled Value: 40 | Target: Friendly (21)
 Description      : $@spelldesc122280
-Tooltip          : $w1 Healing Elixir stored, which will heal for $428439s1% of your maximum health if brought below $s1% heatlh.
+Tooltip          : $w1 Healing Elixir stored, which will heal for $428439s1% of your maximum health if brought below $s2% heatlh.
 
 Name             : Jadefire Teachings (id=467293) [Spell Family (53), Passive] 
 Talent Entry     : Mistweaver [tree=spec, row=9, col=2, max_rank=1, req_points=20, select_idx=100]
@@ -18947,7 +18948,7 @@ Effects          :
                    Affected Spells: Crackling Jade Lightning (117952)
                    Family Flags: 32
 Description      : $@spelldesc467316
-Tooltip          : Crackilng Jade Lightning cleaves to $m1 $lenemy:enemies; and deals $w2% increased damage.
+Tooltip          : Crackling Jade Lightning cleaves to $m1 $lenemy:enemies; and deals $w2% increased damage.
 
 Name             : Rushing Winds (id=467341) [Spell Family (53)] 
 Class            : Monk

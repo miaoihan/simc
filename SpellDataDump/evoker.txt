@@ -1,4 +1,4 @@
-SimulationCraft 1100-02 for World of Warcraft 11.0.5.57689 Live
+SimulationCraft 1100-02 for World of Warcraft 11.0.7.58046 Live
 Name             : Command (desc=Racial Passive) (id=21563) [Spell Family (9), Passive] 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
 Race             : Orc (0x2)
@@ -280,11 +280,13 @@ Labels           : 1224
 Attributes       : Missile Speed is Delay (in sec) (292), Reset cooldown upon ending an encounter (333)
 Effects          :
 #1 (id=477694)   : Trigger Missiles (32)
-                   Base Value: 0 | Scaled Value: 0 | Trigger Spell: 256893 | Radius: 0 - 5 yards | Target: Enemy (6)
-Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards after 3 sec.
-Variables        : $damage=${$cond($gt($SP,$AP),$SP*3,$AP*3)*$pctD*(1+$@versadmg)}
+                   Base Value: 3 | Scaled Value: 3 | Trigger Spell: 256893 | Radius: 0 - 10 yards | Target: Enemy (6)
+#2 (id=1192214)  : Dummy (3)
+                   Base Value: 8 | Scaled Value: 8
+Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards after $s1 sec. Damage reduced beyond $s2 targets.
+Variables        : $damage=${$cond($gt($SP,$AP),$SP*4.2,$AP*4.2)*$pctD*(1+$@versadmg)}
 
-Name             : Holy Resistance (desc=Racial Passive) (id=255651) [Passive] 
+Name             : Holy Providence (desc=Racial Passive) (id=255651) [Passive] 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
 Race             : Lightforged Draenei (0x20000000)
 School           : Holy
@@ -294,7 +296,10 @@ Effects          :
 #1 (id=477698)   : Apply Aura (6) | Modify Damage Taken% (87)
                    Base Value: -1 | Scaled Value: -1 | Misc Value: 0x2 | Target: Self (1)
                    Affected School(s): Holy
-Description      : Reduces Holy damage taken by ${$s1/-1}%.
+#2 (id=1192226)  : Apply Aura (6) | Modify Healing% Done (136)
+                   Base Value: 1 | Scaled Value: 1 | Misc Value: 0x7f | Target: Self (1)
+                   Affected School(s): All
+Description      : Reduces Holy damage taken by ${$s1/-1}% and increases healing done by $s2%.
 
 Name             : Light's Reckoning (desc=Racial Passive) (id=255652) [Passive] 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
@@ -329,9 +334,9 @@ Cooldown         : 150 seconds
 Triggered By     : Light's Judgment (255647)
 Effects          :
 #1 (id=479673)   : School Damage (2): holy
-                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0.5 | Radius: 0 - 5 yards | Target: At Enemy (53) -> At Enemy in Area (16)
+                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0.5 | Radius: 0 - 10 yards | Target: At Enemy (53) -> At Enemy in Area (16)
 Description      : Call down a strike of Holy energy, dealing $<damage> Holy damage to enemies within $A1 yards.
-Variables        : $damage=${$cond($gt($SP,$AP),$SP*3,$AP*3)*$pctD*(1+$@versadmg)}
+Variables        : $damage=${$cond($gt($SP,$AP),$SP*4.2,$AP*4.2)*$pctD*(1+$@versadmg)}
 
 Name             : Light's Reckoning (desc=Racial Passive) (id=256896) 
 Class            : Warrior, Paladin, Hunter, Rogue, Priest, Death Knight, Shaman, Mage, Warlock, Monk, Druid, Demon Hunter, Evoker
@@ -3382,7 +3387,7 @@ Attributes       : Do Not Log Immune Misses (3), Aura Is Debuff (26), No Threat 
 Effects          :
 #1 (id=982471)   : Apply Aura (6) | Decrease Movement Speed% (33)
                    Base Value: -50 | Scaled Value: -50 | Target: Enemy (6)
-Description      : $@spelldesc370897
+Description      : $@spelldesc381773
 Tooltip          : Movement speed reduced by $w1%.
 
 Name             : Leaping Flames (id=370901) [Spell Family (224)] 
@@ -3802,6 +3807,7 @@ Duration         : Aura (infinite)
 Labels           : 16: Class Spells
                  : 292
 Attributes       : Allow Cast While Dead (23), No Aura Cancel (31), Can't Crit (93), Suppress Caster Procs (112), Suppress Target Procs (113), Allow Aura While Dead (116), Suppress Weapon Procs (151), Ignore Healing Modifiers (219), Disable Aura While Dead (226), Do Not Log Full Overheal (323), Always Allow Negative Healing Percent Modifiers (442)
+Aura Interrupt   : Leave World (19)
 Effects          :
 #1 (id=996412)   : Unknown(271) | Periodic Heal% (20): every 2 seconds
                    Base Value: 2 | Scaled Value: 2 | Radius: 40 yards | Target: Self (1)
