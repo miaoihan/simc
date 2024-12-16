@@ -434,6 +434,10 @@ struct player_t : public actor_t
     stat_buff_t* battle_elixir;
     buff_t* food;
     buff_t* augmentation;
+
+    action_t* flask_action;
+    action_t* food_action;
+    action_t* augmentation_action;
   } consumables;
 
   struct buffs_t
@@ -875,6 +879,7 @@ struct player_t : public actor_t
     // currently bugged to trigger on them.
     double mereldars_toll_ally_trigger_chance = 0.7;
     double sureki_zealots_insignia_rppm_multiplier = 0.9;
+    player_option_t<std::string> windsingers_passive_stat = "";
   } thewarwithin_opts;
 
 private:

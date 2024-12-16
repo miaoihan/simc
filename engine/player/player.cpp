@@ -2,7 +2,6 @@
 // Dedmonwakeen's Raid DPS/TPS Simulator.
 // Send questions to natehieter@gmail.com
 // ==========================================================================
-
 #include "player.hpp"
 
 #include "action/action.hpp"
@@ -3381,6 +3380,9 @@ void player_t::init_background_actions()
 
 void player_t::create_actions()
 {
+  if( is_player() && !is_enemy() && !is_pet() )
+    consumable::create_consumeable_actions( this );
+
   if ( action_list_str.empty() )
     no_action_list_provided = true;
 
@@ -6589,6 +6591,13 @@ void player_t::arise()
   }
 
   current_auto_attack_speed = cache.auto_attack_speed();
+
+  if ( consumables.flask && consumables.flask_action )
+    consumables.flask_action->execute();
+  if ( consumables.food && consumables.food_action )
+    consumables.food_action->execute();
+  if ( consumables.augmentation && consumables.augmentation_action )
+    consumables.augmentation_action->execute();
 
   // Requires index-based lookup since on-arise callbacks may
   // insert new on-arise callbacks to the vector.
@@ -12821,6 +12830,8 @@ void player_t::create_options()
                          thewarwithin_opts.mereldars_toll_ally_trigger_chance, 0, 1 ) );
   add_option( opt_float( "thewarwithin.sureki_zealots_insignia_rppm_multiplier",
                          thewarwithin_opts.sureki_zealots_insignia_rppm_multiplier, 0, 1 ) );
+  add_option( opt_string( "thewarwithin.windsingers_passive_stat",
+                          thewarwithin_opts.windsingers_passive_stat ) );
 }
 
 player_t* player_t::create( sim_t*, const player_description_t& )

@@ -207,9 +207,6 @@ void brewmaster( player_t *p )
 
   action_priority_list_t *item_actions = p->get_action_priority_list( "item_actions" );
   action_priority_list_t *race_actions = p->get_action_priority_list( "race_actions" );
-  precombat->add_action( "flask" );
-  precombat->add_action( "food" );
-  precombat->add_action( "augmentation" );
   precombat->add_action( "snapshot_stats" );
   precombat->add_action( "potion" );
   precombat->add_action( "chi_burst" );
@@ -267,15 +264,6 @@ void brewmaster( player_t *p )
 void mistweaver( player_t *p )
 {
   action_priority_list_t *pre = p->get_action_priority_list( "precombat" );
-
-  // Flask
-  pre->add_action( "flask" );
-
-  // Food
-  pre->add_action( "food" );
-
-  // Rune
-  pre->add_action( "augmentation" );
 
   // Snapshot stats
   pre->add_action( "snapshot_stats" );
@@ -434,13 +422,6 @@ void windwalker( player_t *p )
   //============================================================================
 
   action_priority_list_t *pre = p->get_action_priority_list( "precombat" );
-
-  // Flask
-  pre->add_action( "flask" );
-  // Food
-  pre->add_action( "food" );
-  // Rune
-  pre->add_action( "augmentation" );
 
   // Snapshot stats
   pre->add_action( "snapshot_stats", "Snapshot raid buffed stats before combat begins and pre-potting is done." );
