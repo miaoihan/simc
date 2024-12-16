@@ -6346,6 +6346,8 @@ struct roaring_warqueen_citrine_t : public generic_heal_t
   {
     background  = true;
     max_targets = as<int>( data().effectN( 2 ).base_value() );
+    // Prevent feedback loop from proccing other war queen citrines
+    cooldown->duration = 100_ms;
   }
 
   void execute() override
