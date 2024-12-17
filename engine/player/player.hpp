@@ -882,7 +882,7 @@ struct player_t : public actor_t
     double sureki_zealots_insignia_rppm_multiplier = 0.9;
     player_option_t<std::string> windsingers_passive_stat = "";
     bool estimate_roaring_warqueens_citrine                      = false;
-    bool estimate_skippers_roaring_warqueen_procs                = false;
+    bool estimate_skippers_roaring_warqueen_procs                = true;
     bool estimate_skippers_roaring_warqueen_procs_direct_trigger = false;
     double estimate_skippers_roaring_warqueen_procs_rppm_mult    = 4;
   } thewarwithin_opts;

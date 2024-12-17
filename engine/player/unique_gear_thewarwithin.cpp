@@ -6432,7 +6432,7 @@ struct roaring_warqueen_citrine_t : public spell_t
 
   void trigger_ally_gem( player_t* t, bool trigger_own = false )
   {
-    if ( t->is_sleeping() || (target == player && !trigger_own) )
+    if ( t->is_sleeping() || ( target == player && !trigger_own ) )
       return;
 
     if ( !citrine_data[ t ] )
@@ -6473,7 +6473,7 @@ struct roaring_warqueen_citrine_t : public spell_t
         if ( t->is_sleeping() )
           continue;
 
-        if ( !citrine_data[ t ] || citrine_data[ t ]->gem_type == gem_type_t::NONE )
+        if ( !citrine_data[ t ] || citrine_data[ t ]->gem_type == gem_type_t::NONE || t == player )
         {
           continue;
         }
@@ -6504,7 +6504,7 @@ struct roaring_warqueen_citrine_t : public spell_t
         target_cache.is_valid = false;
 
       // Currently there is an Issue with fake Actors initialising the ring. TODO: look into it.
-      if ( !sim->single_actor_batch && sim->player_non_sleeping_list.size() > 1 )
+      if ( !sim->single_actor_batch )
         return;
     }
 
@@ -6945,39 +6945,10 @@ void legendary_skippers_citrine( special_effect_t& effect )
         {
           if ( auto action = citrine_actions[ ix ] )
           {
-            // Check if War Queens
-            if ( action->data().id() == 462964 )
-            {
-              // If solo, attempt to emulate triggering this effect on allies.
-              if ( player->sim->single_actor_batch || player->sim->player_no_pet_list.size() < wq_targets )
-              {
-                auto diff = wq_targets - player->sim->player_no_pet_list.size();
-                switch ( rng().range( 0, 2 ) )
-                {
-                  case 0:
-                    // Thunderlords Crackling Citrine
-                    // Randomize the number of triggers to emualte players wearing non dps increasing citrines.
-                    for( int i = rng().range( 0, 3 ); i < diff; i++  )
-                      citrine_actions[ 0 ]->execute();
-                    break;
-                  case 1:
-                    // Stormbringers Runed Citrine
-                    citrine_buffs[ 0 ]->trigger();
-                    break;
-                  default:
-                    break;
-                }
-              }
-              else 
-                citrine_actions[ ix ]->execute();
-            }
-            else
-            {
               auto old_base = action->base_multiplier;
               action->base_multiplier *= multiplier;
               action->execute_on_target( s->target );
               action->base_multiplier = old_base;
-            }
           }
         }
         else
@@ -7048,6 +7019,16 @@ void legendary_skippers_citrine( special_effect_t& effect )
           break;
       }
     }
+
+    void trigger( action_t* a, action_state_t* state ) override
+    {
+      auto _rppm_modifier = rppm->get_modifier();
+      rppm->set_modifier( _rppm_modifier * ( 1 + a->player->buffs.bloodlust->check_stack_value() ) );
+
+      dbc_proc_callback_t::trigger( a, state );
+
+      rppm->set_modifier( _rppm_modifier );
+    }
   };
 
   if ( effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs &&
@@ -7059,11 +7040,16 @@ void legendary_skippers_citrine( special_effect_t& effect )
     skipper_rwq_estimate->type     = SPECIAL_EFFECT_EQUIP;
     skipper_rwq_estimate->source   = SPECIAL_EFFECT_SOURCE_ITEM;
     skipper_rwq_estimate->spell_id = effect.spell_id;
+    // 25% Raid average haste assumption (slight underestimate)
     skipper_rwq_estimate->rppm_modifier_ =
-        effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_rppm_mult / possible_stones.size();
+        effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_rppm_mult / possible_stones.size() * 1.25;
     effect.player->special_effects.push_back( skipper_rwq_estimate );
 
-    new skippers_roaring_warqueens_estimate_cb_t( *skipper_rwq_estimate );
+    // Make the RPPM Object early so it can be set to RPPM_NONE
+    effect.player->get_rppm( skipper_rwq_estimate->name(), skipper_rwq_estimate->rppm(),
+                             skipper_rwq_estimate->rppm_modifier(), rppm_scale_e::RPPM_NONE );
+
+    new skippers_roaring_warqueens_estimate_cb_t( *skipper_rwq_estimate );    
   }
 }
 
