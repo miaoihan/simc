@@ -477,8 +477,8 @@ struct simplified_player_t : public player_t
     {
       background = repeating = true;
 
-      allow_class_ability_procs = true;
-      may_crit                  = true;
+      allow_class_ability_procs = not_a_proc = true;
+      may_crit                               = true;
 
       set_action_stats( settings, p );
     }
