@@ -6906,14 +6906,16 @@ void legendary_skippers_citrine( special_effect_t& effect )
     std::vector<action_t*> citrine_actions;
     std::vector<buff_t*> citrine_buffs;
     double multiplier;
+    int wq_targets;
 
     legendary_skippers_citrine_t( const special_effect_t& effect )
       : spell_t( "legendary_skippers_citrine", effect.player, effect.player->find_spell( 462962 ) ),
         citrine_actions(),
         citrine_buffs(),
-        multiplier()
+        multiplier(),
+        wq_targets( as<int>( effect.player->find_spell( ROARING_WARQUEENS_CITRINE )->effectN( 2 ).base_value() ) )
     {
-      background  = true;
+      background = true;
 
       auto driver = effect.player->find_spell( LEGENDARY_SKIPPERS_CITRINE );
       multiplier  = driver->effectN( 3 ).percent();
@@ -6943,13 +6945,42 @@ void legendary_skippers_citrine( special_effect_t& effect )
         {
           if ( auto action = citrine_actions[ ix ] )
           {
-            auto old_base = action->base_multiplier;
-            action->base_multiplier *= multiplier;
-            action->execute_on_target( s->target );
-            action->base_multiplier = old_base;
+            // Check if War Queens
+            if ( action->data().id() == 462964 )
+            {
+              // If solo, attempt to emulate triggering this effect on allies.
+              if ( player->sim->single_actor_batch || player->sim->player_no_pet_list.size() < wq_targets )
+              {
+                auto diff = wq_targets - player->sim->player_no_pet_list.size();
+                switch ( rng().range( 0, 2 ) )
+                {
+                  case 0:
+                    // Thunderlords Crackling Citrine
+                    // Randomize the number of triggers to emualte players wearing non dps increasing citrines.
+                    for( int i = rng().range( 0, 3 ); i < diff; i++  )
+                      citrine_actions[ 0 ]->execute();
+                    break;
+                  case 1:
+                    // Stormbringers Runed Citrine
+                    citrine_buffs[ 0 ]->trigger();
+                    break;
+                  default:
+                    break;
+                }
+              }
+              else 
+                citrine_actions[ ix ]->execute();
+            }
+            else
+            {
+              auto old_base = action->base_multiplier;
+              action->base_multiplier *= multiplier;
+              action->execute_on_target( s->target );
+              action->base_multiplier = old_base;
+            }
           }
         }
-        else if ( ix < citrine_actions.size() + citrine_buffs.size() )
+        else
         {
           if ( auto buff = citrine_buffs[ ix - citrine_actions.size() ] )
           {
