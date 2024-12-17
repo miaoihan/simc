@@ -217,7 +217,7 @@ hands=exhumed_centurions_gauntlets,id=212003,bonus_id=1540/10299
 waist=crystalfissure_girdle,id=221079,bonus_id=3131/10299/10376/1808,gem_id=213458
 legs=exhumed_centurions_chausses,id=212001,bonus_id=1540/10299,enchant=stormbound_armor_kit_3
 feet=everforged_sabatons,id=222429,bonus_id=10421/9633/8902/11144/10222/1485,crafted_stats=32/49
-finger1=cyrces_circlet,id=228411,bonus_id=12025/1511,gem_id=228638/228639/228640,enchant=radiant_critical_strike_3
+finger1=cyrces_circlet,id=228411,bonus_id=12025/1511,gem_id=228638/228639/228646,enchant=radiant_critical_strike_3
 finger2=seal_of_the_poisoned_pact,id=225578,bonus_id=1540/10299/10376/8781,gem_id=213458/213458,enchant=radiant_critical_strike_3
 trinket1=ovinaxs_mercurial_egg,id=220305,bonus_id=7981/11143/5878/10299
 trinket2=treacherous_transmitter,id=221023,bonus_id=1540/10299/10376
