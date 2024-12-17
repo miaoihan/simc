@@ -6493,13 +6493,16 @@ struct roaring_warqueen_citrine_t : public spell_t
 
   void execute() override
   {
-    bool old_group_value = estimate_group_value;
+    bool old_group_value   = estimate_group_value;
+    bool skippers_estimate = player->thewarwithin_opts.estimate_skippers_group_benefit &&
+                             ( player->sim->single_actor_batch || player->sim->player_no_pet_list.size() == 1 );
     // Base of 1 + small epsilon to avoid rounding errors.
-    if ( base_multiplier > 1.001 )
+    if ( base_multiplier > 1.001 &&
+         ( player->thewarwithin_opts.force_estimate_skippers_group_benefit || skippers_estimate ) )
     {
       // Can only happen with Legendary Skippers
-      estimate_group_value = player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs &&
-                             player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_direct_trigger;
+      estimate_group_value = player->thewarwithin_opts.estimate_skippers_group_benefit &&
+                             player->thewarwithin_opts.force_estimate_skippers_group_benefit;
       if ( estimate_group_value != old_group_value )
         target_cache.is_valid = false;
 
@@ -7031,25 +7034,30 @@ void legendary_skippers_citrine( special_effect_t& effect )
     }
   };
 
-  if ( effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs &&
-       !effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_direct_trigger &&
-       effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_rppm_mult > 0 )
+  if ( effect.player->thewarwithin_opts.estimate_skippers_group_benefit &&
+       effect.player->thewarwithin_opts.estimate_skippers_group_members > 0 )
   {
     auto skipper_rwq_estimate      = new special_effect_t( effect.player );
-    skipper_rwq_estimate->name_str = "legendary_skippers_citrine_roaring_warqueen_estimate";
+    skipper_rwq_estimate->name_str = "legendary_skippers_party_estimate";
     skipper_rwq_estimate->type     = SPECIAL_EFFECT_EQUIP;
     skipper_rwq_estimate->source   = SPECIAL_EFFECT_SOURCE_ITEM;
     skipper_rwq_estimate->spell_id = effect.spell_id;
     // 25% Raid average haste assumption (slight underestimate)
     skipper_rwq_estimate->rppm_modifier_ =
-        effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_rppm_mult / possible_stones.size() * 1.25;
+        effect.player->thewarwithin_opts.estimate_skippers_group_members / possible_stones.size() * 1.25;
     effect.player->special_effects.push_back( skipper_rwq_estimate );
 
     // Make the RPPM Object early so it can be set to RPPM_NONE
     effect.player->get_rppm( skipper_rwq_estimate->name(), skipper_rwq_estimate->rppm(),
                              skipper_rwq_estimate->rppm_modifier(), rppm_scale_e::RPPM_NONE );
 
-    new skippers_roaring_warqueens_estimate_cb_t( *skipper_rwq_estimate );    
+    auto cb = new skippers_roaring_warqueens_estimate_cb_t( *skipper_rwq_estimate );
+
+    effect.player->register_combat_begin( [ cb ]( player_t* p ) {
+      if ( ( !p->sim->single_actor_batch && p->sim->player_no_pet_list.size() > 1 ) &&
+           !p->thewarwithin_opts.force_estimate_skippers_group_benefit )
+        cb->deactivate();
+    } );
   }
 }
 

@@ -12852,12 +12852,12 @@ void player_t::create_options()
   add_option( opt_string( "thewarwithin.windsingers_passive_stat", thewarwithin_opts.windsingers_passive_stat ) );
   add_option( opt_bool( "thewarwithin.estimate_roaring_warqueens_citrine",
                         thewarwithin_opts.estimate_roaring_warqueens_citrine ) );
-  add_option( opt_bool( "thewarwithin.estimate_skippers_roaring_warqueen_procs",
-                        thewarwithin_opts.estimate_skippers_roaring_warqueen_procs ) );
-  add_option( opt_bool( "thewarwithin.estimate_skippers_roaring_warqueen_procs_direct_trigger",
-                        thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_direct_trigger ) );
-  add_option( opt_float( "thewarwithin.estimate_skippers_roaring_warqueen_procs_rppm_mult",
-                         thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_rppm_mult, 0, 999 ) );
+  add_option( opt_bool( "thewarwithin.force_estimate_skippers_group_benefit",
+                        thewarwithin_opts.force_estimate_skippers_group_benefit ) );
+  add_option( opt_bool( "thewarwithin.estimate_skippers_group_benefit", 
+                        thewarwithin_opts.estimate_skippers_group_benefit ) );
+  add_option( opt_float( "thewarwithin.estimate_skippers_group_members",
+                         thewarwithin_opts.estimate_skippers_group_members, 0, 999 ) );
 }
 
 player_t* player_t::create( sim_t*, const player_description_t& )
