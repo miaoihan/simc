@@ -15226,7 +15226,7 @@ struct death_knight_module_t : public module_t
     unique_gear::register_special_effect( 326864, runeforge::spellwarding );
     unique_gear::register_special_effect( 326982, runeforge::unending_thirst );
   }
-
+  /*
   void register_hotfixes() const override
   {
     hotfix::register_effect( "Death Knight", "2024-12-13", "Rotten Touch Debuff incrased to 60%", 1026981,
@@ -15270,7 +15270,7 @@ struct death_knight_module_t : public module_t
       .operation( hotfix::HOTFIX_SET )
       .modifier( 1.144 )
       .verification_value( 1.04 );
-  }
+  }*/
 
   void init( player_t* ) const override
   {
