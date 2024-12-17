@@ -6334,78 +6334,185 @@ struct storm_sewers_citrine_t : public absorb_citrine_t
   }
 };
 
-struct roaring_warqueen_citrine_t : public generic_heal_t
+action_t* create_citrine_action( const special_effect_t& effect, singing_citrines_drivers_e driver );
+
+struct roaring_warqueen_citrine_t : public spell_t
 {
-  static constexpr std::array<singing_citrines_drivers_e, 4> CITRINE_DRIVERS = {
-      STORM_SEWERS_CITRINE, STORMBRINGERS_RUNED_CITRINE, THUNDERLORDS_CRACKLING_CITRINE, ROARING_WARQUEENS_CITRINE };
-  int max_targets;
-  int num_hit;
+  static constexpr std::array<singing_citrines_drivers_e, 3> CITRINE_DRIVERS = {
+      STORM_SEWERS_CITRINE, STORMBRINGERS_RUNED_CITRINE, THUNDERLORDS_CRACKLING_CITRINE };
+
+  enum gem_type_t
+  {
+    NONE = 0,
+    ACTION,
+    BUFF
+  };
+
+  struct citrine_data_t
+  {
+    gem_type_t gem_type             = gem_type_t::NONE;
+    action_t* action                = nullptr;
+    stat_buff_current_value_t* buff = nullptr;
+
+    citrine_data_t()
+    {
+    }
+  };
+
+  target_specific_t<citrine_data_t> citrine_data;
+  bool estimate_group_value;
 
   roaring_warqueen_citrine_t( const special_effect_t& e )
-    : generic_heal_t( e, "roaring_warqueens_citrine", 462964 ), max_targets( 0 ), num_hit( 0 )
+    : spell_t( "roaring_warqueens_citrine", e.player, e.player->find_spell( 462964 ) ),
+      citrine_data{ true },
+      estimate_group_value( e.player->thewarwithin_opts.estimate_roaring_warqueens_citrine )
   {
-    background  = true;
-    max_targets = as<int>( e.player->find_spell( ROARING_WARQUEENS_CITRINE)->effectN( 2 ).base_value() );
-    // Prevent feedback loop from proccing other war queen citrines
-    cooldown->duration = 100_ms;
+    background = true;
+    aoe        = as<int>( e.player->find_spell( ROARING_WARQUEENS_CITRINE )->effectN( 2 ).base_value() );
+
+    citrine_data[ player ]           = new citrine_data_t();
+    citrine_data[ player ]->gem_type = gem_type_t::ACTION;
+    citrine_data[ player ]->action   = create_citrine_action( e, THUNDERLORDS_CRACKLING_CITRINE );
+  }
+
+  void setup_ally_gem( player_t* t )
+  {
+    if ( citrine_data[ t ] )
+      return;
+
+    if ( t->is_pet() || t->is_enemy() || t == player )
+      return;
+
+    citrine_data[ t ] = new citrine_data_t();
+
+    special_effect_t* circlet = unique_gear::find_special_effect( t, CYRCES_CIRCLET );
+    if ( !circlet )
+      return;
+
+    singing_citrines_drivers_e citrine = CITRINE_DRIVER_NONE;
+    for ( auto& d : CITRINE_DRIVERS )
+    {
+      if ( auto eff = unique_gear::find_special_effect( t, d ) )
+      {
+        citrine = d;
+        break;
+      }
+    }
+
+    if ( citrine == CITRINE_DRIVER_NONE )
+      return;
+
+    if ( auto proc_buff = find_citrine_proc_buff( t, citrine ) )
+    {
+      auto buff                   = debug_cast<stat_buff_current_value_t*>( proc_buff );
+      citrine_data[ t ]->gem_type = gem_type_t::BUFF;
+      citrine_data[ t ]->buff     = buff;
+      return;
+    }
+
+    if ( auto proc_action = find_citrine_action( t, citrine ) )
+    {
+      citrine_data[ t ]->gem_type = gem_type_t::ACTION;
+      citrine_data[ t ]->action   = proc_action;
+    }
+  }
+
+  void activate() override
+  {
+    if ( !estimate_group_value && !sim->single_actor_batch )
+    {
+      sim->player_no_pet_list.register_callback( [ this ]( player_t* t ) { setup_ally_gem( t ); } );
+
+      for ( const auto& t : sim->player_no_pet_list )
+      {
+        setup_ally_gem( t );
+      }
+    }
+  }
+
+  void trigger_ally_gem( player_t* t, bool trigger_own = false )
+  {
+    if ( t->is_sleeping() || target == player && !trigger_own )
+      return;
+
+    if ( !citrine_data[ t ] )
+      setup_ally_gem( t );
+
+    switch ( citrine_data[ t ]->gem_type )
+    {
+      case gem_type_t::ACTION:
+        assert( citrine_data[ t ]->action && "There must be a valid action pointer if the gem type is set to ACTION" );
+        citrine_data[ t ]->action->execute();
+        break;
+      case gem_type_t::BUFF:
+        assert( citrine_data[ t ]->buff && "There must be a valid buff pointer if the gem type is set to BUFF" );
+        citrine_data[ t ]->buff->queen_proc = true;
+        citrine_data[ t ]->buff->trigger();
+        break;
+      default:
+        break;
+    }
+  }
+
+  size_t available_targets( std::vector<player_t*>& target_list ) const override
+  {
+    target_list.clear();
+
+    if ( estimate_group_value )
+    {
+      int _n_targets = aoe > 0 ? aoe : 4;
+      for ( int i = 0; i < _n_targets; i++ )
+      {
+        target_list.push_back( player );
+      }
+    }
+    else
+    {
+      for ( const auto& t : sim->player_no_pet_list )
+      {
+        if ( t->is_sleeping() )
+          continue;
+
+        if ( !citrine_data[ t ] || citrine_data[ t ]->gem_type == gem_type_t::NONE )
+        {
+          continue;
+        }
+
+        target_list.push_back( t );
+      }
+    }
+
+    return target_list.size();
+  }
+
+  void impact( action_state_t* s ) override
+  {
+    spell_t::impact( s );
+    trigger_ally_gem( s->target, estimate_group_value );
   }
 
   void execute() override
   {
-    if ( target->is_enemy() )
+    bool old_group_value = estimate_group_value;
+    // Base of 1 + small epsilon to avoid rounding errors.
+    if ( base_multiplier > 1.001 )
     {
-      target                = player;
-      target_cache.is_valid = false;
-      target                = rng().range( target_list() );
+      // Can only happen with Legendary Skippers
+      estimate_group_value = player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs &&
+                             player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_direct_trigger;
+      if ( estimate_group_value != old_group_value )
+        target_cache.is_valid = false;
     }
 
-    num_hit = 0;
-
-    generic_heal_t::execute();
-
-    for ( auto* t : player->sim->player_no_pet_list )
+    if ( target_list().size() == 0 )
     {
-      if ( t->is_sleeping() || t == player )
-        continue;
-
-      special_effect_t* circlet = unique_gear::find_special_effect( t, CYRCES_CIRCLET );
-      if ( !circlet )
-        continue;
-
-      singing_citrines_drivers_e citrine = CITRINE_DRIVER_NONE;
-      for ( auto& d : CITRINE_DRIVERS )
-      {
-        if ( auto eff = unique_gear::find_special_effect( t, d ) )
-        {
-          citrine = d;
-          break;
-        }
-      }
-
-      if ( citrine == CITRINE_DRIVER_NONE )
-        continue;
-
-      if ( auto proc_buff = find_citrine_proc_buff( t, citrine ) )
-      {
-        auto buff        = debug_cast<stat_buff_current_value_t*>( proc_buff );
-        buff->queen_proc = true;
-        buff->trigger();
-      }
-
-      if ( auto proc_action = find_citrine_action( t, citrine ) )
-        proc_action->execute();
-
-      if ( ++num_hit >= max_targets )
-        break;
-      else
-        continue;
+      return;
     }
-  }
 
-  void reset() override
-  {
-    generic_heal_t::reset();
-    num_hit = 0;
+    rng().shuffle( target_list().begin(), target_list().end() );
+    target = *target_list().begin();
+
+    spell_t::execute();
   }
 };
 
@@ -6853,6 +6960,76 @@ void legendary_skippers_citrine( special_effect_t& effect )
   effect.execute_action = create_proc_action<legendary_skippers_citrine_t>( "legendary_skippers_citrine", effect );
 
   new dbc_proc_callback_t( effect.player, effect );
+
+  struct skippers_roaring_warqueens_estimate_cb_t : public dbc_proc_callback_t
+  {
+    roaring_warqueen_citrine_t::citrine_data_t citrine_data;
+
+    skippers_roaring_warqueens_estimate_cb_t( const special_effect_t& e )
+      : dbc_proc_callback_t( e.player, e ), citrine_data()
+    {
+      singing_citrines_drivers_e citrine = CITRINE_DRIVER_NONE;
+      for ( auto& d : roaring_warqueen_citrine_t::CITRINE_DRIVERS )
+      {
+        if ( auto eff = unique_gear::find_special_effect( effect.player, d ) )
+        {
+          citrine = d;
+          break;
+        }
+      }
+
+      if ( citrine == CITRINE_DRIVER_NONE )
+        return;
+
+      if ( auto proc_buff = find_citrine_proc_buff( effect.player, citrine ) )
+      {
+        auto buff             = debug_cast<stat_buff_current_value_t*>( proc_buff );
+        citrine_data.gem_type = roaring_warqueen_citrine_t::gem_type_t::BUFF;
+        citrine_data.buff     = buff;
+        return;
+      }
+
+      if ( auto proc_action = find_citrine_action( effect.player, citrine ) )
+      {
+        citrine_data.gem_type = roaring_warqueen_citrine_t::gem_type_t::ACTION;
+        citrine_data.action   = proc_action;
+      }
+    }
+
+    void execute( action_t*, action_state_t* s ) override
+    {
+      switch ( citrine_data.gem_type )
+      {
+        case roaring_warqueen_citrine_t::gem_type_t::ACTION:
+          assert( citrine_data.action && "There must be a valid action pointer if the gem type is set to ACTION" );
+          citrine_data.action->execute();
+          break;
+        case roaring_warqueen_citrine_t::gem_type_t::BUFF:
+          assert( citrine_data.> buff && "There must be a valid buff pointer if the gem type is set to BUFF" );
+          citrine_data.buff->queen_proc = true;
+          citrine_data.buff->trigger();
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
+  if ( effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs &&
+       !effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_direct_trigger &&
+       effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_rppm_mult > 0 )
+  {
+    auto skipper_rwq_estimate      = new special_effect_t( effect.player );
+    skipper_rwq_estimate->name_str = "legendary_skippers_citrine_roaring_warqueen_estimate";
+    skipper_rwq_estimate->type     = SPECIAL_EFFECT_EQUIP;
+    skipper_rwq_estimate->source   = SPECIAL_EFFECT_SOURCE_ITEM;
+    skipper_rwq_estimate->spell_id = effect.spell_id;
+    skipper_rwq_estimate->rppm_modifier_ =
+        effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_rppm_mult / possible_stones.size();
+    effect.player->special_effects.push_back( skipper_rwq_estimate );
+
+    auto cb = new skippers_roaring_warqueens_estimate_cb_t( *skipper_rwq_estimate );
+  }
 }
 
 

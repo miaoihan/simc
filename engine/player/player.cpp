@@ -12849,8 +12849,15 @@ void player_t::create_options()
                          thewarwithin_opts.mereldars_toll_ally_trigger_chance, 0, 1 ) );
   add_option( opt_float( "thewarwithin.sureki_zealots_insignia_rppm_multiplier",
                          thewarwithin_opts.sureki_zealots_insignia_rppm_multiplier, 0, 1 ) );
-  add_option( opt_string( "thewarwithin.windsingers_passive_stat",
-                          thewarwithin_opts.windsingers_passive_stat ) );
+  add_option( opt_string( "thewarwithin.windsingers_passive_stat", thewarwithin_opts.windsingers_passive_stat ) );
+  add_option( opt_bool( "thewarwithin.estimate_roaring_warqueens_citrine",
+                        thewarwithin_opts.estimate_roaring_warqueens_citrine ) );
+  add_option( opt_bool( "thewarwithin.estimate_skippers_roaring_warqueen_procs",
+                        thewarwithin_opts.estimate_skippers_roaring_warqueen_procs ) );
+  add_option( opt_bool( "thewarwithin.estimate_skippers_roaring_warqueen_procs_direct_trigger",
+                        thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_direct_trigger ) );
+  add_option( opt_float( "thewarwithin.estimate_skippers_roaring_warqueen_procs_rppm_mult",
+                         thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_rppm_mult, 0, 999 ) );
 }
 
 player_t* player_t::create( sim_t*, const player_description_t& )
