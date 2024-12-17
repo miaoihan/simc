@@ -588,7 +588,7 @@ struct simplified_player_t : public player_t
         { SLOT_FINGER_1,  fmt::format( ",id=207159,ilevel={},gem_id=213494/213494,enchant=radiant_mastery_3", item_level ) },
         { SLOT_FINGER_2,
           fmt::format(
-              ",id=228411,gem_id={}/228639/228646,bonus_id=12025/1512,enchant=radiant_mastery_3", 228638 ) },
+              ",id=228411,gem_id={}/228639/228646,bonus_id=12025/1511,enchant=radiant_mastery_3", 228638 ) },
         { SLOT_TRINKET_1, fmt::format( ",id=153816,ilevel={}", item_level ) },
         { SLOT_TRINKET_2, fmt::format( ",id=153819,ilevel={}", item_level ) },
         { SLOT_MAIN_HAND, fmt::format( ",id=202565,ilevel={}", item_level ) },
