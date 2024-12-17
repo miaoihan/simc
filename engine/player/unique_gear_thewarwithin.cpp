@@ -6044,6 +6044,7 @@ struct stat_buff_current_value_t : stat_buff_t
                                                      // to current buff then after creation flag false.
       skipper_proc( false ),
       skipper_mult( 0 ),
+      queen_proc( false ),
       fathomdwellers_mult( 1.0 ),
       is_proc( false ),
       proc_mult( 1.3 )
