@@ -6362,18 +6362,18 @@ struct roaring_warqueen_citrine_t : public spell_t
 
   target_specific_t<citrine_data_t> citrine_data;
   bool estimate_group_value;
+  action_t* thunder_gem;
 
   roaring_warqueen_citrine_t( const special_effect_t& e )
     : spell_t( "roaring_warqueens_citrine", e.player, e.player->find_spell( 462964 ) ),
       citrine_data{ true },
-      estimate_group_value( e.player->thewarwithin_opts.estimate_roaring_warqueens_citrine )
+      estimate_group_value( e.player->thewarwithin_opts.estimate_roaring_warqueens_citrine ),
+      thunder_gem( create_citrine_action( e, THUNDERLORDS_CRACKLING_CITRINE ) )
   {
     background = true;
     aoe        = as<int>( e.player->find_spell( ROARING_WARQUEENS_CITRINE )->effectN( 2 ).base_value() );
 
-    citrine_data[ player ]           = new citrine_data_t();
-    citrine_data[ player ]->gem_type = gem_type_t::ACTION;
-    citrine_data[ player ]->action   = create_citrine_action( e, THUNDERLORDS_CRACKLING_CITRINE );
+    setup_ally_gem( player );
   }
 
   void setup_ally_gem( player_t* t )
@@ -6381,7 +6381,7 @@ struct roaring_warqueen_citrine_t : public spell_t
     if ( citrine_data[ t ] )
       return;
 
-    if ( t->is_pet() || t->is_enemy() || t == player )
+    if ( t->is_pet() || t->is_enemy() )
       return;
 
     citrine_data[ t ] = new citrine_data_t();
@@ -6489,7 +6489,16 @@ struct roaring_warqueen_citrine_t : public spell_t
   void impact( action_state_t* s ) override
   {
     spell_t::impact( s );
-    trigger_ally_gem( s->target, estimate_group_value );
+
+    if ( s->target != player || s->chain_target == 0 )
+    {
+      trigger_ally_gem( s->target, estimate_group_value );
+    }
+
+    if ( s->target == player && ( s->chain_target > 0 || citrine_data[ player ]->gem_type == gem_type_t::NONE ) )
+    {
+      thunder_gem->execute();
+    }
   }
 
   void execute() override
@@ -6497,7 +6506,7 @@ struct roaring_warqueen_citrine_t : public spell_t
     bool skippers_estimate = player->thewarwithin_opts.estimate_skippers_group_benefit &&
                              ( player->sim->single_actor_batch || player->sim->player_no_pet_list.size() == 1 );
     // Base of 1 + small epsilon to avoid rounding errors.
-    if ( base_multiplier > 1.001 &&
+    if ( base_multiplier > 1.001 && player->thewarwithin_opts.personal_estimate_skippers_group_benefit &&
          ( player->thewarwithin_opts.force_estimate_skippers_group_benefit || skippers_estimate ) )
     {
       bool old_group_value = estimate_group_value;
@@ -7060,7 +7069,8 @@ void legendary_skippers_citrine( special_effect_t& effect )
 
     effect.player->register_combat_begin( [ cb ]( player_t* p ) {
       if ( ( !p->sim->single_actor_batch && p->sim->player_no_pet_list.size() > 1 ) &&
-           !p->thewarwithin_opts.force_estimate_skippers_group_benefit )
+               !p->thewarwithin_opts.force_estimate_skippers_group_benefit ||
+           p->thewarwithin_opts.personal_estimate_skippers_group_benefit )
         cb->deactivate();
     } );
   }

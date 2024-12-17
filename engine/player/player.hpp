@@ -883,6 +883,7 @@ struct player_t : public actor_t
     player_option_t<std::string> windsingers_passive_stat = "";
     bool estimate_roaring_warqueens_citrine               = false;
     bool force_estimate_skippers_group_benefit            = false;
+    bool personal_estimate_skippers_group_benefit         = false;
     bool estimate_skippers_group_benefit                  = true;
     double estimate_skippers_group_members                = 4;
   } thewarwithin_opts;

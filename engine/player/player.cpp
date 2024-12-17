@@ -12854,6 +12854,8 @@ void player_t::create_options()
                         thewarwithin_opts.estimate_roaring_warqueens_citrine ) );
   add_option( opt_bool( "thewarwithin.force_estimate_skippers_group_benefit",
                         thewarwithin_opts.force_estimate_skippers_group_benefit ) );
+  add_option( opt_bool( "thewarwithin.personal_estimate_skippers_group_benefit", 
+                        thewarwithin_opts.personal_estimate_skippers_group_benefit ) );
   add_option( opt_bool( "thewarwithin.estimate_skippers_group_benefit", 
                         thewarwithin_opts.estimate_skippers_group_benefit ) );
   add_option( opt_float( "thewarwithin.estimate_skippers_group_members",
