@@ -6502,6 +6502,10 @@ struct roaring_warqueen_citrine_t : public spell_t
                              player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_direct_trigger;
       if ( estimate_group_value != old_group_value )
         target_cache.is_valid = false;
+
+      // Currently there is an Issue with fake Actors initialising the ring. TODO: look into it.
+      if ( !sim->single_actor_batch && sim->player_non_sleeping_list.size() > 1 )
+        return;
     }
 
     if ( target_list().size() == 0 )
