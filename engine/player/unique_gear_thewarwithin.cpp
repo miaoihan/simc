@@ -6494,22 +6494,17 @@ struct roaring_warqueen_citrine_t : public spell_t
 
   void execute() override
   {
-    bool old_group_value   = estimate_group_value;
     bool skippers_estimate = player->thewarwithin_opts.estimate_skippers_group_benefit &&
                              ( player->sim->single_actor_batch || player->sim->player_no_pet_list.size() == 1 );
     // Base of 1 + small epsilon to avoid rounding errors.
     if ( base_multiplier > 1.001 &&
          ( player->thewarwithin_opts.force_estimate_skippers_group_benefit || skippers_estimate ) )
     {
+      bool old_group_value = estimate_group_value;
       // Can only happen with Legendary Skippers
-      estimate_group_value = player->thewarwithin_opts.estimate_skippers_group_benefit &&
-                             player->thewarwithin_opts.force_estimate_skippers_group_benefit;
+      estimate_group_value = true;
       if ( estimate_group_value != old_group_value )
         target_cache.is_valid = false;
-
-      // Currently there is an Issue with fake Actors initialising the ring. TODO: look into it.
-      if ( !sim->single_actor_batch )
-        return;
     }
 
     if ( target_list().size() == 0 )
