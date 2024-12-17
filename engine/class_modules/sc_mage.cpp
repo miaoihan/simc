@@ -783,7 +783,7 @@ public:
     player_talent_t fiery_rush;
     player_talent_t meteor;
     player_talent_t firefall;
-    player_talent_t explosivo;
+    player_talent_t cratermaker;
 
     // Row 10
     player_talent_t hyperthermia;
@@ -4225,7 +4225,7 @@ struct combustion_t final : public fire_mage_spell_t
     p()->cooldowns.fire_blast->reset( false, as<int>( p()->talents.spontaneous_combustion->effectN( 1 ).base_value() ) );
     p()->cooldowns.phoenix_flames->reset( false, as<int>( p()->talents.spontaneous_combustion->effectN( 2 ).base_value() ) );
     p()->trigger_flash_freezeburn();
-    if ( p()->talents.explosivo.ok() )
+    if ( p()->talents.cratermaker.ok() )
     {
       p()->buffs.lit_fuse->trigger();
       p()->buffs.lit_fuse->predict();
@@ -5762,7 +5762,7 @@ struct living_bomb_explosion_t final : public fire_mage_spell_t
       // TODO: This is currently "Add Flat Multiplier" in the data. Verify the
       // specific numbers in game, especially because scripting is involved.
       // There is also a zeroed "Add Percent Multiplier" on Combustion for Living Bomb.
-      am *= 1.0 + p()->talents.explosivo->effectN( 2 ).percent();
+      am *= 1.0 + p()->talents.cratermaker->effectN( 2 ).percent();
 
     return am;
   }
@@ -7659,7 +7659,7 @@ void mage_t::create_actions()
   if ( talents.arcane_echo.ok() )
     action.arcane_echo = get_action<arcane_echo_t>( "arcane_echo", this );
 
-  if ( talents.lit_fuse.ok() || talents.explosivo.ok() || talents.deep_impact.ok() )
+  if ( talents.lit_fuse.ok() || talents.cratermaker.ok() || talents.deep_impact.ok() )
     action.living_bomb = get_action<living_bomb_dot_t>( "living_bomb", this );
 
   if ( talents.glacial_assault.ok() )
@@ -8063,7 +8063,7 @@ void mage_t::init_spells()
   talents.fiery_rush             = find_talent_spell( talent_tree::SPECIALIZATION, "Fiery Rush"             );
   talents.meteor                 = find_talent_spell( talent_tree::SPECIALIZATION, "Meteor"                 );
   talents.firefall               = find_talent_spell( talent_tree::SPECIALIZATION, "Firefall"               );
-  talents.explosivo              = find_talent_spell( talent_tree::SPECIALIZATION, "Explosivo"              );
+  talents.cratermaker            = find_talent_spell( talent_tree::SPECIALIZATION, "Cratermaker"            );
   // Row 10
   talents.hyperthermia           = find_talent_spell( talent_tree::SPECIALIZATION, "Hyperthermia"           );
   talents.phoenix_reborn         = find_talent_spell( talent_tree::SPECIALIZATION, "Phoenix Reborn"         );
@@ -8361,7 +8361,7 @@ void mage_t::create_buffs()
                                      ->set_default_value_from_effect( 2 )
                                      ->set_trigger_spell( talents.hyperthermia );
   buffs.lit_fuse                 = make_buff( this, "lit_fuse", find_spell( 453207 ) )
-                                     ->set_chance( talents.lit_fuse.ok() || talents.explosivo.ok() );
+                                     ->set_chance( talents.lit_fuse.ok() || talents.cratermaker.ok() );
   buffs.majesty_of_the_phoenix   = make_buff( this, "majesty_of_the_phoenix", find_spell( 453329 ) )
                                      ->set_chance( talents.majesty_of_the_phoenix.ok() );
   buffs.pyrotechnics             = make_buff( this, "pyrotechnics", find_spell( 157644 ) )
@@ -9651,7 +9651,7 @@ void mage_t::trigger_lit_fuse()
   // TODO: Verify the proc chance with every combination of the relevant talents.
   double chance = talents.lit_fuse->effectN( 4 ).percent() + talents.explosive_ingenuity->effectN( 1 ).percent();
   if ( buffs.combustion->check() )
-    chance += talents.explosivo->effectN( 1 ).percent();
+    chance += talents.cratermaker->effectN( 1 ).percent();
   if ( rng().roll( chance ) )
     buffs.lit_fuse->trigger();
 }
