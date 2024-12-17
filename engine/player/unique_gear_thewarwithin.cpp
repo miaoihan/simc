@@ -6513,6 +6513,15 @@ struct roaring_warqueen_citrine_t : public spell_t
 
     if ( target_list().size() == 0 )
     {
+      // We have no targets at all. Free state(s) and abandon ship.
+      if ( pre_execute_state )
+      {
+        action_state_t::release( pre_execute_state );
+      }
+      if ( execute_state )
+      {
+        action_state_t::release( execute_state );
+      }
       return;
     }
 
