@@ -6432,7 +6432,7 @@ struct roaring_warqueen_citrine_t : public spell_t
 
   void trigger_ally_gem( player_t* t, bool trigger_own = false )
   {
-    if ( t->is_sleeping() || target == player && !trigger_own )
+    if ( t->is_sleeping() || (target == player && !trigger_own) )
       return;
 
     if ( !citrine_data[ t ] )
@@ -6971,7 +6971,7 @@ void legendary_skippers_citrine( special_effect_t& effect )
       singing_citrines_drivers_e citrine = CITRINE_DRIVER_NONE;
       for ( auto& d : roaring_warqueen_citrine_t::CITRINE_DRIVERS )
       {
-        if ( auto eff = unique_gear::find_special_effect( effect.player, d ) )
+        if ( unique_gear::find_special_effect( effect.player, d ) )
         {
           citrine = d;
           break;
@@ -7005,7 +7005,7 @@ void legendary_skippers_citrine( special_effect_t& effect )
           citrine_data.action->execute();
           break;
         case roaring_warqueen_citrine_t::gem_type_t::BUFF:
-          assert( citrine_data.> buff && "There must be a valid buff pointer if the gem type is set to BUFF" );
+          assert( citrine_data.buff && "There must be a valid buff pointer if the gem type is set to BUFF" );
           citrine_data.buff->queen_proc = true;
           citrine_data.buff->trigger();
           break;
@@ -7028,7 +7028,7 @@ void legendary_skippers_citrine( special_effect_t& effect )
         effect.player->thewarwithin_opts.estimate_skippers_roaring_warqueen_procs_rppm_mult / possible_stones.size();
     effect.player->special_effects.push_back( skipper_rwq_estimate );
 
-    auto cb = new skippers_roaring_warqueens_estimate_cb_t( *skipper_rwq_estimate );
+    new skippers_roaring_warqueens_estimate_cb_t( *skipper_rwq_estimate );
   }
 }
 
