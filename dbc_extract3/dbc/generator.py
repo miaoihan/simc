@@ -1517,6 +1517,7 @@ class SpellDataGenerator(DataGenerator):
          457630, 455523, 457628, # Woven Dusk Tailoring Set
          463059, # Darkmoon Deck: Ascension
          463232, # Darkmoon Sigil: Symbiosis
+         454979, 454862, 454980, 454977, 454978, 454976, 454975, 454982, # Darkmoon Deck: Vivacity
          441508, 441507, 441430, # Nerubian Phearomone Secreter
          455441, 455454, 455455, 455456, #Unstable Power Core Mastery Crit Haste Vers
          455521, 455522, 457627, # Woven Dawn Tailoring Set
