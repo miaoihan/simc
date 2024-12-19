@@ -1685,6 +1685,7 @@ public:
     double average_cs_travel_time      = 0.4;
     timespan_t first_ams_cast          = 20_s;
     double horsemen_ams_absorb_percent = 0.6;
+    bool disable_ghoul_spawn_stun      = false;
   } options;
 
   // Runes
@@ -2897,6 +2898,9 @@ struct base_ghoul_pet_t : public death_knight_pet_t
   void arise() override
   {
     death_knight_pet_t::arise();
+    if ( dk()->options.disable_ghoul_spawn_stun )
+      return;
+
     timespan_t duration = dk()->pet_spell.pet_stun->duration();
     if ( precombat_spawn_adjust > 0_s && precombat_spawn )
     {
@@ -11285,6 +11289,7 @@ void death_knight_t::create_options()
   add_option(
       opt_timespan( "deathknight.first_ams_cast", options.first_ams_cast, timespan_t::zero(), timespan_t::max() ) );
   add_option( opt_float( "deathknight.horsemen_ams_absorb_percent", options.horsemen_ams_absorb_percent, 0.0, 1.0 ) );
+  add_option( opt_bool( "deathknight.disable_ghoul_spawn_stun", options.disable_ghoul_spawn_stun ) );
 }
 
 void death_knight_t::copy_from( player_t* source )
