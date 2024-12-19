@@ -2343,17 +2343,8 @@ struct power_word_shield_t final : public priest_absorb_t
     if ( b )
       return debug_cast<absorb_buff_t*>( b );
 
-    std::string stats_obj_name = name_str;
-    if ( s->target != player )
-      stats_obj_name += "_" + player->name_str;
-    stats_t* stats_obj = player->get_stats( stats_obj_name, this );
-    if ( stats != stats_obj )
-    {
-      // Add absorb target stats as a child to the main stats object for reporting
-      stats->add_child( stats_obj );
-    }
     auto buff = make_buff<buffs::power_word_shield_buff_t>( &priest(), s->target );
-    buff->set_absorb_source( stats_obj );
+    buff->set_absorb_source( stats );
 
     return buff;
   }
