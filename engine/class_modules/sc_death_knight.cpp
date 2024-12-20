@@ -8700,6 +8700,12 @@ struct epidemic_t final : public death_knight_spell_t
     {
       p()->trigger_vampiric_strike_proc( target );
     }
+
+    if ( p()->is_ptr() && p()->sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW2, B2 ) &&
+         !p()->buffs.dark_transformation->check() && rng().roll( p()->spell.winning_streak_unholy->proc_chance() ) )
+    {
+      p()->buffs.winning_streak_unholy->expire();
+    }
   }
 
   void impact( action_state_t* state ) override
