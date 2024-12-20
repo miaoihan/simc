@@ -6029,7 +6029,6 @@ buff_t* find_citrine_proc_buff( player_t* player, unsigned driver )
 struct stat_buff_current_value_t : stat_buff_t
 {
   bool has_fathomdwellers;
-  double fathomdwellers_mult;
   bool skipper_proc;
   double skipper_mult;
   bool queen_proc;
@@ -6045,15 +6044,15 @@ struct stat_buff_current_value_t : stat_buff_t
       skipper_proc( false ),
       skipper_mult( 0 ),
       queen_proc( false ),
-      fathomdwellers_mult( 1.0 ),
       is_proc( false ),
       proc_mult( 1.3 )
   {
     skipper_mult = player->find_spell( LEGENDARY_SKIPPERS_CITRINE )->effectN( 3 ).percent();
-    if ( has_fathomdwellers )
-    {
-      source->register_precombat_begin( [ & ]( player_t* p ) { set_fathomdweller_mult(); } );
-    }
+    // Stat procs dont update their value unless bumped, so only recalculate passive buffs.
+    // Seems to have a heartbeat update, likely the same 5.25s heartbeat as usual. Tested with Ovinax movement buff
+    // changing stack values. Last tested 19-12-2024.
+    if ( data().duration() == timespan_t::zero() )
+      player->sim->register_heartbeat_event_callback( [ & ]( sim_t* ) { force_recalculate(); } );
   }
 
   double get_buff_size()
@@ -6061,7 +6060,9 @@ struct stat_buff_current_value_t : stat_buff_t
     double amount = default_value;
 
     if ( has_fathomdwellers )
-      amount *= fathomdwellers_mult;
+      amount *= 1.0 + ( source->apply_combat_rating_dr(
+      RATING_MASTERY, source->composite_mastery_rating() / source->current.rating.mastery ) ) /
+      120;
     if ( skipper_proc )
       amount *= skipper_mult;
     // Windsingers Mastery proc doesnt seem to be affected by this... for reasons?
@@ -6069,13 +6070,6 @@ struct stat_buff_current_value_t : stat_buff_t
       amount *= proc_mult;
 
     return amount;
-  }
-
-  void set_fathomdweller_mult()
-  {
-    fathomdwellers_mult = 1.0 + ( source->apply_combat_rating_dr(
-      RATING_MASTERY, source->composite_mastery_rating() / source->current.rating.mastery ) ) /
-      120;
   }
 
   void force_recalculate()
@@ -6131,7 +6125,6 @@ template <typename BASE>
 struct citrine_base_t : public BASE
 {
   bool has_fathomdwellers;
-  double fathomdwellers_mult;
   const spell_data_t* cyrce_driver;
 
   template <typename... ARGS>
@@ -6141,14 +6134,6 @@ struct citrine_base_t : public BASE
       cyrce_driver( effect.player->find_spell( CYRCES_CIRCLET ) )
   {
     BASE::background = true;
-    if ( has_fathomdwellers )
-    {
-      effect.player->register_precombat_begin( [ & ]( player_t* p ) {
-        fathomdwellers_mult = 1.0 + ( p->apply_combat_rating_dr(
-                                        RATING_MASTERY, p->composite_mastery_rating() / p->current.rating.mastery ) ) /
-                                        120;
-      } );
-    }
   }
 
   double action_multiplier() const override
@@ -6158,7 +6143,9 @@ struct citrine_base_t : public BASE
     if ( has_fathomdwellers )
     {
       // Seems to only use gear rating
-      m *= fathomdwellers_mult;
+      m *= 1.0 + ( BASE::player->apply_combat_rating_dr(
+        RATING_MASTERY, BASE::player->composite_mastery_rating() / BASE::player->current.rating.mastery ) ) /
+        120;
     }
 
     return m;
@@ -6175,7 +6162,7 @@ struct damage_citrine_t : citrine_base_t<generic_proc_t>
     // TODO: Confirm bug behaviour
     // Currently the role multiplier of damaging citrines does not appear to be applying. Tested Discipline Priest and
     // Holy Priest 13/12/2024.
-    if ( has_role_mult( e.player, driver_spell ) && !e.player->bugs )
+    if ( has_role_mult( e.player, driver_spell ) )
       this->base_multiplier *= role_mult( e.player, driver_spell );
   }
 
@@ -6809,6 +6796,8 @@ void windsingers_runed_citrine( special_effect_t& effect )
                                                       b->default_value = stat_value;
                                                       buffs[ s ]       = b;
                                                     } );
+
+  // Windsinger does not update its given passive stat if the highest stat changes as of 19-12-2024.
   const auto& desired_stat = effect.player->thewarwithin_opts.windsingers_passive_stat;
   stat_e stat              = STAT_NONE;
   if ( util::str_compare_ci( desired_stat, "haste" ) )
@@ -6845,49 +6834,7 @@ void fathomdwellers_runed_citrine( special_effect_t& effect )
   auto buff = create_buff<stat_buff_t>( effect.player, "fathomdwellers_runed_citrine", effect.driver() )
                   ->add_stat_from_effect( 1, stat_value );
 
-  const auto& desired_stat = effect.player->thewarwithin_opts.windsingers_passive_stat;
-  std::string suffix       = "";
-  if ( util::str_compare_ci( desired_stat, "haste" ) )
-    suffix = "Haste";
-
-  if ( util::str_compare_ci( desired_stat, "mastery" ) )
-    suffix = "Mastery";
-
-  if ( util::str_compare_ci( desired_stat, "critical_strike" ) || util::str_compare_ci( desired_stat, "crit" ) )
-    suffix = "Crit";
-
-  if ( util::str_compare_ci( desired_stat, "versatility" ) || util::str_compare_ci( desired_stat, "vers" ) )
-    suffix = "Vers";
-
   effect.player->register_on_arise_callback( effect.player, [ buff ] { buff->trigger(); } );
-  effect.player->precombat_begin_functions.insert(
-      effect.player->precombat_begin_functions.begin(), [ &, suffix ]( player_t* p ) {
-        auto stormbringer           = buff_t::find( p, "stormbringers_runed_citrine", p );
-        std::string windsinger_name = "windsingers_runed_citrine_";
-        if ( suffix == "" )
-          windsinger_name += util::stat_type_abbrev( util::highest_stat( p, secondary_ratings ) );
-        else
-          windsinger_name += suffix;
-        auto windsinger = buff_t::find( p, windsinger_name, p );
-        p->sim->print_debug( "Fathomdwellers Runed Citrine is active: Recalculating passive buffs" );
-        p->sim->print_debug( "Stormbringers Runed Citrine: {}", stormbringer ? "Found" : "Not Found" );
-        p->sim->print_debug( "Windsingers Runed Citrine: {}", windsinger ? "Found" : "Not Found" );
-        for ( int i = 0; i < 3; i++ )
-        {
-          if ( windsinger && windsinger->check() )
-          {
-            p->sim->print_debug( "Recalculating Windsinger's Runed Citrine Value" );
-            debug_cast<stat_buff_current_value_t*>( windsinger )->set_fathomdweller_mult();
-            debug_cast<stat_buff_current_value_t*>( windsinger )->force_recalculate();
-          }
-          if ( stormbringer && stormbringer->check() )
-          {
-            p->sim->print_debug( "Recalculating Stormbringer's Runed Citrine Value" );
-            debug_cast<stat_buff_current_value_t*>( stormbringer )->set_fathomdweller_mult();
-            debug_cast<stat_buff_current_value_t*>( stormbringer )->force_recalculate();
-          }
-        }
-      } );
 }
 
 void legendary_skippers_citrine( special_effect_t& effect )
