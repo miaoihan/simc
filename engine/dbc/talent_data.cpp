@@ -25,7 +25,8 @@ bool talent_data_t::is_class( player_e c ) const
 const talent_data_t* talent_data_t::find( unsigned id, bool ptr )
 {
   const auto __data = data( ptr );
-  auto it = range::lower_bound( __data, id, {}, &talent_data_t::id );
+  auto it = range::lower_bound( __data, 
+  id, {}, &talent_data_t::id );
   if ( it != __data.end() && it->id() == id )
     return &*it;
   return &talent_data_t::nil();

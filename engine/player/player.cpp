@@ -2783,6 +2783,9 @@ static void parse_traits_hash( const std::string& talents_str, player_t* player 
       // it is possible to have multiple entries per node that are not choice node.
       // default assumption is that the higher trait entry id is used.
       // if this is not the case, clashes must be resolved manually in sort_node_entries().
+      // 可能存在每个节点有多个条目，但不是选择节点。
+      // 默认假设使用较高的特质条目ID。
+      // 如果不是这种情况，则必须在 sort_node_entries() 中手动解决冲突。
       if ( node.size() > 1 )
       {
         range::sort( node, [ player ]( std::pair<const trait_data_t*, unsigned> a, std::pair<const trait_data_t*, unsigned> b ) {
