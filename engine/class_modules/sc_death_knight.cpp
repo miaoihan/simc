@@ -14225,7 +14225,8 @@ void death_knight_t::create_buffs()
   if ( is_ptr() )
   {
     buffs.winning_streak_unholy = make_fallback( sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW2, B2 ), this,
-                                                 "winning_streak", spell.winning_streak_unholy );
+                                                 "winning_streak", spell.winning_streak_unholy )
+                                      ->set_chance( 1.01 );
   }
 }
 
