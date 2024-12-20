@@ -1,4 +1,4 @@
-SimulationCraft 1100-02 for World of Warcraft 11.0.7.58187 PTR
+SimulationCraft 1100-02 for World of Warcraft 11.1.0.58221 PTR
 Name             : Backstab (id=53) [Spell Family (8)] 
 Replaces         : Sinister Strike (id=1752)
 Class            : Subtlety Rogue
@@ -460,6 +460,8 @@ Effects          :
                    Affected School(s): All
 #3 (id=1135544)  : Energize Power (30)
                    Base Value: 0 | Scaled Value: 0 | Resource: combo_points | Target: Self (1)
+#4 (id=1204625)  : Apply Aura (6) | Periodic Dummy (226): every 0.5 seconds
+                   Base Value: 0 | Scaled Value: 0 | Target: Self (1)
 Description      : Performs an evasive maneuver, $?a134735&a79008[reducing damage taken by $s2%.]?a79008[reducing damage taken from area-of-effect attacks by $s1% and all other damage taken by $s2%][reducing damage taken from area-of-effect attacks by $s1%] for $d.
 Tooltip          : Damage taken from area-of-effect attacks reduced by $s1%$?$w2!=0[ and all other damage taken reduced by $w2%.
 ][.]
@@ -2038,7 +2040,7 @@ Effects          :
 Description      : Finishing moves reduce the remaining cooldown of many Rogue skills by $<cdr> sec per combo point spent.
 
 Affected skills: Adrenaline Rush, Between the Eyes, Blade Flurry, Blade Rush, Ghostly Strike, Grappling Hook, Keep it Rolling, Killing Spree, Roll the Bones, Sprint, and Vanish.
-Variables        : $cdr=${$s1/10}
+Variables        : $cdr=${$s1/10}.1
 
 Name             : Venomous Wounds (id=79134) [Spell Family (8), Passive] 
 Talent Entry     : Assassination [tree=spec, row=2, col=2, max_rank=1, req_points=0]
@@ -7998,6 +8000,9 @@ Attributes       : Is Ability (4), Passive (6), Do Not Display (Spellbook, Aura 
 Effects          :
 #1 (id=884754)   : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
+#2 (id=1204992)  : Apply Aura (6) | Hasted Cooldown Duration (Category) (457)
+                   Base Value: 0 | Scaled Value: 0 | Misc Value: 2281 (Category) | Target: Self (1)
+                   Affected Spells (Category): Engulf (443328)
 
 Name             : Hemotoxin (desc=PvP Talent) (id=354124) [Spell Family (8), Passive, Hidden] 
 Class            : Rogue
@@ -8612,7 +8617,7 @@ Tooltip          : Healing $/5;s2% every $t1 seconds.
 Name             : Visage (desc=Racial) (id=372014) 
 Class            : Warrior, Hunter, Rogue, Priest, Mage, Warlock, Evoker
 Race             : Dracthyr (0x18000)
-School           : Physical
+School           : Nature
 Spell Type       : None
 Duration         : Aura (infinite)
 Labels           : 16: Class Spells
@@ -9324,7 +9329,7 @@ Labels           : 16: Class Spells
 Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1012937)  : Apply Aura (6) | Dummy (4)
-                   Base Value: 15 | Scaled Value: 15 | Target: Self (1)
+                   Base Value: 12 | Scaled Value: 12 | Target: Self (1)
 Description      : Roll the Bones has a $s1% increased chance of granting additional matches.
 
 Name             : Audacity (id=381845) [Spell Family (8), Passive] 
@@ -10082,14 +10087,14 @@ Effects          :
 #1 (id=1017353)  : School Damage (2): shadow | Attributes: Suppress Points Stacking (6)
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.6 | Target: Enemy (6)
 #2 (id=1017354)  : Apply Aura (6) | Dummy (4) | Attributes: Suppress Points Stacking (6)
-                   Base Value: 1 | Scaled Value: 1 | Target: Enemy (6)
+                   Base Value: 10 | Scaled Value: 10 | PvP Coefficient: 0.5 | Target: Enemy (6)
 #3 (id=1017355)  : Apply Aura (6) | Modify Mastery% (318)
                    Base Value: 1 | Scaled Value: 1 | PvP Coefficient: 0.5 | Target: Self (1)
 #4 (id=1017356)  : Apply Aura (6) | Periodic Dummy (226): every 1 seconds
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
 #5 (id=1017357)  : Apply Aura (6) | Modify Versatility% (471)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
-Description      : Lash the target for $s1 Shadow damage, causing each combo point spent within $d to lash for an additional $394757s1. Dealing damage with Flagellation increases your Mastery by ${$s2*$mas}.1%, persisting $394758d after their torment fades.
+Description      : Lash the target for $s1 Shadow damage, causing each combo point spent within $d to lash for an additional $394757s1. Dealing damage with Flagellation increases your Mastery by ${$s2/10*$mas}.1%, persisting $394758d after their torment fades.
 Tooltip          : $?$W2>0[$@auracaster is tormenting the target, dealing $394757s1 Shadow damage for each combo point spent.][Combo points spent deal $394757s1 Shadow damage to $@auracaster's tormented target. Mastery increased by ${$W3*$mas}.1%.]
 
 Name             : Serrated Bone Spike (id=385424) [Spell Family (8)] 
@@ -15836,5 +15841,55 @@ Effects          :
 #1 (id=1192064)  : School Damage (2): physical
                    Base Value: 0.249 | Scaled Value: 0.249 (delta=0.05) | Target: Enemy (6)
 Description      : $@spelldesc193315
+
+Name             : Void Barrage (id=1214742) 
+Class            : Rogue
+School           : Shadow
+Spell Type       : Magic
+Range            : 25 yards
+Cast Time        : 1 seconds
+Duration         : 1.5 seconds
+Attributes       : Do Not Sheath (18), Is Channelled (34), No Aura Icon (60), Name in Channel Bar (61), Force Display Castbar (155), Extra Initial Period (169), AI Primary Ranged Attack (206), Uses Ranged Slot (Cosmetic Only) (322)
+Channel Interrupt: Moving (3), Attacking (12)
+Effects          :
+#1 (id=1197159)  : Apply Aura (6) | Periodic Dummy (226): every 0.25 seconds
+                   Base Value: 0 | Scaled Value: 0 | Target: Enemy (6)
+Description      : Alleria fires a barrage of void arrows each inflicting Shadow damage. The volley culminates with a massive void blast, inflicting Shadow damage in an area around the target.
+
+Name             : Void Barrage (id=1214743) 
+Class            : Rogue
+School           : Shadow
+Spell Type       : Magic
+Range            : 50000 yards
+Velocity         : 50 yards/sec
+Attributes       : Uses Ranged Slot (1), Do Not Sheath (18), Ignore Line of Sight (66), Allow Cast While Channeling (308)
+Effects          :
+#1 (id=1197160)  : Weapon Damage% (31)
+                   Base Value: 25 | Scaled Value: 0.25 | Target: Enemy (6)
+Description      : $@spelldesc1214742
+
+Name             : Void Barrage (id=1214744) [Hidden] 
+Class            : Rogue
+School           : Physical
+Spell Type       : None
+Range            : 50000 yards
+Velocity         : 30 yards/sec
+Attributes       : Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), Do Not Sheath (18), No Active Defense (21), Allow While Mounted (24), Allow While Sitting (27), No Immunities (29), No Redirection (35), Allow While Stealthed (37), No Reflection (39), No Threat (42), Ignore Line of Sight (66), Allow While Invisible (78), Allow While Not Shapeshifted (caster form) (83), No Initial Threat (86), Not an Action (92), Suppress Caster Procs (112), Suppress Target Procs (113), Always Hit (114), Casting Cancels Autorepeat (Mainline: Do Not Trigger Target Stand) (118), Allow Cast While Casting (135), Suppress Weapon Procs (151), Allow While Stunned (163), Not On Player Controlled NPC (168), Allow While Fleeing (177), Allow While Confused (178), Always Show Ground Texture (190), Allow While Riding Vehicle (204), Don't Cause Spell Pushback (230), Allow Cast While Channeling (308)
+Effects          :
+#1 (id=1197162)  : Trigger Missiles (32)
+                   Base Value: 0 | Scaled Value: 0 | Trigger Spell: 1214745 | Target: Enemy (6)
+Description      : $@spelldesc1214742
+
+Name             : Void Barrage (id=1214745) 
+Class            : Rogue
+School           : Shadow
+Spell Type       : Magic
+Range            : 50000 yards
+Triggered By     : Void Barrage (1214744)
+Attributes       : Uses Ranged Slot (1), Do Not Sheath (18), Ignore Line of Sight (66), Allow Cast While Channeling (308)
+Effects          :
+#1 (id=1197163)  : Weapon Damage% (31)
+                   Base Value: 150 | Scaled Value: 1.5 | Radius: 0 - 10 yards | Target: At Enemy (53) -> At Enemy in Area (16)
+Description      : $@spelldesc1214742
 
 

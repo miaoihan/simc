@@ -1,4 +1,4 @@
-SimulationCraft 1100-02 for World of Warcraft 11.0.7.58187 PTR
+SimulationCraft 1100-02 for World of Warcraft 11.1.0.58221 PTR
 Name             : Block (desc=Passive) (id=107) [Passive] 
 Class            : Warrior, Paladin, Shaman
 School           : Physical
@@ -297,7 +297,7 @@ Labels           : 16: Class Spells
                  : 2655: Retribution Paladin (412314 effect#3), Retribution Paladin (412314 effect#4), Holy Paladin (428076 effect#5)
 Affecting Spells : Blessing of Sacrifice (200327 effect#1), Uther's Guard (207558 effect#2), Echoing Blessings (339316 effect#5), Sacrifice of the Just (384820 effect#1), Echoing Blessings (387801 effect#5), Blessed Calling (469770 effect#1)
 Family Flags     : 13
-Attributes       : Not Shapeshifted (16), Do Not Sheath (18), No Aura Cancel (31), Exclude Caster (51), Include In Advanced Combat Log (72), Vehicle Immunity Category (218), Aura Points On Client (268), Do Not Log Absorb (348), Ignore Caster Absorb Modifiers (370), Ignore Target Absorb Modifiers (371), Hide Damage Absorb UI (380), Allow Class Ability Procs (416)
+Attributes       : Not Shapeshifted (16), Do Not Sheath (18), No Aura Cancel (31), Exclude Caster (51), Include In Advanced Combat Log (72), No Caster Aura Icon (187), Vehicle Immunity Category (218), Aura Points On Client (268), Do Not Log Absorb (348), Ignore Caster Absorb Modifiers (370), Ignore Target Absorb Modifiers (371), Hide Damage Absorb UI (380), Allow Class Ability Procs (416)
 Aura Interrupt   : Raid Encounter End or M+ Start (41)
 Effects          :
 #1 (id=2515)     : Apply Aura (6) | Transfer Damage% (81)
@@ -361,7 +361,7 @@ School           : Holy
 Spell Type       : Magic
 Resource         : 10% Base Mana (0) (id=809) w/ Retribution Paladin (id=137027)
 Resource         : 10% Base Mana (0) (id=305212) w/ Protection Paladin (id=137028)
-Resource         : 1.8% Base Mana (0) (id=305213) w/ Holy Paladin (id=137029)
+Resource         : 0.6% Base Mana (0) (id=305213) w/ Holy Paladin (id=137029)
 Resource         : 10% Base Mana (0) (id=305265) w/ Initial Paladin (id=417383)
 Spell Level      : 4
 Range            : 40 yards
@@ -423,7 +423,7 @@ GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Duration         : 5 seconds
 Charges          : 1 (11 seconds cooldown)
-Category         : 1663 (Type 0x25): Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Divine Hammer (198034 effect#2), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
+Category         : 1663 (Type 0x25): Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -546,7 +546,7 @@ Effects          :
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 0x7f | Target: Any Target (25)
                    Affected School(s): All
 Description      : Cannot be affected by Divine Shield, Hand of Protection, or Lay on Hands for $25771d.
-Tooltip          : Cannot be affected by Divine Shield, Hand of Protection, or Lay on Hands.
+Tooltip          : Cannot be affected by $?a146956[Blessing of Protection or Lay on Hands][Divine Shield, Blessing of Protection, or Lay on Hands].
 
 Name             : Righteous Fury (id=25780) [Spell Family (10), Passive, Hidden] 
 Class            : Protection Paladin
@@ -562,7 +562,7 @@ Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log
 Aura Interrupt   : Change Specialization (38)
 Effects          :
 #1 (id=15691)    : Apply Aura (6) | Threat (10)
-                   Base Value: 650 | Scaled Value: 650 | Misc Value: 127 | Target: Self (1)
+                   Base Value: 815 | Scaled Value: 815 | Misc Value: 127 | Target: Self (1)
 #2 (id=15692)    : Apply Aura (6) | Modify Damage Taken% (87)
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 0x7f | Target: Self (1)
                    Affected School(s): All
@@ -864,7 +864,7 @@ Range            : 5 yards
 GCD              : 1.5 seconds
 Requires weapon  : One-handed Axe, Two-handed Axe, One-handed Mace, Two-handed Mace, Polearm, One-handed Sword, Two-handed Sword, Staff, Fist Weapon, Dagger, Spear
 Charges          : 1 (6 seconds cooldown)
-Category         : 1627 (Type 0x5): Paladin (137026 effect#4), Retribution Paladin (137027 effect#5), Holy Paladin (137029 effect#20), Divine Hammer (198034 effect#3), Fires of Justice (203316 effect#3), Avenging Crusader (216331 effect#2), Avenging Crusader (216331 effect#11), Swift Justice (383228 effect#2), Improved Crusader Strike (383254 effect#1), Blessing of Dusk (385126 effect#7), Templar Strikes (406646 effect#2), Templar Strikes (406646 effect#3)
+Category         : 1627 (Type 0x5): Paladin (137026 effect#4), Retribution Paladin (137027 effect#5), Holy Paladin (137029 effect#20), Fires of Justice (203316 effect#3), Avenging Crusader (216331 effect#2), Avenging Crusader (216331 effect#11), Swift Justice (383228 effect#2), Improved Crusader Strike (383254 effect#1), Blessing of Dusk (385126 effect#7), Templar Strikes (406646 effect#2), Templar Strikes (406646 effect#3)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -909,7 +909,7 @@ Effects          :
                    Base Value: -50 | Scaled Value: -50 | Misc Value: 33 | Target: Self (1)
 #3 (id=1031977)  : Apply Aura (6) | Dummy (4)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 23 | Target: Self (1)
-Description      : Avenging Wrath now $?c1[reduces Holy Shock's cooldown by $s2%.]?c2[causes Judgment to generate $s3 additional Holy Power.]?c3[causes each Holy Power spent causing you to explode with Holy light for $326731s1 damage to nearby enemies.][.] and its duration is increased by $s1%.
+Description      : $?(c1|c2|c3)[Avenging Wrath now ][The duration of Avenging Wrath is increased by $s1%.]$?c1[reduces Holy Shock's cooldown by $s2%,]?c2[causes Judgment to generate $s3 additional Holy Power,]?c3[causes each Holy Power spent to explode with Holy light for $326731s1 damage to nearby enemies,][]$?(c1|c2|c3)[ and its duration is increased by $s1%.][]
 Variables        : $time= $?a385438&a53376[${$389539d}]?a385438[${$389539d*(1+($53376s1/100))}]?a53376[${$31884d}][${$31884d*(1+($53376s1/100))}]
 
 Name             : Divine Storm (id=53385) [Spell Family (10)] 
@@ -1050,9 +1050,11 @@ Effects          :
 #1 (id=46256)    : School Damage (2): holy
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.51 | Radius: 6 yards | Target: Cone Enemy (24)
 #2 (id=1055445)  : Trigger Spell w/ Value (142): Lightforged Blessing
-                   Base Value: 2 | Scaled Value: 2 | Trigger Spell: 403460
+                   Base Value: 1 | Scaled Value: 1 | Trigger Spell: 403460
 #3 (id=1073752)  : Trigger Spell w/ Value (142): Lightforged Blessing
-                   Base Value: 2 | Scaled Value: 2 | Trigger Spell: 407467
+                   Base Value: 1 | Scaled Value: 1 | Trigger Spell: 407467
+#4 (id=1202785)  : Server Side Script (77)
+                   Base Value: 0 | Scaled Value: 0 | Target: Self (1)
 Description      : Slams enemies in front of you with your shield, causing $s1 Holy damage, and increasing your Armor by $?c1[${$132403s1*$INT/100}][${$132403s1*$STR/100}] for $132403d.$?a386568[
 
 $@spelldesc386568][]$?a280373[
@@ -1114,12 +1116,12 @@ Triggered By     : Infusion of Light (53576)
 Family Flags     : 116
 Attributes       : No Aura Cancel (31), No Threat (42), Floating Combat Text On Cast (198), Aura Points On Client (268), Do Not Log Aura Refresh (291), Allow Class Ability Procs (416)
 Effects          :
-#1 (id=46860)    : Apply Aura (6) | Add Percent Modifier (108): Spell Resource Cost 3 (39)
-                   Base Value: -30 | Scaled Value: -30 | Misc Value: 39 | Target: Self (1)
+#1 (id=46860)    : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
+                   Base Value: 30 | Scaled Value: 30 | Target: Self (1)
                    Affected Spells: Flash of Light (19750)
                    Family Flags: 30
 #2 (id=288923)   : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
-                   Base Value: 100 | Scaled Value: 100 | Target: Self (1)
+                   Base Value: 30 | Scaled Value: 30 | Target: Self (1)
                    Affected Spells: Holy Light (82326)
                    Family Flags: 74
 #3 (id=750484)   : Apply Aura (6) | Add Flat Modifier (107): Spell Direct Amount (0)
@@ -1133,7 +1135,7 @@ Effects          :
 Description      : $@spelldesc53576
 Tooltip          : Your next spell is empowered:
 
--Flash of Light costs $w1% less Mana.
+-Flash of Light healing increased by $w1%.
 -Holy Light healing increased by $w2%.
 -Greater Judgment prevents ${$w4-100}% more damage.
 
@@ -1493,7 +1495,7 @@ Family Flags     : 46, 74
 Attributes       : Not Shapeshifted (16), Heal Prediction (280), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=81809)    : Direct Heal (10)
-                   Base Value: 0 | Scaled Value: 0 (delta=0.05) | SP Coefficient: 3.8 | PvP Coefficient: 1.2 | Target: Friendly (21)
+                   Base Value: 0 | Scaled Value: 0 (delta=0.05) | SP Coefficient: 7.22 | PvP Coefficient: 1.2 | Target: Friendly (21)
 Description      : A powerful but expensive spell, healing a friendly target for $s1.
 
 Name             : Grand Crusader (id=85043) [Spell Family (10), Passive] 
@@ -1530,7 +1532,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 2706: Spatial Paradox (406732 effect#11), Spatial Paradox (406789 effect#10)
-Affecting Spells : Beacon of Light (53563 effect#3), Protection Paladin (137028 effect#4), Holy Paladin (137029 effect#3), Rule of Law (214202 effect#2), Divine Purpose (223819 effects: #1, #2, #5), Sacred Dawn (243174 effect#1), Breaking Dawn (278594 effect#3), The Magistrate's Judgment (337682 effect#1), Enkindled Spirit (341741 effect#1), Dawn Will Come (364306 effect#2), Blessing of Dawn (385127 effect#1), Paladin Holy Class Set 4pc (393672 effects: #2, #3), Divine Purpose (408458 effects: #1, #2), Shining Righteousness (414445 effect#1), Luminosity (431402 effect#1), Gleaming Rays (431481 effect#1), Pure Light (454653 effect#1), Sacred Strength (469337 effect#1)
+Affecting Spells : Beacon of Light (53563 effect#3), Protection Paladin (137028 effect#4), Holy Paladin (137029 effect#3), Rule of Law (214202 effect#2), Divine Purpose (223819 effects: #1, #2, #5), Sacred Dawn (243174 effect#1), Breaking Dawn (278594 effect#3), The Magistrate's Judgment (337682 effect#1), Enkindled Spirit (341741 effect#1), Dawn Will Come (364306 effect#2), Blessing of Dawn (385127 effect#1), Paladin Holy Class Set 4pc (393672 effects: #2, #3), Unending Light (394709 effect#1), Divine Purpose (408458 effects: #1, #2), Shining Righteousness (414445 effect#1), Luminosity (431402 effect#1), Gleaming Rays (431481 effect#1), Pure Light (454653 effect#1), Sacred Strength (469337 effect#1)
 Family Flags     : 82
 Attributes       : Not Shapeshifted (16), Always Line of Sight (185), Allow Class Ability Procs (416)
 Effects          :
@@ -1598,14 +1600,14 @@ Spell Type       : None
 Resource         : 3 Holy Power (9) (id=4098)
 Resource         : 0.6% Base Mana (0) (id=305109) w/ Holy Paladin (id=137029)
 Resource         : 10% Base Mana (0) (id=305305) w/ Protection Paladin (id=137028)
-Resource         : 10% Base Mana (0) (id=305306) w/ Retribution Paladin (id=137027)
+Resource         : 15% Base Mana (0) (id=305306) w/ Retribution Paladin (id=137027)
 Spell Level      : 7
 Range            : 40 yards
 GCD              : 1.5 seconds
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Sanctuary (105805 effect#5), Retribution Paladin (137027 effect#15), Protection Paladin (137028 effect#17), Holy Paladin (137029 effects: #1, #2, #14), Beacon of Faith (156910 effect#3), Consecration (188370 effect#3), Fires of Justice (209785 effect#1), Rule of Law (214202 effect#1), Divine Purpose (223819 effects: #1, #2, #5), Righteous Conviction (287126 effect#1), Shining Light (327510 effect#1), The Magistrate's Judgment (337682 effect#1), Blessing of Dawn (337747 effects: #1, #2), Royal Decree (340147 effect#1), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Paladin Holy Class Set 4pc (393672 effects: #2, #3), Luminous Force (394550 effect#1), Unending Light (394709 effect#1), Divine Purpose (408458 effects: #1, #2), Shining Righteousness (414445 effect#1), Initial Paladin (417383 effects: #3, #4), Gleaming Rays (431481 effect#1), Avenging Wrath (454351 effects: #2, #11), Pure Light (454653 effect#1), Heightened Wrath (456759 effects: #1, #2), Sacred Strength (469337 effect#1)
+Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Sanctuary (105805 effect#5), Retribution Paladin (137027 effect#15), Protection Paladin (137028 effect#17), Holy Paladin (137029 effects: #1, #2, #14), Beacon of Faith (156910 effect#3), Consecration (188370 effect#3), Fires of Justice (209785 effect#1), Rule of Law (214202 effect#1), Divine Purpose (223819 effects: #1, #2, #5), Righteous Conviction (287126 effect#1), Shining Light (327510 effect#1), The Magistrate's Judgment (337682 effect#1), Blessing of Dawn (337747 effects: #1, #2), Royal Decree (340147 effect#1), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Paladin Holy Class Set 4pc (393672 effects: #2, #3), Luminous Force (394550 effect#1), Divine Purpose (408458 effects: #1, #2), Shining Righteousness (414445 effect#1), Initial Paladin (417383 effects: #3, #4), Gleaming Rays (431481 effect#1), Avenging Wrath (454351 effects: #2, #11), Pure Light (454653 effect#1), Heightened Wrath (456759 effects: #1, #2), Sacred Strength (469337 effect#1)
 Family Flags     : 46, 78
 Attributes       : Not Shapeshifted (16), Allow Class Ability Procs (416)
 Effects          :
@@ -1749,7 +1751,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Affecting Spells : Judgment (197277 effect#1), Final Reckoning (343721 effect#3), Reckoning (343724 effect#2), Blessing of Dawn (385127 effect#1), Divine Purpose (408458 effect#2), Retribution Paladin (412314 effect#22), Sacred Strength (469337 effect#1)
+Affecting Spells : Judgment (197277 effect#1), Final Reckoning (343721 effect#3), Reckoning (343724 effect#2), Blessing of Dawn (385127 effect#1), Divine Purpose (408458 effect#2), Retribution Paladin (412314 effect#23), Sacred Strength (469337 effect#1)
 Family Flags     : 112
 Attributes       : Always AOE Line of Sight (186), Not In Spellbook Until Learned (269), Allow Class Ability Procs (416)
 Effects          :
@@ -2393,7 +2395,7 @@ Effects          :
                    Base Value: 100 | Scaled Value: 100 | Misc Value: 1663 (Category) | Target: Self (1)
                    Affected Spells (Category): Judgment (20271), Judgment (275773), Judgment (275779)
 #8 (id=260909)   : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
-                   Base Value: 12 | Scaled Value: 12 | Target: Self (1)
+                   Base Value: 51 | Scaled Value: 51 | Target: Self (1)
                    Affected Spells: Flash of Light (19750)
                    Family Flags: 30
 #9 (id=260910)   : Apply Aura (6) | Modify Mana Regen% (379)
@@ -2616,7 +2618,6 @@ Effects          :
                    Base Value: 92 | Scaled Value: 92
                    Affected Spells: Consecration (26573), Consecration (81297), Consecration (243597), Consecration (387881), Consecration (419810)
                    Family Flags: 5
-Hotfixed         : Base Value (48 -> 92)
 #12 (id=260933)  : Apply Aura (6) | Modify Pet Damage Done% (429)
                    Base Value: 0 | Scaled Value: 0
 #13 (id=1032420) : Apply Aura (6) | Modify Guardian Damage Done% (531)
@@ -2691,7 +2692,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=198903)   : Apply Aura (6) | Dummy (4)
                    Base Value: 10 | Scaled Value: 10 | Misc Value: 11 | Target: Self (1)
@@ -2839,7 +2840,7 @@ Duration         : 16 seconds
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Sanctuary (105805 effect#5), Holy Paladin (137029 effects: #1, #2, #14), Beacon of Faith (156910 effect#3), Consecration (188370 effect#3), Divine Purpose (223819 effects: #1, #2, #5), Sacred Dawn (243174 effect#1), Blessing of Dawn (337747 effects: #1, #2), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Unending Light (394709 effect#1), Divine Purpose (408458 effects: #1, #2), Retribution Paladin (412314 effects: #10, #11, #13), Shining Righteousness (414445 effect#1), Initial Paladin (417383 effects: #3, #4), Holy Paladin (428076 effects: #6, #7), Gleaming Rays (431481 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Pure Light (454653 effect#1), Heightened Wrath (456759 effects: #1, #2)
+Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Sanctuary (105805 effect#5), Holy Paladin (137029 effects: #1, #2, #14), Beacon of Faith (156910 effect#3), Consecration (188370 effect#3), Divine Purpose (223819 effects: #1, #2, #5), Sacred Dawn (243174 effect#1), Blessing of Dawn (337747 effects: #1, #2), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Divine Purpose (408458 effects: #1, #2), Retribution Paladin (412314 effects: #10, #11, #13), Shining Righteousness (414445 effect#1), Initial Paladin (417383 effects: #3, #4), Holy Paladin (428076 effects: #6, #7), Gleaming Rays (431481 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Pure Light (454653 effect#1), Heightened Wrath (456759 effects: #1, #2)
 Family Flags     : 41, 46, 89, 115
 Attributes       : Not Shapeshifted (16), Include In Advanced Combat Log (72), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Aura Never Bounces (148), Spell Haste Affects Periodic (173), Vehicle Immunity Category (218), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Allow Class Ability Procs (416), Periodic Refresh Extends Duration (436)
 Effects          :
@@ -2948,7 +2949,6 @@ Effects          :
 #1 (id=218989)   : Apply Aura (6) | Absorb Damage (69)
                    Base Value: 0 | Scaled Value: 0 | SP Coefficient: 10.35 | PvP Coefficient: 0.87 | Misc Value: 0x7f | Target: Friendly (21)
                    Affected School(s): All
-Hotfixed         : SP Coefficient (9 -> 10.35), PvP Coefficient (1 -> 0.87)
 Description      : $@spelldesc157047
 Tooltip          : Absorbs $w1 damage.
 
@@ -3345,7 +3345,7 @@ Range            : 12 yards
 GCD              : 1.5 seconds
 Requires weapon  : Two-handed Axe, Two-handed Mace, Polearm, Two-handed Sword, Staff
 Charges          : 1 (12 seconds cooldown)
-Category         : 2128 (Type 0x1): Retribution Paladin (137027 effect#6), Retribution Paladin (137027 effect#19), Divine Hammer (198034 effect#4), Blessing of Dusk (385126 effect#11), Improved Blade of Justice (403745 effect#1), Light of Justice (404436 effect#1)
+Category         : 2128 (Type 0x1): Retribution Paladin (137027 effect#6), Retribution Paladin (137027 effect#19), Blessing of Dusk (385126 effect#11), Improved Blade of Justice (403745 effect#1), Light of Justice (404436 effect#1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
@@ -3666,8 +3666,8 @@ Aura Interrupt   : Leave World (19), Enter World (22)
 Effects          :
 #1 (id=289735)   : Apply Aura (6) | Modify Damage Taken% from Caster's Spells (271) | Attributes: Suppress Points Stacking (6)
                    Base Value: 20 | Scaled Value: 20 | Target: Enemy (6)
-                   Affected Spells: Denounce (2812), Divine Storm (53385), Shield of the Righteous (53600), Ancient Fury (86704), Divine Hammer (198137), Justicar's Vengeance (215661), Templar's Verdict (224266), Final Verdict (336872), Final Verdict (383328), Radiant Decree (383469), Shield of the Righteous (415091), Hammer of Light (429826)
-                   Family Flags: 25, 44, 49, 52, 88, 112
+                   Affected Spells: Denounce (2812), Divine Storm (53385), Shield of the Righteous (53600), Ancient Fury (86704), Divine Hammer (198137), Justicar's Vengeance (215661), Templar's Verdict (224266), Final Verdict (336872), Final Verdict (383328), Radiant Decree (383469), Shield of the Righteous (415091), Hammer of Light (427453), Hammer of Light (429826)
+                   Family Flags: 25, 29, 44, 49, 52, 88, 112
 #2 (id=368486)   : Dummy (3)
                    Base Value: 0 | Scaled Value: 0
 Description      : $@spelldesc20271
@@ -3718,11 +3718,11 @@ Talent Entry     : Retribution [tree=spec, row=6, col=4, max_rank=1, req_points=
 Class            : Paladin
 School           : Holy
 Spell Type       : Magic
-Resource         : 0 Holy Power (9) and 1 Holy Power (9) per tick (id=306930)
+Resource         : 3 Holy Power (9) (id=306930)
 GCD              : 1.5 seconds
-Duration         : Aura (infinite)
+Duration         : 8 seconds
 Requires weapon  : One-handed Axe, Two-handed Axe, One-handed Mace, Two-handed Mace, Polearm, One-handed Sword, Two-handed Sword, Staff, Fist Weapon, Dagger, Spear
-Cooldown         : 120 seconds
+Cooldown         : 60 seconds
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 117
@@ -3732,28 +3732,20 @@ Proc Chance      : 101%
 Proc Flags       : White Melee, Yellow Melee, Generic Hostile Spell
 Affecting Spells : Retribution Paladin (137027 effect#4), Protection Paladin (137028 effects: #4, #5), Holy Paladin (137029 effects: #3, #4), Divine Purpose (408458 effect#1)
 Family Flags     : 108
-Attributes       : Is Ability (4), Do Not Sheath (18), No Aura Icon (60), Can Proc From Procs (122), Extra Initial Period (169), Do Not Consume Resources (197), Melee Haste Affects Periodic (278), Do Not Display Power Cost (303)
+Attributes       : Is Ability (4), Do Not Sheath (18), Can Proc From Procs (122), Extra Initial Period (169), Melee Haste Affects Periodic (278), Nameplate Personal Buffs/Debuffs (423)
 Effects          :
-#1 (id=291057)   : Apply Aura (6) | Periodic Trigger Spell (23): Divine Hammer every 2.2 seconds
+#1 (id=291057)   : Apply Aura (6) | Periodic Trigger Spell (23): Divine Hammer every 2 seconds
                    Base Value: 15 | Scaled Value: 15 | Trigger Spell: 198137 | Target: Self (1)
-#2 (id=1144706)  : Apply Aura (6) | Modify Charge Cooldown Recharge Rate% (Category) (148)
-                   Base Value: 75 | Scaled Value: 75 | Misc Value: 1663 (Category) | Target: Self (1)
-                   Affected Spells (Category): Judgment (20271), Judgment (275773), Judgment (275779)
-#3 (id=1144707)  : Apply Aura (6) | Modify Charge Cooldown Recharge Rate% (Category) (148)
-                   Base Value: 75 | Scaled Value: 75 | Misc Value: 1627 (Category) | Target: Self (1)
-                   Affected Spells (Category): Crusader Strike (35395), Templar Strike (407480)
-#4 (id=1144708)  : Apply Aura (6) | Modify Charge Cooldown Recharge Rate% (Category) (148)
-                   Base Value: 75 | Scaled Value: 75 | Misc Value: 2128 (Category) | Target: Self (1)
-                   Affected Spells (Category): Blade of Justice (184575)
-Description      : Divine Hammers spin around you, consuming a Holy Power to strike enemies within $198137A1 yds for $?s405289[${$198137sw1*1.05} Radiant][$198137sw1 Holy] damage every $t sec. 
+#2 (id=1144706)  : Apply Aura (6) | Dummy (4)
+                   Base Value: 500 | Scaled Value: 500 | Trigger Spell: 198137 | Target: Self (1)
+Description      : Divine Hammers spin around you, striking enemies nearby for $?s405289[${$198137sw1*1.05} Radiant][$198137sw1 Holy] damage every $t sec for $d.
 
-While active, $?a404542[Judgment and Blade of Justice][Judgment, Blade of Justice and Crusader Strike] recharge $s2% faster, and increases the rate at which Divine Hammer strikes by $s1% when they are cast. Deals reduced damage beyond 8 targets.
+While active, each Holy Power spent increases the duration of Divine Hammer by ${$s2/1000}.1 sec. Deals reduced damage beyond 8 targets.
 
 Name             : Divine Hammer (id=198137) [Spell Family (10)] 
 Class            : Paladin
 School           : Holy
 Spell Type       : Melee
-Resource         : 1 Holy Power (9) (id=306682)
 Range            : 50000 yards
 Duration         : 1.5 seconds
 Requires weapon  : One-handed Axe, Two-handed Axe, One-handed Mace, Two-handed Mace, Polearm, One-handed Sword, Two-handed Sword, Staff, Fist Weapon, Dagger, Spear
@@ -3801,7 +3793,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 118
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=293465)   : Apply Aura (6) | Dummy (4)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
@@ -4480,7 +4472,7 @@ Labels           : 16: Class Spells
                  : 2756
 Proc Chance      : 100%
 Proc Flags       : Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Aura Points On Client (268), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=309902)   : Apply Aura (6) | Dummy (4)
                    Base Value: 60 | Scaled Value: 60 | Target: Self (1)
@@ -5061,8 +5053,8 @@ Effects          :
                    Family Flags: 29, 49, 52, 55, 77, 78, 82, 88, 89, 111
 #2 (id=739426)   : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 15 | Scaled Value: 15 | PvP Coefficient: 0.666667 | Target: Self (1)
-                   Affected Spells: Denounce (2812), Divine Storm (53385), Shield of the Righteous (53600), Light of Dawn (85222), Word of Glory (85673), Eternal Flame (156322), Justicar's Vengeance (215661), Templar's Verdict (224266), Light of Dawn (225311), Final Verdict (336872), Final Verdict (383328), Radiant Decree (383469), Intercession (391054), Afterimage (391309), Shield of the Righteous (415091), Eternal Flame (461432)
-                   Family Flags: 44, 49, 52, 78, 82, 88, 89, 111
+                   Affected Spells: Denounce (2812), Divine Storm (53385), Shield of the Righteous (53600), Light of Dawn (85222), Word of Glory (85673), Eternal Flame (156322), Justicar's Vengeance (215661), Templar's Verdict (224266), Light of Dawn (225311), Final Verdict (336872), Final Verdict (383328), Radiant Decree (383469), Intercession (391054), Afterimage (391309), Shield of the Righteous (415091), Hammer of Light (427453), Eternal Flame (461432)
+                   Family Flags: 29, 44, 49, 52, 78, 82, 88, 89, 111
 #3 (id=742537)   : Apply Aura (6) | Modify Max Cost (63)
                    Base Value: -2 | Scaled Value: -2 | Misc Value: 9 | Target: Self (1)
                    Family Flags: 55
@@ -5074,9 +5066,6 @@ Effects          :
                    Base Value: -100 | Scaled Value: -100 | Misc Value: 34 | Target: Self (1)
                    Affected Spells: Denounce (2812), Shield of the Righteous (53600), Light of Dawn (85222), Word of Glory (85673), Eternal Flame (156322), Light of Dawn (225311), Afterimage (391309), Shield of the Righteous (415091), Eternal Flame (461432)
                    Family Flags: 52, 78, 82, 89
-#6 (id=1123252)  : Apply Aura (6) | Apply Percent Modifier w/ Label (218): Spell Direct Amount (0)
-                   Base Value: 15 | Scaled Value: 15 | Misc Value 2: 3084 (Label)
-                   Affected Spells (Label): Hammer of Light (429826)
 Description      : $@spelldesc223817
 Tooltip          : Your next Holy Power spending ability is free and deals $s2% increased damage and healing.
 
@@ -5130,7 +5119,7 @@ Range            : 100 yards
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Beacon of Light (53563 effect#3), Protection Paladin (137028 effect#4), Holy Paladin (137029 effects: #1, #2, #3), Beacon of Faith (156910 effect#3), Rule of Law (214202 effect#2), Divine Purpose (223819 effects: #1, #2, #5), Sacred Dawn (243174 effect#1), Breaking Dawn (278594 effect#3), The Magistrate's Judgment (337682 effect#1), Blessing of Dawn (337747 effects: #1, #2), Enkindled Spirit (341741 effect#1), Dawn Will Come (364306 effect#2), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Paladin Holy Class Set 4pc (393672 effects: #2, #3), Luminous Force (394550 effect#1), Divine Purpose (408458 effects: #1, #2), Shining Righteousness (414445 effect#1), Initial Paladin (417383 effects: #3, #4), Luminosity (431402 effect#1), Gleaming Rays (431481 effect#1), Avenging Wrath (454351 effects: #2, #11), Pure Light (454653 effect#1), Heightened Wrath (456759 effects: #1, #2), Sacred Strength (469337 effect#1)
+Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Beacon of Light (53563 effect#3), Protection Paladin (137028 effect#4), Holy Paladin (137029 effects: #1, #2, #3), Beacon of Faith (156910 effect#3), Rule of Law (214202 effect#2), Divine Purpose (223819 effects: #1, #2, #5), Sacred Dawn (243174 effect#1), Breaking Dawn (278594 effect#3), The Magistrate's Judgment (337682 effect#1), Blessing of Dawn (337747 effects: #1, #2), Enkindled Spirit (341741 effect#1), Dawn Will Come (364306 effect#2), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Paladin Holy Class Set 4pc (393672 effects: #2, #3), Luminous Force (394550 effect#1), Unending Light (394709 effect#1), Divine Purpose (408458 effects: #1, #2), Shining Righteousness (414445 effect#1), Initial Paladin (417383 effects: #3, #4), Luminosity (431402 effect#1), Gleaming Rays (431481 effect#1), Avenging Wrath (454351 effects: #2, #11), Pure Light (454653 effect#1), Heightened Wrath (456759 effects: #1, #2), Sacred Strength (469337 effect#1)
 Family Flags     : 46, 82
 Attributes       : Not a Proc (105), Allow Class Ability Procs (416)
 Effects          :
@@ -5207,7 +5196,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 2688
-Attributes       : Passive (6), Only In Spellbook Until Learned (240), Cooldown Shared With AI Group (418)
+Attributes       : Passive (6), Not In Spellbook (143), Only In Spellbook Until Learned (240), Do Not Log on Learn (355), Cooldown Shared With AI Group (418)
 Effects          :
 #1 (id=349470)   : Apply Aura (6) | Dummy (4)
                    Base Value: 184 | Scaled Value: 184 | PvP Coefficient: 1.3 | Misc Value: 12 | Target: Self (1)
@@ -5224,7 +5213,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 2589: Protection Paladin (137028 effect#19)
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=349502)   : Apply Aura (6) | Dummy (4)
                    Base Value: 20 | Scaled Value: 20 | Misc Value: 3 | Target: Self (1)
@@ -6005,7 +5994,7 @@ Range            : 30 yards
 GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Charges          : 1 (11 seconds cooldown)
-Category         : 1663 (Type 0x25): Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Divine Hammer (198034 effect#2), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
+Category         : 1663 (Type 0x25): Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -6033,7 +6022,7 @@ Range            : 30 yards
 GCD              : 1.5 seconds
 Velocity         : 35 yards/sec
 Charges          : 1 (11 seconds cooldown)
-Category         : 1663 (Type 0x25): Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Divine Hammer (198034 effect#2), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
+Category         : 1663 (Type 0x25): Retribution Paladin (137027 effect#7), Protection Paladin (137028 effect#3), Protection Paladin (137028 effect#6), Holy Paladin (137029 effect#5), Crusader's Judgment (204023 effect#1), Avenging Crusader (216331 effect#3), Blessing of Dusk (385126 effect#5), Improved Judgment (405461 effect#1)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -6740,7 +6729,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=808622)   : Apply Aura (6) | Dummy (4)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
@@ -6929,7 +6918,7 @@ Effects          :
                    Base Value: 100 | Scaled Value: 100 | PvP Coefficient: 0.5 | Target: Self (1)
 Description      : The cooldown of Lay on Hands is reduced up to $s1%, based on the target's missing health.
 
-Word of Glory's healing is increased by up to $m3%, based on the target's missing health.
+Word of Glory's healing is increased by up to $m3% on yourself, based on your missing health.
 
 Name             : Moment of Glory (id=327193) [Spell Family (10)] 
 Talent Entry     : Protection [tree=spec, row=10, col=1, max_rank=1, req_points=20]
@@ -7844,7 +7833,6 @@ Effects          :
 Description      : Turn Evil's cast time is reduced by |cFFFFFFFF${-$s1}.1%|r, and its range is increased by $s2 yds.
 
 Name             : Echoing Blessings (id=339316) [Spell Family (10), Passive, Hidden] 
-Class            : Paladin
 School           : Physical
 Spell Type       : None
 Spell Level      : 60
@@ -7872,45 +7860,6 @@ Effects          :
                    Affected Spells: Blessing of Sacrifice (6940)
                    Family Flags: 13
 Description      : Blessing of Freedom increases the target's movement speed by |cFFFFFFFF${$s1}.1%|r. Blessing of Protection and Blessing of Sacrifice reduce the target's damage taken by |cFFFFFFFF${$s1}.1%|r. These effects linger for $339324d after the Blessing ends.
-
-Name             : Echoing Freedom (id=339321) [Spell Family (10)] 
-Class            : Paladin
-School           : Holy
-Spell Type       : None
-Spell Level      : 60
-Range            : 100 yards
-Duration         : 8 seconds
-Labels           : 16: Class Spells
-                 : 26: Paladin Spells
-                 : 292
-                 : 999
-Attributes       : Aura Points On Client (268), Not In Spellbook Until Learned (269)
-Effects          :
-#1 (id=838542)   : Apply Aura (6) | Increase Movement Speed% (Stacking) (129)
-                   Base Value: 15 | Scaled Value: 15 | Target: Friendly (21)
-Description      : $@spelldesc339316
-Tooltip          : Movement speed increased by $w%.
-
-Name             : Echoing Protection (id=339324) [Spell Family (10)] 
-Class            : Paladin
-School           : Holy
-Spell Type       : None
-Spell Level      : 60
-Range            : 100 yards
-Duration         : 8 seconds
-Labels           : 16: Class Spells
-                 : 26: Paladin Spells
-                 : 292
-                 : 999
-Stacks           : 1 maximum
-Proc Chance      : 101%
-Attributes       : Aura Points On Client (268), Not In Spellbook Until Learned (269)
-Effects          :
-#1 (id=838547)   : Apply Aura (6) | Modify Damage Taken% (87)
-                   Base Value: -15 | Scaled Value: -15 | Misc Value: 0x7f | Target: Friendly (21)
-                   Affected School(s): All
-Description      : $@spelldesc339316
-Tooltip          : Damage taken reduced by $w%.
 
 Name             : Expurgation (id=339371) [Spell Family (10), Passive, Hidden] 
 School           : Physical
@@ -9340,7 +9289,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Magic Hostile Spell
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Can Proc From Procs (122)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1006645)  : Apply Aura (6) | Dummy (4)
                    Base Value: 1000 | Scaled Value: 1000 | Misc Value: 17 | Target: Self (1)
@@ -9363,7 +9312,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Can Proc From Procs (122), Do Not Display Range (126), No Aura Log (202), Aura Points On Client (268), Spellcast Override In Spellbook (310), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Can Proc From Procs (122), Do Not Display Range (126), Not In Spellbook (143), No Aura Log (202), Aura Points On Client (268), Spellcast Override In Spellbook (310), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1006652)  : Apply Aura (6) | Proc Trigger Spell (42): Tyr's Enforcer
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 378286 | Target: Self (1)
@@ -9441,7 +9390,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
 Proc Chance      : 100%
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), No Aura Icon (60)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), No Aura Icon (60), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1006821)  : Apply Aura (6) | Add Percent Modifier (108): Spell Cooldown (11)
                    Base Value: -30 | Scaled Value: -30 | PvP Coefficient: 0.67 | Misc Value: 11 | Target: Self (1)
@@ -9460,7 +9409,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1006869)  : Apply Aura (6) | Add Flat Modifier (107): Spell Targets (17)
                    Base Value: 2 | Scaled Value: 2 | Misc Value: 17 | Target: Self (1)
@@ -9477,7 +9426,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1007200)  : Apply Aura (6) | Dummy (4)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -9493,7 +9442,7 @@ Labels           : 16: Class Spells
                  : 292
 Affecting Spells : Grand Crusader (85416 effect#1), Protection Paladin (137028 effect#4), Holy Paladin (137029 effect#3), First Avenger (203776 effect#1), Ferren Marcus's Strength (207614 effects: #1, #2), Soaring Shield (278951 effect#2), Moment of Glory (327193 effects: #1, #2), Soaring Shield (378457 effect#1)
 Family Flags     : 14
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1007319)  : Apply Aura (6) | Dummy (4)
                    Base Value: 100 | Scaled Value: 100 | Target: Self (1)
@@ -9546,7 +9495,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 2760
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1007569)  : Apply Aura (6) | Dummy (4)
                    Base Value: 4000 | Scaled Value: 4000 | Target: Self (1)
@@ -9560,7 +9509,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1007573)  : Apply Aura (6) | Add Flat Modifier (107): Spell Duration (1)
                    Base Value: 2000 | Scaled Value: 2000 | Misc Value: 1 | Target: Self (1)
@@ -9600,7 +9549,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Magic Heal
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Aura Points On Client (268), Spellcast Override In Spellbook (310), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Aura Points On Client (268), Spellcast Override In Spellbook (310), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1007613)  : Apply Aura (6) | Trigger Spell with Value (231)
                    Base Value: 5 | Scaled Value: 5 | Trigger Spell: 379041 | Target: Self (1)
@@ -9616,7 +9565,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1008310)  : Apply Aura (6) | Add Flat Modifier (107): Spell Cooldown (11)
                    Base Value: -15000 | Scaled Value: -15000 | Misc Value: 11 | Trigger Spell: 375576 | Target: Self (1)
@@ -9634,7 +9583,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), Can Proc From Procs (122), Aura Points On Client (268), Do Not Log Absorb (348)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Aura Points On Client (268), Do Not Log Absorb (348), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1009867)  : Apply Aura (6) | Absorb Damage (69)
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 0x1 | Target: Self (1)
@@ -9650,7 +9599,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1013572)  : Apply Aura (6) | Dummy (4)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
@@ -9684,7 +9633,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1013924)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -9889,7 +9838,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1015195)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 2 (12)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 12 | Target: Self (1)
@@ -9992,7 +9941,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1015297)  : Apply Aura (6) | Dummy (4)
                    Base Value: 20 | Scaled Value: 20 | Target: Self (1)
@@ -10011,7 +9960,7 @@ Cooldown         : 15 seconds
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Judgment (197277 effect#1), Fires of Justice (209785 effect#1), Divine Purpose (223819 effects: #1, #2), Crusade (231895 effects: #1, #2), Ashes to Dust (236106 effect#1), Mastery: Highlord's Judgment (267316 effects: #1, #2), The Magistrate's Judgment (337682 effect#1), Blessing of Dawn (337747 effects: #1, #2), Final Reckoning (343721 effect#3), Reckoning (343724 effect#2), Radiant Decree (384052 effect#1), Blessing of Dusk (385126 effect#3), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Paladin Retribution Class Set 2pc (393675 effects: #1, #2), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Divine Purpose (408458 effects: #1, #2), Retribution Paladin (412314 effects: #14, #15, #22), Initial Paladin (417383 effects: #1, #2), Hammer of Light (427441 effect#1), Paladin Retribution 11.0 Class Set 2pc (453655 effects: #2, #3), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2), Sacred Strength (469337 effect#1)
+Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Judgment (197277 effect#1), Fires of Justice (209785 effect#1), Divine Purpose (223819 effects: #1, #2), Crusade (231895 effects: #1, #2), Ashes to Dust (236106 effect#1), Mastery: Highlord's Judgment (267316 effects: #1, #2), The Magistrate's Judgment (337682 effect#1), Blessing of Dawn (337747 effects: #1, #2), Final Reckoning (343721 effect#3), Reckoning (343724 effect#2), Radiant Decree (384052 effect#1), Blessing of Dusk (385126 effect#3), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Paladin Retribution Class Set 2pc (393675 effects: #1, #2), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Divine Purpose (408458 effects: #1, #2), Retribution Paladin (412314 effects: #14, #15, #23), Initial Paladin (417383 effects: #1, #2), Hammer of Light (427441 effect#1), Paladin Retribution 11.0 Class Set 2pc (453655 effects: #2, #3), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2), Sacred Strength (469337 effect#1)
 Family Flags     : 27, 65, 68, 111, 112
 Attributes       : Not Shapeshifted (16), Do Not Sheath (18), Periodic Can Crit (265), Aura Points On Client (268), Area Effects Use Target Radius (328), Allow Class Ability Procs (416)
 Effects          :
@@ -10113,7 +10062,7 @@ Labels           : 16: Class Spells
                  : 292
 Stacks           : 2 maximum
 Proc Chance      : 101%
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1016306)  : Apply Aura (6) | Unknown(285)
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 384028 | Target: Self (1)
@@ -10184,7 +10133,7 @@ Spell Type       : Melee
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Aura Points On Client (268), Unknown (454)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355), Unknown (454)
 Effects          :
 #1 (id=1016352)  : Apply Aura (6) | Override Action Spell (Misc /w Base) (332)
                    Base Value: 383469 | Scaled Value: 383469 | Target: Self (1)
@@ -10213,7 +10162,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 2628: Retribution Paladin (137027 effect#29), Retribution Paladin (137027 effect#30)
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Hide Passive From Tooltip (451)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Hide Passive From Tooltip (451)
 Effects          :
 #1 (id=1016941)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 1 (3)
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 3 | Target: Self (1)
@@ -10242,7 +10191,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Hide Passive From Tooltip (451)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Hide Passive From Tooltip (451)
 Effects          :
 #1 (id=1016969)  : Apply Aura (6) | Dummy (4)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
@@ -10263,7 +10212,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 2629: Retribution Paladin (137027 effect#31), Retribution Paladin (137027 effect#32)
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Hide Passive From Tooltip (451)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Hide Passive From Tooltip (451)
 Effects          :
 #1 (id=1017062)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 3 (23)
                    Base Value: 20 | Scaled Value: 20 | Misc Value: 23 | Target: Self (1)
@@ -10315,7 +10264,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 2651: Holy Paladin (428076 effect#8)
-Attributes       : Passive (6), Only In Spellbook Until Learned (240)
+Attributes       : Passive (6), Not In Spellbook (143), Only In Spellbook Until Learned (240), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1017694)  : Apply Aura (6) | Add Flat Modifier (107): Spell Cooldown (11)
                    Base Value: -60000 | Scaled Value: -60000 | Misc Value: 11 | Target: Self (1)
@@ -10331,7 +10280,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Only In Spellbook Until Learned (240)
+Attributes       : Passive (6), Not In Spellbook (143), Only In Spellbook Until Learned (240), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1017827)  : Apply Aura (6) | Modify Recharge Time (Category) (453)
                    Base Value: -60000 | Scaled Value: -60000 | Misc Value: 1392 (Category) | Target: Self (1)
@@ -10350,7 +10299,7 @@ Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Yellow Ranged, Magic Heal
 Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #1, #2, #9, #31), Beacon of Faith (156910 effect#3), Crusade (231895 effects: #1, #2), Blessing of Dawn (337747 effects: #1, #2), Radiant Decree (383469 effect#3), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Initial Paladin (417383 effects: #1, #2, #3, #4), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2)
 Family Flags     : 46, 65
-Attributes       : Passive (6), Aura Points On Client (268)
+Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1017835)  : Apply Aura (6) | Dummy (4)
                    Base Value: 50 | Scaled Value: 50 | Target: Self (1)
@@ -10402,7 +10351,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Can Proc From Procs (122), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1018178)  : Apply Aura (6) | Dummy (4)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
@@ -10500,7 +10449,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 4021: Holy Paladin (428076 effect#12)
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1018187)  : Dummy (3)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -10527,7 +10476,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display Range (126)
+Attributes       : Passive (6), Do Not Display Range (126), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1018609)  : Apply Aura (6) | Dummy (4)
                    Base Value: 30 | Scaled Value: 30 | Target: Self (1)
@@ -10548,7 +10497,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), Not In Spellbook Until Learned (269)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1018630)  : Apply Aura (6) | Dummy (4)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -10564,7 +10513,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log on Learn (355)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1018644)  : Apply Aura (6) | Increase Movement Speed% (Stacking) (129)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -10581,7 +10530,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log on Learn (355), Hide Passive From Tooltip (451)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Hide Passive From Tooltip (451)
 Effects          :
 #1 (id=1018664)  : Apply Aura (6) | Dummy (4)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -10613,7 +10562,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log on Learn (355)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1018816)  : Apply Aura (6) | Modify Critical Strike% (290)
                    Base Value: 4 | Scaled Value: 4 | Target: Self (1)
@@ -10692,7 +10641,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Magic Hostile Spell
-Attributes       : Passive (6), Can Proc From Procs (122)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1019190)  : Apply Aura (6) | Proc Trigger Spell (42): Barricade of Faith
                    Base Value: 10 | Scaled Value: 10 | Trigger Spell: 385724 | Target: Self (1)
@@ -10804,7 +10753,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1020883)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 3 | Target: Self (1)
@@ -10877,7 +10826,7 @@ Labels           : 16: Class Spells
                  : 292
 Stacks           : 2 maximum
 Proc Chance      : 101%
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1021024)  : Apply Aura (6) | Unknown(285)
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 386732 | Target: Self (1)
@@ -11015,7 +10964,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.1 seconds
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell, Periodic
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1022557)  : Apply Aura (6) | Dummy (4)
                    Base Value: 8 | Scaled Value: 8 | Target: Self (1)
@@ -11127,7 +11076,7 @@ Effects          :
 #2 (id=1022839)  : Apply Aura (6) | Dummy (4)
                    Base Value: 8 | Scaled Value: 8 | Misc Value: 5 | Target: Self (1)
 #3 (id=1022840)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 3 (23)
-                   Base Value: 15 | Scaled Value: 15 | Misc Value: 23 | Target: Self (1)
+                   Base Value: 30 | Scaled Value: 30 | Misc Value: 23 | Target: Self (1)
                    Affected Spells: Blessing of Freedom (1044)
                    Family Flags: 4
 #4 (id=1022841)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 3 (23)
@@ -11142,7 +11091,7 @@ Effects          :
                    Base Value: 15 | Scaled Value: 15 | Misc Value: 12 | Target: Self (1)
                    Affected Spells: Blessing of Spellwarding (204018)
                    Family Flags: 28
-Description      : Blessing of Freedom increases the target's movement speed by $s3%. $?s204018[Blessing of Spellwarding][Blessing of Protection] and Blessing of Sacrifice reduce the target's damage taken by $s4%. These effects linger for $339324d after the Blessing ends.
+Description      : Blessing of Freedom increases the target's movement speed by $s3%. $?s204018[Blessing of Spellwarding][Blessing of Protection] and Blessing of Sacrifice reduce the target's damage taken by $s4%. These effects linger for $394454d after the Blessing ends.
 
 Name             : Echoing Protection (id=387804) [Spell Family (10)] 
 Class            : Paladin
@@ -11209,7 +11158,7 @@ Labels           : 16: Class Spells
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Magic Heal
 Triggered By     : Divine Revelations (387808)
-Attributes       : Passive (6), Aura Points On Client (268)
+Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1022857)  : Apply Aura (6) | Dummy (4)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
@@ -11307,14 +11256,14 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
 Proc Chance      : 100%
-Proc Flags       : Generic Heal, Magic Heal, Helpful Periodic
+Proc Flags       : Generic Heal, Magic Heal
 Attributes       : Passive (6), Not In Spellbook (143)
 Effects          :
 #1 (id=1023370)  : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
 #2 (id=1023371)  : Apply Aura (6) | Dummy (4)
                    Base Value: 45 | Scaled Value: 45 | Target: Self (1)
-Description      : Each Holy Power spent on Light of Dawn increases the healing of your next Word of Glory by $s1%, up to a maximum of $s2%.
+Description      : Each Holy Power spent on Word of Glory increases the healing of your next Light of Dawn by $s1%, up to a maximum of $s2%.
 
 Name             : Blessing of Summer (id=388007) [Spell Family (10)] 
 Talent Entry     : Holy [tree=spec, row=10, col=3, max_rank=1, req_points=20, select_idx=200]
@@ -11683,7 +11632,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1028453)  : Apply Aura (6) | Dummy (4)
                    Base Value: 500 | Scaled Value: 500 | Target: Self (1)
@@ -11706,7 +11655,7 @@ Range            : 50000 yards
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Affecting Spells : Sanctuary (105805 effect#5), Retribution Paladin (137027 effect#15), Protection Paladin (137028 effect#17), Holy Paladin (137029 effect#14), Consecration (188370 effect#3), Fires of Justice (209785 effect#1), Rule of Law (214202 effect#1), Divine Purpose (223819 effects: #1, #2, #5), Righteous Conviction (287126 effect#1), Shining Light (327510 effect#1), The Magistrate's Judgment (337682 effect#1), Royal Decree (340147 effect#1), Blessing of Dawn (385127 effect#1), Paladin Holy Class Set 4pc (393672 effects: #2, #3), Unending Light (394709 effect#1), Divine Purpose (408458 effects: #1, #2), Shining Righteousness (414445 effect#1), Gleaming Rays (431481 effect#1), Pure Light (454653 effect#1), Sacred Strength (469337 effect#1)
+Affecting Spells : Sanctuary (105805 effect#5), Retribution Paladin (137027 effect#15), Protection Paladin (137028 effect#17), Holy Paladin (137029 effect#14), Consecration (188370 effect#3), Fires of Justice (209785 effect#1), Rule of Law (214202 effect#1), Divine Purpose (223819 effects: #1, #2, #5), Righteous Conviction (287126 effect#1), Shining Light (327510 effect#1), The Magistrate's Judgment (337682 effect#1), Royal Decree (340147 effect#1), Blessing of Dawn (385127 effect#1), Paladin Holy Class Set 4pc (393672 effects: #2, #3), Divine Purpose (408458 effects: #1, #2), Shining Righteousness (414445 effect#1), Gleaming Rays (431481 effect#1), Pure Light (454653 effect#1), Sacred Strength (469337 effect#1)
 Family Flags     : 78
 Attributes       : Do Not Log (8), Allow While Sitting (27), Not an Action (92), Do Not Display Range (126), Allow Class Ability Procs (416)
 Effects          :
@@ -11742,7 +11691,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Magic Heal
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1031446)  : Apply Aura (6) | Dummy (4)
                    Base Value: 8 | Scaled Value: 8 | Misc Value: 11 | Target: Self (1)
@@ -11783,18 +11732,18 @@ Effects          :
                    Affected Spells: Infusion of Light (54149), Infusion of Light (458213)
                    Family Flags: 116
 #2 (id=1031454)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 1 (3)
-                   Base Value: -30 | Scaled Value: -30 | Misc Value: 3 | Target: Self (1)
+                   Base Value: 15 | Scaled Value: 15 | Misc Value: 3 | Target: Self (1)
                    Affected Spells: Infusion of Light (54149), Infusion of Light (458213)
                    Family Flags: 116
 #3 (id=1042454)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 2 (12)
-                   Base Value: 50 | Scaled Value: 50 | Misc Value: 12 | Target: Self (1)
+                   Base Value: 15 | Scaled Value: 15 | Misc Value: 12 | Target: Self (1)
                    Affected Spells: Infusion of Light (54149), Infusion of Light (458213)
                    Family Flags: 116
 #4 (id=1083475)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 4 (32)
                    Base Value: 50 | Scaled Value: 50 | Misc Value: 32 | Target: Self (1)
                    Affected Spells: Infusion of Light (54149), Infusion of Light (458213)
                    Family Flags: 116
-Description      : Infusion of Light has $s1 additional charge, increases Greater Judgment's effect by an additional $s4%, reduces the cost of Flash of Light by an additional $s2%, and Holy Light's healing is increased by an additional $s3%.
+Description      : Infusion of Light has $s1 additional charge, increases Greater Judgment's effect by an additional $s4%, Flash of Light's healing is increased by an additional $s2%, and Holy Light's healing is increased by an additional $s3%.
 
 Name             : Unwavering Spirit (id=392911) [Spell Family (10), Passive] 
 Talent Entry     : Holy [tree=spec, row=5, col=3, max_rank=1, req_points=8, select_idx=100]
@@ -11919,7 +11868,7 @@ Effects          :
 Description      : Consuming Infusion of Light reduces the cooldown of Holy Shock by ${$s1/-1000}.1 sec.
 
 Name             : Divine Image (id=392988) [Spell Family (6), Passive, Hidden] 
-Talent Entry     : Holy [tree=spec, row=10, col=2, max_rank=1, req_points=20]
+Talent Entry     : Holy [tree=spec, row=10, col=3, max_rank=1, req_points=20]
 Class            : Paladin, Priest
 School           : Physical
 Spell Type       : None
@@ -11981,7 +11930,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
 Triggered By     : Inspiring Vanguard (393019)
-Attributes       : Passive (6), Aura Points On Client (268)
+Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1031668)  : Apply Aura (6) | Unknown(285)
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 393022 | Target: Self (1)
@@ -12000,7 +11949,7 @@ Labels           : 16: Class Spells
 Proc Chance      : 101%
 Proc Flags       : Cast Successful
 Triggered By     : Inspiring Vanguard (393020)
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Can Proc From Procs (122), Disable Aura While Dead (226), Aura Points On Client (268), Only Proc From Class Abilities (415)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Can Proc From Procs (122), Not In Spellbook (143), Disable Aura While Dead (226), Aura Points On Client (268), Do Not Log on Learn (355), Only Proc From Class Abilities (415)
 Effects          :
 #1 (id=1031672)  : Apply Aura (6) | Proc Trigger Spell (42): Inspiring Vanguard
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 393019 | Target: Self (1)
@@ -12018,7 +11967,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1031676)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -12034,7 +11983,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 117
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1031684)  : Apply Aura (6) | Unknown(529)
                    Base Value: 8 | Scaled Value: 8 | Target: Self (1)
@@ -12064,7 +12013,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
 Proc Chance      : 101%
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1031765)  : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
@@ -12098,7 +12047,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow While Stealthed (37), Aura Points On Client (268), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow While Stealthed (37), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1031840)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
                    Base Value: -10 | Scaled Value: -10 | Misc Value: 3 | Misc Value 2: 2371 (Label) | Target: Self (1)
@@ -12263,7 +12212,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Hide Passive From Tooltip (451)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Hide Passive From Tooltip (451)
 Effects          :
 #1 (id=1033459)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -12298,7 +12247,7 @@ Labels           : 16: Class Spells
 Attributes       : Aura Points On Client (268), Not In Spellbook Until Learned (269)
 Effects          :
 #1 (id=1034102)  : Apply Aura (6) | Increase Movement Speed% (Stacking) (129)
-                   Base Value: 15 | Scaled Value: 15 | Target: Friendly (21)
+                   Base Value: 30 | Scaled Value: 30 | Target: Friendly (21)
 Description      : $@spelldesc387801
 Tooltip          : Movement speed increased by $w%.
 
@@ -12357,10 +12306,10 @@ Aura Interrupt   : Raid Encounter Start or M+ Start (40)
 Effects          :
 #1 (id=1034628)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
-                   Affected Spells: Word of Glory (85673), Eternal Flame (156322), Afterimage (391309), Eternal Flame (461432)
-                   Family Flags: 78, 89
+                   Affected Spells: Light of Dawn (85222), Light of Dawn (225311)
+                   Family Flags: 82
 Description      : $@spelldesc387998
-Tooltip          : The healing of your next $?s156322[Eternal Flame][Word of Glory] is increased by $w1%.
+Tooltip          : The healing of your next Light of Dawn is increased by $w1%.
 
 Name             : Ally of the Light (id=394714) 
 Class            : Paladin
@@ -12441,7 +12390,7 @@ Labels           : 16: Class Spells
                  : 1079: The Long Summer (340185 effect#1), Equinox (355567 effect#4)
 Affecting Spells : Equinox (355567 effects: #1, #2)
 Family Flags     : 114
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), No Reflection (39), No Threat (42), Suppress Caster Procs (112), Suppress Target Procs (113)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), No Reflection (39), No Threat (42), Suppress Caster Procs (112), Suppress Target Procs (113), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1035770)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -12545,7 +12494,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 2602: Retribution Paladin (137027 effect#17), Retribution Paladin (137027 effect#18), Protection Paladin (137028 effect#20), Retribution Paladin (412314 effect#1), Retribution Paladin (412314 effect#2), Holy Paladin (428076 effect#1), Holy Paladin (428076 effect#2), Holy Paladin (428076 effect#3)
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1049636)  : Apply Aura (6) | Modify Total Stat% (137)
                    Base Value: 5 | Scaled Value: 5 | Misc Value 2: 0x4 | Target: Self (1)
@@ -12648,7 +12597,7 @@ Family Flags     : 41, 46
 Attributes       : Exclude Caster (51), Can't Crit (93), Not In Spellbook (143), Ignore Healing Modifiers (219), Always Allow Negative Healing Percent Modifiers (442)
 Effects          :
 #1 (id=1050431)  : Direct Heal% (136)
-                   Base Value: 2 | Scaled Value: 2 | Radius: 0 - 12 yards | Target: At Self (18) -> At Friendly in Area (31)
+                   Base Value: 1 | Scaled Value: 1 | Radius: 0 - 12 yards | Target: At Self (18) -> At Friendly in Area (31)
 Description      : Divine Storm heals you for $s1% of your maximum health.
 
 Name             : Lightforged Blessing (id=403479) [Spell Family (10), Passive, Hidden] 
@@ -12856,7 +12805,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1050883)  : Apply Aura (6) | Modify Cooldown Charge (Category) (411)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 2128 (Category) | Target: Self (1)
@@ -13018,7 +12967,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 60 seconds
 Proc Chance      : 100%
 Proc Flags       : White Melee Taken, Yellow Melee Taken, White Ranged Taken, Yellow Ranged Taken, Generic Hostile Spell Taken, Magic Hostile Spell Taken, Periodic Taken, Helpful Periodic Taken
-Attributes       : Is Ability (4), Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Allow Proc While Sitting (147), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Allow Proc While Sitting (147), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1051840)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 25 | Scaled Value: 25 | Target: Self (1)
@@ -13111,7 +13060,7 @@ Description      : Highlord's Judgment and Radiant damage abilities have a chanc
 
 Deals reduced damage beyond 8 targets.
 
-Name             : Crusading Strikes (id=404542) [Spell Family (10), Passive, Hidden] 
+Name             : Crusading Strikes (id=404542) [Spell Family (10), Passive] 
 Talent Entry     : Retribution [tree=spec, row=6, col=2, max_rank=1, req_points=8, select_idx=100, replace="Crusader Strike" (id=35395)]
 Class            : Paladin
 School           : Holy
@@ -13121,7 +13070,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : White Melee, Yellow Melee
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1052153)  : Apply Aura (6) | Override Auto-Attack with Spell (361)
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 408385 | Target: Self (1)
@@ -13159,7 +13108,7 @@ Spell Level      : 11
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Only In Spellbook Until Learned (240), Spellcast Override In Spellbook (310), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1052635)  : Apply Aura (6) | Dummy (4)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
@@ -13226,7 +13175,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 3622
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1053450)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 1 (3)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 3 | Target: Self (1)
@@ -13317,7 +13266,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1053768)  : Apply Aura (6) | Modify Cooldown Charge (Category) (411)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 1663 (Category) | Target: Self (1)
@@ -13490,7 +13439,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Can Proc From Procs (122)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1054198)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 300 | Scaled Value: 300 | Target: Self (1)
@@ -13607,7 +13556,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow While Stealthed (37), Can Proc From Procs (122), Aura Points On Client (268), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow While Stealthed (37), Can Proc From Procs (122), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1054804)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -13652,7 +13601,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Aura Points On Client (268), Do Not Log on Learn (355)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1054894)  : Apply Aura (6) | Add Percent Modifier (108): Spell Critical Bonus Multiplier (15)
                    Base Value: 5 | Scaled Value: 5 | Misc Value: 15 | Target: Self (1)
@@ -13670,7 +13619,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Aura Points On Client (268), Do Not Log on Learn (355)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1054898)  : Apply Aura (6) | Dummy (4)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
@@ -13877,7 +13826,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1070071)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Duration (1)
                    Base Value: 4000 | Scaled Value: 4000 | Misc Value: 1 | Misc Value 2: 2578 (Label) | Target: Self (1)
@@ -13972,7 +13921,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Aura Points On Client (268)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1070298)  : Apply Aura (6) | Trigger Spell with Value (231)
                    Base Value: 5 | Scaled Value: 5 | Trigger Spell: 407065 | Target: Self (1)
@@ -13991,7 +13940,7 @@ Family Flags     : 41, 46
 Attributes       : Can't Crit (93), Not In Spellbook (143), Ignore Healing Modifiers (219), Aura Points On Client (268), Always Allow Negative Healing Percent Modifiers (442)
 Effects          :
 #1 (id=1070945)  : Direct Heal% (136)
-                   Base Value: 2 | Scaled Value: 2 | Target: Self (1)
+                   Base Value: 1 | Scaled Value: 1 | Target: Self (1)
 Description      : Divine Storm heals you for $s1% of your maximum health.
 
 Name             : Consecrated Blade (id=407475) [Spell Family (10), Hidden] 
@@ -14042,7 +13991,7 @@ Range            : 5 yards
 GCD              : 1 seconds
 Requires weapon  : One-handed Axe, Two-handed Axe, One-handed Mace, Two-handed Mace, Polearm, One-handed Sword, Two-handed Sword, Staff, Fist Weapon, Dagger, Spear
 Charges          : 1 (6 seconds cooldown)
-Category         : 1627 (Type 0x5): Paladin (137026 effect#4), Retribution Paladin (137027 effect#5), Holy Paladin (137029 effect#20), Divine Hammer (198034 effect#3), Fires of Justice (203316 effect#3), Avenging Crusader (216331 effect#2), Avenging Crusader (216331 effect#11), Swift Justice (383228 effect#2), Improved Crusader Strike (383254 effect#1), Blessing of Dusk (385126 effect#7), Templar Strikes (406646 effect#2), Templar Strikes (406646 effect#3)
+Category         : 1627 (Type 0x5): Paladin (137026 effect#4), Retribution Paladin (137027 effect#5), Holy Paladin (137029 effect#20), Fires of Justice (203316 effect#3), Avenging Crusader (216331 effect#2), Avenging Crusader (216331 effect#11), Swift Justice (383228 effect#2), Improved Crusader Strike (383254 effect#1), Blessing of Dusk (385126 effect#7), Templar Strikes (406646 effect#2), Templar Strikes (406646 effect#3)
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 189
@@ -14261,7 +14210,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell, Periodic, Helpful Periodic
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Can Proc From Procs (122), No Aura Log (202), Can Proc From Suppressed Target Procs (254), Enable Procs from Suppressed Caster Procs (384), Can Proc from Suppressed Caster Procs (385), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Can Proc From Suppressed Target Procs (254), Do Not Log on Learn (355), Enable Procs from Suppressed Caster Procs (384), Can Proc from Suppressed Caster Procs (385), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1074294)  : Apply Aura (6) | Dummy (4)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
@@ -14284,7 +14233,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Can Proc From Procs (122), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1074296)  : Apply Aura (6) | Dummy (4)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
@@ -14398,6 +14347,10 @@ Effects          :
                    Affected Spells (Label): Sanctification (433671)
 #22 (id=1191619) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 25 | Scaled Value: 25 | Target: Self (1)
+                   Affected Spells: Hammer of Light (427453)
+                   Family Flags: 29
+#23 (id=1201029) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
+                   Base Value: 75 | Scaled Value: 75 | Target: Self (1)
                    Affected Spells: Ancient Fury (86704), Radiant Decree (383469), Hammer of Light (429826)
                    Family Flags: 112
 
@@ -14493,7 +14446,9 @@ Effects          :
 #1 (id=1082842)  : Apply Aura (6) | Modify Cooldown Charge (Category) (411)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 2179 (Category) | Target: Self (1)
                    Affected Spells (Category): Holy Shock (20473)
-Description      : Holy Shock now has ${$s1+1} charges.
+#2 (id=1200739)  : Apply Aura (6) | Dummy (4)
+                   Base Value: 50 | Scaled Value: 50 | Target: Self (1)
+Description      : Holy Shock now has ${$s1+1} charges and it refunds $s2% of its mana cost when cast on an enemy.
 
 Name             : Righteous Judgment (id=414113) [Spell Family (10), Passive, Hidden] 
 Talent Entry     : Holy [tree=spec, row=6, col=1, max_rank=1, req_points=8]
@@ -14503,7 +14458,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1082917)  : Apply Aura (6) | Dummy (4)
                    Base Value: 50 | Scaled Value: 50 | Target: Self (1)
@@ -14704,7 +14659,6 @@ Effects          :
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
 #2 (id=1083443)  : Apply Aura (6) | Dummy (4)
                    Base Value: 225 | Scaled Value: 225 | Target: Self (1)
-Hotfixed         : Base Value (200 -> 225)
 Description      : $@spelldesc392938
 
 Name             : Shining Righteousness (id=414443) [Spell Family (10), Passive] 
@@ -14794,7 +14748,7 @@ Internal Cooldown: 0.2 seconds
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Magic Hostile Spell
 Triggered By     : Shining Righteousness (414443)
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1083501)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -15045,7 +14999,7 @@ Family Flags     : 41, 46
 Attributes       : Not In Spellbook (143), Aura Points On Client (268)
 Effects          :
 #1 (id=1087832)  : Direct Heal (10)
-                   Base Value: 0 | Scaled Value: 0 | AP Coefficient: 0.5 | Radius: 0 - 15 yards | Target: At Self (18) -> At Friendly in Area (31)
+                   Base Value: 0 | Scaled Value: 0 | AP Coefficient: 0.25 | Radius: 0 - 15 yards | Target: At Self (18) -> At Friendly in Area (31)
 Description      : $@spelldesc416770
 Tooltip          : $@spellaura416770
 
@@ -15452,7 +15406,7 @@ Labels           : 16: Class Spells
                  : 3022
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee
-Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1103397)  : Apply Aura (6) | Proc Trigger Spell (42): Light's Deliverance
                    Base Value: 1 | Scaled Value: 1 | Trigger Spell: 433674 | Target: Self (1)
@@ -15493,14 +15447,14 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Hide Passive From Tooltip (451)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Hide Passive From Tooltip (451)
 Effects          :
 #1 (id=1106892)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 427441 | Target: Self (1)
 #2 (id=1119184)  : Dummy (3)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
 #3 (id=1119193)  : Dummy (3)
-                   Base Value: 250 | Scaled Value: 250 | Target: Self (1)
+                   Base Value: 200 | Scaled Value: 200 | Target: Self (1)
 #4 (id=1119213)  : Dummy (3)
                    Base Value: 500 | Scaled Value: 500 | Target: Self (1)
 Description      : $?a137028[Eye of Tyr][Wake of Ashes] is replaced with $@spellname427453 for $427441d after it is cast.
@@ -15518,20 +15472,19 @@ Resource         : 5 Holy Power (9) (id=305690) w/ Retribution Paladin (id=13702
 Resource         : 3 Holy Power (9) (id=307350) w/ Protection Paladin (id=137028)
 Range            : 14 yards
 GCD              : 1.5 seconds
-Duration         : 1 seconds
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 3022
-Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Paladin (137026 effect#8), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Divine Purpose (223819 effects: #1, #4), Crusade (231895 effects: #1, #2), Mastery: Highlord's Judgment (267316 effects: #1, #2), Blessing of Dawn (337747 effects: #1, #2), Radiant Decree (383469 effect#3), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Divine Purpose (408458 effect#1), Retribution Paladin (412314 effects: #14, #15), Initial Paladin (417383 effects: #1, #2), Light's Deliverance (433732 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2)
+Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Paladin (137026 effect#8), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Judgment (197277 effect#1), Divine Purpose (223819 effects: #1, #2, #4), Crusade (231895 effects: #1, #2), Mastery: Highlord's Judgment (267316 effects: #1, #2), Blessing of Dawn (337747 effects: #1, #2), Radiant Decree (383469 effect#3), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Divine Purpose (408458 effect#1), Retribution Paladin (412314 effects: #14, #15, #22), Initial Paladin (417383 effects: #1, #2), Light's Deliverance (433732 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2)
 Family Flags     : 27, 29, 65
-Attributes       : Not Shapeshifted (16), Do Not Sheath (18), No Aura Icon (60), Not In Spellbook (143), Aura Points On Client (268), Area Effects Use Target Radius (328), Allow Class Ability Procs (416)
+Attributes       : Not In Spellbook (143), Aura Points On Client (268), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1106904)  : Trigger Spell (64): Hammer of Light
-                   Base Value: 0 | Scaled Value: 0 | Misc Value: 600 | Trigger Spell: 429826 | Target: Enemy (6)
-#2 (id=1119306)  : Apply Aura (6) | Dummy (4)
-                   Base Value: 0 | Scaled Value: 0 | Target: Self (1)
-Description      : Hammer down your enemy with the power of the Light, dealing $429826s1 Holy damage and ${$429826s1/2} Holy damage up to 4 nearby enemies. 
+                   Base Value: 4 | Scaled Value: 4 | Trigger Spell: 1217116 | Target: Self (1)
+#2 (id=1119306)  : School Damage (2): holy
+                   Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 5.80645 | PvP Coefficient: 0.8 | Target: Enemy (6)
+Description      : Hammer down your enemy with the power of the Light, dealing $s2 Holy damage and $429826s1 Holy damage up to $s1 nearby enemies. 
 
 Additionally, calls down Empyrean Hammers from the sky to strike $427445s2 nearby enemies for $431398s1 Holy damage each.
 
@@ -15601,7 +15554,7 @@ Effects          :
                    Base Value: -5 | Scaled Value: -5 | Misc Value: 23 | Misc Value 2: 4021 (Label) | Target: Self (1)
                    Affected Spells (Label): Seal of Order (385129)
 #13 (id=1177921) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
-                   Base Value: -80 | Scaled Value: -80 | PvP Coefficient: 2 | Misc Value: 3 | Misc Value 2: 4022 (Label) | Target: Self (1)
+                   Base Value: -180 | Scaled Value: -180 | Misc Value: 3 | Misc Value 2: 4022 (Label) | Target: Self (1)
                    Affected Spells (Label): Blessed Assurance (433019)
 #14 (id=1178378) : Apply Aura (6) | Apply Percent Modifier w/ Label (218): Spell Effect 1 (3)
                    Base Value: -50 | Scaled Value: -50 | Misc Value: 3 | Misc Value 2: 4037 (Label) | Target: Self (1)
@@ -15610,7 +15563,7 @@ Effects          :
                    Affected Spells: Judgment of Light (183811)
                    Family Flags: 32
 #16 (id=1178478) : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
-                   Base Value: -5 | Scaled Value: -5 | Target: Self (1)
+                   Base Value: -29 | Scaled Value: -29 | Target: Self (1)
                    Affected Spells: Flash of Light (19750)
                    Family Flags: 30
 #17 (id=1184482) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
@@ -15637,15 +15590,12 @@ Range            : 100 yards
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-                 : 3084: Divine Purpose (223819 effect#6)
-Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Judgment (197277 effect#1), Crusade (231895 effects: #1, #2), Mastery: Highlord's Judgment (267316 effects: #1, #2), Blessing of Dawn (337747 effects: #1, #2), Final Reckoning (343721 effect#3), Reckoning (343724 effect#2), Radiant Decree (383469 effect#3), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Divine Purpose (408458 effect#2), Retribution Paladin (412314 effects: #14, #15, #22), Initial Paladin (417383 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2), Sacred Strength (469337 effect#1)
-Triggered By     : Hammer of Light (427453)
+                 : 3084
+Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Retribution Paladin (137027 effects: #1, #2), Protection Paladin (137028 effects: #1, #2), Holy Paladin (137029 effects: #9, #31), Judgment (197277 effect#1), Crusade (231895 effects: #1, #2), Mastery: Highlord's Judgment (267316 effects: #1, #2), Blessing of Dawn (337747 effects: #1, #2), Final Reckoning (343721 effect#3), Reckoning (343724 effect#2), Radiant Decree (383469 effect#3), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Adjudication (406157 effect#1), Divine Purpose (408458 effect#2), Retribution Paladin (412314 effects: #14, #15, #23), Initial Paladin (417383 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Crusade (454373 effects: #1, #2), Rise From Ash (454693 effects: #1, #2), Heightened Wrath (456759 effects: #1, #2), Sacred Strength (469337 effect#1)
 Family Flags     : 27, 65, 112
-Attributes       : Allow Dead Target (64), Do Not Reset Combat Timers (81), Not a Proc (105), Can Proc From Procs (122), Do Not Display Range (126), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Do Not Reset Combat Timers (81), Not a Proc (105), Can Proc From Procs (122), Do Not Display Range (126), Not In Spellbook (143), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1114338)  : School Damage (2): holy
-                   Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 5.80645 | PvP Coefficient: 0.8 | Target: Enemy (6)
-#2 (id=1114339)  : School Damage (2): holy
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 2.9 | Radius: 0 - 6 yards | Target: At Enemy (53) -> At Enemy in Area (16)
 Description      : $@spelldesc427453
 
@@ -15660,7 +15610,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.25 seconds
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119122)  : Apply Aura (6) | Dummy (4)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -15783,7 +15733,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119155)  : Apply Aura (6) | Add Flat Modifier (107): Spell Critical Chance (7)
                    Base Value: 5 | Scaled Value: 5 | Misc Value: 7 | Target: Self (1)
@@ -15805,7 +15755,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119163)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -15821,7 +15771,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : White Melee Taken, Yellow Melee Taken, White Ranged Taken, Yellow Ranged Taken, Generic Heal Taken, Generic Hostile Spell Taken, Magic Heal Taken, Magic Hostile Spell Taken, Periodic Taken, Helpful Periodic Taken
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119166)  : Apply Aura (6) | Periodic Dummy (226): every 1 seconds
                    Base Value: 80 | Scaled Value: 80 | Target: Self (1)
@@ -15843,7 +15793,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119168)  : Apply Aura (6) | Dummy (4)
                    Base Value: 6000 | Scaled Value: 6000 | Target: Self (1)
@@ -15857,9 +15807,10 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
+                 : 3022
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1119174)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -15912,7 +15863,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119195)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -15929,7 +15880,7 @@ Labels           : 16: Class Spells
                  : 3865
 Proc Chance      : 100%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119200)  : Apply Aura (6) | Add Percent Modifier (108): Spell Duration (1)
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 1 | Target: Self (1)
@@ -15947,9 +15898,9 @@ Effects          :
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
 #7 (id=1167611)  : Apply Aura (6) | Dummy (4)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
-Description      : During Avenging Wrath, you become linked to your Dawnlights, causing $431911s1 Radiant damage to enemies or $431939s1 healing to allies that pass through the beams, reduced beyond $s6 targets.
+Description      : During $?s216331[Avenging Crusader][Avenging Wrath], you become linked to your Dawnlights, causing $431911s1 Radiant damage to enemies or $431939s1 healing to allies that pass through the beams, reduced beyond $s6 targets.
 
-Activating Avenging Wrath applies up to $s3 Dawnlights onto nearby allies or enemies and increases Dawnlight's duration by $s5%.
+Activating $?s216331[Avenging Crusader applies up to $s4 Dawnlights]?a458359&a137027[Radiant Glory applies up to $s7 Dawnlight]?s231895&a137027[Crusade applies up to $s3 Dawnlights]?a137029&s31884[Avenging Wrath applies up to $s3 Dawnlights]?a137027!s231895!458359[Avenging Wrath applies up to $s4 Dawnlights][Avenging Wrath applies up to $s3 Dawnlights] onto nearby allies or enemies and increases Dawnlight's duration by $s5%.
 
 Name             : Dawnlight (id=431460) [Spell Family (10), Passive, Hidden] 
 Class            : Paladin
@@ -15961,7 +15912,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 2 seconds
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119259)  : Apply Aura (6) | Proc Trigger Spell (42): Dawnlight
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 431522 | Target: Self (1)
@@ -15995,7 +15946,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119263)  : Apply Aura (6) | Dummy (4)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -16005,7 +15956,7 @@ Name             : Templar's Watch (id=431464) [Spell Family (10), Passive]
 Class            : Paladin
 School           : Physical
 Spell Type       : None
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119265)  : Apply Aura (6) | Dummy (4)
                    Base Value: 30 | Scaled Value: 30 | Target: Self (1)
@@ -16033,7 +15984,7 @@ Name             : Templar's Watch (id=431469) [Passive]
 Class            : Paladin
 School           : Physical
 Spell Type       : None
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119270)  : Apply Aura (6) | Dummy (4)
                    Base Value: 30 | Scaled Value: 30 | Target: Self (1)
@@ -16054,7 +16005,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 1 seconds
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119279)  : Apply Aura (6) | Dummy (4)
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
@@ -16072,7 +16023,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119289)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -16109,7 +16060,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 3087: Morning Star (431568 effect#1)
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119291)  : Apply Aura (6) | Periodic Dummy (226): every 5 seconds
                    Base Value: 20 | Scaled Value: 20 | Target: Self (1)
@@ -16151,7 +16102,7 @@ Labels           : 16: Class Spells
                  : 3022
 Proc Chance      : 100%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119381)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
@@ -16203,7 +16154,7 @@ Labels           : 16: Class Spells
                  : 4200: Retribution Paladin (412314 effect#20)
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee
-Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119408)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 100 | Scaled Value: 100 | Target: Self (1)
@@ -16250,7 +16201,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell, Periodic, Helpful Periodic
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119458)  : Apply Aura (6) | Dummy (4)
                    Base Value: 8 | Scaled Value: 8 | Target: Self (1)
@@ -16287,7 +16238,7 @@ School           : Physical
 Spell Type       : None
 Proc Chance      : 100%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119613)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
@@ -16301,7 +16252,7 @@ Spell Type       : None
 Internal Cooldown: 5 seconds
 Proc Chance      : 100%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1119699)  : Apply Aura (6) | Dummy (4)
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
@@ -16439,7 +16390,7 @@ Spell Type       : None
 Internal Cooldown: 1 seconds
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1121178)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 300 | Scaled Value: 300 | Target: Self (1)
@@ -16590,7 +16541,7 @@ Spell Type       : None
 Internal Cooldown: 1 seconds
 Proc Chance      : 100%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1121463)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -16624,7 +16575,7 @@ Labels           : 3022
 Internal Cooldown: 1 seconds
 Proc Chance      : 100%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1121476)  : Apply Aura (6) | Proc Trigger Spell (42): Undisputed Ruling
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 432629 | Target: Self (1)
@@ -16632,7 +16583,7 @@ Effects          :
                    Base Value: 3 | Scaled Value: 3 | Misc Value: 32 | Target: Self (1)
                    Affected Spells: Eye of Tyr (387174)
                    Family Flags: 59
-Description      : Hammer of Light applies Judgment to its targets, and increases your Haste by $432629s1% for $432629d.$?a137028[
+Description      : Hammer of Light $?a137028[grants Shield of the Righteous, erupts a Consecration beneath its target][applies Judgment to its targets], and increases your Haste by $432629s1% for $432629d.$?a137028[
 
 Additionally, Eye of Tyr grants $s2 Holy Power.][]
 
@@ -16693,7 +16644,7 @@ Range            : 40 yards
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), No Aura Icon (60)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1121750)  : Apply Aura (6) | Dummy (4)
@@ -16711,7 +16662,7 @@ Range            : 40 yards
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), No Aura Icon (60)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1121752)  : Apply Aura (6) | Modify Recharge Time% (Category) (454)
@@ -16728,7 +16679,7 @@ Range            : 40 yards
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), No Aura Icon (60)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1121788)  : Apply Aura (6) | Dummy (4)
@@ -16744,7 +16695,7 @@ Range            : 40 yards
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), No Aura Icon (60)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1121857)  : Apply Aura (6) | Dummy (4)
@@ -16760,7 +16711,7 @@ Range            : 40 yards
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), No Aura Icon (60)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1121939)  : Apply Aura (6) | Dummy (4)
@@ -16776,7 +16727,7 @@ Labels           : 3022
 Internal Cooldown: 30 seconds
 Proc Chance      : 101%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1121950)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 100 | Scaled Value: 100 | Target: Self (1)
@@ -16799,7 +16750,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 1 seconds
 Proc Chance      : 101%
 Proc Flags       : White Melee, Yellow Melee, Yellow Ranged, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell, Periodic, Helpful Periodic
-Attributes       : Passive (6), No Aura Icon (60)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1121992)  : Apply Aura (6) | Dummy (4)
@@ -16813,7 +16764,7 @@ School           : Physical
 Spell Type       : None
 Proc Chance      : 101%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1122007)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -16826,7 +16777,7 @@ Talent Entry     : Templar (Protection, Retribution) [tree=hero, row=3, col=3, m
 Class            : Paladin
 School           : Physical
 Spell Type       : None
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1122024)  : Apply Aura (6) | Add Flat Modifier (107): Spell Duration (1)
                    Base Value: 2000 | Scaled Value: 2000 | Misc Value: 1 | Target: Self (1)
@@ -16840,7 +16791,7 @@ Class            : Paladin
 School           : Physical
 Spell Type       : None
 Labels           : 3022
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1122028)  : Apply Aura (6) | Dummy (4)
                    Base Value: 20 | Scaled Value: 20 | Target: Self (1)
@@ -16855,7 +16806,7 @@ Range            : 40 yards
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), No Aura Icon (60)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1122061)  : Apply Aura (6) | Dummy (4)
@@ -16873,7 +16824,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Heal, Helpful Periodic
-Attributes       : Passive (6), No Aura Icon (60)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1122068)  : Apply Aura (6) | Proc Trigger Spell (42): Blessed Assurance
@@ -16900,7 +16851,6 @@ Description      : $@spelldesc433015
 Tooltip          : Damage and healing of your next $?s204019[Blessed Hammer]?s53595[Hammer of the Righteous][Crusader Strike] increased by $w1%.
 
 Name             : Divine Guidance (id=433106) [Spell Family (10), Passive] 
-Hotfixed         : Variables
 Talent Entry     : Lightsmith (Holy, Protection) [tree=hero, row=2, col=3, max_rank=1, req_points=1, select_idx=100]
 Class            : Paladin
 School           : Holy
@@ -16909,7 +16859,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 4182: Protection Paladin (137028 effect#25)
-Attributes       : Passive (6), No Aura Icon (60)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1122231)  : Apply Aura (6) | Dummy (4)
@@ -17115,7 +17065,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1123221)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | AP Coefficient: 1 | Target: Self (1)
@@ -17134,7 +17084,7 @@ Family Flags     : 41, 46
 Attributes       : Always AOE Line of Sight (186)
 Effects          :
 #1 (id=1123227)  : Direct Heal (10)
-                   Base Value: 0 | Scaled Value: 0 | SP Coefficient: 3.75 | AP Coefficient: 3.75 | Radius: 0 - 20 yards | Target: At Enemy (53) -> At Friendly in Area (31)
+                   Base Value: 0 | Scaled Value: 0 | SP Coefficient: 3 | AP Coefficient: 3 | Radius: 0 - 20 yards | Target: At Enemy (53) -> At Friendly in Area (31)
 Description      : $@spelldesc433718
 
 Name             : Light's Deliverance (id=433732) [Spell Family (10)] 
@@ -17231,7 +17181,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 2 seconds
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1133238)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -17383,7 +17333,7 @@ Labels           : 16: Class Spells
 Proc Chance      : 100%
 Real PPM         : 2 (Haste multiplier)
 Proc Flags       : Periodic, Helpful Periodic
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1142004)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -17441,7 +17391,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1144157)  : Apply Aura (6) | Dummy (4)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -17551,7 +17501,7 @@ Effects          :
                    Affected Spells: Holy Shock (25914)
                    Family Flags: 48
 Description      : $@spelldesc447985
-Tooltip          : Holy Shock healing increased by $w1%.
+Tooltip          : Holy Shock healing increased by $w1%. This effect is canceled if brought below $447985s1% health.
 
 Name             : Light of the Martyr (id=447998) [Spell Family (10)] 
 Class            : Paladin
@@ -17685,7 +17635,7 @@ Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
                  : 3502: Mastery: Highlord's Judgment (267316 effect#3)
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Mastery Affects Points (285), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Mastery Affects Points (285), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1148148)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 0 | Scaled Value: 0 | SP Coefficient: 0.75 | Target: Self (1)
@@ -18219,10 +18169,13 @@ Talent Entry     : Holy [tree=spec, row=6, col=2, max_rank=1, req_points=8, sele
 Class            : Paladin
 School           : Physical
 Spell Type       : None
+Labels           : 16: Class Spells
+                 : 26: Paladin Spells
+                 : 292
 Internal Cooldown: 1 seconds
 Proc Chance      : 100%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Can Proc From Procs (122)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1168039)  : Apply Aura (6) | Proc Trigger Spell (42): Divine Favor
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 210294 | Target: Self (1)
@@ -18246,7 +18199,6 @@ Effects          :
 Description      : Turn Evil's cast time is reduced by $s1%.
 
 Name             : Divine Guidance (id=460822) [Spell Family (10)] 
-Hotfixed         : Variables
 Class            : Paladin
 School           : Holy
 Spell Type       : None
@@ -18262,7 +18214,7 @@ Effects          :
 #1 (id=1168799)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
 Description      : $@spelldesc433106
-Tooltip          : Your next Consecration will deal $<value> additional damage or healing.
+Tooltip          : Your next Consecration will deal $?a137029[$<holy>][$<prot>] additional damage or healing.
 Variables        : $prot=${($SP*$433106s1/10)*(1+$@versadmg)*(1+$137028s1/100)}
 $holy=${($SP*$433106s1/10)*(1+$@versadmg)*(1+$137029s9/100)}
 $value=$?a137028[${($SP*$433106s1/10)*(1+$@versadmg)*(1+$137028s1/100)}][${($SP*$433106s1/10)*(1+$@versadmg)*(1+$137029s9/100)}]
@@ -18291,7 +18243,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell, Periodic, Helpful Periodic
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1169532)  : Apply Aura (6) | Dummy (4)
                    Base Value: 30 | Scaled Value: 30 | Target: Self (1)
@@ -18421,7 +18373,7 @@ Duration         : 16 seconds
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Sanctuary (105805 effect#5), Holy Paladin (137029 effects: #1, #2, #14), Beacon of Faith (156910 effect#3), Consecration (188370 effect#3), Divine Purpose (223819 effects: #1, #2, #5), Sacred Dawn (243174 effect#1), Blessing of Dawn (337747 effects: #1, #2), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Unending Light (394709 effect#1), Divine Purpose (408458 effects: #1, #2), Retribution Paladin (412314 effects: #10, #11, #13), Shining Righteousness (414445 effect#1), Initial Paladin (417383 effects: #3, #4), Holy Paladin (428076 effects: #6, #7), Gleaming Rays (431481 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Pure Light (454653 effect#1), Heightened Wrath (456759 effects: #1, #2)
+Affecting Spells : Avenging Wrath (31884 effects: #1, #2), Sanctuary (105805 effect#5), Holy Paladin (137029 effects: #1, #2, #14), Beacon of Faith (156910 effect#3), Consecration (188370 effect#3), Divine Purpose (223819 effects: #1, #2, #5), Sacred Dawn (243174 effect#1), Blessing of Dawn (337747 effects: #1, #2), Blessing of Dawn (385127 effect#1), Sentinel (389539 effects: #1, #2, #3), Luminous Force (394550 effect#1), Divine Purpose (408458 effects: #1, #2), Retribution Paladin (412314 effects: #10, #11, #13), Shining Righteousness (414445 effect#1), Initial Paladin (417383 effects: #3, #4), Holy Paladin (428076 effects: #6, #7), Gleaming Rays (431481 effects: #1, #2), Avenging Wrath (454351 effects: #2, #11), Pure Light (454653 effect#1), Heightened Wrath (456759 effects: #1, #2)
 Family Flags     : 41, 46, 89, 115
 Attributes       : Not Shapeshifted (16), Include In Advanced Combat Log (72), Allow While Not Shapeshifted (caster form) (83), DoT Stacking Rule (103), Aura Never Bounces (148), Spell Haste Affects Periodic (173), Vehicle Immunity Category (218), Periodic Can Crit (265), Aura Points On Client (268), Heal Prediction (280), Allow Class Ability Procs (416), Periodic Refresh Extends Duration (436)
 Effects          :
@@ -18527,7 +18479,6 @@ Effects          :
 #1 (id=1170166)  : Apply Aura (6) | Absorb Damage (69)
                    Base Value: 0 | Scaled Value: 0 | SP Coefficient: 3.45 | PvP Coefficient: 0.87 | Misc Value: 0x7f | Target: Friendly (21)
                    Affected School(s): All
-Hotfixed         : SP Coefficient (3 -> 3.45), PvP Coefficient (1 -> 0.87)
 Description      : $@spelldesc157047
 Tooltip          : Absorbs $w1 damage.
 
@@ -18572,7 +18523,7 @@ Spell Type       : None
 Internal Cooldown: 1 seconds
 Proc Chance      : 100%
 Proc Flags       : Magic Heal
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1170891)  : Apply Aura (6) | Dummy (4)
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
@@ -18743,7 +18694,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183516)  : Apply Aura (6) | Dummy (4)
                    Base Value: 100 | Scaled Value: 100 | Target: Self (1)
@@ -18778,7 +18729,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.1 seconds
 Proc Chance      : 100%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183571)  : Apply Aura (6) | Dummy (4)
                    Base Value: 3000 | Scaled Value: 3000 | Target: Self (1)
@@ -18797,7 +18748,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : White Melee Taken, Yellow Melee Taken, White Ranged Taken, Yellow Ranged Taken, Generic Hostile Spell Taken
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183578)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -18827,7 +18778,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183591)  : Apply Aura (6) | Modify Mechanic Duration% (Stacking) (232)
                    Base Value: -20 | Scaled Value: -20 | PvP Coefficient: 0.5 | Misc Value: 12 | Target: Self (1)
@@ -18841,7 +18792,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183592)  : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
@@ -18859,7 +18810,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183596)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -18873,7 +18824,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183618)  : Apply Aura (6) | Add Flat Modifier (107): Spell Cooldown (11)
                    Base Value: -15000 | Scaled Value: -15000 | Misc Value: 11 | Target: Self (1)
@@ -18891,7 +18842,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183636)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -18909,7 +18860,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : White Melee Taken, Yellow Melee Taken, White Ranged Taken, Yellow Ranged Taken
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183756)  : Apply Aura (6) | Modify Recharge Time% (Category) (454)
                    Base Value: -20 | Scaled Value: -20 | Misc Value: 1662 (Category) | Target: Self (1)
@@ -18933,7 +18884,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Unknown 37
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183762)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -18952,7 +18903,7 @@ Family Flags     : 41, 46
 Attributes       : Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183764)  : Direct Heal (10)
-                   Base Value: 0 | Scaled Value: 0 | SP Coefficient: 1.25 | Target: Friendly (21)
+                   Base Value: 0 | Scaled Value: 0 | SP Coefficient: 3 | Target: Friendly (21)
 Description      : $@spelldesc469411
 
 Name             : Lightbearer (id=469416) [Spell Family (10), Passive, Hidden] 
@@ -18965,7 +18916,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Generic Heal Taken, Magic Heal Taken, Helpful Periodic Taken
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183768)  : Apply Aura (6) | Periodic Dummy (226): every 1 seconds
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -18998,7 +18949,7 @@ Labels           : 16: Class Spells
                  : 4088: Holy Paladin (428076 effect#17), Holy Paladin (428076 effect#18)
 Proc Chance      : 100%
 Proc Flags       : Magic Heal
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183790)  : Apply Aura (6) | Dummy (4)
                    Base Value: 30 | Scaled Value: 30 | Target: Self (1)
@@ -19029,7 +18980,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183797)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 4 (32)
                    Base Value: 15 | Scaled Value: 15 | Misc Value: 32 | Target: Self (1)
@@ -19049,7 +19000,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183809)  : Apply Aura (6) | Add Flat Modifier (107): Spell Duration (1)
                    Base Value: -10000 | Scaled Value: -10000 | Misc Value: 1 | Target: Self (1)
@@ -19065,7 +19016,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1183850)  : Apply Aura (6) | Add Flat Modifier (107): Spell Radius (6)
                    Base Value: 20 | Scaled Value: 20 | Misc Value: 6 | Target: Self (1)
@@ -19091,7 +19042,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1184221)  : Apply Aura (6) | Dummy (4)
                    Base Value: 100 | Scaled Value: 100 | Target: Self (1)
@@ -19143,7 +19094,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 26: Paladin Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1184322)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 5 (33)
                    Base Value: 15 | Scaled Value: 15 | Misc Value: 33 | Target: Self (1)
@@ -19173,7 +19124,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.3 seconds
 Proc Chance      : 101%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Do Not Log on Learn (355), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1184334)  : Apply Aura (6) | Dummy (4)
                    Base Value: 4 | Scaled Value: 4 | Target: Self (1)
@@ -19232,7 +19183,7 @@ Family Flags     : 65
 Attributes       : Aura Is Debuff (26), Suppress Caster Procs (112), Always Hit (114), Do Not Display Range (126), Spell Haste Affects Periodic (173), Periodic Can Crit (265), Aura Points On Client (268), Rolling Periodic (334), Periodic Refresh Extends Duration (436)
 Effects          :
 #1 (id=1184536)  : Apply Aura (6) | Periodic Damage (3): holyfire every 1 seconds
-                   Base Value: 0 | Scaled Value: 0 | AP Coefficient: 0.225 | Target: Enemy (6)
+                   Base Value: 0 | Scaled Value: 0 | AP Coefficient: 0.165 | Target: Enemy (6)
 Description      : Enemies struck by Avenger's Shield burn with holy fire, suffering $o1 Radiant damage over $d.
 Tooltip          : Suffering $w1 Radiant damage every $t sec.
 
@@ -19264,7 +19215,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell, Periodic, Helpful Periodic
-Attributes       : Passive (6), No Aura Icon (60), Can Proc From Procs (122)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1184542)  : Apply Aura (6) | Dummy (4)
@@ -19298,5 +19249,20 @@ Description      : Heals a friendly target for an amount equal to $s2% your maxi
 Grants the target $387792s1% increased armor for $387792d.][]
 
 Cannot be used on a target with Forbearance. Causes Forbearance for $25771d.
+
+Name             : Hammer of Light (id=1217116) [Spell Family (10), Hidden] 
+Class            : Paladin
+School           : Holy
+Spell Type       : None
+Duration         : 1.5 seconds
+Labels           : 16: Class Spells
+                 : 26: Paladin Spells
+                 : 292
+Triggered By     : Hammer of Light (427453)
+Attributes       : Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Haste Affects Duration (273)
+Effects          :
+#1 (id=1200923)  : Apply Aura (6) | Dummy (4)
+                   Base Value: 0 | Scaled Value: 0 | Target: Self (1)
+Description      : $@spelldesc427453
 
 

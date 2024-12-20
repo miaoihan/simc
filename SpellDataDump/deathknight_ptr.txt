@@ -1,4 +1,4 @@
-SimulationCraft 1100-02 for World of Warcraft 11.0.7.58187 PTR
+SimulationCraft 1100-02 for World of Warcraft 11.1.0.58221 PTR
 Name             : Dual Wield (desc=Passive) (id=674) [Passive] 
 Class            : Frost Death Knight, Warrior, Hunter, Rogue, Monk, Demon Hunter
 School           : Physical
@@ -497,7 +497,6 @@ Attributes       : Do Not Sheath (18), Initiates Combat (Enables Auto-Attack) (4
 Effects          :
 #1 (id=39872)    : School Damage (2): shadow
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.64368 | PvP Coefficient: 1.49 | Chain Multiplier: 1 | Chain Targets: 1 | Target: Enemy (6)
-Hotfixed         : AP Coefficient (0.596 -> 0.64368)
 Description      : Fire a blast of unholy energy, causing Shadow damage to an enemy target or healing a friendly Undead target.
 
 Name             : Death Coil (id=47633) [Spell Family (15)] 
@@ -529,9 +528,9 @@ Spell Level      : 8
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Affecting Spells : Blood Death Knight (137008 effect#11), Veteran of the Third War (316714 effects: #1, #2, #3)
+Affecting Spells : Frost Death Knight (137006 effects: #10, #11), Unholy Death Knight (137007 effects: #12, #13), Blood Death Knight (137008 effect#11), Veteran of the Third War (316714 effects: #1, #2, #3)
 Family Flags     : 107
-Attributes       : Passive (6), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Aura Interrupt   : Login (29)
 Effects          :
 #1 (id=40417)    : Apply Aura (6) | Modify Total Stat% (137)
@@ -907,7 +906,7 @@ Labels           : 16: Class Spells
 Proc Chance      : 100%
 Proc Flags       : White Melee
 Family Flags     : 97
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Instant Target Procs (115), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Instant Target Procs (115), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=41650)    : Apply Aura (6) | Proc Trigger Spell (42): Sudden Doom
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 81340 | Target: Self (1)
@@ -980,10 +979,10 @@ Labels           : 16: Class Spells
 Stance Mask      : 0x01000000
 Affecting Spells : Blood Plague (55078 effect#4), Frost Fever (55095 effect#2), Might of the Frozen Wastes (81333 effect#2), Dark Succor (101568 effect#2), Unholy Blight (115994 effect#2), Death Knight (137005 effect#2), Frost Death Knight (137006 effects: #1, #2, #6, #7), Unholy Death Knight (137007 effects: #1, #2, #6, #7), Blood Death Knight (137008 effects: #1, #2, #3), Virulent Plague (191587 effect#3), Festering Wound (194310 effect#2), Unholy Assault (207289 effects: #4, #5), Ossuary (219788 effect#1), Death March (235556 effect#2), Haemostasis (235559 effect#1), Hemostasis (273947 effect#1), Voracious (273953 effects: #2, #3), War (327096 effect#1), Death's Certainty (334898 effect#2), Insatiable Appetite (338330 effect#1), Deep Frost (373934 effect#1), Improved Death Strike (374277 effects: #1, #2, #3), Brittle (374557 effect#1), Heartrend (377656 effect#2), Sanguine Ground (391459 effects: #1, #3), Vigorous Lifeblood (394570 effects: #1, #2), Ghoulish Infusion (394899 effects: #1, #3), Lingering Chill (410879 effect#1), Chilling Rage (424165 effects: #1, #2), Amplify Damage (424949 effects: #1, #2), Ashen Decay (425719 effect#2), Essence of the Blood Queen (433925 effect#2), A Feast of Souls (440861 effect#1), Death Knight Frost 11.0 Class Set 2pc (453634 effect#1), Blood Draw (454871 effect#2)
 Family Flags     : 4, 43, 127
-Attributes       : Is Ability (4), Not Shapeshifted (16), Do Not Sheath (18), Initiates Combat (Enables Auto-Attack) (41), Discount Power On Miss (59), Allow While Not Shapeshifted (caster form) (83), Requires Main-Hand Weapon (106), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Not Shapeshifted (16), Do Not Sheath (18), Initiates Combat (Enables Auto-Attack) (41), Discount Power On Miss (59), Chain From Caster (76), Allow While Not Shapeshifted (caster form) (83), Requires Main-Hand Weapon (106), Do Not Chain To Crowd-Controlled Targets (200), Allow Class Ability Procs (416), Chain by Most Hit (440)
 Effects          :
 #1 (id=42113)    : School Damage (2): physical
-                   Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.557107 | Target: Enemy (6)
+                   Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.557107 | Chain Multiplier: 1 | Chain Targets: 1 | Target: Enemy (6)
 #2 (id=42114)    : Dummy (3)
                    Base Value: 25 | Scaled Value: 25 | Target: Enemy (6)
 #3 (id=287354)   : Dummy (3)
@@ -1173,7 +1172,7 @@ Labels           : 16: Class Spells
 Proc Chance      : 100%
 Proc Flags       : White Melee
 Family Flags     : 98
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Instant Target Procs (115), Can Proc From Procs (122), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Instant Target Procs (115), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=43434)    : Apply Aura (6) | Proc Trigger Spell (42): Killing Machine
                    Base Value: 1 | Scaled Value: 1 | Trigger Spell: 51124 | Target: Self (1)
@@ -1207,8 +1206,22 @@ Effects          :
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
 #4 (id=739365)   : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Misc Value: 12 | Target: Self (1)
+#5 (id=1203568)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
+                   Base Value: 1000 | Scaled Value: 1000 | Target: Self (1)
+                   Affected Spells: Remorseless Winter (196771), Remorseless Winter (211793)
+                   Family Flags: 126
+#6 (id=1203569)  : Apply Aura (6) | Add Percent Modifier (108): Spell Radius (6)
+                   Base Value: 150 | Scaled Value: 150 | Misc Value: 6 | Target: Self (1)
+                   Affected Spells: Remorseless Winter (196771), Remorseless Winter (211793)
+                   Family Flags: 126
+#7 (id=1203570)  : Apply Aura (6) | Scale% (Stacking) (61)
+                   Base Value: 20 | Scaled Value: 20 | Target: Self (1)
+#8 (id=1203572)  : Apply Aura (6) | Unknown(191)
+                   Base Value: 2 | Scaled Value: 2 | Target: Self (1)
 Description      : The power of frost increases your Strength by $s1% for $d.
-Tooltip          : Strength increased by $w1%.
+Tooltip          : Strength increased by $w1%.$?e5[
+
+Increases Remorseless Winter's damage by $w5%, its radius by $w6%, but movement speed is reduced.][]
 
 Name             : Runic Corruption (id=51460) [Spell Family (15)] 
 Class            : Death Knight
@@ -1453,7 +1466,6 @@ Effects          :
                    Base Value: 0 | Scaled Value: 0 | Target: Enemy (6)
 #2 (id=48019)    : School Damage (2): physical | Attributes: Area Effects Use Target Radius (17)
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.641784 | PvP Coefficient: 1.3 | Radius: 0 - 8 yards | Target: At Enemy (53) -> At Enemy in Area (16)
-Hotfixed         : AP Coefficient (0.58344 -> 0.641784)
 #3 (id=48020)    : Trigger Spell (64): Scourge Strike
                    Base Value: 25 | Scaled Value: 25 | Trigger Spell: 70890 | Target: Enemy (6)
 #4 (id=840915)   : Dummy (3)
@@ -2084,7 +2096,6 @@ Effects          :
                    Base Value: 0 | Scaled Value: 0 | Target: Enemy (6)
 #2 (id=214692)   : School Damage (2): shadow | Attributes: Area Effects Use Target Radius (17)
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.35354 | PvP Coefficient: 1.3 | Radius: 0 - 8 yards | Target: At Enemy (53) -> At Enemy in Area (16)
-Hotfixed         : AP Coefficient (0.3214 -> 0.35354)
 Description      : $@spelldesc55090
 
 Name             : Mastery: Master of Beasts (id=76657) [Spell Family (9), Passive] 
@@ -2103,8 +2114,8 @@ Effects          :
                    Base Value: 190 | Scaled Value: 190 | Target: Self (1)
 #3 (id=171318)   : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 0 | Scaled Value: 0 | SP Coefficient: 1.9 | Target: Self (1)
-                   Affected Spells: A Murder of Crows (131894), A Murder of Crows (131900), Stampede (201594), Murloc Stampede (388719), Greater Mrgrglhjorn (396968), Vicious Hunt (445431)
-                   Family Flags: 99, 113, 122
+                   Affected Spells: A Murder of Crows (131894), A Murder of Crows (131900), Stampede (201594), Murloc Stampede (388719), Greater Mrgrglhjorn (396968), Boar Charge (471936), Boar Charge (471938), Rend Flesh (471999)
+                   Family Flags: 52, 99, 113, 122
 #4 (id=1033046)  : Apply Aura (6) | Modify Guardian Damage Done% (531)
                    Base Value: 0 | Scaled Value: 0 | SP Coefficient: 1.9 | Target: Self (1)
 Description      : Increases the damage done by your pets by ${$s1}.1%.
@@ -2783,7 +2794,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Absorb Cannot Be Ignore (214), Do Not Count For PvP Scoreboard (252), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Absorb Cannot Be Ignore (214), Do Not Count For PvP Scoreboard (252), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=127901)   : Apply Aura (6) | Unknown(316)
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 127 | Misc Value 2: 0x28 | Target: Self (1)
@@ -3056,6 +3067,26 @@ Effects          :
                    Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0 | Target: Self (1)
 #9 (id=1131945)  : Apply Aura (6) | Modify Guardian Damage Done% (531)
                    Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0 | Target: Self (1)
+#10 (id=1203292) : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 1 (3)
+                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0 | Misc Value: 3 | Target: Self (1)
+                   Affected Spells: Veteran of the Third War (48263), Veteran of the Fourth War (319278)
+                   Family Flags: 107
+#11 (id=1203296) : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 1 (3)
+                   Base Value: -8 | Scaled Value: -8 | Misc Value: 3 | Target: Self (1)
+                   Affected Spells: Veteran of the Third War (48263), Veteran of the Fourth War (319278)
+                   Family Flags: 107
+#12 (id=1203300) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
+                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0 | Misc Value: 3 | Misc Value 2: 4360 (Label) | Target: Self (1)
+                   Affected Spells (Label): Permafrost (207200)
+#13 (id=1203301) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
+                   Base Value: -10 | Scaled Value: -10 | Misc Value: 3 | Misc Value 2: 4360 (Label) | Target: Self (1)
+                   Affected Spells (Label): Permafrost (207200)
+#14 (id=1203302) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
+                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0 | Misc Value: 3 | Misc Value 2: 4361 (Label) | Target: Self (1)
+                   Affected Spells (Label): Null Magic (454842)
+#15 (id=1203303) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
+                   Base Value: 3 | Scaled Value: 3 | Misc Value: 3 | Misc Value 2: 4361 (Label) | Target: Self (1)
+                   Affected Spells (Label): Null Magic (454842)
 
 Name             : Unholy Death Knight (id=137007) [Spell Family (15), Passive, Hidden] 
 Class            : Unholy Death Knight
@@ -3102,6 +3133,26 @@ Effects          :
                    Base Value: 15 | Scaled Value: 15 | PvP Coefficient: 0 | Misc Value: 22 | Target: Self (1)
                    Affected Spells: Blood Plague (55078), Frost Fever (55095)
                    Family Flags: 57, 58
+#12 (id=1203293) : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 1 (3)
+                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0 | Misc Value: 3 | Target: Self (1)
+                   Affected Spells: Veteran of the Third War (48263), Veteran of the Fourth War (319278)
+                   Family Flags: 107
+#13 (id=1203295) : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 1 (3)
+                   Base Value: -8 | Scaled Value: -8 | Misc Value: 3 | Target: Self (1)
+                   Affected Spells: Veteran of the Third War (48263), Veteran of the Fourth War (319278)
+                   Family Flags: 107
+#14 (id=1203298) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
+                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0 | Misc Value: 3 | Misc Value 2: 4360 (Label) | Target: Self (1)
+                   Affected Spells (Label): Permafrost (207200)
+#15 (id=1203299) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
+                   Base Value: -10 | Scaled Value: -10 | Misc Value: 3 | Misc Value 2: 4360 (Label) | Target: Self (1)
+                   Affected Spells (Label): Permafrost (207200)
+#16 (id=1203304) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
+                   Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0 | Misc Value: 3 | Misc Value 2: 4361 (Label) | Target: Self (1)
+                   Affected Spells (Label): Null Magic (454842)
+#17 (id=1203305) : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
+                   Base Value: 3 | Scaled Value: 3 | Misc Value: 3 | Misc Value 2: 4361 (Label) | Target: Self (1)
+                   Affected Spells (Label): Null Magic (454842)
 
 Name             : Blood Death Knight (id=137008) [Spell Family (15), Passive, Hidden] 
 Class            : Blood Death Knight
@@ -3133,7 +3184,7 @@ Effects          :
 #6 (id=260807)   : Apply Aura (6) | Modify Attacker Melee Crit Chance (187)
                    Base Value: -6 | Scaled Value: -6 | Target: Self (1)
 #7 (id=260808)   : Apply Aura (6) | Threat (10)
-                   Base Value: 650 | Scaled Value: 650 | Misc Value: 127 | Target: Self (1)
+                   Base Value: 815 | Scaled Value: 815 | Misc Value: 127 | Target: Self (1)
 #8 (id=260809)   : Apply Aura (6) | Modify Expertise% (240)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
 #9 (id=260810)   : Apply Aura (6) | Modify Recharge Time (Category) (453)
@@ -3408,7 +3459,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
 Family Flags     : 101
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Aura Required by Client (262), Aura Points On Client (268), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Aura Required by Client (262), Aura Points On Client (268), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=227072)   : Apply Aura (6) | Unknown(463)
                    Base Value: 100 | Scaled Value: 100 | Target: Self (1)
@@ -3630,11 +3681,11 @@ Attributes       : Is Ability (4), Passive (6), Do Not Display (Spellbook, Aura 
 Effects          :
 #1 (id=280739)   : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 30 | Scaled Value: 30 | PvP Coefficient: 0.666667 | Target: Unknown(120)
-                   Affected Spells: Growl (2649), Claw (16827), Bite (17253), Bloody Screech (24423), Prowl (24450), Shell Shield (26064), Warp Time (35346), Smack (49966), Pin (50245), Dust Cloud (50285), Ankle Crack (50433), Frost Breath (54644), Monstrous Bite (54680), Dash (61684), Spirit Walk (90328), Play (90347), Spirit Mend (90361), Froststorm Breath (92380), Burrow Attack (93433), Rest (94019), Trick (94022), Burrow Attack (95714), Froststorm Breath (95725), Agile Reflexes (160011), Thick Hide (160057), Thick Hide (160058), Deadly Sting (160060), Tendon Rip (160065), Web Spray (160067), Molten Hide (160124), Lock Jaw (263423), Acid Spit (263446), Furious Bite (263840), Talon Rend (263852), Infected Bite (263853), Savage Rend (263854), Ravage (263857), Toxic Sting (263858), Obsidian Skin (263867), Bristle (263869), Dragon's Guile (263887), Catlike Reflexes (263892), Serpent's Swiftness (263904), Thick Fur (263926), Thick Fur (263934), Silverback (263938), Silverback (263939), Winged Agility (264360), Primal Rage (264667), Primal Rage (272678), Spore Cloud (344347), Sonic Screech (344348), Nether Energy (344349), Spirit Pulse (344351), Serenity Dust (344353), Primal Rage (357650), Fortitude of the Bear (388035), Fortitude of the Bear (392956)
+                   Affected Spells: Growl (2649), Claw (16827), Bite (17253), Bloody Screech (24423), Prowl (24450), Shell Shield (26064), Warp Time (35346), Smack (49966), Pin (50245), Dust Cloud (50285), Ankle Crack (50433), Frost Breath (54644), Monstrous Bite (54680), Dash (61684), Spirit Walk (90328), Play (90347), Spirit Mend (90361), Froststorm Breath (92380), Burrow Attack (93433), Rest (94019), Trick (94022), Burrow Attack (95714), Froststorm Breath (95725), Agile Reflexes (160011), Thick Hide (160057), Thick Hide (160058), Deadly Sting (160060), Tendon Rip (160065), Web Spray (160067), Molten Hide (160124), Lock Jaw (263423), Acid Spit (263446), Furious Bite (263840), Talon Rend (263852), Infected Bite (263853), Savage Rend (263854), Ravage (263857), Toxic Sting (263858), Obsidian Skin (263867), Bristle (263869), Dragon's Guile (263887), Catlike Reflexes (263892), Serpent's Swiftness (263904), Thick Fur (263926), Thick Fur (263934), Silverback (263938), Silverback (263939), Winged Agility (264360), Primal Rage (264667), Primal Rage (272678), Spore Cloud (344347), Sonic Screech (344348), Nether Energy (344349), Spirit Pulse (344351), Serenity Dust (344353), Primal Rage (357650), Fortitude of the Bear (388035), Fortitude of the Bear (392956), Harrier's Cry (466904)
                    Family Flags: 19, 60
 #2 (id=725119)   : Apply Aura (6) | Add Percent Modifier (108): Spell Periodic Amount (22)
                    Base Value: 30 | Scaled Value: 30 | PvP Coefficient: 0.666667 | Misc Value: 22 | Target: Unknown(120)
-                   Affected Spells: Growl (2649), Claw (16827), Bite (17253), Bloody Screech (24423), Prowl (24450), Shell Shield (26064), Warp Time (35346), Smack (49966), Pin (50245), Dust Cloud (50285), Ankle Crack (50433), Frost Breath (54644), Monstrous Bite (54680), Dash (61684), Spirit Walk (90328), Play (90347), Spirit Mend (90361), Froststorm Breath (92380), Burrow Attack (93433), Rest (94019), Trick (94022), Burrow Attack (95714), Froststorm Breath (95725), Agile Reflexes (160011), Thick Hide (160057), Thick Hide (160058), Deadly Sting (160060), Tendon Rip (160065), Web Spray (160067), Molten Hide (160124), Lock Jaw (263423), Acid Spit (263446), Furious Bite (263840), Talon Rend (263852), Infected Bite (263853), Savage Rend (263854), Ravage (263857), Toxic Sting (263858), Obsidian Skin (263867), Bristle (263869), Dragon's Guile (263887), Catlike Reflexes (263892), Serpent's Swiftness (263904), Thick Fur (263926), Thick Fur (263934), Silverback (263938), Silverback (263939), Winged Agility (264360), Primal Rage (264667), Primal Rage (272678), Spore Cloud (344347), Sonic Screech (344348), Nether Energy (344349), Spirit Pulse (344351), Serenity Dust (344353), Primal Rage (357650), Fortitude of the Bear (388035), Fortitude of the Bear (392956)
+                   Affected Spells: Growl (2649), Claw (16827), Bite (17253), Bloody Screech (24423), Prowl (24450), Shell Shield (26064), Warp Time (35346), Smack (49966), Pin (50245), Dust Cloud (50285), Ankle Crack (50433), Frost Breath (54644), Monstrous Bite (54680), Dash (61684), Spirit Walk (90328), Play (90347), Spirit Mend (90361), Froststorm Breath (92380), Burrow Attack (93433), Rest (94019), Trick (94022), Burrow Attack (95714), Froststorm Breath (95725), Agile Reflexes (160011), Thick Hide (160057), Thick Hide (160058), Deadly Sting (160060), Tendon Rip (160065), Web Spray (160067), Molten Hide (160124), Lock Jaw (263423), Acid Spit (263446), Furious Bite (263840), Talon Rend (263852), Infected Bite (263853), Savage Rend (263854), Ravage (263857), Toxic Sting (263858), Obsidian Skin (263867), Bristle (263869), Dragon's Guile (263887), Catlike Reflexes (263892), Serpent's Swiftness (263904), Thick Fur (263926), Thick Fur (263934), Silverback (263938), Silverback (263939), Winged Agility (264360), Primal Rage (264667), Primal Rage (272678), Spore Cloud (344347), Sonic Screech (344348), Nether Energy (344349), Spirit Pulse (344351), Serenity Dust (344353), Primal Rage (357650), Fortitude of the Bear (388035), Fortitude of the Bear (392956), Harrier's Cry (466904)
                    Family Flags: 19, 60
 #3 (id=725122)   : Apply Aura (6) | Add Percent Modifier (108): Spell Effect 1 (3)
                    Base Value: 50 | Scaled Value: 50 | Misc Value: 3 | Target: Self (1)
@@ -3820,7 +3871,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 2780
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Aura Interrupt   : Change Specialization (38), Change Talent (46), Change Glyph (47)
 Effects          :
 #1 (id=285787)   : Apply Aura (6) | Add Percent Modifier (108): Spell Tick Time (19)
@@ -3904,7 +3955,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.5 seconds
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Hostile Spell, Periodic, Helpful Periodic, Cast Successful
-Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=286061)   : Apply Aura (6) | Trigger Spell with Value (231)
                    Base Value: 6 | Scaled Value: 6 | Trigger Spell: 194879 | Target: Self (1)
@@ -3959,7 +4010,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell, Periodic, Helpful Periodic
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=286103)   : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Misc Value: 12 | Target: Self (1)
@@ -3996,7 +4047,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=286107)   : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 11 | Target: Self (1)
@@ -4009,7 +4060,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=286108)   : Apply Aura (6) | Dummy (4)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -4162,7 +4213,7 @@ Labels           : 16: Class Spells
 Proc Chance      : 101%
 Real PPM         : 5
 Proc Flags       : White Melee
-Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=287219)   : Apply Aura (6) | Proc Trigger Spell (42): Bloodworm
                    Base Value: 30 | Scaled Value: 30 | Trigger Spell: 196361 | Target: Self (1)
@@ -4290,7 +4341,7 @@ Labels           : 16: Class Spells
                  : 881
 Stance Mask      : 0x01000000
 Family Flags     : 122
-Attributes       : Not Shapeshifted (16), No Aura Cancel (31), Allow While Not Shapeshifted (caster form) (83), Extra Initial Period (169), Allow Class Ability Procs (416)
+Attributes       : Not Shapeshifted (16), No Aura Cancel (31), Allow While Not Shapeshifted (caster form) (83), Extra Initial Period (169), Allow Class Ability Procs (416), Periodic Refresh Extends Duration (436)
 Effects          :
 #1 (id=288888)   : Dummy (3)
                    Base Value: 25 | Scaled Value: 25 | Target: Self (1)
@@ -4310,7 +4361,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 881
-Affecting Spells : Razorice (51714 effect#1), Blood Plague (55078 effect#4), Frost Fever (55095 effect#2), Mastery: Frozen Heart (77514 effects: #1, #2), Might of the Frozen Wastes (81333 effect#2), Unholy Blight (115994 effect#2), Frost Death Knight (137006 effects: #1, #2, #6, #7), Unholy Death Knight (137007 effects: #1, #2, #6, #7), Blood Death Knight (137008 effects: #1, #2), Virulent Plague (191587 effect#3), Festering Wound (194310 effect#2), Unholy Assault (207289 effects: #4, #5), Gathering Storm (211805 effect#1), Frozen Tempest (278487 effects: #2, #3), War (327096 effect#1), Biting Cold (334678 effects: #2, #3), Everfrost (337989 effect#1), Deep Frost (373934 effect#1), Brittle (374557 effect#1), Everfrost (376974 effect#1), Biting Cold (377056 effects: #2, #3), Sanguine Ground (391459 effects: #1, #3), Vigorous Lifeblood (394570 effects: #1, #2), Ghoulish Infusion (394899 effects: #1, #3), Lingering Chill (410879 effect#1), Chilling Rage (424165 effects: #1, #2), Amplify Damage (424949 effects: #1, #2), Ashen Decay (425719 effect#2)
+Affecting Spells : Pillar of Frost (51271 effects: #5, #6), Razorice (51714 effect#1), Blood Plague (55078 effect#4), Frost Fever (55095 effect#2), Mastery: Frozen Heart (77514 effects: #1, #2), Might of the Frozen Wastes (81333 effect#2), Unholy Blight (115994 effect#2), Frost Death Knight (137006 effects: #1, #2, #6, #7), Unholy Death Knight (137007 effects: #1, #2, #6, #7), Blood Death Knight (137008 effects: #1, #2), Virulent Plague (191587 effect#3), Festering Wound (194310 effect#2), Unholy Assault (207289 effects: #4, #5), Gathering Storm (211805 effect#1), Frozen Tempest (278487 effects: #2, #3), War (327096 effect#1), Biting Cold (334678 effects: #2, #3), Everfrost (337989 effect#1), Deep Frost (373934 effect#1), Brittle (374557 effect#1), Everfrost (376974 effect#1), Biting Cold (377056 effects: #2, #3), Sanguine Ground (391459 effects: #1, #3), Vigorous Lifeblood (394570 effects: #1, #2), Ghoulish Infusion (394899 effects: #1, #3), Lingering Chill (410879 effect#1), Chilling Rage (424165 effects: #1, #2), Amplify Damage (424949 effects: #1, #2), Ashen Decay (425719 effect#2)
 Triggered By     : Remorseless Winter (196770)
 Family Flags     : 43, 120, 126
 Attributes       : Aura Is Debuff (26), Allow While Sitting (27), Not an Action (92), DoT Stacking Rule (103), Not a Proc (105), No Cast Log (128), Allow Cast While Casting (135), Allow While Stunned (163), Allow While Fleeing (177), Allow While Confused (178), Allow While Riding Vehicle (204), Allow While Charmed (261), Allow While Banished Aura State (299), Allow Cast While Channeling (308), Allow While Stunned By Horror Mechanic (342), Allow While Stunned by Stun Mechanic (378), Don't close loot window (379), Allow Class Ability Procs (416), Allow While Feared By Fear Mechanic (417)
@@ -4652,7 +4703,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=303972)   : Apply Aura (6) | Dummy (4)
                    Base Value: 2000 | Scaled Value: 2000 | Target: Self (1)
@@ -4669,7 +4720,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 2782
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Aura Interrupt   : Change Specialization (38), Change Talent (46), Change Glyph (47)
 Effects          :
 #1 (id=303981)   : Apply Aura (6) | Add Flat Modifier (107): Spell Cooldown (11)
@@ -4811,7 +4862,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306100)   : Apply Aura (6) | Absorb Damage (69)
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 0x7f | Misc Value 2: -10 | Target: Self (1)
@@ -4830,7 +4881,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Aura Interrupt   : Change Specialization (38), Change Talent (46), Change Glyph (47)
 Effects          :
 #1 (id=306105)   : Apply Aura (6) | Add Flat Modifier (107): Spell Cooldown (11)
@@ -4849,7 +4900,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Aura Interrupt   : Change Specialization (38), Change Talent (46), Change Glyph (47)
 Effects          :
 #1 (id=306111)   : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 3 (23)
@@ -4868,7 +4919,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Is Ability (4), Passive (6), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Aura Interrupt   : Change Specialization (38), Change Talent (46), Change Glyph (47)
 Effects          :
 #1 (id=306238)   : Apply Aura (6) | Dummy (4)
@@ -4886,7 +4937,7 @@ Labels           : 16: Class Spells
                  : 117
                  : 292
 Family Flags     : 37
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306243)   : Apply Aura (6) | Dummy (4)
                    Base Value: 25 | Scaled Value: 25 | Target: Self (1)
@@ -4920,7 +4971,7 @@ Labels           : 16: Class Spells
 Proc Chance      : 100%
 Real PPM         : 10.8 (Haste multiplier)
 Proc Flags       : White Melee
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306302)   : Apply Aura (6) | Proc Trigger Spell (42): Runic Attenuation
                    Base Value: 5 | Scaled Value: 5 | Trigger Spell: 221322 | Target: Self (1)
@@ -4939,7 +4990,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.5 seconds
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, White Ranged, Yellow Ranged, Generic Hostile Spell, Magic Hostile Spell, Periodic
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Can Proc From Procs (122), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306334)   : Apply Aura (6) | Add Flat Modifier (107): Spell Cooldown (11)
                    Base Value: -15000 | Scaled Value: -15000 | Misc Value: 11 | Target: Self (1)
@@ -4960,7 +5011,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Magic Hostile Spell
-Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306356)   : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -5044,9 +5095,10 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
+                 : 4360: Frost Death Knight (137006 effect#12), Frost Death Knight (137006 effect#13), Unholy Death Knight (137007 effect#14), Unholy Death Knight (137007 effect#15)
 Proc Chance      : 100%
 Proc Flags       : White Melee
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306445)   : Apply Aura (6) | Dummy (4)
                    Base Value: 40 | Scaled Value: 40 | Target: Self (1)
@@ -5136,7 +5188,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306535)   : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 16 | Scaled Value: 16 | Target: Self (1)
@@ -5178,7 +5230,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306542)   : Apply Aura (6) | Add Percent Modifier (108): Spell Tick Time (19)
                    Base Value: -50 | Scaled Value: -50 | Misc Value: 19 | Target: Self (1)
@@ -5203,7 +5255,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306547)   : Apply Aura (6) | Dummy (4)
                    Base Value: 30 | Scaled Value: 30 | Misc Value: 19 | Target: Self (1)
@@ -5277,7 +5329,6 @@ Effects          :
                    Base Value: 0 | Scaled Value: 0 | Target: Enemy (6)
 #2 (id=324719)   : School Damage (2): shadow | Attributes: Area Effects Use Target Radius (17)
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 1.177 | PvP Coefficient: 1.3 | Radius: 0 - 8 yards | Target: At Enemy (53) -> At Enemy in Area (16)
-Hotfixed         : AP Coefficient (1.07 -> 1.177)
 Description      : Deals $s2 Shadow damage and causes 1 Festering Wound to burst.
 
 Name             : Sludge Belcher (id=207313) [Spell Family (15), Passive] 
@@ -5288,7 +5339,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306603)   : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -5325,7 +5376,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=306617)   : Apply Aura (6) | Add Percent Modifier (108): Spell Effect 2 (12)
                    Base Value: 30 | Scaled Value: 30 | Misc Value: 12 | Target: Self (1)
@@ -5448,7 +5499,7 @@ Labels           : 16: Class Spells
                  : 292
 Stacks           : 1 maximum
 Proc Chance      : 101%
-Affecting Spells : Gathering Storm (211805 effect#1), Frozen Tempest (278487 effects: #2, #3), Biting Cold (334678 effects: #2, #3), Everfrost (337989 effect#1), Everfrost (376974 effect#1), Biting Cold (377056 effects: #2, #3)
+Affecting Spells : Pillar of Frost (51271 effects: #5, #6), Gathering Storm (211805 effect#1), Frozen Tempest (278487 effects: #2, #3), Biting Cold (334678 effects: #2, #3), Everfrost (337989 effect#1), Everfrost (376974 effect#1), Biting Cold (377056 effects: #2, #3)
 Family Flags     : 126
 Attributes       : Allow While Mounted (24), Allow While Sitting (27), Not an Action (92), Active Threat (94), DoT Stacking Rule (103), Not a Proc (105), Allow While Stunned (163), Allow While Fleeing (177), Allow While Confused (178), Not an Attack (194), Allow While Riding Vehicle (204), Show Mechanic as Combat Text (213), Allow While Charmed (261), Do Not Log Aura Refresh (291), Don't Cancel When All Effects are Disabled (353), Don't close loot window (379), Allow Class Ability Procs (416)
 Effects          :
@@ -5711,7 +5762,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=327512)   : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
@@ -5860,7 +5911,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
 Proc Chance      : 101%
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=330519)   : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -6226,7 +6277,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Extra Initial Period (169)
+Attributes       : Passive (6), Not In Spellbook (143), Extra Initial Period (169), Do Not Log on Learn (355)
 Effects          :
 #1 (id=474096)   : Apply Aura (6) | Periodic Dummy (226): every 8 seconds
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -6453,7 +6504,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Magic Hostile Spell
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=725973)   : Apply Aura (6) | Proc Trigger Spell (42): Hemostasis
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 273947 | Target: Self (1)
@@ -6490,7 +6541,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Aura Interrupt   : Change Specialization (38), Change Talent (46), Change Glyph (47)
 Effects          :
 #1 (id=725979)   : Apply Aura (6) | Dummy (4)
@@ -6509,7 +6560,7 @@ Labels           : 16: Class Spells
                  : 292
                  : 2778
 Proc Chance      : 101%
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=725981)   : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -6699,7 +6750,7 @@ Effects          :
 #1 (id=728456)   : Dummy (3)
                    Base Value: 0 | Scaled Value: 0 | Radius: 8.5 yards | Target: At Random (72)
 #2 (id=728457)   : Summon (28)
-                   Base Value: 0 | Scaled Value: 0 | Misc Value: 24207 | Misc Value 2: 0xebc | Target: Unknown(86)
+                   Base Value: 0 | Scaled Value: 0 | Misc Value: 237409 | Misc Value 2: 0xebc | Target: Unknown(86)
 Description      : $@spelldesc275699
 
 Name             : Apocalypse (id=275699) [Spell Family (15)] 
@@ -6777,7 +6828,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=729401)   : Apply Aura (6) | Add Flat Modifier (107): Spell Max Stacks (37)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 37 | Target: Self (1)
@@ -6804,7 +6855,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Killing Blow
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=729509)   : Apply Aura (6) | Add Flat Modifier (107): Spell Range (5)
                    Base Value: 10 | Scaled Value: 10 | Misc Value: 5 | Target: Self (1)
@@ -6846,7 +6897,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Log (8), Not In Spellbook (143), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=732285)   : Apply Aura (6) | Dummy (4)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -6951,7 +7002,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Include In Advanced Combat Log (72)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=739465)   : Apply Aura (6) | Periodic Trigger Spell (23): Cold Heart every 2 seconds
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 281209 | Target: Self (1)
@@ -7028,7 +7079,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Generic Heal
-Attributes       : Passive (6), Can Proc From Procs (122), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=739508)   : Apply Aura (6) | Proc Trigger Spell (42): Obliteration
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 207256 | Target: Self (1)
@@ -7036,7 +7087,7 @@ Effects          :
                    Base Value: 30 | Scaled Value: 30 | Target: Self (1)
 #3 (id=1168502)  : Dummy (3)
                    Base Value: 15 | Scaled Value: 15
-Description      : While Pillar of Frost is active, Frost Strike$?s194913[, Glacial Advance,][]$?s343294[ Soul Reaper,][] and Howling Blast always grant Killing Machine and have a $s2% chance to generate a Rune. to deal additional damage.
+Description      : While Pillar of Frost is active, Frost Strike$?s194913[, Glacial Advance,][]$?s343294[ Soul Reaper,][] and Howling Blast always grant Killing Machine and have a $s2% chance to generate a Rune.
 Tooltip          : Frost Strike$?s194913[, Glacial Advance,][] and Howling Blast grant Killing Machine and have a $s2% chance to generate a Rune.
 
 Name             : Obliteration (id=281327) [Spell Family (15)] 
@@ -7909,7 +7960,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Only In Spellbook Until Learned (240)
+Attributes       : Passive (6), Not In Spellbook (143), Only In Spellbook Until Learned (240), Do Not Log on Learn (355)
 Effects          :
 #1 (id=801548)   : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -7925,7 +7976,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Only In Spellbook Until Learned (240)
+Attributes       : Passive (6), Not In Spellbook (143), Only In Spellbook Until Learned (240), Do Not Log on Learn (355)
 Effects          :
 #1 (id=801601)   : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 2 (12)
                    Base Value: 75 | Scaled Value: 75 | Misc Value: 12 | Target: Self (1)
@@ -7942,7 +7993,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Only In Spellbook Until Learned (240)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=801663)   : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -7958,7 +8009,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Only In Spellbook Until Learned (240)
+Attributes       : Passive (6), Not In Spellbook (143), Only In Spellbook Until Learned (240), Do Not Log on Learn (355)
 Effects          :
 #1 (id=801745)   : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -7987,7 +8038,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Only In Spellbook Until Learned (240)
+Attributes       : Passive (6), Not In Spellbook (143), Only In Spellbook Until Learned (240), Do Not Log on Learn (355)
 Effects          :
 #1 (id=802114)   : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 1 (3)
                    Base Value: 5 | Scaled Value: 5 | Misc Value: 3 | Target: Self (1)
@@ -8011,7 +8062,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Only In Spellbook Until Learned (240)
+Attributes       : Passive (6), Not In Spellbook (143), Only In Spellbook Until Learned (240), Do Not Log on Learn (355)
 Effects          :
 #1 (id=802237)   : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -8041,7 +8092,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Aura Interrupt   : Change Specialization (38), Change Talent (46), Change Glyph (47)
 Effects          :
 #1 (id=802865)   : Apply Aura (6) | Dummy (4)
@@ -8148,7 +8199,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268)
+Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=805540)   : Apply Aura (6) | Unknown(285)
                    Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0.5 | Trigger Spell: 319232 | Target: Self (1)
@@ -8348,7 +8399,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Affecting Spells : Blood Death Knight (137008 effect#11), Veteran of the Third War (316714 effects: #1, #2, #3)
+Affecting Spells : Frost Death Knight (137006 effects: #10, #11), Unholy Death Knight (137007 effects: #12, #13), Blood Death Knight (137008 effect#11), Veteran of the Third War (316714 effects: #1, #2, #3)
 Family Flags     : 107
 Attributes       : Passive (6), Update Passives on Apply/Remove (344)
 Effects          :
@@ -10629,7 +10680,7 @@ Spell Type       : Magic
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow during spell override (404)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Allow during spell override (404)
 Effects          :
 #1 (id=999499)   : Apply Aura (6) | Add Flat Modifier (107): Spell Targets (17)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 17 | Target: Self (1)
@@ -10647,7 +10698,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=999500)   : Apply Aura (6) | Dummy (4)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -10680,7 +10731,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=999657)   : Apply Aura (6) | Modify Leech% (443)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
@@ -10696,7 +10747,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Generic Hostile Spell Taken, Magic Hostile Spell Taken
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Aura Points On Client (268), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Aura Points On Client (268), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=999681)   : Apply Aura (6) | Modify AoE Damage Taken% (229)
                    Base Value: -3 | Scaled Value: -3 | Misc Value: 127 | Target: Self (1)
@@ -10714,7 +10765,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1000038)  : Apply Aura (6) | Apply Percent Modifier w/ Label (218): Spell Effect 1 (3)
                    Base Value: 20 | Scaled Value: 20 | Misc Value: 3 | Misc Value 2: 961 (Label) | Target: Self (1)
@@ -10739,7 +10790,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1000044)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -10797,7 +10848,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1000205)  : Apply Aura (6) | Dummy (4)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -10831,7 +10882,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 15%
 Proc Flags       : Periodic
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1000381)  : Apply Aura (6) | Dummy (4)
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
@@ -10871,7 +10922,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1000477)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
                    Base Value: 3 | Scaled Value: 3 | Misc Value: 3 | Misc Value 2: 1927 (Label) | Target: Self (1)
@@ -10902,7 +10953,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Aura Points On Client (268), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Aura Points On Client (268), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1000517)  : Apply Aura (6) | Trigger Spell Based on Health% (468)
                    Base Value: 30 | Scaled Value: 30 | Misc Value: 1 | Trigger Spell: 374606 | Target: Self (1)
@@ -10961,7 +11012,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 2777
-Attributes       : Passive (6), Only In Spellbook Until Learned (240)
+Attributes       : Passive (6), Not In Spellbook (143), Only In Spellbook Until Learned (240), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1000710)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 4 (32)
                    Base Value: 10 | Scaled Value: 10 | Misc Value: 32 | Target: Self (1)
@@ -10978,7 +11029,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1000714)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
@@ -11012,7 +11063,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 2775
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1000743)  : Apply Aura (6) | Add Percent Modifier (108): Spell Effect 1 (3)
                    Base Value: 10 | Scaled Value: 10 | Misc Value: 3 | Target: Self (1)
@@ -11032,7 +11083,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Not In Spellbook (143), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1000757)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -11082,7 +11133,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), Not In Spellbook (143)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1003158)  : Apply Aura (6) | Modify Max Resource (418)
                    Base Value: 50 | Scaled Value: 50 | Resource: runic_power | Target: Self (1)
@@ -11099,7 +11150,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.75 seconds
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Only Proc From Class Abilities (415)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Only Proc From Class Abilities (415)
 Effects          :
 #1 (id=1004348)  : Apply Aura (6) | Trigger Spell with Value (231)
                    Base Value: 2 | Scaled Value: 2 | Trigger Spell: 376907 | Target: Self (1)
@@ -11134,7 +11185,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Magic Hostile Spell, Periodic
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Only Proc From Class Abilities (415)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Only Proc From Class Abilities (415)
 Effects          :
 #1 (id=1004447)  : Apply Aura (6) | Trigger Spell with Value (231)
                    Base Value: 6 | Scaled Value: 6 | PvP Coefficient: 0.5 | Trigger Spell: 376974 | Target: Self (1)
@@ -11169,7 +11220,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1004684)  : Apply Aura (6) | Add Percent Modifier (108): Spell Cooldown (11)
                    Base Value: -50 | Scaled Value: -50 | Misc Value: 11 | Target: Self (1)
@@ -11202,7 +11253,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268)
+Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1004694)  : Dummy (3)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
@@ -11227,7 +11278,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.7 seconds
 Proc Chance      : 15%
 Proc Flags       : Yellow Melee
-Attributes       : Passive (6), Include In Advanced Combat Log (72)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1004718)  : Apply Aura (6) | Proc Trigger Spell (42): Frigid Executioner
                    Base Value: 1 | Scaled Value: 1 | Trigger Spell: 377074 | Target: Self (1)
@@ -11261,7 +11312,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Can Proc From Procs (122)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1004722)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 2 (12)
                    Base Value: 15 | Scaled Value: 15 | Misc Value: 12 | Target: Self (1)
@@ -11294,7 +11345,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.7 seconds
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), Include In Advanced Combat Log (72)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1004749)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
                    Base Value: 10 | Scaled Value: 10 | PvP Coefficient: 0.5 | Misc Value: 3 | Misc Value 2: 1625 (Label) | Target: Self (1)
@@ -11349,7 +11400,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Generic Heal
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Aura Points On Client (268), Only Proc From Class Abilities (415)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355), Only Proc From Class Abilities (415)
 Effects          :
 #1 (id=1004884)  : Apply Aura (6) | Proc Trigger Spell (42): Enduring Strength
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 377192 | Target: Self (1)
@@ -11410,7 +11461,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Generic Heal
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Aura Points On Client (268), Only Proc From Class Abilities (415)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355), Only Proc From Class Abilities (415)
 Effects          :
 #1 (id=1004946)  : Apply Aura (6) | Proc Trigger Spell (42): Frostwhelp's Aid
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 377243 | Target: Self (1)
@@ -11488,7 +11539,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Aura Points On Client (268), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Aura Points On Client (268), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1005138)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -11522,7 +11573,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Aura Points On Client (268), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Aura Points On Client (268), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1005185)  : Apply Aura (6) | Dummy (4)
                    Base Value: 25 | Scaled Value: 25 | Target: Self (1)
@@ -11636,7 +11687,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1005502)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
@@ -11656,7 +11707,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1005511)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
                    Base Value: 5 | Scaled Value: 5 | Misc Value: 3 | Misc Value 2: 1618 (Label) | Target: Self (1)
@@ -11715,7 +11766,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1005517)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 1 (3)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 3 | Misc Value 2: 1619 (Label) | Target: Self (1)
@@ -11739,7 +11790,7 @@ Effects          :
 #1 (id=1005518)  : Apply Aura (6) | Modify Total Stat% (137)
                    Base Value: 0 | Scaled Value: 0 | PvP Coefficient: 0.65 | Misc Value 2: 0x1 | Target: Self (1)
 Description      : $@spelldesc377590
-Tooltip          : Strength increased by $w1%.
+Tooltip          : Strength increased by ${$W1}.2%.
 
 Name             : Morbidity (id=377592) [Spell Family (15), Passive] 
 Talent Entry     : Unholy [tree=spec, row=9, col=1, max_rank=2, req_points=20]
@@ -11761,7 +11812,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1005519)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 3 (23)
                    Base Value: 1 | Scaled Value: 1 | Misc Value: 23 | Target: Self (1)
@@ -11823,7 +11874,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Generic Hostile Spell
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1005578)  : Apply Aura (6) | Dummy (4)
                    Base Value: 25 | Scaled Value: 25 | Target: Self (1)
@@ -11852,7 +11903,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 2781
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1005589)  : Apply Aura (6) | Dummy (4)
                    Base Value: -5000 | Scaled Value: -5000 | Misc Value: 11 | Target: Self (1)
@@ -11868,7 +11919,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1005593)  : Apply Aura (6) | Dummy (4)
                    Base Value: 3 | Scaled Value: 3 | Misc Value: 11 | Target: Self (1)
@@ -11905,7 +11956,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Generic Hostile Spell
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1005618)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Effect 2 (12)
                    Base Value: 20 | Scaled Value: 20 | Misc Value: 12 | Misc Value 2: 1622 (Label) | Target: Self (1)
@@ -11943,7 +11994,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Can Proc From Procs (122), Allow Entering Arena (149), Disable Aura While Dead (226), Only Proc From Class Abilities (415)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Can Proc From Procs (122), Not In Spellbook (143), Allow Entering Arena (149), Disable Aura While Dead (226), Do Not Log on Learn (355), Only Proc From Class Abilities (415)
 Effects          :
 #1 (id=1005634)  : Apply Aura (6) | Dummy (4)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
@@ -12015,7 +12066,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook Until Learned (269), Only Proc From Class Abilities (415)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Only Proc From Class Abilities (415)
 Effects          :
 #1 (id=1007330)  : Apply Aura (6) | Proc Trigger Spell (42): Coldthirst
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 378849 | Target: Self (1)
@@ -12155,7 +12206,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook Until Learned (269)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1026071)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -12185,7 +12236,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook Until Learned (269)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1026074)  : Apply Aura (6) | Add Flat Modifier (107): Spell Duration (1)
                    Base Value: 2000 | Scaled Value: 2000 | Misc Value: 1 | Target: Self (1)
@@ -12203,7 +12254,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), Not In Spellbook (143)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1026788)  : Apply Aura (6) | Modify Max Resource (418)
                    Base Value: 100 | Scaled Value: 100 | Resource: runic_power | Target: Self (1)
@@ -12224,7 +12275,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.7 seconds
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), No Aura Cancel (31), No Threat (42), Not an Action (92), Aura Points On Client (268), Do Not Display Cast Time (441)
+Attributes       : Passive (6), No Aura Cancel (31), No Threat (42), Not an Action (92), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355), Do Not Display Cast Time (441)
 Effects          :
 #1 (id=1026801)  : Apply Aura (6) | Trigger Spell with Value (231)
                    Base Value: -50 | Scaled Value: -50 | Trigger Spell: 390178 | Target: Self (1)
@@ -12260,7 +12311,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1026837)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -12287,7 +12338,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268)
+Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1026902)  : Apply Aura (6) | Dummy (4)
                    Base Value: 25 | Scaled Value: 25 | PvP Coefficient: 2 | Target: Self (1)
@@ -12305,7 +12356,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Magic Heal
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1026942)  : Apply Aura (6) | Proc Trigger Spell (42): Commander of the Dead
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 390260 | Target: Self (1)
@@ -12358,7 +12409,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Generic Heal, Generic Hostile Spell, Magic Heal, Magic Hostile Spell
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1026963)  : Apply Aura (6) | Dummy (4)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
@@ -12374,7 +12425,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1026970)  : Apply Aura (6) | Dummy (4)
                    Base Value: 30 | Scaled Value: 30 | Target: Self (1)
@@ -12404,7 +12455,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1026979)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -12425,7 +12476,6 @@ Effects          :
                    Base Value: 60 | Scaled Value: 60 | PvP Coefficient: 0.6 | Target: Enemy (6)
                    Affected Spells: Scourge Strike (55090), Scourge Strike (70890), Clawing Shadows (207311), Vampiric Strike (433895)
                    Family Flags: 59, 71
-Hotfixed         : Base Value (50 -> 60)
 Description      : $@spelldesc390275
 Tooltip          : Scourge Strike damage taken from $@auracaster is increased by $s1%.
 
@@ -12457,7 +12507,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), No Threat (42), Allow Aura While Dead (116), Not In Spellbook (143), Allow While Riding Vehicle (204), Aura Points On Client (268)
+Attributes       : Passive (6), No Threat (42), Allow Aura While Dead (116), Not In Spellbook (143), Allow While Riding Vehicle (204), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1026992)  : Apply Aura (6) | Dummy (4)
                    Base Value: 75 | Scaled Value: 75 | Target: Self (1)
@@ -12478,7 +12528,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1028868)  : Apply Aura (6) | Dummy (4)
                    Base Value: 100 | Scaled Value: 100 | Target: Self (1)
@@ -12505,7 +12555,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1028878)  : Apply Aura (6) | Add Flat Modifier (107): Spell Duration (1)
                    Base Value: 2000 | Scaled Value: 2000 | Misc Value: 1 | Target: Self (1)
@@ -12525,7 +12575,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1028887)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 2 (12)
                    Base Value: 25 | Scaled Value: 25 | Misc Value: 12 | Target: Self (1)
@@ -12541,7 +12591,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1028994)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Misc Value: 1 | Target: Self (1)
@@ -12583,7 +12633,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Generic Hostile Spell
-Attributes       : Passive (6), Include In Advanced Combat Log (72)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1029025)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 4 (32)
                    Base Value: 5 | Scaled Value: 5 | Misc Value: 32 | Target: Self (1)
@@ -12624,7 +12674,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Generic Heal, Magic Heal, Helpful Periodic
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1029083)  : Apply Aura (6) | Proc Trigger Spell (42): Umbilicus Eternus
                    Base Value: 5 | Scaled Value: 5 | Trigger Spell: 391519 | Target: Self (1)
@@ -12661,7 +12711,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Generic Heal, Magic Heal
-Attributes       : Passive (6), Not In Spellbook Until Learned (269)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1029125)  : Apply Aura (6) | Trigger Spell with Value (231)
                    Base Value: 25 | Scaled Value: 25 | Trigger Spell: 391547 | Target: Self (1)
@@ -12728,7 +12778,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 2776
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Include In Advanced Combat Log (72)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1029161)  : Apply Aura (6) | Modify Absorb% Done (422)
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
@@ -12792,7 +12842,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1031542)  : Apply Aura (6) | Dummy (4)
                    Base Value: 30 | Scaled Value: 30 | Target: Self (1)
@@ -13670,7 +13720,6 @@ Attributes       : Do Not Sheath (18), No Aura Icon (60), Not In Spellbook (143)
 Effects          :
 #1 (id=1123513)  : School Damage (2): shadow | Attributes: Area Effects Use Target Radius (17)
                    Base Value: 0 | Scaled Value: 0 | AP Coefficient: 1.144 | Radius: 0 - 8 yards | Target: At Enemy (53) -> At Enemy in Area (16)
-Hotfixed         : AP Coefficient (1.04 -> 1.144)
 #2 (id=1123558)  : Trigger Spell (64): Vampiric Strike
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 434422 | Target: Self (1)
 #3 (id=1123562)  : Trigger Spell (64): Essence of the Blood Queen
@@ -13713,7 +13762,7 @@ Labels           : 16: Class Spells
                  : 4242: Blood Death Knight (137008 effect#21)
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Magic Hostile Spell
-Attributes       : Passive (6), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1123520)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 25 | Scaled Value: 25 | Target: Self (1)
@@ -13752,7 +13801,8 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Ignore Caster Damage Modifiers (221), Ignore Caster Healing Modifiers (312), Ignore Caster Absorb Modifiers (370), Allow Class Ability Procs (416)
+                 : 3022
+Attributes       : Passive (6), Not In Spellbook (143), Ignore Caster Damage Modifiers (221), Ignore Caster Healing Modifiers (312), Do Not Log on Learn (355), Ignore Caster Absorb Modifiers (370), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1123580)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 2 (12)
                    Base Value: 40 | Scaled Value: 40 | Misc Value: 12 | Target: Self (1)
@@ -13791,7 +13841,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.1 seconds
 Proc Chance      : 101%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1123733)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 1 (3)
                    Base Value: 10 | Scaled Value: 10 | Misc Value: 3 | Target: Self (1)
@@ -13830,7 +13880,8 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143)
+                 : 3022
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1123745)  : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Misc Value: 1 | Target: Self (1)
@@ -13866,7 +13917,7 @@ Labels           : 16: Class Spells
                  : 292
                  : 3022
                  : 4192: Blood Death Knight (137008 effect#19)
-Attributes       : Passive (6), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1123818)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Max Stacks (37)
                    Base Value: 2 | Scaled Value: 2 | Misc Value: 37 | Misc Value 2: 3134 (Label) | Target: Self (1)
@@ -13885,7 +13936,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3135: Vampiric Aura (434105 effect#1)
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1123857)  : Apply Aura (6) | Modify Leech% (443)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -13939,9 +13990,10 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
+                 : 3022
 Proc Chance      : 101%
 Proc Flags       : Killing Blow
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1123920)  : Apply Aura (6) | Dummy (4)
                    Base Value: 20 | Scaled Value: 20 | Target: Self (1)
@@ -13959,10 +14011,11 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
+                 : 3022
                  : 4138: Blood Death Knight (137008 effect#17), Blood Death Knight (137008 effect#18)
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1123935)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 100 | Scaled Value: 100 | Target: Self (1)
@@ -14058,7 +14111,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1123969)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -14124,7 +14177,7 @@ Internal Cooldown: 1 seconds
 Proc Chance      : 101%
 Real PPM         : 1.5 (Haste multiplier)
 Proc Flags       : Yellow Melee
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1124175)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 50 | Scaled Value: 50 | Target: Self (1)
@@ -14144,9 +14197,10 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
+                 : 3022
 Proc Chance      : 100%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Hostile Spell, Magic Hostile Spell, Periodic
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1124176)  : Apply Aura (6) | Dummy (4)
                    Base Value: 50 | Scaled Value: 50 | Misc Value: 1 | Target: Self (1)
@@ -14160,7 +14214,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143)
+Attributes       : Passive (6), Include In Advanced Combat Log (72), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1124180)  : Apply Aura (6) | Dummy (4)
                    Base Value: 35 | Scaled Value: 35 | Misc Value: 1 | Target: Self (1)
@@ -14299,7 +14353,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1125191)  : Apply Aura (6) | Dummy (4)
                    Base Value: 30 | Scaled Value: 30 | Target: Self (1)
@@ -14319,7 +14373,7 @@ Spell Type       : Magic
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1125366)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Max Stacks (37)
                    Base Value: 2 | Scaled Value: 2 | Misc Value: 37 | Misc Value 2: 3254 (Label) | Target: Self (1)
@@ -14341,7 +14395,7 @@ Labels           : 16: Class Spells
                  : 3022
 Proc Chance      : 100%
 Proc Flags       : White Melee
-Attributes       : Passive (6), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1125373)  : Apply Aura (6) | Proc Trigger Spell (42)
                    Base Value: 20 | Scaled Value: 20 | Target: Self (1)
@@ -14364,10 +14418,8 @@ Attributes       : Allow While Mounted (24), Allow While Sitting (27), Allow Whi
 Effects          :
 #1 (id=1126738)  : School Damage (2): shadowfrost
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.67275 | PvP Coefficient: 1.54 | Target: Enemy (6)
-Hotfixed         : PvP Coefficient (1.2821 -> 1.54)
 #2 (id=1174044)  : School Damage (2): shadowfrost
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.773663 | PvP Coefficient: 1.54 | Target: Enemy (6)
-Hotfixed         : PvP Coefficient (1.2821 -> 1.54)
 Description      : $@spelldesc434711
 
 Name             : Reaper's Mark (id=436304) [Spell Family (15)] 
@@ -14387,10 +14439,8 @@ Attributes       : Allow While Mounted (24), Allow While Sitting (27), Allow Whi
 Effects          :
 #1 (id=1127543)  : School Damage (2): shadowfrost
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.10647 | PvP Coefficient: 0.72 | Target: Enemy (6)
-Hotfixed         : PvP Coefficient (0.6 -> 0.72)
 #2 (id=1144448)  : School Damage (2): shadowfrost
                    Base Value: 0 | Scaled Value: 0 (delta=0.05) | AP Coefficient: 0.191646 | PvP Coefficient: 0.72 | Target: Enemy (6)
-Hotfixed         : PvP Coefficient (0.6 -> 0.72)
 Description      : $@spelldesc439843
 
 Name             : Dark Talons (id=436687) [Spell Family (15), Passive] 
@@ -14405,7 +14455,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 1 seconds
 Proc Chance      : 101%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1128151)  : Apply Aura (6) | Dummy (4)
                    Base Value: 25 | Scaled Value: 25 | Target: Self (1)
@@ -14424,7 +14474,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1128872)  : Apply Aura (6) | Add Flat Modifier (107): Spell Cooldown (11)
                    Base Value: -30000 | Scaled Value: -30000 | Misc Value: 11 | Target: Self (1)
@@ -14441,7 +14491,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1128925)  : Apply Aura (6) | Dummy (4)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -14548,7 +14598,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1133388)  : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
@@ -14565,7 +14615,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1133560)  : Apply Aura (6) | Dummy (4)
                    Base Value: 50 | Scaled Value: 50 | Target: Self (1)
@@ -14584,7 +14634,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1133630)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 20 | Scaled Value: 20 | Target: Self (1)
@@ -14623,7 +14673,7 @@ Labels           : 16: Class Spells
                  : 3022
 Proc Chance      : 101%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Aura Points On Client (268), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1133684)  : Apply Aura (6) | Proc Trigger Spell (42): Bind in Darkness
                    Base Value: 15 | Scaled Value: 15 | Trigger Spell: 443532 | Target: Self (1)
@@ -14668,7 +14718,7 @@ Labels           : 16: Class Spells
                  : 3022
 Proc Chance      : 101%
 Proc Flags       : White Melee Taken, Yellow Melee, Yellow Melee Taken, White Ranged Taken, Yellow Ranged Taken, Generic Heal, Generic Heal Taken, Generic Hostile Spell, Generic Hostile Spell Taken, Magic Heal, Magic Heal Taken, Magic Hostile Spell, Magic Hostile Spell Taken, Periodic, Periodic Taken, Helpful Periodic, Helpful Periodic Taken
-Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268), Update Passives on Apply/Remove (344), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268), Update Passives on Apply/Remove (344), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1134061)  : Apply Aura (6) | Periodic Dummy (226): every 1 seconds
                    Base Value: 1.5 | Scaled Value: 1.5 | Target: Self (1)
@@ -14805,7 +14855,7 @@ Labels           : 16: Class Spells
                  : 3022
 Proc Chance      : 101%
 Proc Flags       : White Melee Taken, Yellow Melee Taken, White Ranged Taken, Yellow Ranged Taken, Generic Hostile Spell Taken, Magic Hostile Spell Taken, Periodic Taken
-Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1134381)  : Apply Aura (6) | Dummy (4)
                    Base Value: 25 | Scaled Value: 25 | PvP Coefficient: 0.6 | Target: Self (1)
@@ -14913,7 +14963,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 1 seconds
 Proc Chance      : 101%
 Proc Flags       : Cast Ended
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1135790)  : Apply Aura (6) | Dummy (4) | Attributes: Suppress Points Stacking (6)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -15018,7 +15068,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1136668)  : Apply Aura (6) | Add Percent Modifier (108): Spell Tick Time (19)
                    Base Value: -50 | Scaled Value: -50 | Misc Value: 19 | Target: Self (1)
@@ -15112,7 +15162,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1139556)  : Apply Aura (6) | Dummy (4)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -15130,7 +15180,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1139565)  : Apply Aura (6) | Dummy (4)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -15206,7 +15256,7 @@ Labels           : 16: Class Spells
                  : 3022
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140240)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -15234,12 +15284,10 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Spellcast Override In Spellbook (310), Displayed Outside Of Spellbook (432)
+Attributes       : Passive (6), Not In Spellbook (143), Spellcast Override In Spellbook (310), Do Not Log on Learn (355), Displayed Outside Of Spellbook (432)
 Effects          :
 #1 (id=1140253)  : Apply Aura (6) | Dummy (4)
                    Base Value: 445194 | Scaled Value: 445194 | Target: Self (1)
-#2 (id=1158213)  : Apply Aura (6) | Unknown(312)
-                   Base Value: 0 | Scaled Value: 0 | Misc Value: 1154 | Target: Self (1)
 Description      : While outdoors you are able to mount your Acherus Deathcharger in combat.
 
 Name             : Death Charge (id=444010) [Spell Family (15), Passive] 
@@ -15251,7 +15299,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Spellcast Override In Spellbook (310)
+Attributes       : Passive (6), Not In Spellbook (143), Spellcast Override In Spellbook (310), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140259)  : Apply Aura (6) | Override Action Spell (Misc /w Base) (332)
                    Base Value: 444347 | Scaled Value: 444347 | Misc Value: 48265 | Target: Self (1)
@@ -15268,7 +15316,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268)
+Attributes       : Passive (6), Not In Spellbook (143), Aura Points On Client (268), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140290)  : Apply Aura (6) | Dummy (4)
                    Base Value: 1 | Scaled Value: 1 | Target: Self (1)
@@ -15283,7 +15331,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140296)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -15307,7 +15355,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 1 seconds
 Proc Chance      : 101%
 Proc Flags       : Cast Successful
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140302)  : Apply Aura (6) | Proc Trigger Spell (42): Apocalypse Now
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 444244 | Target: Self (1)
@@ -15322,7 +15370,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140317)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -15337,7 +15385,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140322)  : Apply Aura (6) | Dummy (4)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
@@ -15356,7 +15404,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140355)  : Apply Aura (6) | Dummy (4)
                    Base Value: 50 | Scaled Value: 50 | Target: Self (1)
@@ -15375,7 +15423,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140359)  : Apply Aura (6) | Periodic Trigger Spell (23): Unknown(0) every 1 seconds
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -15392,7 +15440,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140361)  : Apply Aura (6) | Dummy (4)
                    Base Value: 80 | Scaled Value: 80 | Target: Self (1)
@@ -15409,7 +15457,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140374)  : Apply Aura (6) | Dummy (4)
                    Base Value: 5 | Scaled Value: 5 | Target: Self (1)
@@ -15424,7 +15472,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140397)  : Apply Aura (6) | Dummy (4)
                    Base Value: 8 | Scaled Value: 8 | Target: Self (1)
@@ -15439,7 +15487,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1140400)  : Apply Aura (6) | Modify Recharge Time (Category) (453)
                    Base Value: -10000 | Scaled Value: -10000 | Misc Value: 1877 (Category) | Target: Self (1)
@@ -15614,6 +15662,8 @@ Effects          :
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
 #4 (id=1140953)  : Apply Aura (6) | Unknown(395)
                    Base Value: 26 | Scaled Value: 26 | Misc Value: 32961 | Target: Self (1)
+#5 (id=1178400)  : Trigger Spell (64): Death and Decay
+                   Base Value: 3 | Scaled Value: 3 | Trigger Spell: 466066 | Target: Self (1)
 Description      : Corrupts the targeted ground, causing ${$341340m1*11} Shadow damage over $d to targets within the area.$?!c2[
 
 While you remain within the area, your ][]$?s223829&!c2[Necrotic Strike and ][]$?c1[Heart Strike will hit up to $188290m3 additional targets.]?s207311&!c2[Clawing Shadows will hit up to ${$55090s4-1} enemies near the target.]?!c2[Scourge Strike will hit up to ${$55090s4-1} enemies near the target.][
@@ -15994,7 +16044,7 @@ Labels           : 16: Class Spells
                  : 117
                  : 292
                  : 3022
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1142642)  : Apply Aura (6) | Add Flat Modifier (107): Spell Range (5)
                    Base Value: 27 | Scaled Value: 27 | Misc Value: 5 | Target: Self (1)
@@ -16208,7 +16258,7 @@ Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log
 Effects          :
 #1 (id=1155628)  : Apply Aura (6) | Dummy (4)
                    Base Value: 20 | Scaled Value: 20 | PvP Coefficient: 0.5 | Target: Self (1)
-Description      : While you have one or more Boneshield charges, the damage you take is reduced by ${$abs($457468S1)}.1%. Losing a Boneshield charge has a chance to reduce the damage you take by an additional ${$abs($457473S1)}.1%, up to ${$abs($457473S1)*$457473U}.1% for $457473d.
+Description      : While you have one or more Bone Shield charges, the damage you take is reduced by ${$abs($457468S1)}.1%. Losing a Bone Shield charge has a chance to reduce the damage you take by an additional ${$abs($457473S1)}.1%, up to ${$abs($457473S1)*$457473U}.1% for $457473d.
 
 Name             : Death Knight Blood 11.0 Class Set 4pc (id=453630) [Spell Family (15), Passive, Hidden] 
 Class            : Death Knight
@@ -16232,7 +16282,7 @@ Effects          :
                    Base Value: 2 | Scaled Value: 2 | PvP Coefficient: 0.5 | Target: Self (1)
 #5 (id=1162776)  : Apply Aura (6) | Dummy (4)
                    Base Value: 8 | Scaled Value: 8 | PvP Coefficient: 0.5 | Target: Self (1)
-Description      : Your damage is increased by ${$s1/10}.1% per active Boneshield charge. Taking damage while below $s2 Boneshield charges has a chance to generate $s3-$s4 Boneshield charges.
+Description      : Your damage is increased by ${$s1/10}.1% per active Bone Shield charge. Taking damage while below $s2 Bone Shield charges has a chance to generate $s3-$s4 Bone Shield charges.
 
 Name             : Death Knight Frost 11.0 Class Set 4pc (id=453631) [Spell Family (15), Passive, Hidden] 
 Class            : Death Knight
@@ -16391,7 +16441,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1157674)  : Apply Aura (6) | Dummy (4)
                    Base Value: 4000 | Scaled Value: 4000 | Target: Self (1)
@@ -16432,7 +16482,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1157681)  : Apply Aura (6) | Modify Armor% (101)
                    Base Value: 6 | Scaled Value: 6 | Misc Value: 1 | Target: Self (1)
@@ -16451,7 +16501,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1157751)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -16484,7 +16534,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1157767)  : Apply Aura (6) | Add Flat Modifier (107): Spell Effect 4 (32)
                    Base Value: 15 | Scaled Value: 15 | Misc Value: 32 | Target: Self (1)
@@ -16501,10 +16551,11 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Allow Class Ability Procs (416)
+                 : 4361: Frost Death Knight (137006 effect#14), Frost Death Knight (137006 effect#15), Unholy Death Knight (137007 effect#16), Unholy Death Knight (137007 effect#17)
+Attributes       : Is Ability (4), Passive (6), Do Not Log (8), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1157778)  : Apply Aura (6) | Modify Damage Taken% (87)
-                   Base Value: -8 | Scaled Value: -8 | PvP Coefficient: 0.5 | Misc Value: 0x7e | Target: Self (1)
+                   Base Value: -8 | Scaled Value: -8 | PvP Coefficient: 0.6 | Misc Value: 0x7e | Target: Self (1)
                    Affected School(s): Arcane, Fire, Frost, Holy, Nature, Shadow
 #2 (id=1157779)  : Apply Aura (6) | Modify Debuff Duration% (245)
                    Base Value: -35 | Scaled Value: -35 | PvP Coefficient: 0.29 | Misc Value: 1 | Target: Self (1)
@@ -16518,7 +16569,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Update Passives on Apply/Remove (344)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Not In Spellbook (143), Update Passives on Apply/Remove (344), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1157792)  : Apply Aura (6) | Dummy (4)
                    Base Value: 3 | Scaled Value: 3 | Target: Self (1)
@@ -16616,7 +16667,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Allow Entering Arena (149), Disable Aura While Dead (226)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Not In Spellbook (143), Allow Entering Arena (149), Disable Aura While Dead (226), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1158350)  : Apply Aura (6) | Dummy (4)
                    Base Value: 0 | Scaled Value: 0 | Target: Self (1)
@@ -16674,7 +16725,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Allow Entering Arena (149), Disable Aura While Dead (226)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Not In Spellbook (143), Allow Entering Arena (149), Disable Aura While Dead (226), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1158791)  : Apply Aura (6) | Add Percent Modifier (108): Spell Direct Amount (0)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -16700,7 +16751,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Can Proc From Procs (122), Allow Entering Arena (149), Disable Aura While Dead (226)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Can Proc From Procs (122), Not In Spellbook (143), Allow Entering Arena (149), Disable Aura While Dead (226), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1158796)  : Apply Aura (6) | Dummy (4)
                    Base Value: 20 | Scaled Value: 20 | Target: Self (1)
@@ -16718,7 +16769,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Allow Entering Arena (149), Disable Aura While Dead (226)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Not In Spellbook (143), Allow Entering Arena (149), Disable Aura While Dead (226), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1158797)  : Apply Aura (6) | Dummy (4)
                    Base Value: 50 | Scaled Value: 50 | Target: Self (1)
@@ -16772,7 +16823,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 117
                  : 292
-Attributes       : Passive (6), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Aura Interrupt   : Change Specialization (38), Change Talent (46)
 Effects          :
 #1 (id=1159883)  : Apply Aura (6) | Dummy (4)
@@ -16806,7 +16857,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Allow Entering Arena (149), Disable Aura While Dead (226), Only Proc From Class Abilities (415)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Not In Spellbook (143), Allow Entering Arena (149), Disable Aura While Dead (226), Do Not Log on Learn (355), Only Proc From Class Abilities (415)
 Effects          :
 #1 (id=1160277)  : Apply Aura (6) | Dummy (4)
                    Base Value: 80 | Scaled Value: 80 | Target: Self (1)
@@ -16822,7 +16873,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Periodic
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Allow Entering Arena (149), Disable Aura While Dead (226)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Not In Spellbook (143), Allow Entering Arena (149), Disable Aura While Dead (226), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1160289)  : Apply Aura (6) | Dummy (4)
                    Base Value: 15 | Scaled Value: 15 | Target: Self (1)
@@ -16840,7 +16891,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 35%
 Proc Flags       : Yellow Melee, Generic Hostile Spell, Magic Hostile Spell
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Can Proc From Procs (122), Allow Entering Arena (149), Disable Aura While Dead (226)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Can Proc From Procs (122), Not In Spellbook (143), Allow Entering Arena (149), Disable Aura While Dead (226), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1160291)  : Apply Aura (6) | Dummy (4)
                    Base Value: 45 | Scaled Value: 45 | Target: Self (1)
@@ -16856,7 +16907,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : White Melee
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Allow Entering Arena (149), Disable Aura While Dead (226)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Allow Aura While Dead (116), Not In Spellbook (143), Allow Entering Arena (149), Disable Aura While Dead (226), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1160293)  : Apply Aura (6) | Dummy (4)
                    Base Value: 2 | Scaled Value: 2 | Target: Self (1)
@@ -16999,7 +17050,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 100%
 Proc Flags       : Generic Heal, Magic Heal
-Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1162885)  : Apply Aura (6) | Proc Trigger Spell (42): Unyielding Will
                    Base Value: 15 | Scaled Value: 15 | Trigger Spell: 457575 | Target: Self (1)
@@ -17150,7 +17201,7 @@ Labels           : 16: Class Spells
                  : 292
 Proc Chance      : 101%
 Proc Flags       : Yellow Melee, Yellow Ranged, Generic Hostile Spell, Magic Hostile Spell, Periodic
-Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Can Proc From Procs (122), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1164650)  : Apply Aura (6) | Proc Trigger Spell (42): Bone Shield
                    Base Value: 1 | Scaled Value: 1 | Trigger Spell: 195181 | Target: Self (1)
@@ -17187,7 +17238,7 @@ Spell Type       : None
 Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
-Attributes       : Passive (6), Not In Spellbook (143)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355)
 Effects          :
 #1 (id=1164969)  : Apply Aura (6) | Dummy (4)
                    Base Value: 10 | Scaled Value: 10 | Target: Self (1)
@@ -17225,7 +17276,7 @@ Labels           : 16: Class Spells
 Proc Chance      : 101%
 Real PPM         : 1.1 (Haste multiplier)
 Proc Flags       : White Melee Taken, Yellow Melee Taken
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1164979)  : Apply Aura (6) | Dummy (4)
                    Base Value: -50 | Scaled Value: -50 | Target: Self (1)
@@ -17244,7 +17295,7 @@ Labels           : 16: Class Spells
 Internal Cooldown: 0.5 seconds
 Proc Chance      : 101%
 Proc Flags       : White Melee Taken, Yellow Melee Taken
-Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), No Aura Cancel (31), No Aura Icon (60), No Aura Log (202), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Do Not Display (Spellbook, Aura Icon, Combat Log) (7), Do Not Log (8), No Aura Cancel (31), No Aura Icon (60), Not In Spellbook (143), No Aura Log (202), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1164980)  : Apply Aura (6) | Dummy (4)
                    Base Value: 200 | Scaled Value: 200 | Target: Self (1)
@@ -17299,7 +17350,7 @@ Proc Chance      : 101%
 Proc Flags       : Cast Successful
 Affecting Spells : Blood Plague (55078 effect#4), Frost Fever (55095 effect#2), Mastery: Dreadblade (77515 effects: #1, #2), Might of the Frozen Wastes (81333 effect#2), Unholy Blight (115994 effect#2), Frost Death Knight (137006 effects: #1, #2, #6, #7), Unholy Death Knight (137007 effects: #1, #2, #6, #7), Blood Death Knight (137008 effects: #1, #2), Virulent Plague (191587 effect#3), Festering Wound (194310 effect#2), Unholy Assault (207289 effects: #4, #5), War (327096 effect#1), Deep Frost (373934 effect#1), Brittle (374557 effect#1), Death Rot (377540 effect#1), Morbidity (377592 effects: #4, #5, #6), Plaguebringer (390178 effect#1), Sanguine Ground (391459 effects: #1, #3), Vigorous Lifeblood (394570 effects: #1, #2), Ghoulish Infusion (394899 effects: #1, #3), Lingering Chill (410879 effect#1), Chilling Rage (424165 effects: #1, #2), Amplify Damage (424949 effects: #1, #2), Ashen Decay (425719 effect#2), Foul Infections (455396 effects: #1, #2, #3)
 Family Flags     : 43, 78, 93
-Attributes       : Passive (6), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1168090)  : Apply Aura (6) | Proc Trigger Spell (42): Unholy Blight
                    Base Value: 0 | Scaled Value: 0 | Trigger Spell: 115989 | Target: Self (1)
@@ -17499,6 +17550,28 @@ Effects          :
 Description      : ${$w1~} damage taken in the last 5 sec, ${$floor($w1~/$mhp*100)}% of your maximum health, will empower your next Death Strike.
 Tooltip          : ${$w1~} damage taken in the last 5 sec, ${$floor($w1~/$mhp*100)}% of your maximum health, will empower your next Death Strike.
 
+Name             : Death and Decay (id=466066) [Spell Family (15), Hidden] 
+Class            : Death Knight
+School           : Shadow
+Spell Type       : None
+Range            : 30 yards
+Duration         : 1 seconds
+Labels           : 16: Class Spells
+                 : 27: Death Knight Spells
+                 : 292
+                 : 3022
+Stance Mask      : 0x01000000
+Triggered By     : Death and Decay (444474)
+Attributes       : Do Not Display (Spellbook, Aura Icon, Combat Log) (7), No Redirection (35), No Reflection (39), Allow While Not Shapeshifted (caster form) (83), No Caster Aura Icon (187), No Aura Log (202), Aura Points On Client (268), Caster Death Cancels Persistent Area Auras (347), Don't Cancel When All Effects are Disabled (353), Allow Class Ability Procs (416)
+Effects          :
+#1 (id=1178391)  : Apply Aura (6) | Root (26)
+                   Base Value: 3 | Scaled Value: 3 | Target: Self (1)
+Description      : Corrupts the targeted ground, causing ${$341340m1*11} Shadow damage over $d to targets within the area.$?!c2[
+
+While you remain within the area, your ][]$?s223829&!c2[Necrotic Strike and ][]$?c1[Heart Strike will hit up to $188290m3 additional targets.]?s207311&!c2[Clawing Shadows will hit up to ${$55090s4-1} enemies near the target.]?!c2[Scourge Strike will hit up to ${$55090s4-1} enemies near the target.][
+
+While you remain within the area, your Obliterate will hit up to $316916M2 additional $Ltarget:targets;.]
+
 Name             : Swift and Painful (id=469169) [Spell Family (15)] 
 Class            : Death Knight
 School           : Shadowfrost
@@ -17569,7 +17642,7 @@ Labels           : 16: Class Spells
                  : 27: Death Knight Spells
                  : 292
                  : 3022
-Attributes       : Passive (6), Not In Spellbook (143), Allow Class Ability Procs (416)
+Attributes       : Passive (6), Not In Spellbook (143), Do Not Log on Learn (355), Allow Class Ability Procs (416)
 Effects          :
 #1 (id=1184516)  : Apply Aura (6) | Apply Flat Modifier w/ Label (219): Spell Cooldown (11)
                    Base Value: -15000 | Scaled Value: -15000 | Misc Value: 11 | Misc Value 2: 3243 (Label) | Target: Self (1)
