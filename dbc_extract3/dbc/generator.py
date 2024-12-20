@@ -1803,6 +1803,8 @@ class SpellDataGenerator(DataGenerator):
             ( 391232, 0 ),          # Maddening Touch Insanity
             ( 409502, 0 ),          # DF Season 2 4pc
             ( 148859, 0 ),          # Shadowy Apparitions Travel Spell
+            ( 1215702, 0 ),         # Priest Shadow 11.1 Class Set 2pc
+            ( 1215703, 0 ),         # Priest Shadow 11.1 Class Set 4pc
             # Holy Priest
             ( 196809, 5 ),          # Healing Light (Divine Image legendary pet spell)
             ( 196810, 5 ),          # Dazzling Light (Divine Image legendary pet spell)
