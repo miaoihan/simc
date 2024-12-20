@@ -147,7 +147,6 @@
       { "data_type": "S", "field": "requirements_fail_lang",      "formats": { } },
       { "data_type": "S", "field": "hyphenated_name_male_lang",   "formats": { } },
       { "data_type": "S", "field": "hyphenated_name_female_lang", "formats": { } },
-      { "data_type": "i", "field": "id" },
       { "data_type": "I", "field": "create_screen_file_data_id" },
       { "data_type": "I", "field": "select_screen_file_data_id" },
       { "data_type": "I", "field": "icon_file_data_id" },
@@ -167,6 +166,7 @@
       { "data_type": "i", "field": "unk_4" },
       { "data_type": "H", "field": "cinematic_sequence_id" },
       { "data_type": "H", "field": "default_spec" },
+      { "data_type": "i", "field": "id" },
       { "data_type": "B", "field": "primary_stat_priority" },
       { "data_type": "B", "field": "display_power" },
       { "data_type": "B", "field": "ranged_attack_power_per_agility" },
@@ -324,17 +324,18 @@
       { "data_type": "I", "field": "spell_weight" },
       { "data_type": "B", "field": "spell_category" },
       { "data_type": "I", "field": "max_quantity" },
-      { "data_type": "i", "field": "max_earnable_per_week" },
-      { "data_type": "b", "field": "flags" },
-      { "data_type": "i", "field": "quality" },
-      { "data_type": "i", "field": "unk_1" },
-      { "data_type": "i", "field": "unk_2" },
-      { "data_type": "i", "field": "unk_3" },
-      { "data_type": "i", "field": "unk_4" },
-      { "data_type": "i", "field": "unk_5", "elements": 2 },
-      { "data_type": "i", "field": "unk_6" },
-      { "data_type": "i", "field": "unk_7" },
-      { "data_type": "f", "field": "warband_transfer_pct" }
+      { "data_type": "I", "field": "max_earnable_per_week" },
+      { "data_type": "b", "field": "quality" },
+      { "data_type": "i", "field": "id_faction" },
+      { "data_type": "i", "field": "id_item_group_sounds" },
+      { "data_type": "i", "field": "xp_quest_difficulty" },
+      { "data_type": "i", "field": "id_award_condition" },
+      { "data_type": "i", "field": "id_max_qty_world_state" },
+      { "data_type": "I", "field": "recharing_amount_per_cycle" },
+      { "data_type": "I", "field": "recharging_cycle_duration_ms" },
+      { "data_type": "f", "field": "warband_transfer_pct" },
+      { "data_type": "B", "field": "unk_17" },
+      { "data_type": "I", "field": "flags", "elements": 2 }
     ]
   },
   "Curve": {
@@ -955,7 +956,8 @@
       { "data_type": "i", "field": "id_button_small_file_data", "ref": "ManifestInterfaceData" },
       { "data_type": "i", "field": "id_lore_file_data" },
       { "data_type": "b", "field": "flags" },
-      { "data_type": "H", "field": "area_id" }
+      { "data_type": "H", "field": "area_id" },
+      { "data_type": "H", "field": "unk_9" }
     ]
   },
   "JournalItemXDifficulty": {
