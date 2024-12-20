@@ -7884,7 +7884,7 @@ struct dark_transformation_t final : public death_knight_spell_t
       p()->active_spells.unholy_blight->execute();
     }
 
-    if( p()->is_ptr() && p()->sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW2, B2 ) )
+    if( p()->is_ptr() && p()->sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW2, B4 ) )
     {
       p()->buffs.winning_streak_unholy->trigger( winning_streak_stacks );
     }
