@@ -784,6 +784,7 @@ public:
     propagate_const<buff_t*> festering_scythe_stacks;
     // Tier Sets
     propagate_const<buff_t*> unholy_commander;
+    propagate_const<buff_t*> winning_streak_unholy;
 
     // Rider of the Apocalypse
     propagate_const<buff_t*> a_feast_of_souls;
@@ -1438,6 +1439,7 @@ public:
     const spell_data_t* festering_scythe_stacking_buff;
     // Tier Sets
     const spell_data_t* unholy_commander;
+    const spell_data_t* winning_streak_unholy;
 
     // Rider of the Apocalypse non-talent spells
     const spell_data_t* a_feast_of_souls_buff;
@@ -1553,6 +1555,7 @@ public:
     real_ppm_t* runic_attenuation;
     real_ppm_t* blood_beast;
     real_ppm_t* tww1_fdk_4pc;
+    real_ppm_t* tww2_unh_2pc;
   } rppm;
 
   // Pets and Guardians
@@ -4794,6 +4797,9 @@ struct death_knight_action_t : public parse_action_effects_t<Base>
     {
       p()->active_spells.blood_draw->execute();
     }
+
+    if ( p()->is_ptr() && p()->sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW2, B2 ) && p()->rppm.tww2_unh_2pc->trigger() )
+      p()->buffs.winning_streak_unholy->trigger();
   }
 
   void impact( action_state_t* s ) override
@@ -7819,8 +7825,11 @@ struct dark_transformation_damage_t final : public death_knight_spell_t
 
 struct dark_transformation_t final : public death_knight_spell_t
 {
+  int winning_streak_stacks;
+
   dark_transformation_t( death_knight_t* p, std::string_view options_str )
-    : death_knight_spell_t( "dark_transformation", p, p->talent.unholy.dark_transformation )
+    : death_knight_spell_t( "dark_transformation", p, p->talent.unholy.dark_transformation ),
+      winning_streak_stacks( 0 )
   {
     harmful = false;
     target  = p;
@@ -7840,6 +7849,10 @@ struct dark_transformation_t final : public death_knight_spell_t
     if ( p->talent.unholy.unholy_pact.ok() )
     {
       add_child( get_action<unholy_pact_damage_t>( "unholy_pact_damage", p ) );
+    }
+    if( p->sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW2, B2 ) )
+    {
+      winning_streak_stacks = p->spell.winning_streak_unholy->max_stacks();
     }
   }
 
@@ -7869,6 +7882,11 @@ struct dark_transformation_t final : public death_knight_spell_t
     if ( p()->talent.unholy.unholy_blight.ok() )
     {
       p()->active_spells.unholy_blight->execute();
+    }
+
+    if( p()->is_ptr() && p()->sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW2, B2 ) )
+    {
+      p()->buffs.winning_streak_unholy->trigger( winning_streak_stacks );
     }
   }
 
@@ -8277,7 +8295,7 @@ struct death_coil_t final : public death_knight_spell_t
   {
     parse_options( options_str );
 
-    execute_action = get_action<death_coil_damage_t>( "death_coil_damage", p );
+    execute_action        = get_action<death_coil_damage_t>( "death_coil_damage", p );
     execute_action->stats = stats;
     stats->action_list.push_back( execute_action );
 
@@ -8287,6 +8305,16 @@ struct death_coil_t final : public death_knight_spell_t
     if ( p->talent.unholy.doomed_bidding.ok() )
     {
       p->pets.doomed_bidding_magus_coil.set_creation_event_callback( pets::parent_pet_action_fn( this ) );
+    }
+  }
+
+  void execute() override
+  {
+    death_knight_spell_t::execute();
+    if ( p()->is_ptr() && p()->sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW2, B2 ) && !p()->buffs.dark_transformation->check() &&
+         rng().roll( p()->spell.winning_streak_unholy->proc_chance() ) )
+    {
+      p()->buffs.winning_streak_unholy->expire();
     }
   }
 };
@@ -12863,6 +12891,7 @@ void death_knight_t::init_rng()
   rppm.runic_attenuation = get_rppm( "runic_attenuation", talent.runic_attenuation );
   rppm.blood_beast       = get_rppm( "blood_beast", talent.sanlayn.the_blood_is_life );
   rppm.tww1_fdk_4pc      = get_rppm( "tww1_fdk_4pc", sets->set( DEATH_KNIGHT_FROST, TWW1, B4 ) );
+  rppm.tww2_unh_2pc      = get_rppm( "tww2_unh_2pc", sets->set( DEATH_KNIGHT_UNHOLY, TWW2, B2 ) );
 }
 
 // death_knight_t::init_base ================================================
@@ -13356,6 +13385,7 @@ void death_knight_t::spell_lookups()
   spell.festering_scythe_stacking_buff = conditional_spell_lookup( talent.unholy.festering_scythe.ok(), 459238 );
   // Set Bonuses
   spell.unholy_commander = conditional_spell_lookup( sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW1, B4 ), 456698 );
+  spell.winning_streak_unholy = conditional_spell_lookup( is_ptr() && sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW2, B2 ), 1216813 );
 
   // Rider of the Apocalypse Spells
   spell.a_feast_of_souls_buff = conditional_spell_lookup( talent.rider.a_feast_of_souls.ok(), 440861 );
@@ -14169,9 +14199,8 @@ void death_knight_t::create_buffs()
                           ->set_default_value( talent.unholy.festermight->effectN( 1 ).percent() )
                           ->set_stack_behavior( buff_stack_behavior::ASYNCHRONOUS );
 
-  buffs.commander_of_the_dead =
-      make_fallback( talent.unholy.commander_of_the_dead.ok(), this, "commander_of_the_dead",
-                     spell.commander_of_the_dead );
+  buffs.commander_of_the_dead = make_fallback( talent.unholy.commander_of_the_dead.ok(), this, "commander_of_the_dead",
+                                               spell.commander_of_the_dead );
 
   buffs.festering_scythe =
       make_fallback( talent.unholy.festering_scythe.ok(), this, "festering_scythe", spell.festering_scythe_buff );
@@ -14186,6 +14215,12 @@ void death_knight_t::create_buffs()
 
   buffs.unholy_commander = make_fallback( sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW1, B4 ), this,
                                           "unholy_commander", spell.unholy_commander );
+
+  if ( is_ptr() )
+  {
+    buffs.winning_streak_unholy = make_fallback( sets->has_set_bonus( DEATH_KNIGHT_UNHOLY, TWW2, B2 ), this,
+                                                 "winning_streak", spell.winning_streak_unholy );
+  }
 }
 
 // death_knight_t::init_gains ===============================================
@@ -14863,6 +14898,12 @@ void death_knight_action_t<Base>::apply_action_effects()
   parse_effects( p()->buffs.sudden_doom, p()->talent.unholy.harbinger_of_doom );
   parse_effects( p()->buffs.plaguebringer, p()->talent.unholy.plaguebringer );
   parse_effects( p()->mastery.dreadblade );
+  parse_effects( p()->buffs.winning_streak_unholy, [ & ]( double v ) {
+    if ( p()->buffs.dark_transformation->check() )
+      v *= 1.0 + p()->sets->set( DEATH_KNIGHT_UNHOLY, TWW2, B4 )->effectN( 1 ).percent();
+
+    return v;
+  } );
 
   // Rider of the Apocalypse
   parse_effects( p()->buffs.mograines_might );
